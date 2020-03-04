@@ -51,18 +51,20 @@ export default () => {
 
   const showForm = (
     <form onSubmit={handleSubmit(onSubmit)} method="post">
-      <label htmlFor="name">
-        <h5>Name</h5>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="Your name"
-          ref={register({ required })}
-          disabled={isSubmitting}
-        />
-        {errors.name && <div className="msg-error">{errors.name.message}</div>}
-      </label>
+      <div className="field">
+        <label className="label">Name</label>
+        <div className="control">
+          <input className={("input").concat(errors.name ? " is-danger": "")}
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Your name"
+              ref={register({ required })}
+              disabled={isSubmitting}
+            />
+        </div>
+        {errors.name && <p className="help is-danger">{errors.name.message}</p>}
+      </div>
       <label htmlFor="email">
         <h5>Email</h5>
         <input
@@ -99,10 +101,12 @@ export default () => {
         )}
       </label>
 
-      <div className="submit-wrapper">
-        <button type="submit" disabled={isSubmitting}>
-          Send
-        </button>
+      <div className="field">
+        <div className="control">
+          <button className="button is-link" type="submit" disabled={isSubmitting}>
+            Send
+          </button>
+        </div>
       </div>
     </form>
   );
