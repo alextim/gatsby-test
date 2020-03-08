@@ -7,11 +7,13 @@
 
 import React from "react"
 import PropTypes from "prop-types"
+import { Section, Container } from  "rbx"
 import { useStaticQuery, graphql } from "gatsby"
 
 import SEO from "./SEO/SEO"
 import Header from "./Header"
-import Footer from "./Footer"
+
+import SiteFooter from "./SiteFooter"
 import "./layout.scss"
 
 const Layout = ({ children }) => {
@@ -29,12 +31,12 @@ const Layout = ({ children }) => {
     <>
       <SEO />
       <Header siteTitle={data.site.siteMetadata.title} />
-      <section className="section">
-          <div className="container">
-            {children}
-          </div>
-      </section>
-      <Footer />
+      <Section>
+                <Container>
+                    {children}
+                </Container>
+      </Section>      
+      <SiteFooter />
     </>
   )
 }
