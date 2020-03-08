@@ -3,6 +3,19 @@ module.exports = {
     title: `Gatsby Default Starter`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
+    image:'adrenalin.jpg',
+    siteUrl: 'https://adrenalin.travel',
+    baseUrl: 'https://adrenalin.travel',
+    organization: {
+      name: "Adrenalin Travel",
+      url: "https://adrenalin.travel",
+      logo: "sample.logo",
+    },
+    social: {
+      twitter: "https://twitter.com\adrenalin.travel",
+      fbAppID: "https://facebook.com\adrenalin.travel",
+    }
+
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
