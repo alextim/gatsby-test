@@ -48,24 +48,23 @@ function SEO({ title, description, url, image, isBlogPost, locale }) {
   }
 
   if (defaults.baseUrl === '') {
-    console.error('Please set a baseUrl in your site metadata!');
+    console.error('Please set a baseUrl in your site metadata!')
     return null;
   }
 
-  title = title || defaults.title;
+  title = title || defaults.title
   description = description || defaults.description;
-  url = new URL(url || '', defaults.baseUrl);
-//  image = image ? new URL(image, defaults.baseUrl) : false;
+  url = url || defaults.baseUrl + window.location.pathname
+//  image = image ? new URL(image, defaults.baseUrl) : false
   image = image ? new URL(image, defaults.image) : false
   //TODO:
-  const datePublished = isBlogPost ? false : false;
+  const datePublished = isBlogPost ? false : false
 
   return (
     <React.Fragment>
       <Helmet>
         <html lang={locale} />
         {/* General tags */}
-        <meta charSet="utf-8" />
         <title>{title}</title>
         <link rel="canonical" href={url} />
         <meta name="description" content={description} />

@@ -1,2 +1,28 @@
 @charset "utf-8";
 @import "~bulma/bulma.sass";
+
+$footer-color: #fff;
+$footer-widgets-bg: #252831;
+$colophon-top-bg: #2c3038;
+$colophon-bottom-bg: #414244;
+
+footer {
+    color: $footer-color;
+}
+
+.footer-widgets {
+    padding: 70px 0;
+    background-color: $footer-widgets-bg;
+}
+
+.colophon-top, .colophon-bottom {
+    padding: 20px 0;
+}
+
+.colophon-top {
+    background-color: $colophon-top-bg;
+}
+
+.colophon-bottom {
+    background-color: $colophon-bottom-bg;
+}

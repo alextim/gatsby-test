@@ -1,21 +1,52 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `Adrenalin-Travel`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    author: `@AlexTim`,
     image:'adrenalin.jpg',
     siteUrl: 'https://adrenalin.travel',
     baseUrl: 'https://adrenalin.travel',
     organization: {
-      name: "Adrenalin Travel",
+      name: "Adrenalin-Travel",
       url: "https://adrenalin.travel",
       logo: "sample.logo",
     },
     social: {
-      twitter: "https://twitter.com\adrenalin.travel",
-      fbAppID: "https://facebook.com\adrenalin.travel",
-    }
-
+      twitter: "https://twitter.com/adrenalin.travel",
+      fbAppID: "https://facebook.com/adrenalin.travel",
+    },
+    footerNavigation: [
+      {
+        title: "Домой",
+        path:    "/"
+      },
+      {
+        title: "Скидки",
+        path:    "/discount"
+      },
+      {
+        title: "Оплата",
+        path:    "/payment"
+      },
+      {
+        title: "Новости",
+        path:    "/news"
+      },
+      {
+        title: "Контакты",
+        path:    "/contact-us"
+      }
+    ],
+    socialLinks: [
+      { 
+        key: "facebook", 
+        url: "https://www.facebook.com/travel.adrenalin",
+      },
+      {
+        key: "instagram",
+        url: "https://www.instagram.com/adrenalin_travel/",
+      }
+    ]
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

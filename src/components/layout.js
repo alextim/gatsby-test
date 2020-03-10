@@ -10,10 +10,9 @@ import PropTypes from "prop-types"
 import { Section, Container } from  "rbx"
 import { useStaticQuery, graphql } from "gatsby"
 
-import SEO from "./SEO/SEO"
 import Header from "./Header"
+import SiteFooter from "./SiteFooter/SiteFooter"
 
-import SiteFooter from "./SiteFooter"
 import "./layout.scss"
 
 const Layout = ({ children }) => {
@@ -29,7 +28,6 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <SEO />
       <Header siteTitle={data.site.siteMetadata.title} />
       <Section>
                 <Container>
