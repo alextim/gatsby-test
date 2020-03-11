@@ -6,8 +6,9 @@ $footer-widgets-bg: #252831;
 $colophon-top-bg: #2c3038;
 $colophon-bottom-bg: #414244;
 
-footer {
+.footer {
     color: $footer-color;
+    padding: 0;
 }
 
 .footer-widgets {

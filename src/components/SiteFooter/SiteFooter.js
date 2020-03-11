@@ -31,7 +31,7 @@ const SiteFooter = ({companyName}) => {
    `)    
 
     return (
-    <Footer className="footer">
+    <Footer as="footer">
         <FooterWidgets/>
 
         <div className="colophon-top">

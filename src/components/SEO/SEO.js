@@ -12,10 +12,11 @@ import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+
 import SchemaOrg from './SchemaOrg'
 
 function SEO({ title, description, url, image, isBlogPost, locale }) {
-  const { site } = useStaticQuery(
+  const data = useStaticQuery(
     graphql`
       query {
         site {
@@ -40,8 +41,8 @@ function SEO({ title, description, url, image, isBlogPost, locale }) {
       }`
   )
 
-  const defaults = site.siteMetadata;
-  const seo = site.siteMetadata;
+  const defaults = data.site.siteMetadata;
+  const seo = data.site.siteMetadata;
 
   if (defaults.baseUrl === '' && typeof window !== 'undefined') {
     defaults.baseUrl = window.location.origin;
@@ -55,8 +56,7 @@ function SEO({ title, description, url, image, isBlogPost, locale }) {
   title = title || defaults.title
   description = description || defaults.description;
   url = url || defaults.baseUrl + window.location.pathname
-//  image = image ? new URL(image, defaults.baseUrl) : false
-  image = image ? new URL(image, defaults.image) : false
+  image = image ? new URL(image, defaults.baseUrl) : false
   //TODO:
   const datePublished = isBlogPost ? false : false
 

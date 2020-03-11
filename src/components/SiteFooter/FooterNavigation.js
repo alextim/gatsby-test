@@ -1,3 +1,6 @@
+/**************************************
+ * https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern
+ */
 import React from "react"
 import { Link } from "gatsby"
 

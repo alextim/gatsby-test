@@ -1,12 +1,16 @@
 import React from "react"
 import { Container, Column } from "rbx"
 
-const FooterWidgets = () => (
+import FooterWidget from "./FooterWidget"
+import ContactInfo from "./ContactInfo"
+
+const FooterWidgets = () => {
+    return (
     <div className="footer-widgets">
         <Container>
             <Column.Group>
                 <Column>
-                    1
+                    <FooterWidget title="Контакты" children={<ContactInfo />} />
                 </Column>
                 <Column>
                     2
@@ -21,6 +25,7 @@ const FooterWidgets = () => (
             </Column.Group>
         </Container>
     </div>
-)
+    )
+}
 
 export default FooterWidgets

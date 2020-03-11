@@ -1,8 +1,37 @@
 const Utils = {
     upperFirst: function(s) {
       return s.charAt(0).toUpperCase() + s.substring(1);
+    },
+    
+    reverseString: function(s) {
+      let newString = "";
+      for (let i = s.length - 1; i >= 0; i--) {
+          newString += s[i];
+      }
+      return newString;
+    },
+
+    //https://stackoverflow.com/questions/8498592/extract-hostname-name-from-string
+    extractHostname: function(url) {
+      var hostname;
+      //find & remove protocol (http, ftp, etc.) and get hostname
+
+      if (url.indexOf("//") > -1) {
+          hostname = url.split('/')[2];
+      }
+      else {
+          hostname = url.split('/')[0];
+      }
+
+      //find & remove port number
+      hostname = hostname.split(':')[0];
+      //find & remove "?"
+      hostname = hostname.split('?')[0];
+
+      return hostname;
     }
 }
+
 
 export default Utils
 
