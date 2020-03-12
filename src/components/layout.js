@@ -25,22 +25,171 @@ import "./layout.scss"
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import your icons
-import { faMoneyBill } from '@fortawesome/free-solid-svg-icons'
-import { faEnvelope, faCode, faHighlighter } from '@fortawesome/free-regular-svg-icons'
-import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { 
+  faAngleDown,
+  faAngleRight,
+  faAngleUp,
 
-library.add(
-  //regular
-  faEnvelope,
+  faBars,
+  faBed,
 
-  //solid
+  faCamera,
+  faCaretDown,
+  faChartArea,
+  faCheck,
+  faChevronDown,
+  faChild,
+  faCloud,
+
+  faDumbbell,
+
+  faEuroSign,
+
+  faFax,
+  faFilter,
+
+  faHeartbeat,
+
+  faInfoCircle,
+
+  faLink,
+  faListOl,
+  faLongArrowAltLeft,
+  faLongArrowAltRight,
+  faLongArrowAltUp,
+
+  faMapMarkerAlt,
+  faMountain,
   faMoneyBill,
 
-  //brands
-  faFacebook,
-  faTwitter,
+  faPaperclip,
+  faPhone,
+  faPhoneVolume,
+  faPrint,
+
+  faReply,
+  faRss,
+
+  faShieldAlt,
+
+  faTag,
+  faTags,
+  faTh,
+  faThList,
+  faThumbtack,
+  faTimes,
+  faTshirt,
+} from '@fortawesome/free-solid-svg-icons'
+
+import { 
+  faCalendar,
+  faCalendarCheck,
+  faCheckCircle,
+  faCircle,
+  faClock,
+  faComment,
+
+  faEdit,
+  faEnvelope, 
+  faEye,
+
+  faFile,
+  faFolder,
+  faFolderOpen,
+
+  faMap,
+  
+  faSmileWink,
+
+  faUser,
+} from '@fortawesome/free-regular-svg-icons'
+
+import { 
+  faFacebook, 
+  faInstagram,
+  faTelegram,
+  faTwitter, 
+  faSkype,
+  faViber,
+  faWhatsapp,
+} from '@fortawesome/free-brands-svg-icons'
+
+library.add(
+  faMountain,
+  faDumbbell,
+  faUser,
+  faPhone,
+  faFax,
+  faCalendar,
+  faLink,
+  faPrint,
+  faMoneyBill,
+  faEnvelope, 
+  faTh,
+  faThList,
+  faFilter,
+  
+  faClock,
+  faChild,
+  
+  faFolder,
+  faFolderOpen,
+  
+  faCaretDown,
+  
+  faChartArea,
+  faBed,
+  
+  faEuroSign,
+  faSmileWink,
+  faShieldAlt,
+  
+  faCheckCircle,
+  faCircle,
+  
+  faPhoneVolume,
+  faMap,
+  faCalendarCheck,
+  faEdit,
+  faReply,
+  
+  faTags,
+  faThumbtack,
+  faTimes,
+  faBars,
+  
+  faAngleRight,
+  faAngleUp,
+  faAngleDown,
+  
+  faLongArrowAltLeft,
+  faLongArrowAltRight,
+  faLongArrowAltUp,
+  
+  faCheck,
+  faPaperclip,
+  faFile,
+  faTag,
+  faRss,
+  faCloud,
+  faComment,
+  
+  faEye,
+  faTshirt,
+  faInfoCircle,
+  faListOl,
+  faCamera,
+  faChevronDown,
+  faMapMarkerAlt,
+  faHeartbeat,
  
-  // more icons go here
+  faFacebook, 
+  faTwitter, 
+  faInstagram,
+  faSkype,
+  faViber,
+  faWhatsapp,
+  faTelegram,
 )
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
