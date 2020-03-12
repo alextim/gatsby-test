@@ -28,16 +28,20 @@ const ContactInfo = () => {
       )
     
     const meta = data.site.siteMetadata
+
     const email = meta.organization.email1;
     const encodedEmail = "javascript:window.location.href=atob('" + btoa(email) + "')"
     const reversedEmail = Utils.reverseString(email)
-    const emailStyle = "unicode-bidi:bidi-override;direction:rtl;"
+    const emailStyle = {
+      unicodeBidi: 'bidi-override',
+      direction: 'rtl'
+    }
 
     const hostName = Utils.extractHostname(meta.siteUrl)
 
     return (
     <>
-        <div class="address-company-name">
+        <div className="address-company-name">
             {meta.organization.name}
         </div>
         <div>
@@ -49,8 +53,8 @@ const ContactInfo = () => {
             <br/>
             {meta.organization.address.country}
         </div>
-        <div class="communication-info">
-            <div class="contact-item icon-email">
+        <div className="communication-info">
+            <div className="contact-item icon-email">
                 <a href={encodedEmail} style={emailStyle}>
                     {reversedEmail}
                 </a>

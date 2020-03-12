@@ -13,7 +13,7 @@ const SocialLinks = ({socialItems}) => {
                     <li key={i}>
                         <a className={"icon-" + item.key } 
                             title={ Utils.upperFirst(item.key) }
-                            target="_blank" rel="noopener" 
+                            target="_blank" rel="noopener noreferrer" 
                             href={ item.url }>
                                 { item.key }
                         </a>

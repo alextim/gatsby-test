@@ -1,6 +1,7 @@
-import React, { Children } from 'react'
+import React from 'react'
+//import { Children } from 'react'
 import { Navbar, Button } from "rbx"
-import { Link } from 'gatsby'
+//import { Link } from 'gatsby'
 import logo from '../images/gatsby-icon.png'
 
 

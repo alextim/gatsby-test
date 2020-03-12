@@ -1,6 +1,6 @@
 const Utils = {
     upperFirst: function(s) {
-      return s.charAt(0).toUpperCase() + s.substring(1);
+      return s[0].toUpperCase() + s.substring(1);
     },
     
     reverseString: function(s) {
