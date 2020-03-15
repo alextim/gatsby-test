@@ -5,16 +5,15 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-
+import React, { useEffect } from "react"
 import PropTypes from "prop-types"
-import { Section, Container } from  "rbx"
 import { useStaticQuery, graphql } from "gatsby"
+import { Global, css } from '@emotion/core'
+import { ThemeProvider } from 'emotion-theming'
 
+import theme from './theme'
 import Header from "./Header"
-import SiteFooter from "./SiteFooter/SiteFooter"
-
-
+import Footer from "./Footer"
 import "./layout.scss"
 
 /**********************************
@@ -191,7 +190,20 @@ library.add(
   faWhatsapp,
   faTelegram,
 )
+
+const loadScript = src => {
+  const tag = document.createElement('script');
+  tag.src = src;
+  tag.defer = true;
+
+  document.getElementsByTagName('body')[0].appendChild(tag);
+}
+
 const Layout = ({ children }) => {
+  useEffect(() => {
+    loadScript('https://use.fontawesome.com/fd58d214b9.js');
+  }, []);
+
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -202,22 +214,39 @@ const Layout = ({ children }) => {
     }
   `)
 
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
+      <Global
+        styles={css`
+          *,
+          *::after,
+          *::before { 
+            box-sizing: inherit;
+          }
+        
+          body {
+            box-sizing: border-box; 
+            margin: 0;
+            font-family: Cabin, 'Open Sans', sans-serif;
+            font-display: swap;
+            font-display: fallback;
+            overflow-x: hidden;
+          }
+       `}
+      />
       <Header siteTitle={data.site.siteMetadata.title} />
-      <Section>
-                <Container>
-                <FontAwesomeIcon icon={faEnvelope} style={{ color: 'red' }} />
-                    {children}
-                </Container>
-      </Section>      
-      <SiteFooter />
-    </>
+      <main>
+        {children}
+      </main>      
+      <Footer theme={theme}/>
+    </ThemeProvider>
   )
 }
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  theme: PropTypes.object,
 }
 
 export default Layout

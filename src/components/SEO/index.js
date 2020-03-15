@@ -61,7 +61,7 @@ function SEO({ title, description, url, image, isBlogPost, locale }) {
   const datePublished = isBlogPost ? false : false
 
   return (
-    <React.Fragment>
+    <>
       <Helmet>
         <html lang={locale} />
         {/* General tags */}
@@ -101,7 +101,7 @@ function SEO({ title, description, url, image, isBlogPost, locale }) {
         organization={seo.organization}
         defaultTitle={title}
       />
-    </React.Fragment>
+    </>
   )
 }
 

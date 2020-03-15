@@ -5,16 +5,21 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-brands-svg-icons": "^5.12.1",
     "@fortawesome/free-regular-svg-icons": "^5.12.1",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "@fortawesome/react-fontawesome": "^0.1.9",
+    "@rebass/preset": "^4.0.5",
     "bulma": "^0.8.0",
     "dotenv": "^8.2.0",
+    "emotion-theming": "^10.0.27",
     "gatsby": "^2.19.7",
     "gatsby-cli": "^2.10.6",
     "gatsby-image": "^2.2.39",
+    "gatsby-plugin-emotion": "^4.1.24",
     "gatsby-plugin-manifest": "^2.2.39",
     "gatsby-plugin-offline": "^3.0.32",
     "gatsby-plugin-react-helmet": "^3.1.21",
@@ -29,8 +34,10 @@
     "react": "^16.12.0",
     "react-bulma-components": "^3.2.0",
     "react-dom": "^16.12.0",
+    "react-fontawesome": "^1.7.1",
     "react-helmet": "^5.2.1",
-    "react-hook-form": "^4.10.1"
+    "react-hook-form": "^4.10.1",
+    "rebass": "^4.0.7"
   },
   "devDependencies": {
     "prettier": "^1.19.1"

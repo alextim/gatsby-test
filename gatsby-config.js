@@ -18,7 +18,7 @@ module.exports = {
     organization: {
       name: "Adrenalin-Travel",
       description: 'Проведение интересных приключений и путешествий по всему миру!',
-      url:          "https://adrenalin.travel",
+      url:         `${process.env.BASE_URL}`,
       logo:         "/public/adrenalin-travel.svg",
       address: {
         streetAddress1: 'ул.Ришельевская, 32',
@@ -196,6 +196,7 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+   `gatsby-plugin-emotion`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
