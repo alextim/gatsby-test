@@ -29,56 +29,124 @@ $fullhd	computed	1344px + (2 * $gap)
     
     
     
-    breakpoints: ['40em', '48em', '64em', '76em'],
+  breakpoints: ['40em', '48em', '64em', '76em'],
 
-    fontSizes: [
-      12, 14, 16, 20, 24, 32, 48, 64
-    ],
-    colors: {
-      blue: '#07c',
-      lightgray: '#f6f6ff'
+  colors: {
+    text: '#000',
+    background: '#fff',
+    primary: '#07c',
+    secondary: '#30c',
+    muted: '#f6f6f9',
+    gray: '#dddddf',
+    highlight: 'hsla(205, 100%, 40%, 0.125)',
+    brands: {
+      skype:    'rgb(0, 175, 240)',
+      viber:    '#bcaec7',
+      whatsapp: '#25d366',
+      telegram: '#0088cc',    
+    }
+  },
+
+
+  fonts: {
+    body: 'system-ui, sans-serif',
+    heading: 'inherit',
+    monospace: 'Menlo, monospace',
+  },
+  fontSizes: [
+    12, 14, 16, 20, 24, 32, 48, 64, 96
+  ],
+  fontWeights: {
+    body: 400,
+    heading: 700,
+    bold: 700,
+  },
+  lineHeights: {
+    body: 1.5,
+    heading: 1.25,
+  },
+  space: [
+    0, 4, 8, 16, 32, 64, 128, 256, 512
+  ],
+
+  sizes: {
+    avatar: 48,
+  },
+
+  radii: {
+    default: 4,
+    circle: 99999,
+  },
+  shadows: {
+    small: '0 0 4px rgba(0, 0, 0, .125)',
+    large: '0 0 24px rgba(0, 0, 0, .125)',
+    card: '0 0 4px rgba(0, 0, 0, .125)',
+  },
+  variants: {
+    avatar: {
+      width: 'avatar',
+      height: 'avatar',
+      borderRadius: 'circle',
     },
-    space: [
-      0, 4, 8, 16, 32, 64, 128, 256
-    ],
-    fonts: {
-      body: 'system-ui, sans-serif',
-      heading: 'inherit',
-      monospace: 'Menlo, monospace',
+    card: {
+      p: 2,
+      bg: 'background',
+      boxShadow: 'card',
     },
-    fontWeights: {
-      body: 400,
-      heading: 700,
-      bold: 700,
+    link: {
+      color: 'primary',
     },
-    lineHeights: {
-      body: 1.5,
-      heading: 1.25,
-    },
-    shadows: {
-      small: '0 0 4px rgba(0, 0, 0, .125)',
-      large: '0 0 24px rgba(0, 0, 0, .125)'
-    },
-    variants: {
-    },
-    text: {
-    },
-    buttons: {
-      primary: {
-        color: 'white',
-        bg: 'primary',
+    nav: {
+      fontSize: 1,
+      fontWeight: 'bold',
+      display: 'inline-block',
+      p: 2,
+      color: 'inherit',
+      textDecoration: 'none',
+      ':hover,:focus,.active': {
+        color: 'primary',
       }
     },
-    footer: {
-        colors: {
-          text: "#ddd",
-          highlited: "#fff",
-          bg: "#252831",
-          colophonTopBg: "#2c3038",
-          colophonBottomBg: "#414244",
-          widgetTitleUnderline: "#ff7550",
-        }
+  },
+  buttons: {
+    primary: {
+      fontSize: 2,
+      fontWeight: 'bold',
+      color: 'background',
+      bg: 'primary',
+      borderRadius: 'default',
     },
+    outline: {
+      variant: 'buttons.primary',
+      color: 'primary',
+      bg: 'transparent',
+      boxShadow: 'inset 0 0 2px',
+    },
+    secondary: {
+      variant: 'buttons.primary',
+      color: 'background',
+      bg: 'secondary',
+    },
+  },
+
+  styles: {
+    root: {
+      fontFamily: 'body',
+      fontWeight: 'body',
+      lineHeight: 'body',
+    },
+  },
+
+  footer: {
+    colors: {
+      text: "#ddd",
+      highlited: "#fff",
+      bg: "#252831",
+      colophonTopBg: "#2c3038",
+      colophonBottomBg: "#414244",
+      widgetTitleUnderline: "#ff7550",
+    }
+  },
 }
 
 theme.mediaQueries = [

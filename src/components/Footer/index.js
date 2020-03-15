@@ -1,47 +1,21 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
 
-import styled from "@emotion/styled"
-import { css } from "@emotion/core"
+import { Global, css } from "@emotion/core"
+import { useTheme } from "emotion-theming"
 
 import { Flex, Box } from "rebass"
 
+import Container from "./../Container"
 import SocialLinks from "./SocialLinks"
 import FooterWidget from "./FooterWidget"
 import ContactInfo from "./ContactInfo"
 import FooterNavigation from "./FooterNavigation"
 import LegalInfo from "./LegalInfo"
 
-export default ({theme}) => {
-  const data = useStaticQuery(graphql`
-        query SiteFooterQuery {
-            site {
-                siteMetadata {
-                    organization {
-                      name
-                    }
-                    baseUrl
-                    socialLinks {
-                        key
-                        url
-                    }
-                    footerNavigation {
-                        title
-                        path
-                    }
+export default () => {
+  const theme = useTheme()
 
-                }
-            }
-        }
-   `)
-
-  const FooterContainer = styled.div`
-    min-width: 320px;
-    max-width: 1366px;
-    padding: 0 30px;
-    margin: auto;
-  `
-  const FooterBox = ({children, theme}) => {
+  const WidgetWrapper = ({children}) => {
       return (
         <Box width={1} mb={20} 
           sx={{
@@ -53,42 +27,52 @@ export default ({theme}) => {
         >
           {children}
         </Box>
-    )}
+  )}
 
-    return (
+  return (
       <Box
         color={theme.footer.colors.text} 
         bg={theme.footer.colors.bg}
         as="footer"
       >
-        <FooterContainer>
+        <Global
+            styles={css`
+              .footer-link {
+                  color: ${theme.footer.colors.text};
+                  &:hover {
+                    color: ${theme.footer.colors.highlited};
+                  }
+              }
+        `}
+        />
+        <Container>
           <Flex flexWrap='wrap' py={70}>
-              <FooterBox theme={theme}>
-                  <FooterWidget title="Контакты" children={<ContactInfo />} theme={theme}/>
-              </FooterBox>
-              <FooterBox theme={theme}>
+              <WidgetWrapper>
+                  <FooterWidget title="Контакты" children={<ContactInfo />}/>
+              </WidgetWrapper>
+              <WidgetWrapper>
                   2
-              </FooterBox>
-              <FooterBox theme={theme}>
+              </WidgetWrapper>
+              <WidgetWrapper>
                   3
-              </FooterBox>
-              <FooterBox theme={theme}>
+              </WidgetWrapper>
+              <WidgetWrapper>
                   4
-              </FooterBox>
+              </WidgetWrapper>
           </Flex>
-        </FooterContainer>
+        </Container>
 
         <Box py={20} bg={theme.footer.colors.colophonTopBg}>
-          <FooterContainer>
-            <SocialLinks socialItems={data.site.siteMetadata.socialLinks}/>
-            <FooterNavigation navItems={data.site.siteMetadata.footerNavigation}/>
-          </FooterContainer>
+          <Container>
+            <SocialLinks />
+            <FooterNavigation />
+          </Container>
         </Box>
         
         <Box py={20} bg={theme.footer.colors.colophonBottomBg}>
-          <FooterContainer>
-            <LegalInfo companyName={data.site.siteMetadata.organization.name}/>
-          </FooterContainer>
+          <Container>
+            <LegalInfo />
+          </Container>
         </Box>
    
       </Box>

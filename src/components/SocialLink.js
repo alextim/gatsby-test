@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link, Flex, Box } from "rebass"
+import { Link } from "rebass"
 import styled from "@emotion/styled"
 import PropTypes from 'prop-types'
-import FontAwesomeIcon from 'react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const IconLink = styled(Link)`
   transition: color 0.5s;
@@ -23,7 +23,7 @@ const SocialLink = ({ fontAwesomeIcon, name, url, color }) => (
       rel="noreferrer"
       aria-label={name}
     >
-      <FontAwesomeIcon name={fontAwesomeIcon} />
+      <FontAwesomeIcon icon={fontAwesomeIcon} />
     </IconLink>
  )
 

@@ -163,12 +163,16 @@ module.exports = {
     ],
     socialLinks: [
       { 
-        key: "facebook", 
-        url: "https://www.facebook.com/travel.adrenalin",
+        key:   "facebook", 
+        url:   "https://www.facebook.com/travel.adrenalin",
+        icon:  ["fab", "facebook"],
+        color: "blue"
       },
       {
-        key: "instagram",
-        url: "https://www.instagram.com/adrenalin_travel/",
+        key:   "instagram",
+        url:   "https://www.instagram.com/adrenalin_travel/",
+        icon:  ["fab", "instagram"],
+        color: "red"
       }
     ]
   },
@@ -197,6 +201,27 @@ module.exports = {
       },
     },
    `gatsby-plugin-emotion`,
+   {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      path: `${__dirname}/src/markdown-pages`,
+      name: `markdown-pages`,
+    },
+  },
+  `gatsby-transformer-remark`,
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      path: `${__dirname}/src/posts`,
+    },
+  },
+  {
+    resolve: "gatsby-plugin-page-creator",
+    options: {
+      path: `${__dirname}/src/posts`,
+    },
+  },
+  `gatsby-plugin-mdx`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

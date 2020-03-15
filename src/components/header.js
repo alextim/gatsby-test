@@ -1,21 +1,25 @@
 //import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
+
 
 import NavBar2 from "./NavBar"
 
-const Header = ({ siteTitle }) => (
-  <header>
-    <NavBar2 />
-  </header>
-)
+export default () => {
+  const data = useStaticQuery(graphql`
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
+  return (
+    <header>
+      <NavBar2 />
+      <h1>{data.site.siteMetadata.title}</h1>
+    </header>
+  )
 }
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header

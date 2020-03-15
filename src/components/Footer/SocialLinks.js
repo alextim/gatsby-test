@@ -1,28 +1,46 @@
 import React from "react"
-import { Link, Flex, Box } from "rebass"
+import { useStaticQuery, graphql } from "gatsby"
+import { Flex, Box } from "rebass"
+
+
+import SocialLink from "./../SocialLink"
 
 import Utils from "../../utils"
+//import fontawesome from "./../fontawesome"
 
 
-const SocialLinks = ({socialItems}) => {
-  const type = "circle"
+export default () => {
+  const data = useStaticQuery(graphql`
+  query SocialLinksQuery {
+      site {
+          siteMetadata {
+              socialLinks {
+                  key
+                  url
+                  icon
+                  color
+              }
+          }
+      }
+  }
+`)
+
+//  const type = "circle"
 
   return (
    <Flex as="ul" alignItems="center" justifyContent="center" flexWrap="wrap">
-   { 
-     socialItems.map( (item, i) => (
-       <Box as="li" key={i}>
-            <a className={"icon-" + item.key } 
-                title={ Utils.upperFirst(item.key) }
-                target="_blank" rel="noopener noreferrer" 
-                href={ item.url }>
-                    { item.key }
-            </a>
-        </Box>
-      ))
-    }
+      { 
+        data.site.siteMetadata.socialLinks.map( (item, i) => (
+          <Box as="li" key={i}>
+            <SocialLink 
+              fontAwesomeIcon={item.icon}
+              name={ Utils.upperFirst(item.key) }
+              url={item.url}
+              color={item.color}
+            />
+          </Box>
+        ))
+      }
     </Flex>
   )
 }
-
-export default SocialLinks

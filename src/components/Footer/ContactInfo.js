@@ -1,23 +1,25 @@
 import React from "react"
-
-import styled from "@emotion/styled"
-import { Global, css } from "@emotion/core"
-
 import { useStaticQuery, graphql } from "gatsby"
-import { Icon } from "rbx"
+import { Flex, Box } from "rebass"
+import styled from "@emotion/styled"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Utils from "../../utils"
 
-const IconText = ({ico, text}) => {
-  return (
-    <>
-    hello
-    </>
-
-  )
-}
 const ContactInfo = () => {
+    const StyledAnchor = styled.a`
+      margin-left: 10px;
+    `
+    const IconLink = ({icon, url, name, ...props}) => {
+      return (
+        <>
+            <FontAwesomeIcon icon={icon} size="xs"/> 
+            <StyledAnchor className="footer-link" href={url} {...props}>{name}</StyledAnchor>
+        </>
+      )
+    }
+  
     const data = useStaticQuery(graphql`
       query {
         site {
@@ -53,30 +55,15 @@ const ContactInfo = () => {
     const hostName = Utils.extractHostname(meta.siteUrl)
 
     return (
-    <>
-        <div className="address-company-name">
-            {meta.organization.name}
-        </div>
-        <div>
-            {meta.organization.address.streetAddress1}
-            <br/>
-            {meta.organization.address.city}
-            &nbsp;
-            {meta.organization.address.postalIndex}
-            <br/>
-            {meta.organization.address.country}
-        </div>
-        <div>
-            <Icon><FontAwesomeIcon icon={["far","envelope"]} size="xs"/></Icon>
-            {/*
-            <a dangerouslySetInnerHTML={"href=\"" + encodedEmail +"\""} style={emailStyle}>{reversedEmail}</a>
-            */}       
-        </div>
-        <div>
-            <Icon><FontAwesomeIcon icon={["fas","link"]} size="xs"/></Icon> 
-            <a href={meta.siteUrl}>{hostName}</a>
-        </div>
-    </>
+    <Flex flexDirection="column">
+        <Box sx={{ fontSize: '1.25rem', }}>{meta.organization.name}</Box>
+        <Box>{meta.organization.address.streetAddress1}</Box>
+        <Box>{meta.organization.address.city}</Box>
+        <Box>{meta.organization.address.postalIndex}</Box>
+        <Box>{meta.organization.address.country}</Box>
+        <Box><IconLink icon={["far","envelope"]} url={encodedEmail} name={reversedEmail} style={emailStyle}/></Box>
+        <Box><IconLink icon={["fas","link"]} url={meta.siteUrl} name={hostName} /></Box>
+    </Flex>
     )
 }
 
