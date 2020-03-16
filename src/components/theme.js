@@ -38,9 +38,10 @@ $fullhd	computed	1344px + (2 * $gap)
     secondary: '#30c',
     muted: '#f6f6f9',
     gray: '#dddddf',
+    orange: '#ff7550',
     highlight: 'hsla(205, 100%, 40%, 0.125)',
     brands: {
-      skype:    'rgb(0, 175, 240)',
+  //    skype:    'rgb(0, 175, 240)',
       viber:    '#bcaec7',
       whatsapp: '#25d366',
       telegram: '#0088cc',    
@@ -82,6 +83,26 @@ $fullhd	computed	1344px + (2 * $gap)
     large: '0 0 24px rgba(0, 0, 0, .125)',
     card: '0 0 4px rgba(0, 0, 0, .125)',
   },
+
+  forms: {
+    input: {
+      color: 'primary',
+    },
+    select: {
+      borderRadius: 9999,
+    },
+    textarea: {},
+    label: {},
+    radio: {},
+    checkbox: {},
+// example theme with variants
+    largeInput: {
+      fontSize: 3,
+      px: 3,
+      py: 2,
+    }
+  },
+  
   variants: {
     avatar: {
       width: 'avatar',
@@ -111,10 +132,12 @@ $fullhd	computed	1344px + (2 * $gap)
   buttons: {
     primary: {
       fontSize: 2,
-      fontWeight: 'bold',
-      color: 'background',
-      bg: 'primary',
+//      fontWeight: 'bold',
+      color: 'highlite',
+      bg: 'orange',
       borderRadius: 'default',
+      px: 3,
+      py: 2
     },
     outline: {
       variant: 'buttons.primary',
@@ -145,7 +168,8 @@ $fullhd	computed	1344px + (2 * $gap)
       colophonTopBg: "#2c3038",
       colophonBottomBg: "#414244",
       widgetTitleUnderline: "#ff7550",
-    }
+    },
+    mbWidgetLink: "0.4375rem",
   },
 }
 

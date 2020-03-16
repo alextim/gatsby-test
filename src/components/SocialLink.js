@@ -5,13 +5,25 @@ import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const IconLink = styled(Link)`
-  transition: color 0.5s;
-  color: ${props =>
-    props.theme.colors[props.color] || props.theme.colors.primary};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  color: ${props => props.theme.footer.colors.text};
   text-decoration: none;
+  
+  height: 2em;
+  width: 2em;
+  margin: 0 0.625em;
+
+  border: 0.125em solid ${props => props.theme.footer.colors.text};
+  border-radius: 100%;
 
   &:hover {
-    color: ${props => props.theme.colors.primaryLight};
+    color: ${props => props.theme.footer.colors.highlited};
+    background-color: #517fa4;
+    border: 0.125em  solid transparent;
+    transition: all .4s ease-out 0s;
   }
 `
 

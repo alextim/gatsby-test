@@ -1,10 +1,10 @@
 /**************************************
  * https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern
  */
-import React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import React from 'react'
+import { Link, useStaticQuery, graphql } from 'gatsby'
 
-import { Flex, Box } from "rebass"
+import { Flex, Box } from 'rebass'
 
 const FooterNavigation = () => {
   const data = useStaticQuery(graphql`
@@ -21,10 +21,10 @@ const FooterNavigation = () => {
         }
    `)  
   return (
-    <Flex as="ul" alignItems="center" justifyContent="center" flexWrap="wrap">
+    <Flex as="ul" py={[1]} mt={[3]} alignItems="center" justifyContent="center" flexWrap="wrap">
       {
         data.site.siteMetadata.footerNavigation.map( (item, i) => (
-          <Box as="li" key={i} mx={10}>
+          <Box as="li" key={i} mx={[2]}>
             <Link className="footer-link" to={item.path}>
               {item.title}
             </Link>

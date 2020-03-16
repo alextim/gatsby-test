@@ -5,19 +5,19 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-//import { useEffect } from "react"
-//import PropTypes from "prop-types"
+import React from 'react'
+//import { useEffect } from 'react'
+//import PropTypes from 'prop-types'
 
 import { Global, css } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 
 import theme from './theme'
-import Container from "./Container"
-import Header from "./Header"
-import Footer from "./Footer"
-import "./layout.scss"
-import "./fontawesome"
+import Container from './Container'
+import Header from './Header'
+import Footer from './Footer'
+import './layout.scss'
+import './fontawesome'
 
 /*
 const loadScript = src => {

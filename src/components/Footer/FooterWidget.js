@@ -1,23 +1,23 @@
-import React from "react"
+import React from 'react'
 
-import styled from "@emotion/styled"
+import styled from '@emotion/styled'
 
 const FooterWidget = ( {title, children} ) => {
   
   const Title = styled.h3`
     color: ${props => props.theme.footer.colors.highlited};
-    font-weight: 400;
-    margin: 0 0 10px;
-    line-height: 1.5;
+    font-weight: ${props => props.theme.fontWeights.body};
+    margin: 0 0 ${props => props.theme.space[3]}px;
+    line-height: ${props => props.theme.lineHeights.heading};
     padding: 0;
     &:after {
       display: block;
       content: "";
       height: 2px;
       background: ${props => props.theme.footer.colors.widgetTitleUnderline};
-      width: 50px;
-      margin-top: 10px;
-      margin-bottom: 20px;
+      width: ${props => props.theme.space[5]}px;
+      margin-top: ${props => props.theme.space[3]}px;
+      margin-bottom: ${props => props.theme.space[4]}px;
     }
     ${props => props.theme.mediaQueries.m}: {
       font-size: 1.125rem;

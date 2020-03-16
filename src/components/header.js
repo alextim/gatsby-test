@@ -1,9 +1,9 @@
-//import { Link } from "gatsby"
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+//import { Link } from 'gatsby'
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 
 
-import NavBar2 from "./NavBar"
+import NavBar2 from './NavBar'
 
 export default () => {
   const data = useStaticQuery(graphql`

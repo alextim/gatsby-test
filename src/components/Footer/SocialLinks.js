@@ -1,12 +1,12 @@
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import { Flex, Box } from "rebass"
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
+import { Flex, Box } from 'rebass'
 
 
-import SocialLink from "./../SocialLink"
+import SocialLink from './../SocialLink'
 
-import Utils from "../../utils"
-//import fontawesome from "./../fontawesome"
+import Utils from '../../utils'
+//import fontawesome from './../fontawesome'
 
 
 export default () => {
@@ -28,7 +28,7 @@ export default () => {
 //  const type = "circle"
 
   return (
-   <Flex as="ul" alignItems="center" justifyContent="center" flexWrap="wrap">
+   <Flex as="ul" py={[1]} alignItems="center" justifyContent="center" flexWrap="wrap">
       { 
         data.site.siteMetadata.socialLinks.map( (item, i) => (
           <Box as="li" key={i}>

@@ -1,26 +1,30 @@
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import { Flex, Box } from "rebass"
-import styled from "@emotion/styled"
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
+import { Box } from 'rebass'
+import styled from '@emotion/styled'
+import { useTheme } from 'emotion-theming'
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import Utils from "../../utils"
+import Utils from '../../utils'
+
+const StyledAnchor = styled.a`
+  margin-left: ${props => props.theme.space[2]}px;
+`
 
 const ContactInfo = () => {
-    const StyledAnchor = styled.a`
-      margin-left: 10px;
-    `
-    const IconLink = ({icon, url, name, ...props}) => {
-      return (
-        <>
+  const theme = useTheme()
+  
+  const IconLink = ({icon, url, name, ...props}) => {
+    return (
+        <Box mb={theme.footer.mbWidgetLink}>
             <FontAwesomeIcon icon={icon} size="xs"/> 
             <StyledAnchor className="footer-link" href={url} {...props}>{name}</StyledAnchor>
-        </>
+        </Box>
       )
-    }
+  }
   
-    const data = useStaticQuery(graphql`
+  const data = useStaticQuery(graphql`
       query {
         site {
           siteMetadata {
@@ -34,36 +38,45 @@ const ContactInfo = () => {
                 postalIndex
                 country
               },
-              phone1
-              email1
+              email
             }
           }
         }
       }`
-    )
-    
-    const meta = data.site.siteMetadata
+  )
 
-    const email = meta.organization.email1;
-    const encodedEmail = "javascript:window.location.href=atob('" + btoa(email) + "')"
-    const reversedEmail = Utils.reverseString(email)
-    const emailStyle = {
-      unicodeBidi: 'bidi-override',
-      direction: 'rtl'
-    }
+  const meta = data.site.siteMetadata
+  
+  const emailStyle = {
+      unicodeBidi: "bidi-override",
+      direction: "rtl"
+  }
 
-    const hostName = Utils.extractHostname(meta.siteUrl)
+  const hostName = Utils.extractHostname(meta.siteUrl)
 
-    return (
-    <Flex flexDirection="column">
-        <Box sx={{ fontSize: '1.25rem', }}>{meta.organization.name}</Box>
+  return (
+    <Box>
+        <Box sx={{ fontSize: "1.25rem", }}>{meta.organization.name}</Box>
         <Box>{meta.organization.address.streetAddress1}</Box>
         <Box>{meta.organization.address.city}</Box>
         <Box>{meta.organization.address.postalIndex}</Box>
-        <Box>{meta.organization.address.country}</Box>
-        <Box><IconLink icon={["far","envelope"]} url={encodedEmail} name={reversedEmail} style={emailStyle}/></Box>
-        <Box><IconLink icon={["fas","link"]} url={meta.siteUrl} name={hostName} /></Box>
-    </Flex>
+        <Box mb={theme.footer.mbWidgetLink}>{meta.organization.address.country}</Box>
+        {
+          meta.organization.email.map( (email) => {
+            const encoded = "javascript:window.location.href=atob('" + btoa(email) + "')"
+            const reversed = Utils.reverseString(email)
+            return (
+                <IconLink 
+                  icon={["far","envelope"]} 
+                  url={encoded} 
+                  name={reversed} 
+                  style={emailStyle}
+                />
+            )
+          })
+        }
+        <IconLink icon={["fas","link"]} url={meta.siteUrl} name={hostName} />
+    </Box>
     )
 }
 

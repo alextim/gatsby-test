@@ -1,5 +1,14 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Box, Flex } from "rebass"
+import {
+  Label,
+  Input,
+  Select,
+  Textarea,
+  Radio,
+  Checkbox,
+} from '@rebass/forms'
 
 const FAKE_GATEWAY_URL = "https://jsonplaceholder.typicode.com/posts";
 const required = "This field is required";
@@ -50,7 +59,7 @@ export default () => {
   );
 
   const showForm = (
-    <form onSubmit={handleSubmit(onSubmit)} method="post">
+    <Box as="form" onSubmit={handleSubmit(onSubmit)} method="post">
       <div className="field">
         <label className="label">Name</label>
         <div className="control">
@@ -65,6 +74,7 @@ export default () => {
         </div>
         {errors.name && <p className="help is-danger">{errors.name.message}</p>}
       </div>
+
       <label htmlFor="email">
         <h5>Email</h5>
         <input
@@ -108,7 +118,7 @@ export default () => {
           </button>
         </div>
       </div>
-    </form>
+    </Box>
   );
 
   return (
