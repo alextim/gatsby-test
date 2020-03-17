@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Box, Button } from "rebass"
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Box, Button } from 'rebass'
 import {
   Input,
 } from '@rebass/forms'
 
-const FAKE_GATEWAY_URL = "https://jsonplaceholder.typicode.com/posts";
-//const required = "This field is required";
+const FAKE_GATEWAY_URL = 'https://jsonplaceholder.typicode.com/posts';
+//const required = 'This field is required';
 
 export default () => {
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false)
   const {
     register,
     handleSubmit,
@@ -17,32 +17,30 @@ export default () => {
     errors,
     reset,
     formState: { isSubmitting }
-  } = useForm();
+  } = useForm()
 
   const onSubmit = async data => {
     try {
       console.log(data);
       await fetch(FAKE_GATEWAY_URL, {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
         body: JSON.stringify(data),
         headers: {
-          "Content-type": "application/json; charset=UTF-8"
+          'Content-type': 'application/json; charset=UTF-8'
         }
       });
       setSubmitted(true);
       reset();
     } catch (error) {
       setError(
-        "submit",
-        "submitError",
+        'submit',
+        'submitError',
         `Oops! There seems to be an issue! ${error.message}`
       );
     }
   };
-
-  const showSubmitError = msg => <p className="msg-error">{msg}</p>;
 
   const showThankYou = (
     <div className="msg-confirm">
@@ -51,13 +49,16 @@ export default () => {
         Send another message?
       </button>
     </div>
-  );
+  )
   
+  const ShowError = msg => <div className="msg-error">{msg}</div>
+
+
   const showForm = (
     <Box as="form" onSubmit={handleSubmit(onSubmit)} method="post">
       <Box className="field">
         <Box className="control">
-          <Input className={("input").concat(errors.email ? " is-danger": "")}
+          <Input className={'input' + (errors.email ? ' is-danger' : '')}
             type="email"
             name="email"
             id="email"
@@ -72,9 +73,9 @@ export default () => {
             disabled={isSubmitting}
             />
         </Box>
-        {errors.email && errors.email.type === 'required' && <div className="msg-error">E-mail is required</div>},
-        {errors.email && errors.email.type === 'maxLength' && <div className="msg-error">Max length exceeded</div> },
-        {errors.email && errors.email.type === 'pattern' && <div className="msg-error">invalid email address</div> },
+        {errors.email && errors.email.type === 'required'  && ShowError('Email required') }
+        {errors.email && errors.email.type === 'maxLength' && ShowError('Max length exceeded') }
+        {errors.email && errors.email.type === 'pattern'   && ShowError('invalid email address') }
      </Box>
 
       <Box className="field">
@@ -85,13 +86,14 @@ export default () => {
         </Box>
       </Box>
     </Box>
-  );
+  )
+
 
   return (
     <Box>
       <Box>Будьте в курсе наших последних новостей и актуальных предложений!</Box>
       <Box>
-        {errors && errors.submit && showSubmitError(errors.submit.message)}
+        {errors && errors.submit && ShowError(errors.submit.message)}
       </Box>
       <Box>
         {submitted ? showThankYou : showForm}

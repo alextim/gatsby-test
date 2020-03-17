@@ -11,6 +11,7 @@ import React from 'react'
 
 import { Global, css } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
+import { Flex, Box } from 'rebass'
 
 import theme from './theme'
 import Container from './Container'
@@ -64,13 +65,17 @@ export default props => {
         }
        `}
       />
-      <Header />
-      <main>
-        <Container>
-          {props.children}
-        </Container>
-      </main>      
-      <Footer/>
+      <Flex flexDirection="column" sx={{minHeight:'100vh'}}>
+        <Header />
+        <Box as="main" width="100%" sx={{
+          flex: '1 1 auto',
+        }}>
+          <Container>
+            {props.children}
+          </Container>
+        </Box>  
+        <Footer/>
+      </Flex>
     </ThemeProvider>
   )
 }

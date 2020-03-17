@@ -1,9 +1,15 @@
 // example theme.js
-
+//https://theme-ui.com/theme-spec
 
 
 const theme = {
     /*************
+     * Prefix	Description
+     * https://basscss.com/
+xs-	below 40em
+sm-	40em – 52em
+md-	52em – 64em
+lg-	above 64em
      * 
      * 1em = 16px
      * 
@@ -72,6 +78,10 @@ $fullhd	computed	1344px + (2 * $gap)
 
   sizes: {
     avatar: 48,
+    container: {
+      min: 320,
+      max: 1366,
+    },
   },
 
   radii: {

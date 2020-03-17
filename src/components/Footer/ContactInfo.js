@@ -63,14 +63,21 @@ const ContactInfo = () => {
         <Box mb={theme.footer.mbWidgetLink}>{meta.organization.address.country}</Box>
         {
           meta.organization.email.map( (email) => {
-            const encoded = "javascript:window.location.href=atob('" + btoa(email) + "')"
+            const onClick = (e) => {
+              e.preventDefault()
+              //const x = window.open('mailto:' + atob(`${btoa(email)}`));
+              //x.close();
+              //TODO: check in real
+              window.location.href='mailto:' + atob(`${btoa(email)}`)
+            }
             const reversed = Utils.reverseString(email)
             return (
                 <IconLink 
                   icon={["far","envelope"]} 
-                  url={encoded} 
+                  url="" 
                   name={reversed} 
                   style={emailStyle}
+                  onClick={onClick}
                 />
             )
           })

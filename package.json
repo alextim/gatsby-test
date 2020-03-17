@@ -20,7 +20,7 @@
     "dotenv": "^8.2.0",
     "emotion-theming": "^10.0.27",
     "gatsby": "^2.19.7",
-    "gatsby-cli": "^2.10.10",
+    "gatsby-cli": "^2.10.11",
     "gatsby-image": "^2.2.39",
     "gatsby-plugin-emotion": "^4.1.24",
     "gatsby-plugin-manifest": "^2.2.39",
@@ -45,6 +45,9 @@
     "rebass": "^4.0.7"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@storybook/react": "^5.3.17",
+    "babel-loader": "^8.0.6",
     "prettier": "^1.19.1"
   },
   "keywords": [
@@ -58,7 +61,8 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "storybook": "start-storybook"
   },
   "repository": {
     "type": "git",

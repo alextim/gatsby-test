@@ -41,6 +41,7 @@ export default () => {
         color={theme.footer.colors.text} 
         bg={theme.footer.colors.bg}
         as="footer"
+        width="100%"
       >
         <Global
             styles={css`

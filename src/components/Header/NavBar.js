@@ -2,7 +2,7 @@ import React from 'react'
 //import { Children } from 'react'
 import { Navbar, Button } from "rbx"
 //import { Link } from 'gatsby'
-import logo from '../images/gatsby-icon.png'
+import logo from './../../images/adrenalin-logo.svg'
 
 
 export default class Navbar2 extends React.Component {
