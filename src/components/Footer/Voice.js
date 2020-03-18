@@ -50,16 +50,10 @@ const Voice = () => {
     const hideElementColor = theme.footer.colors.bg
     let firstPhone = true
 
- //TODO: check 
- //i.test(navigator.userAgent) 
- //add + for mobile 
-    const isMobile = true
-    let key = 0
- 
     return (
       <Box>
         {
-          voice.phone.map( (phone) => {
+          voice.phone.map( (phone, i) => {
             const color = firstPhone ? "" : hideElementColor
             if (firstPhone) {
               firstPhone = false   
@@ -68,7 +62,7 @@ const Voice = () => {
 //TODO:  \AT_Lib\trackCallLink($title) 
             return (
                 <IconLink
-                  key={key++}
+                  key={i}
                   icon={["fas","phone"]}
                   color={color}
                   size="xs"
@@ -110,7 +104,7 @@ const Voice = () => {
                 icon={["fab","viber"]} 
                 color={viberColor}
                 size="sm"
-                url={`viber://add?number=${isMobile ? "+" : ""}${voice.viber}`} 
+                url={`viber://add?number=${Utils.isMobile() ? "+" : ""}${voice.viber}`} 
                 name={Utils.formatPhone(voice.viber)}
                 title="Viber"
                 target="_blank" rel="noindex noopener noreferrer"

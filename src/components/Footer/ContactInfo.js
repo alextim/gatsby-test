@@ -53,8 +53,7 @@ const ContactInfo = () => {
   }
 
   const hostName = Utils.extractHostname(meta.siteUrl)
-  let key = 0
-
+  
   return (
     <Box>
         <Box sx={{ fontSize: "1.25rem", }}>{meta.organization.name}</Box>
@@ -63,7 +62,7 @@ const ContactInfo = () => {
         <Box>{meta.organization.address.postalIndex}</Box>
         <Box mb={theme.footer.mbWidgetLink}>{meta.organization.address.country}</Box>
         {
-          meta.organization.email.map( (email) => {
+          meta.organization.email.map( (email, i) => {
             const onClick = (e) => {
               e.preventDefault()
               //const x = window.open('mailto:' + atob(`${btoa(email)}`));
@@ -74,7 +73,7 @@ const ContactInfo = () => {
             const reversed = Utils.reverseString(email)
             return (
                 <IconLink
-                  key={key++}
+                  key={i}
                   icon={["far","envelope"]} 
                   url="" 
                   name={reversed} 

@@ -43,13 +43,11 @@ const LatestNews = () => {
     }
   `)
 
-  let key = 0
-
   return (
     <Box>
     {  
-        data.allMarkdownRemark.edges.map( edge => 
-          <AnimatedPostLink key={key++} post={edge.node} />
+        data.allMarkdownRemark.edges.map( (edge, i) => 
+          <AnimatedPostLink key={i} post={edge.node} />
         )
     }
     </Box>

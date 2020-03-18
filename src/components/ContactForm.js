@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Box, Flex } from "rebass"
+import { Box } from "rebass"
+/*
 import {
   Label,
   Input,
@@ -9,7 +10,7 @@ import {
   Radio,
   Checkbox,
 } from '@rebass/forms'
-
+*/
 const FAKE_GATEWAY_URL = "https://jsonplaceholder.typicode.com/posts";
 const required = "This field is required";
 
@@ -61,7 +62,7 @@ export default () => {
   const showForm = (
     <Box as="form" onSubmit={handleSubmit(onSubmit)} method="post">
       <div className="field">
-        <label className="label">Name</label>
+        <label className="label" htmlFor="name">Name</label>
         <div className="control">
           <input className={("input").concat(errors.name ? " is-danger": "")}
               type="text"

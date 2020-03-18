@@ -8,6 +8,7 @@ require('dotenv').config({
 
 const path = require('path')
 
+
 module.exports = {
   siteMetadata: {
     title: `Adrenalin-Travel`,
@@ -66,107 +67,32 @@ module.exports = {
       active: true,
       code:'UA-134987060-1',
     },
-    headerNavigation: [
-      {
-        title: 'О нас',
-        path: '/about-us'
-      },
-      {
-        title: 'Направления',
-        path: '/destination',
-        submenu: [
-          {
-            title: 'Альпы',
-            path: '/destination/alps',
-            submenu: [
-              {
-                title: 'Италия',
-                path: '/italy'
-              },
-              {
-                title: 'Франция',
-                path: '/france'
-              },
-              {
-                title: 'Швейцария',
-                path: '/switzerland'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        title: 'Подбор тура',
-        path: '/trip-search'
-      },
-      {
-        title: 'Туристу',
-        submenu:[
-          {
-            title: 'ЧаВо',
-            path: '/faq'
-          },
-          {
-            title: 'Как пойти в поход (на восхождение)',
-            path: '/workflow'
-          },
-          {
-            title: 'Как тренироваться перед поездкой',
-            path: '/training-before-trip'
-          },
-          {
-            title: 'Как собирать рюкзак',
-            path: '/how-to-pack-a-backpack'
-          },
-          {
-            title: 'Личная аптечка',
-            path: '/Личная аптечка'
-          },
-          {
-            title: 'Оплата',
-            path: '/payment'
-          },
-          {
-            title: 'Скидки',
-            path: '/discounts'
-          },
-          {
-            title: 'Страхование в поездке',
-            path: '/travel-insurance'
-          },
-        ]
-      },
-      {
-        title: 'Статьи и новости',
-        path: '/news'
-      },
-      {
-        title: 'Контакты',
-        path: '/contact-us'
-      }
-    ],
-    footerNavigation: [
-      {
-        title: 'Домой',
-        path:    '/'
-      },
-      {
-        title: 'Скидки',
-        path:    '/discount'
-      },
-      {
-        title: 'Оплата',
-        path:    '/payment'
-      },
-      {
-        title: 'Новости',
-        path:    '/news'
-      },
-      {
-        title: 'Контакты',
-        path:    '/contact-us'
-      }
-    ],
+    menus: {
+      footer: [
+        {
+          title: 'Домой',
+          url:    '/'
+        },
+        {
+          title: 'Скидки',
+          url:    '/discount'
+        },
+        {
+          title: 'Оплата',
+          url:    '/payment'
+        },
+        {
+          title: 'Новости',
+          url:    '/news'
+        },
+        {
+          title: 'Контакты',
+          url:    '/contact-us'
+        }
+      ]
+
+    },
+
     socialLinks: [
       { 
         key:   'facebook', 

@@ -11,9 +11,11 @@ const FooterNavigation = () => {
         query FooterNavigationQuery {
             site {
                 siteMetadata {
-                    footerNavigation {
-                        title
-                        path
+                    menus {
+                        footer {
+                          title
+                          url
+                        }
                     }
 
                 }
@@ -23,9 +25,9 @@ const FooterNavigation = () => {
   return (
     <Flex as="ul" py={[1]} mt={[3]} alignItems="center" justifyContent="center" flexWrap="wrap">
       {
-        data.site.siteMetadata.footerNavigation.map( (item, i) => (
+        data.site.siteMetadata.menus.footer.map( (item, i) => (
           <Box as="li" key={i} mx={[2]}>
-            <Link className="footer-link" to={item.path}>
+            <Link className="footer-link" to={item.url}>
               {item.title}
             </Link>
          </Box>

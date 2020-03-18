@@ -3,8 +3,8 @@
 // https://dev.to/nevernull/setup-menu-navigation-guide-to-gatsby-wordpress-starter-advanced-with-previews-i18n-and-more-3bfl#create-components-in-gatsby-computer
 // https://dev.to/spences10/build-a-coding-blog-from-scratch-with-gatsby-and-mdx-2h31
 
-import React from "react"
-import { Link as GatsbyLink } from "gatsby"
+import React from 'react'
+import { Link as GatsbyLink } from 'gatsby'
 // Since DOM elements <a> cannot receive activeClassName
 // and partiallyActive, destructure the prop here and
 // pass it only to GatsbyLink
