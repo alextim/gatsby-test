@@ -53,6 +53,7 @@ const ContactInfo = () => {
   }
 
   const hostName = Utils.extractHostname(meta.siteUrl)
+  let key = 0
 
   return (
     <Box>
@@ -72,7 +73,8 @@ const ContactInfo = () => {
             }
             const reversed = Utils.reverseString(email)
             return (
-                <IconLink 
+                <IconLink
+                  key={key++}
                   icon={["far","envelope"]} 
                   url="" 
                   name={reversed} 

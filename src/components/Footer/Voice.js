@@ -54,6 +54,7 @@ const Voice = () => {
  //i.test(navigator.userAgent) 
  //add + for mobile 
     const isMobile = true
+    let key = 0
  
     return (
       <Box>
@@ -66,7 +67,8 @@ const Voice = () => {
             const phoneUrl = (phone.lengh > 10) ? `+${phone}` : phone
 //TODO:  \AT_Lib\trackCallLink($title) 
             return (
-                <IconLink 
+                <IconLink
+                  key={key++}
                   icon={["fas","phone"]}
                   color={color}
                   size="xs"
@@ -81,7 +83,7 @@ const Voice = () => {
               <IconLink 
                 icon={["fab","whatsapp"]}
                 color={whatsappColor}
-                size="s"
+                size="sm"
                 url={`https://wa.me/${voice.whatsapp}`} 
                 name={Utils.formatPhone(voice.whatsapp)}
                 title="WhatsApp"
@@ -94,7 +96,7 @@ const Voice = () => {
               <IconLink 
                 icon={["fab","telegram"]} 
                 color={telegramColor}
-                size="s"
+                size="sm"
                 url={`tg://resolve?domain=${voice.telegram}`} 
                 name={voice.telegram}
                 title="Telegram"
@@ -107,7 +109,7 @@ const Voice = () => {
               <IconLink 
                 icon={["fab","viber"]} 
                 color={viberColor}
-                size="s"
+                size="sm"
                 url={`viber://add?number=${isMobile ? "+" : ""}${voice.viber}`} 
                 name={Utils.formatPhone(voice.viber)}
                 title="Viber"

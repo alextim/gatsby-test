@@ -17,8 +17,10 @@ const LatestNews = () => {
   const AnimatedPostLink = ({ post }) => {
     return (
       <Box mb={theme.footer.mbWidgetLink}>
-          <FontAwesomeIcon icon={["fas","long-arrow-alt-right"]} size="sx"/> 
-          <StyledAnchor className="footer-link" href={post.frontmatter.path}>{post.frontmatter.title}</StyledAnchor>
+          <FontAwesomeIcon icon={["fas","long-arrow-alt-right"]} size="xs"/> 
+          <StyledAnchor className="footer-link" href={post.frontmatter.path}>
+            {post.frontmatter.title}
+          </StyledAnchor>
       </Box>
     )
   }
@@ -41,11 +43,13 @@ const LatestNews = () => {
     }
   `)
 
+  let key = 0
+
   return (
     <Box>
     {  
         data.allMarkdownRemark.edges.map( edge => 
-            <AnimatedPostLink post={edge.node} />
+          <AnimatedPostLink key={key++} post={edge.node} />
         )
     }
     </Box>
