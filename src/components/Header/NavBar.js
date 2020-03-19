@@ -8,12 +8,13 @@ import { mainMenuItems } from './mainMenuItems'
 
 
 const logoalt = 'hello'
-const menuId = 'navbarExampleTransparentExample'
 
 const NavbarItem = props => <div className="navbar-item">{props.children}</div>
 
 
 const Navbar2 = () => {
+  const [isActive, setisActive] = React.useState(false)
+
   const renderSubMenu = (title, children, level) => {
     if (level === 0) {
       return (
@@ -28,19 +29,19 @@ const Navbar2 = () => {
       )
     } else {
       return (
-        <div class="nested navbar-item dropdown">
+        <div className="nested navbar-item dropdown">
 
-           <div class="dropdown-trigger">
+           <div className="dropdown-trigger">
               <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
                 <span>{title}</span>
-                <span class="icon is-small">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                <span className="icon is-small">
+                  <i className="fas fa-angle-down" aria-hidden="true"></i>
                 </span>
               </button>
             </div>
 
-            <div class="dropdown-menu" id="dropdown-menu" role="menu">
-              <div class="dropdown-content">
+            <div className="dropdown-menu" id="dropdown-menu" role="menu">
+              <div className="dropdown-content">
                 {renderMenuItems(children, level + 1)}
               </div>
             </div>
@@ -67,16 +68,28 @@ const Navbar2 = () => {
     })
   
  
-
+  /*
+   * https://blog.8bitzen.com/posts/26-02-2019-getting-the-bulma-burger-menu-to-work-with-react/
+   */
   const Burger = () => (
-    <div className="navbar-burger burger" data-target={menuId}>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+    <a
+            onClick={() => {
+              setisActive(!isActive);
+            }}
+            role="button"
+            className={`navbar-burger burger ${isActive ? "is-active" : ""}`}
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+    </a>
   )
 
   return (
+    
     <nav className="navbar is-transparent" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item" href="https://bulma.io">
@@ -85,7 +98,10 @@ const Navbar2 = () => {
         <Burger />
       </div>
 
-      <div id={menuId} className="navbar-menu">
+      <div
+          id="navbarBasicExample"
+          className={`navbar-menu ${isActive ? "is-active" : ""}`}
+      >
         <div className="navbar-start">
           { 
             renderMenuItems(mainMenuItems, 0) 
