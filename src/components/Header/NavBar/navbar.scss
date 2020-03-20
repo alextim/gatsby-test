@@ -50,13 +50,12 @@
     }
   }
 
-  li label.drop-icon {
+label.drop-icon {
+  &::after {
+    content: '▾';
     position: absolute;
     right: 0;
     top: 0;
-  }
-
-  label.drop-icon {
     padding: 1em;
     font-size: 1em;
     text-align: center;
@@ -64,6 +63,7 @@
     text-shadow: 0 0 0 transparent;
     color: rgba(255, 255, 255, 0.75);
   }
+}
 
   input[type="checkbox"]:checked + .sub-menu {
     display: block;
