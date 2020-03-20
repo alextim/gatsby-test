@@ -5,11 +5,6 @@ import Brand from './Brand'
 import { mainMenuItems } from './mainMenuItems'
 import './navbar.scss'
 
-/*
-https://jonsuh.com/hamburgers/
-*/
-
-
 let id = 0
 
 const getId = () => {
@@ -52,7 +47,7 @@ const Navbar2 = () => {
   const Burger = () => {
   
     return (
-      <button 
+      <div
         id="toggle-menu" 
         type="button" 
         aria-label="Menu" aria-controls="navigation"
@@ -60,12 +55,12 @@ const Navbar2 = () => {
           setisActive(!isActive);
         }}
         role="button"
-        className={`hamburger hamburger--spin ${isActive ? "is-active" : ""}`}
+        className={`navbar-burger ${isActive ? "is-active" : ""}`}
       >
-        <span className="hamburger-box">
-          <span className="hamburger-inner"></span>
-        </span>
-      </button>
+        <span/>
+        <span/>
+        <span/>
+      </div>
     )
   }
   
@@ -74,11 +69,11 @@ const Navbar2 = () => {
     return (
       <ul id="navbar-menu" className={`navbar-menu ${isActive ? "is-active" : ""}`}> 
       {
-        mainMenuItems.map ( (item) => {
+        mainMenuItems.map ( (item, i) => {
           if (item.hasOwnProperty('children')) {
-            return (<NavbarDropdown title={item.title}  id={getId()} isTopLevel={true} items={item.children} />)
+            return (<NavbarDropdown key={i} title={item.title}  id={getId()} isTopLevel={true} items={item.children} />)
           } else {
-            return (<NavbarItem title={item.title} url={item.url}/>)
+            return (<NavbarItem key={i} title={item.title} url={item.url}/>)
           }
         } )
       }
