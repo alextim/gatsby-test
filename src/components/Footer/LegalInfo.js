@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from 'gatsby'
-import { Flex, Box } from "rebass"
+import { Flex, Box } from '@chakra-ui/core' //"rebass"
 //import { useTheme } from "emotion-theming"
 
 export default () => {
@@ -21,20 +21,21 @@ export default () => {
     <Flex 
       flexWrap="wrap"
       alignItems="center"
+      fontSize="0.9375em"
 
-      sx={{
-        fontSize: "0.9375em",
+ 
+        
         /*
-        textAlign: "center",
+      sx={{       textAlign: "center",
         [theme.mediaQueries.s]: {
           justifyContent: "space-between",
         }
-        */
       }}
+        */
     >
-      <Box mx={[2]}>© {new Date().getFullYear()} «{data.site.siteMetadata.organization.name}». Все права защищены.</Box>
+      <Box mx={2}>© {new Date().getFullYear()} «{data.site.siteMetadata.organization.name}». Все права защищены.</Box>
       <Box mx="auto" />
-      <Box mx={[2]}>
+      <Box mx={2}>
           <Link className="footer-link" to="/privacy">Политика конфиденциальности</Link>
       </Box>
     </Flex>

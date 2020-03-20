@@ -1,6 +1,6 @@
 // example theme.js
 //https://theme-ui.com/theme-spec
-
+import { theme as chakraDefaultTheme } from "@chakra-ui/core"
 
 const theme = {
     /*************
@@ -32,12 +32,14 @@ $fullhd	computed	1344px + (2 * $gap)
      * 
      * 
      */
+    ...chakraDefaultTheme,    
     
     
-    
-  breakpoints: ['40em', '48em', '64em', '76em'],
+  //breakpoints: ['40em', '48em', '64em', '76em'],
 
   colors: {
+    ...chakraDefaultTheme.colors,
+    /*
     text: '#000',
     background: '#fff',
     primary: '#07c',
@@ -46,6 +48,7 @@ $fullhd	computed	1344px + (2 * $gap)
     gray: '#dddddf',
     orange: '#ff7550',
     highlight: 'hsla(205, 100%, 40%, 0.125)',
+    */
     brands: {
   //    skype:    'rgb(0, 175, 240)',
       viber:    '#bcaec7',
@@ -54,7 +57,7 @@ $fullhd	computed	1344px + (2 * $gap)
     }
   },
 
-
+/*
   fonts: {
     body: 'system-ui, sans-serif',
     heading: 'inherit',
@@ -75,15 +78,16 @@ $fullhd	computed	1344px + (2 * $gap)
   space: [
     0, 4, 8, 16, 32, 64, 128, 256, 512
   ],
-
+*/
   sizes: {
-    avatar: 48,
+    //avatar: 48,
+    ...chakraDefaultTheme.sizes,
     container: {
       min: 320,
       max: 1366,
     },
   },
-
+/*
   radii: {
     default: 4,
     circle: 99999,
@@ -169,7 +173,7 @@ $fullhd	computed	1344px + (2 * $gap)
       lineHeight: 'body',
     },
   },
-
+*/
   footer: {
     colors: {
       text: "#ddd",
@@ -181,6 +185,7 @@ $fullhd	computed	1344px + (2 * $gap)
     },
     mbWidgetLink: "0.4375rem",
   },
+  
 }
 
 theme.mediaQueries = [

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { Box } from 'rebass'
+import { Box } from '@chakra-ui/core'
 import styled from '@emotion/styled'
 import { useTheme } from 'emotion-theming'
 
@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Utils from '../../utils'
 
 const StyledAnchor = styled.a`
-  margin-left: ${props => props.theme.space[2]}px;
+  margin-left: ${props => props.theme.space[2]};
 `
 
 const ContactInfo = () => {
@@ -56,7 +56,7 @@ const ContactInfo = () => {
   
   return (
     <Box>
-        <Box sx={{ fontSize: "1.25rem", }}>{meta.organization.name}</Box>
+        <Box fontSize="1.25rem">{meta.organization.name}</Box>
         <Box>{meta.organization.address.streetAddress1}</Box>
         <Box>{meta.organization.address.city}</Box>
         <Box>{meta.organization.address.postalIndex}</Box>

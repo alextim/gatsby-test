@@ -109,8 +109,33 @@ module.exports = {
     ]
   },
   plugins: [
+    {
+      resolve: "gatsby-plugin-chakra-ui",
+      options: {
+        /**
+         * @property {boolean} [isResettingCSS=true]
+         * if false, this plugin will not use `<CSSReset />
+         */
+        isResettingCSS: true,
+        /**
+         * @property {boolean} [isUsingColorMode=true]
+         * if false, this plugin will not use <ColorModeProvider />
+         */
+        isUsingColorMode: true,
+      },
+    },
     `gatsby-plugin-react-helmet`,
-    'gatsby-plugin-sass',
+    `gatsby-plugin-sass`,
+    /*
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        includePaths: [
+          require('path').resolve(__dirname, 'node_modules')
+        ]
+      }
+    },
+    */
     {
       resolve: `gatsby-source-filesystem`,
       options: {

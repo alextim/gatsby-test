@@ -1,7 +1,7 @@
 //import { Link } from 'gatsby'
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { Box } from 'rebass'
+import { Box } from '@chakra-ui/core'
 
 import Container from './../Container'
 import NavBar2 from './NavBar'

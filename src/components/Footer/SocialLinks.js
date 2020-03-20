@@ -1,10 +1,8 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { Flex, Box } from 'rebass'
-
+import { Flex, Box } from '@chakra-ui/core'
 
 import SocialLink from './../SocialLink'
-
 import Utils from '../../utils'
 //import fontawesome from './../fontawesome'
 
@@ -28,10 +26,10 @@ export default () => {
 //  const type = "circle"
 
   return (
-   <Flex as="ul" py={[1]} alignItems="center" justifyContent="center" flexWrap="wrap">
+   <Flex py={1} alignItems="center" justifyContent="center" flexWrap="wrap">
       { 
         data.site.siteMetadata.socialLinks.map( (item, i) => (
-          <Box as="li" key={i}>
+          <Box key={i}>
             <SocialLink 
               fontAwesomeIcon={item.icon}
               name={ Utils.upperFirst(item.key) }

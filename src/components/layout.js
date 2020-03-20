@@ -9,9 +9,10 @@ import React from 'react'
 //import { useEffect } from 'react'
 //import PropTypes from 'prop-types'
 
-import { Global, css } from '@emotion/core'
-import { ThemeProvider } from 'emotion-theming'
-import { Flex, Box } from 'rebass'
+//import { Global, css } from '@emotion/core'
+//import { ThemeProvider } from 'emotion-theming'
+import { ThemeProvider, CSSReset, ColorModeProvider } from '@chakra-ui/core'
+import { Flex, Box } from '@chakra-ui/core'
 
 import theme from './theme'
 import Container from './Container'
@@ -38,6 +39,8 @@ export default props => {
  
   return (
     <ThemeProvider theme={theme}>
+      <CSSReset />
+      {/*
       <Global
         styles={css`
 
@@ -65,17 +68,18 @@ export default props => {
         }
        `}
       />
-      <Flex flexDirection="column" sx={{minHeight:'100vh'}}>
-        <Header />
-        <Box as="main" width="100%" sx={{
-          flex: '1 1 auto',
-        }}>
-          <Container>
-            {props.children}
-          </Container>
-        </Box>  
-        <Footer/>
-      </Flex>
+      */}
+      <ColorModeProvider>
+        <Flex flexDirection="column" minHeight="100vh">
+          <Header />
+          <Box as="main" width="100%" flex="1 1 auto">
+            <Container>
+              {props.children}
+            </Container>
+          </Box>  
+          <Footer/>
+        </Flex>
+      </ColorModeProvider>
     </ThemeProvider>
   )
 }

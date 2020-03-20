@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Box } from "rebass"
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Box } from '@chakra-ui/core'
 /*
 import {
   Label,
@@ -11,8 +11,8 @@ import {
   Checkbox,
 } from '@rebass/forms'
 */
-const FAKE_GATEWAY_URL = "https://jsonplaceholder.typicode.com/posts";
-const required = "This field is required";
+const FAKE_GATEWAY_URL = 'https://jsonplaceholder.typicode.com/posts';
+const required = 'This field is required';
 
 export default () => {
   const [submitted, setSubmitted] = useState(false);

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Global, css } from '@emotion/core'
 import { useTheme } from 'emotion-theming'
-import { Flex, Box } from 'rebass'
+import { Flex, Box } from '@chakra-ui/core'
 
 import Container from './../Container'
 
@@ -21,16 +21,8 @@ export default () => {
 
   const WidgetWrapper = ({children}) => {
       return (
-        <Box width={1} mb={[4]} 
-          sx={{
-            [theme.mediaQueries.s]: {
-              width: "50%",
-            },
-            [theme.mediaQueries.m]: {
-              width: "25%",
-              marginBottom: 0,
-            },            
-          }}
+        <Box width={['100%', '100%', '50%', '25%']}
+             mb={[4, 4, 4, 0]} 
         >
           {children}
         </Box>
@@ -54,7 +46,7 @@ export default () => {
         `}
         />
         <Container>
-          <Flex flexWrap="wrap" py={[3,3,5]}>
+          <Flex flexWrap="wrap" py={[2, 3, 3, 5]}>
               <WidgetWrapper>
                 <FooterWidget title="Контакты" children={<ContactInfo />}/>
               </WidgetWrapper>
@@ -70,14 +62,14 @@ export default () => {
           </Flex>
         </Container>
 
-        <Box py={[3]} bg={theme.footer.colors.colophonTopBg}>
+        <Box py={[2, 3]} bg={theme.footer.colors.colophonTopBg}>
           <Container>
             <SocialLinks />
             <FooterNavigation />
           </Container>
         </Box>
         
-        <Box py={[3]} bg={theme.footer.colors.colophonBottomBg}>
+        <Box py={[2, 3]} bg={theme.footer.colors.colophonBottomBg}>
           <Container>
             <LegalInfo />
           </Container>

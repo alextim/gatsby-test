@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Box, Button } from 'rebass'
+import { Box, Button } from '@chakra-ui/core'
 import {
   Input,
-} from '@rebass/forms'
+} from '@chakra-ui/core'
 
 const FAKE_GATEWAY_URL = 'https://jsonplaceholder.typicode.com/posts';
 //const required = 'This field is required';

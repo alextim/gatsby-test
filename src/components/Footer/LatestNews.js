@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { Box } from 'rebass'
+import { Box } from '@chakra-ui/core'
 import styled from '@emotion/styled'
 import { useTheme } from 'emotion-theming'
 
@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 const StyledAnchor = styled.a`
-  margin-left: ${props => props.theme.space[2]}px;
+  margin-left: ${props => props.theme.space[2]};
 `
 
 const LatestNews = () => {
@@ -44,13 +44,13 @@ const LatestNews = () => {
   `)
 
   return (
-    <Box>
+    <>
     {  
         data.allMarkdownRemark.edges.map( (edge, i) => 
           <AnimatedPostLink key={i} post={edge.node} />
         )
     }
-    </Box>
+    </>
   )
 }
 
