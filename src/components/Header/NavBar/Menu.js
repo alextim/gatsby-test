@@ -16,23 +16,21 @@ const NavbarItem = ({title, url}) => (
     <li><a href={url}>{title}</a></li>
 )
   
-const NavbarDropdown = ({title, id, isTopLevel, items}) => (
+const NavbarDropdown = ({title, id, items}) => (
   <li>
-    <a>
-      <span>{title}</span>
-      <span className="drop-icon">{ isTopLevel ? '▾' : '▸' }</span>
-      <label title="Toggle Drop-down" className="drop-icon" htmlFor={id} />
-    </a>
+    <label className="psevdoa drop-icon" htmlFor={id}>
+      {title}
+    </label>
     <input type="checkbox" id={id}/>
     <ul className="sub-menu">
     {
-          items.map( (item, i) => {
+        items.map( (item, i) => {
             if (item.hasOwnProperty('children')) {
-              return (<NavbarDropdown key={i} title={item.title} id={getId()} isTopLevel={false} items={item.children}/>)
+                return (<NavbarDropdown key={i} title={item.title} id={getId()} items={item.children}/>)
             } else {
-              return (<NavbarItem key={i} title={item.title} url={item.url}/>)
+                return (<NavbarItem key={i} title={item.title} url={item.url}/>)
             }
-          })
+        })
     }
     </ul>
   </li>

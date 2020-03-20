@@ -1,9 +1,7 @@
 .navbar-menu {
-  input[type="checkbox"],
-  ul span.drop-icon {
+  input[type="checkbox"] {
     display: none;
   }
-  
 
   li {
     border-style: solid;
@@ -27,6 +25,7 @@
     border-width: 0;
   }
   
+  .psevdoa,
   li,
   a {
     position: relative;
@@ -35,6 +34,7 @@
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.125);
   }
   
+  .psevdoa,
   a {
     padding: 1em 1.5em;
     transition: all 0.125s ease-in-out;
@@ -45,12 +45,13 @@
   }
   
   .sub-menu {
+    .psevdoa:hover,
     a:hover {
       color: #444;
     }
   }
 
-label.drop-icon {
+.drop-icon {
   &::after {
     content: '▾';
     position: absolute;
@@ -74,13 +75,19 @@ label.drop-icon {
   .navbar-menu {
     align-items: center;
     margin-left: auto;
-
-    label.drop-icon {
-      display: none;
+    
+    .sub-menu .drop-icon::after {
+      content: ">";
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 1em;
     }
-
-    ul span.drop-icon {
-      display: inline-block;
+    .drop-icon::after {
+      position: relative;
+      padding-right: 0;
+      padding-left: 0.25em;
+      background: transparent;
     }
 
     li {
@@ -109,13 +116,6 @@ label.drop-icon {
         top: 0;
         left: 100%;
       }
-
-      .drop-icon {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 1em;
-      }     
     }
 
     .sub-menu,
