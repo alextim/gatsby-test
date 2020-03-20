@@ -3,24 +3,31 @@
     display: none;
     width: 100%;
 
+    &.is-active {
+      display: block;
+    }
+
     input[type="checkbox"],
     ul span.drop-icon {
       display: none;
     }
-  
-    li,
-    .sub-menu {
+    
+
+    li {
       border-style: solid;
       border-color: rgba(0, 0, 0, 0.05);
-    }
-    
-    li {
+
       border-width: 0 0 1px;
     }
   
     .sub-menu {
-      background-color: #444;
+      display: none;
+
+      border-style: solid;
+      border-color: rgba(0, 0, 0, 0.05);
+
       border-width: 1px 1px 0;
+      background-color: #444;
       margin: 0 1em;
     }
   
@@ -46,7 +53,6 @@
     }
     
     .sub-menu {
-      display: none;
       a:hover {
         color: #444;
       }
@@ -138,11 +144,7 @@
       input[type="checkbox"]:checked + .sub-menu {
         display: none;
       }
-  
-  
-  
-  
-  
+
       li:hover > input[type="checkbox"] + .sub-menu {
         display: block;
       }
