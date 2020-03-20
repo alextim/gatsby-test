@@ -1,23 +1,8 @@
-.navbar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items:center;
-    background-color: #09c;
-  }
-  
+
   .navbar-menu {
     display: none;
     width: 100%;
-    
-    ul {
-      margin: 0;
-      padding: 0;
-    }
-    a {
-      text-decoration: none;
-    }
-  
+
     input[type="checkbox"],
     ul span.drop-icon {
       display: none;
