@@ -1,5 +1,6 @@
 import React from 'react'
-import { Flex } from '@chakra-ui/core'
+import { Flex, Box } from '@chakra-ui/core'
+import styled from '@emotion/styled'
 
 import Brand from './Brand'
 import { mainMenuItems } from './mainMenuItems'
@@ -43,31 +44,66 @@ const NavbarDropdown = ({title, id, isTopLevel, items}) => (
 
 const Navbar2 = () => {
   const [isActive, setisActive] = React.useState(false)
+  const handleToggle = () => setisActive(!isActive)
 
-  const Burger = () => {
   
+  const Burger = () => {
+    const BurgerSpan = styled(Box)`
+      background-color: currentColor;
+      display: block;
+      height: 1px;
+      left: calc(50% - 8px);
+      position: absolute;
+      transform-origin: center;
+      transition-duration: 86ms;
+      transition-property: background-color,opacity,transform;
+      transition-timing-function: ease-out;
+      width: 16px;
+    `
+
+    const BurgerPseudoBox = styled(Box)`
+      color: #4a4a4a;
+      cursor: pointer;
+      display: block;
+      height: 3.25rem;
+      position: relative;
+      width: 3.25rem;
+      margin-left: auto;
+      hover {
+        background-color: rgba(0,0,0,.05);
+      }
+    `
     return (
-      <div
-        id="toggle-menu" 
-        type="button" 
+      <BurgerPseudoBox
         aria-label="Menu" aria-controls="navigation"
-        onClick={() => {
-          setisActive(!isActive);
-        }}
+        onClick={handleToggle}
         role="button"
-        className={`navbar-burger ${isActive ? "is-active" : ""}`}
+        display={{ sm: "block", md: "none" }}
       >
-        <span/>
-        <span/>
-        <span/>
-      </div>
+        <BurgerSpan as="span" 
+          top="calc(50% - 6px)" 
+          transform={isActive ? "translateY(5px) rotate(45deg)" : ""} 
+        />
+        <BurgerSpan as="span" 
+          top="calc(50% - 1px)"
+          opacity={isActive ? 0 : ""} 
+        />
+        <BurgerSpan as="span" 
+          top="calc(50% + 4px)"
+          transform={isActive ? "translateY(-5px) rotate(-45deg)" : ""} 
+        />
+      </BurgerPseudoBox>
     )
   }
-  
 
   const Menu = () => {
     return (
-      <ul id="navbar-menu" className={`navbar-menu ${isActive ? "is-active" : ""}`}> 
+      <Box 
+        as="ul" 
+        id="navbar-menu"
+        className="navbar-menu"
+        display={{ sm: isActive ? "block" : "none", md: "block" }}
+        width={{ sm: "100%", md: "auto" }}>
       {
         mainMenuItems.map ( (item, i) => {
           if (item.hasOwnProperty('children')) {
@@ -77,7 +113,7 @@ const Navbar2 = () => {
           }
         } )
       }
-        </ul>
+        </Box>
       )
   }
   

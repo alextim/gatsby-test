@@ -1,13 +1,9 @@
 
   .navbar-menu {
-    display: none;
-    width: 100%;
-
     &.is-active {
       display: block;
     }
-
-    input[type="checkbox"],
+        input[type="checkbox"],
     ul span.drop-icon {
       display: none;
     }
@@ -79,21 +75,8 @@
     
   }
   
-  
-  #toggle-menu {
-    display:block;
-    background: green;
-  }
-  
-  
   @media only screen and (min-width: 700px) {
-    #toggle-menu {
-      display: none;
-    }
-    
     .navbar-menu {
-        display: block;
-        width: auto;
         align-items: center;
         margin-left: auto;
   
@@ -123,7 +106,7 @@
         width: 12em;
         z-index: 3000;
         
-         li {
+        li {
           border-width: 0 0 1px;
         }
         
@@ -150,47 +133,4 @@
       }
     }
   }
-
-.navbar-burger:hover {
-  background-color: rgba(0,0,0,.05);
-}
-.navbar-burger {
-    color: #4a4a4a;
-    cursor: pointer;
-    display: block;
-    height: 3.25rem;
-    position: relative;
-    width: 3.25rem;
-    margin-left: auto;
-}
-
-.navbar-burger.is-active span:nth-child(1) {
-  transform: translateY(5px) rotate(45deg);
-}
-.navbar-burger span:nth-child(1) {
-  top: calc(50% - 6px);
-}
-.navbar-burger.is-active span:nth-child(2) {
-  opacity: 0;
-}
-.navbar-burger span:nth-child(2) {
-  top: calc(50% - 1px);
-}
-.navbar-burger.is-active span:nth-child(3) {
-  transform: translateY(-5px) rotate(-45deg);
-}
-.navbar-burger span:nth-child(3) {
-  top: calc(50% + 4px);
-}
-.navbar-burger span {
-  background-color: currentColor;
-  display: block;
-  height: 1px;
-  left: calc(50% - 8px);
-  position: absolute;
-  transform-origin: center;
-  transition-duration: 86ms;
-  transition-property: background-color,opacity,transform;
-  transition-timing-function: ease-out;
-  width: 16px;
 }
