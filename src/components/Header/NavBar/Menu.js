@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'gatsby'
+import styled from '@emotion/styled'
 import { Box } from '@chakra-ui/core'
 
 import { mainMenuItems } from './mainMenuItems'
@@ -11,18 +13,37 @@ const getId = () => {
   return 'sm' + id.toString()
 }
 
+const StyledLi = styled.li`
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.05);
+
+    border-width: 0 0 1px;
+`
+
+const StyledUl = styled.ul`
+    display: none;
+
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.05);
+
+    border-width: 1px 1px 0;
+    background-color: #444;
+    margin: 0 1em;
+`
 
 const NavbarItem = ({title, url}) => (
-    <li><a href={url}>{title}</a></li>
+    <StyledLi>
+        <Link to={url}>{title}</Link>
+    </StyledLi>
 )
   
 const NavbarDropdown = ({title, id, items}) => (
-  <li>
+  <StyledLi>
     <label className="psevdoa drop-icon" htmlFor={id}>
       {title}
     </label>
     <input type="checkbox" id={id}/>
-    <ul className="sub-menu">
+    <StyledUl className="sub-menu">
     {
         items.map( (item, i) => {
             if (item.hasOwnProperty('children')) {
@@ -32,8 +53,8 @@ const NavbarDropdown = ({title, id, items}) => (
             }
         })
     }
-    </ul>
-  </li>
+    </StyledUl>
+  </StyledLi>
 )
 
 
