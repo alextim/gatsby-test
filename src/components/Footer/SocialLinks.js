@@ -1,42 +1,25 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
-import { Flex, Box } from '@chakra-ui/core'
+import { Flex } from '@chakra-ui/core'
 
 import SocialLink from './../SocialLink'
-import Utils from '../../utils'
-//import fontawesome from './../fontawesome'
+import Utils from '../../lib/utils'
+import useSocialLinks from '../../hooks/useSocialLinks'
 
 
 export default () => {
-  const data = useStaticQuery(graphql`
-  query SocialLinksQuery {
-      site {
-          siteMetadata {
-              socialLinks {
-                  key
-                  url
-                  icon
-                  color
-              }
-          }
-      }
-  }
-`)
-
 //  const type = "circle"
+  const items = useSocialLinks()
 
   return (
    <Flex py={1} alignItems="center" justifyContent="center" flexWrap="wrap">
       { 
-        data.site.siteMetadata.socialLinks.map( (item, i) => (
-          <Box key={i}>
-            <SocialLink 
+        items.map( (item, i) => (
+            <SocialLink key={i}
               fontAwesomeIcon={item.icon}
               name={ Utils.upperFirst(item.key) }
               url={item.url}
               color={item.color}
             />
-          </Box>
         ))
       }
     </Flex>

@@ -185,6 +185,13 @@ $fullhd	computed	1344px + (2 * $gap)
     },
     mbWidgetLink: "0.4375rem",
   },
+
+  header: {
+    colors: {
+      navbarBg: "#fff",
+      topHeadBg: "grey",
+    }
+  }
   
 }
 

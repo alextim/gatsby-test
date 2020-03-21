@@ -9,11 +9,20 @@ import './navbar.scss'
 
 
 const Navbar2 = () => {
+  /*
+  * https://stackoverflow.com/questions/44154760/passing-states-between-components
+  * https://www.pluralsight.com/guides/react-communicating-between-components
+  * https://reactjs.org/docs/lifting-state-up.html
+  *
+  * 
+  * 
+  * 
+  * */
   const [isActive, setisActive] = React.useState(false)
   const handleToggle = () => setisActive(!isActive)
 
   return (
-    <Flex as="nav" 
+     <Flex as="nav" 
       role="navigation" aria-label="main navigation"
       flexWrap="wrap"
       justifyContent="space-between"

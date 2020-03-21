@@ -1,35 +1,18 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { Box } from '@chakra-ui/core'
 import styled from '@emotion/styled'
 import { useTheme } from 'emotion-theming'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Utils from '../../utils'
+import Utils from '../../lib/utils'
+import useOrganizationVoice from '../../hooks/useOrganizationVoice'
 
 const StyledAnchor = styled.a`
   margin-left: ${props => props.theme.space[2]};
 `
 
 const Voice = () => {
-    const data = useStaticQuery(graphql`
-      query {
-        site {
-          siteMetadata {
-            organization {
-              voice {
-                phone
-                whatsapp	
-                telegram
-                viber
-              }
-            }
-          }
-        }
-      }`
-    )
-    
-    const voice = data.site.siteMetadata.organization.voice
+    const voice = useOrganizationVoice()
 
     const theme = useTheme()
 
@@ -58,15 +41,14 @@ const Voice = () => {
             if (firstPhone) {
               firstPhone = false   
             }
-            const phoneUrl = (phone.lengh > 10) ? `+${phone}` : phone
-//TODO:  \AT_Lib\trackCallLink($title) 
+   //TODO:  \AT_Lib\trackCallLink($title) 
             return (
                 <IconLink
                   key={i}
                   icon={["fas","phone"]}
                   color={color}
                   size="xs"
-                  url={`tel:${phoneUrl}`} 
+                  url={Utils.phoneUrl(phone)} 
                   name={Utils.formatPhone(phone)}
                 />
             )
@@ -78,7 +60,7 @@ const Voice = () => {
                 icon={["fab","whatsapp"]}
                 color={whatsappColor}
                 size="sm"
-                url={`https://wa.me/${voice.whatsapp}`} 
+                url={Utils.whatsappUrl(voice.whatsapp)} 
                 name={Utils.formatPhone(voice.whatsapp)}
                 title="WhatsApp"
                 target="_blank" rel="noindex noopener noreferrer"
@@ -91,7 +73,7 @@ const Voice = () => {
                 icon={["fab","telegram"]} 
                 color={telegramColor}
                 size="sm"
-                url={`tg://resolve?domain=${voice.telegram}`} 
+                url={Utils.telegramUrl(voice.telegram)} 
                 name={voice.telegram}
                 title="Telegram"
                 target="_blank" rel="noindex noopener noreferrer"
@@ -104,7 +86,7 @@ const Voice = () => {
                 icon={["fab","viber"]} 
                 color={viberColor}
                 size="sm"
-                url={`viber://add?number=${Utils.isMobile() ? "+" : ""}${voice.viber}`} 
+                url={Utils.viberUrl(voice.viber)} 
                 name={Utils.formatPhone(voice.viber)}
                 title="Viber"
                 target="_blank" rel="noindex noopener noreferrer"

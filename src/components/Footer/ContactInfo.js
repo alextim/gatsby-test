@@ -1,12 +1,14 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { Box } from '@chakra-ui/core'
 import styled from '@emotion/styled'
 import { useTheme } from 'emotion-theming'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import Utils from '../../utils'
+import Utils from '../../lib/utils'
+import useOrganizationName from '../../hooks/useOrganizationName'
+import useOrganizationAddress from '../../hooks/useOrganizationAddress'
+import useOrganizationEmail from '../../hooks/useOrganizationEmail'
+import useSiteUrl from '../../hooks/useSiteUrl'
 
 const StyledAnchor = styled.a`
   margin-left: ${props => props.theme.space[2]};
@@ -23,46 +25,29 @@ const ContactInfo = () => {
         </Box>
       )
   }
-  
-  const data = useStaticQuery(graphql`
-      query {
-        site {
-          siteMetadata {
-            siteUrl
-            organization {
-              name
-              address {
-                streetAddress1
-                streetAddress2
-                city
-                postalIndex
-                country
-              },
-              email
-            }
-          }
-        }
-      }`
-  )
 
-  const meta = data.site.siteMetadata
+  const organizationName = useOrganizationName()
+  const address = useOrganizationAddress()
+  const email = useOrganizationEmail()
+  const siteUrl = useSiteUrl()
+  const hostName = Utils.extractHostname(siteUrl)
   
   const emailStyle = {
       unicodeBidi: "bidi-override",
       direction: "rtl"
   }
 
-  const hostName = Utils.extractHostname(meta.siteUrl)
+  
   
   return (
     <Box>
-        <Box fontSize="1.25rem">{meta.organization.name}</Box>
-        <Box>{meta.organization.address.streetAddress1}</Box>
-        <Box>{meta.organization.address.city}</Box>
-        <Box>{meta.organization.address.postalIndex}</Box>
-        <Box mb={theme.footer.mbWidgetLink}>{meta.organization.address.country}</Box>
+        <Box fontSize="1.25rem">{organizationName}</Box>
+        <Box>{address.streetAddress1}</Box>
+        <Box>{address.postalIndex + ' ' + address.city}</Box>
+
+        <Box mb={theme.footer.mbWidgetLink}>{address.country}</Box>
         {
-          meta.organization.email.map( (email, i) => {
+          email.map( (email, i) => {
             const onClick = (e) => {
               e.preventDefault()
               //const x = window.open('mailto:' + atob(`${btoa(email)}`));
@@ -83,7 +68,7 @@ const ContactInfo = () => {
             )
           })
         }
-        <IconLink icon={["fas","link"]} url={meta.siteUrl} name={hostName} />
+        <IconLink icon={["fas","link"]} url={siteUrl} name={hostName} />
     </Box>
     )
 }

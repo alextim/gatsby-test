@@ -8,8 +8,11 @@ import styled from "@emotion/styled"
 const Container = styled.div`
   min-width: ${ props => props.theme.sizes.container.min }px;
   max-width: ${ props => props.theme.sizes.container.max }px;
-  padding: 0 30px;
-  margin: auto;
+  padding: 0 1em;
+  margin: 0 auto;
+  ${ props => props.theme.mediaQueries.m } {
+    padding: 0 1.5em;
+  }
 `
 
 Container.propTypes = {

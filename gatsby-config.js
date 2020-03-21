@@ -23,7 +23,7 @@ module.exports = {
       url:         `${process.env.BASE_URL}`,
       logo:         '/public/adrenalin-travel.svg',
       address: {
-        streetAddress1: 'ул.Ришельевская, 32',
+        streetAddress1: 'ул.Ришельевская 32',
         streetAddress2: '',
         city:           'Одесса',
         postalIndex:    '65011',
@@ -67,31 +67,7 @@ module.exports = {
       active: true,
       code:'UA-134987060-1',
     },
-    menus: {
-      footer: [
-        {
-          title: 'Домой',
-          url:    '/'
-        },
-        {
-          title: 'Скидки',
-          url:    '/discount'
-        },
-        {
-          title: 'Оплата',
-          url:    '/payment'
-        },
-        {
-          title: 'Новости',
-          url:    '/news'
-        },
-        {
-          title: 'Контакты',
-          url:    '/contact-us'
-        }
-      ]
 
-    },
 
     socialLinks: [
       { 

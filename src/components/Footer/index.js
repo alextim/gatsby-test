@@ -1,7 +1,7 @@
 import React from 'react'
 import { Global, css } from '@emotion/core'
-import { useTheme } from 'emotion-theming'
-import { Flex, Box } from '@chakra-ui/core'
+import { Flex, Box, useTheme } from '@chakra-ui/core'
+
 
 import Container from './../Container'
 
