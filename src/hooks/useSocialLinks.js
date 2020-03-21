@@ -10,6 +10,7 @@ const useSocialLinks = () => {
                         url
                         icon
                         color
+                        text
                     }
                 }
             }

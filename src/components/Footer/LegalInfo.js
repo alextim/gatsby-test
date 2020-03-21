@@ -1,24 +1,26 @@
 import React from "react"
 import { Link } from 'gatsby'
 import { Flex, Box } from '@chakra-ui/core' 
+import { useTheme } from '@chakra-ui/core' 
+
 import useOrganizationName from '../../hooks/useOrganizationName'
 
 export default () => {
   const organizationName = useOrganizationName()
 
-  //const theme = useTheme()
+  const theme = useTheme()
 
   return (
     <Flex 
       flexWrap="wrap"
       alignItems="center"
-      fontSize="0.9375em"
+      fontSize={theme.fontSizes.sm}
 
  
         
         /*
       sx={{       textAlign: "center",
-        [theme.mediaQueries.s]: {
+        [theme.mediaQueries.sm]: {
           justifyContent: "space-between",
         }
       }}

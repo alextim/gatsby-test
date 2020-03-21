@@ -27,7 +27,7 @@ const Navbar2 = () => {
       flexWrap="wrap"
       justifyContent="space-between"
       alignItems="center"
-      bg="#09c"
+      bg="white"
     >
 
       <Brand />

@@ -19,7 +19,7 @@ const FooterWidget = ( {title, children} ) => {
       margin-top: ${props => props.theme.space[2]};
       margin-bottom: ${props => props.theme.space[4]};
     }
-    ${props => props.theme.mediaQueries.m}: {
+    ${props => props.theme.mediaQueries.md}: {
       font-size: 1.125rem;
     }
   `

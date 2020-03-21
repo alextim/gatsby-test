@@ -1,25 +1,40 @@
 import React from 'react'
-import { Flex, Box, useTheme } from '@chakra-ui/core'
+import { Box, useTheme } from '@chakra-ui/core'
+import styled from '@emotion/styled'
 
 import Container from './../Container'
 import TopHead from './TopHead'
 import NavBar2 from './NavBar'
 
+
 export default () => {
   const theme = useTheme()
 
+  const StyledFlex = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    ${ props => props.theme.mediaQueries.md } {
+      flex-direction: column-reverse;
+    }
+  `
+
   return (
-    <Flex as="header" flexDirection={{sm: "column", md: "column-reverse"}} width="100%">
-      <Box bg={theme.header.colors.navbarBg}>
+    <StyledFlex>
+      <Box bg={theme.header.colors.navbar.bg}>
         <Container>
           <NavBar2 />
         </Container>
       </Box>
-      <Box bg={theme.header.colors.topHeadBg}>
+      <Box
+        color={theme.header.colors.topHead.text}  
+        bg={theme.header.colors.topHead.bg} 
+        fontSize={theme.fontSizes.sm}
+      >
         <Container>
            <TopHead />
         </Container>
       </Box>
-    </Flex>
+    </StyledFlex>
   )
 }

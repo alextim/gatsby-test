@@ -1,0 +1,34 @@
+import React from 'react'
+import { Box } from '@chakra-ui/core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import styled from '@emotion/styled'
+
+import useOrganizationAddress from './../../../hooks/useOrganizationAddress'
+
+const StyledInlineFlex = styled.div`
+    display: inline-flex;
+    align-items: center;
+    padding-bottom: 0.5em;
+    ${ props => props.theme.mediaQueries.md } {
+      padding-bottom: 0;
+    }
+`
+
+const PostalAddress = () => {
+    const { streetAddress1, streetAddress2, city, country } = useOrganizationAddress()
+    const nbsp = '\xa0'
+    const addressInOneLine =
+        streetAddress1 +
+        ( streetAddress2 && nbsp + streetAddress2) +
+        ( city && ',' + nbsp + city) +
+        //( postalIndex && nbsp + postalIndex ) +
+        ( country && ',' + nbsp + country )
+
+    return (
+      <StyledInlineFlex>
+        <FontAwesomeIcon icon={['far', 'map']} size="sm"/>
+        <Box ml="0.5em">{ addressInOneLine }</Box>
+      </StyledInlineFlex>
+    )
+  }
+export default PostalAddress

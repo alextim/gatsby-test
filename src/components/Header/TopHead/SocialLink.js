@@ -4,39 +4,41 @@ import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const IconLink = styled(Link)`
+const StyledLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  color: ${props => props.theme.footer.colors.text};
+
+  text-align: center;
+  color: ${props => props.theme.header.colors.topHead.text};
   text-decoration: none;
   
-  height: 2em;
-  width: 2em;
-  margin: 0 0.625em;
+  height: 2.75em;
+  width: 2.75em;
+  margin: 0;
 
-  border: 0.125em solid ${props => props.theme.footer.colors.text};
-  border-radius: 100%;
+  border: none;
+
 
   &:hover {
     color: ${props => props.theme.footer.colors.highlited};
     background-color: #517fa4;
-    border: 0.125em  solid transparent;
+    border: 0.625em solid transparent;
     transition: all .4s ease-out 0s;
   }
 `
 
-const SocialLink = ({ fontAwesomeIcon, name, url, color }) => (
-    <IconLink
+const SocialLink = ({ fontAwesomeIcon, name, text, url, color }) => (
+    <StyledLink
       href={url}
       target="_blank"
       color={color}
       rel="noreferrer"
       aria-label={name}
+      title={text}
     >
       <FontAwesomeIcon icon={fontAwesomeIcon} />
-    </IconLink>
+    </StyledLink>
  )
 
 SocialLink.propTypes = {

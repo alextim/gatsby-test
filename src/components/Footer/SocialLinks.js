@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex } from '@chakra-ui/core'
 
-import SocialLink from './../SocialLink'
+import SocialLink from './SocialLink'
 import Utils from '../../lib/utils'
 import useSocialLinks from '../../hooks/useSocialLinks'
 
@@ -19,6 +19,7 @@ export default () => {
               name={ Utils.upperFirst(item.key) }
               url={item.url}
               color={item.color}
+              text={item.text}
             />
         ))
       }

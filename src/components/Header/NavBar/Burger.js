@@ -24,7 +24,7 @@ const BurgerPseudoBox = styled(Box)`
     width: 3.25rem;
     margin-left: auto;
     hover {
-    background-color: rgba(0,0,0,.05);
+        background-color: rgba(0,0,0,.05);
     }
 `
 

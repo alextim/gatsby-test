@@ -73,14 +73,16 @@ module.exports = {
       { 
         key:   'facebook', 
         url:   'https://www.facebook.com/travel.adrenalin',
-        icon:  ['fab', 'facebook'],
-        color: 'blue'
+        icon:  ['fab', 'facebook-f'],
+        color: 'blue',
+        text:  'Facebook',
       },
       {
         key:   'instagram',
         url:   'https://www.instagram.com/adrenalin_travel/',
         icon:  ['fab', 'instagram'],
-        color: 'red'
+        color: 'red',
+        text:  'Instagram',
       }
     ]
   },

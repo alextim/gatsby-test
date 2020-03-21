@@ -188,22 +188,23 @@ $fullhd	computed	1344px + (2 * $gap)
 
   header: {
     colors: {
-      navbarBg: "#fff",
-      topHeadBg: "grey",
+      navbar: {
+        bg: "#fff",
+      },
+      topHead: {
+        text: "rgb(132, 133, 134)",
+        bg: "rgb(249, 249, 249)",
+      },
     }
   }
   
 }
 
-theme.mediaQueries = [
-  `@media screen and (min-width: ${theme.breakpoints[0]})`,
-  `@media screen and (min-width: ${theme.breakpoints[1]})`,
-  `@media screen and (min-width: ${theme.breakpoints[2]})`,
-  `@media screen and (min-width: ${theme.breakpoints[3]})`,
-]
-theme.mediaQueries.xs = theme.mediaQueries[0];
-theme.mediaQueries.s  = theme.mediaQueries[1];
-theme.mediaQueries.m  = theme.mediaQueries[2];
-theme.mediaQueries.l  = theme.mediaQueries[3];
+theme.mediaQueries = theme.breakpoints.map( bp => `@media screen and (min-width: ${bp})` )
+
+theme.mediaQueries.sm = theme.mediaQueries[0]
+theme.mediaQueries.md = theme.mediaQueries[1]
+theme.mediaQueries.lg = theme.mediaQueries[2]
+theme.mediaQueries.xl = theme.mediaQueries[3]
 
 export default theme

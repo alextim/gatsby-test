@@ -85,7 +85,8 @@ import {
 } from '@fortawesome/free-regular-svg-icons'
 
 import { 
-  faFacebook, 
+  faFacebook,
+  faFacebookF,
   faInstagram,
   faTelegram,
   faTwitter, 
@@ -164,6 +165,7 @@ library.add(
   faHeartbeat,
  
   faFacebook, 
+  faFacebookF, 
   faTwitter, 
   faInstagram,
   faSkype,

@@ -10,7 +10,7 @@ const Container = styled.div`
   max-width: ${ props => props.theme.sizes.container.max }px;
   padding: 0 1em;
   margin: 0 auto;
-  ${ props => props.theme.mediaQueries.m } {
+  ${ props => props.theme.mediaQueries.md } {
     padding: 0 1.5em;
   }
 `
