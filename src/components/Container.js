@@ -1,7 +1,6 @@
 
 //import React from 'react'
 import PropTypes from "prop-types"
-
 import styled from "@emotion/styled"
 
 
@@ -20,3 +19,18 @@ Container.propTypes = {
 }
 
 export default Container
+
+export const StrechedBackground = styled.div`
+  padding-left: -1em;
+  padding-right: -1em;
+  ${ props => props.theme.mediaQueries.md } {
+    padding-left: -1.5em;
+    padding-right: -1.5em;
+  }
+`
+
+StrechedBackground.propTypes = {
+  children: PropTypes.node.isRequired,
+}
+
+

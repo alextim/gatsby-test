@@ -4,9 +4,10 @@ import { Flex } from '@chakra-ui/core'
 import Brand from './Brand'
 import Burger from './Burger'
 import Menu from './Menu'
+import NavbarEnd from './NavbarEnd'
+//import StrechedBackground from './../../Container'
 
-import './navbar.scss'
-
+//import './navbar.scss'
 
 const Navbar2 = () => {
   /*
@@ -33,6 +34,7 @@ const Navbar2 = () => {
       <Brand />
       <Burger handleToggleCallback={handleToggle} isActive={isActive}/>
       <Menu isActive={isActive}/>
+      <NavbarEnd />
     </Flex>
     )
 }

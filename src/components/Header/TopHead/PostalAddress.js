@@ -6,11 +6,12 @@ import styled from '@emotion/styled'
 import useOrganizationAddress from './../../../hooks/useOrganizationAddress'
 
 const StyledInlineFlex = styled.div`
-    display: inline-flex;
-    align-items: center;
-    padding-bottom: 0.5em;
+    display: none;
     ${ props => props.theme.mediaQueries.md } {
-      padding-bottom: 0;
+      display: inline-flex;
+      align-items: center;
+      padding-bottom: 0.5em;
+      padding-bottom: 0; 
     }
 `
 

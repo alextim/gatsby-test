@@ -13,69 +13,170 @@ const getId = () => {
   return 'sm' + id.toString()
 }
 
+const StyledCheckbox = styled.input`
+  display: none;
+  &:checked + ul {
+    display: block;
+  }
+  ${ props => props.theme.mediaQueries.md } {
+    &:checked + ul {
+      display: none;
+    }
+  }
+`
+
 const StyledLi = styled.li`
+    display: block;
+    position: relative;
+    padding: 1em 1.5em;
+
+    color: black;
+    
     border-style: solid;
+    border-width: 0 0 1px;
     border-color: rgba(0, 0, 0, 0.05);
 
-    border-width: 0 0 1px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.125);
+    transition: all 0.125s ease-in-out;
+
+    &:hover {
+        color: white;
+        background-color: #ff7550;
+    }
+    ${ props => props.theme.mediaQueries.md } {
+        &:hover > input[type="checkbox"] + ul {
+            display: block;
+        }
+        li {
+            float: left;
+            border-width: 0 1px 0 0;
+        }
+    }
 `
 
 const StyledUl = styled.ul`
     display: none;
 
+    margin: 0 1em;
+    margin-top: 1em;
+
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.05);
 
     border-width: 1px 1px 0;
-    background-color: #444;
-    margin: 0 1em;
+    background-color: white;
+
+    ul {
+        li {
+          color: black;
+          &:last-child {
+            border-width: 0;
+          }
+        }
+    }
+
+    ${ props => props.theme.mediaQueries.md } {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 12em;
+        margin: 0;
+
+        border-width: 0;
+        z-index: 3000;
+
+        ul {
+            top: 0;
+            left: 100%; 
+        }
+        li {
+            float: none;
+            border-width: 0 0 1px;
+        }
+        label::after {
+            content: ">";
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 1em;
+        }
+    }
+
 `
 
-const NavbarItem = ({title, url}) => (
+const StyledLabel = styled.label`
+    &::after {
+        content: '▾';
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 1em;
+
+        font-size: 1em;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.75);
+        background-color: rgba(0, 0, 0, 0.125);
+        text-shadow: 0 0 0 transparent;
+        
+    }
+    ${ props => props.theme.mediaQueries.md } {
+        position: relative;
+        padding-right: 0;
+        padding-left: 0.25em;
+        background: transparent;
+    }
+`
+const MenuItem = ({title, url}) => (
     <StyledLi>
         <Link to={url}>{title}</Link>
     </StyledLi>
 )
-  
-const NavbarDropdown = ({title, id, items}) => (
+
+const MenuItems = ({items}) => (
+    items.map ( (item, i) => {
+        if (item.hasOwnProperty('children')) {
+          return (<MenuDropdown key={i} title={item.title}  id={getId()} items={item.children} />)
+        } else {
+          return (<MenuItem key={i} title={item.title} url={item.url}/>)
+        }
+    } )
+)
+
+const MenuDropdown = ({title, id, items}) => (
   <StyledLi>
-    <label className="psevdoa drop-icon" htmlFor={id}>
+
+    <StyledLabel htmlFor={id}>
       {title}
-    </label>
-    <input type="checkbox" id={id}/>
-    <StyledUl className="sub-menu">
-    {
-        items.map( (item, i) => {
-            if (item.hasOwnProperty('children')) {
-                return (<NavbarDropdown key={i} title={item.title} id={getId()} items={item.children}/>)
-            } else {
-                return (<NavbarItem key={i} title={item.title} url={item.url}/>)
-            }
-        })
-    }
+    </StyledLabel>
+
+    <StyledCheckbox type="checkbox" id={id}/>
+
+    <StyledUl>
+        <MenuItems items={items} />
     </StyledUl>
+
   </StyledLi>
 )
 
 
-const Menu = ({isActive}) => (
-    <Box 
-        as="ul" 
-        className="navbar-menu"
-        display={{ sm: isActive ? "block" : "none", md: "block" }}
-        width=  {{ sm: "100%",                      md: "auto"  }}
-    >
-    {
-        mainMenuItems.map ( (item, i) => {
-            if (item.hasOwnProperty('children')) {
-            return (<NavbarDropdown key={i} title={item.title}  id={getId()} isTopLevel={true} items={item.children} />)
-            } else {
-            return (<NavbarItem key={i} title={item.title} url={item.url}/>)
-            }
-        } )
-    }
-    </Box>
+const Menu = ({isActive}) => {
+    const StyledMenuWrap = styled.ul`
+        display: ${ isActive ? 'none' : 'block'};
+        width: 100%;
+
+        ${ props => props.theme.mediaQueries.md } {
+            display: flex;            
+            align-items: center;
+            margin-left: auto;
+            width: auto;
+        }
+    `
+    return (
+    <StyledMenuWrap>
+        <MenuItems items={mainMenuItems} />
+    </StyledMenuWrap>
 )
+}
 
 
 export default Menu

@@ -1,22 +1,17 @@
 import React from 'react'
-import { Link } from 'gatsby'
 
-import Layout from "../components/Layout"
-import Image from "../components/image"
-import SEO from "../components/SEO"
+import homePageSettings from '../components/home/homePageSettings'
+import LayoutFullWidth from '../components/LayoutFullWidth'
+import SEO from '../components/SEO'
+import CTA from '../components/home/CTA'
+import Features from '../components/home/Features'
 
 const IndexPage = () => (
-  <Layout>
+  <LayoutFullWidth>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-    <Link to="/contact-us/">Contact Us</Link>
-  </Layout>
+    <CTA settings={homePageSettings.CTA}/>
+    <Features settings={homePageSettings.features}/>
+  </LayoutFullWidth>
 )
 
 export default IndexPage

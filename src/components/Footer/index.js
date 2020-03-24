@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from '@emotion/styled'
 import { Global, css } from '@emotion/core'
 import { Flex, Box, useTheme } from '@chakra-ui/core'
 
@@ -16,17 +17,20 @@ import SocialLinks from './SocialLinks'
 import FooterNavigation from './FooterNavigation'
 import LegalInfo from './LegalInfo'
 
+const WidgetWrapper = styled.div`
+  width: 100%;
+  margin-bottom: 1.5em;
+  ${ props => props.theme.mediaQueries.md } {
+    width: 50%;
+  }
+  ${ props => props.theme.mediaQueries.lg } {
+    width: 25%;
+    margin-bottom: 0;
+  }
+`
+
 export default () => {
   const theme = useTheme()
-
-  const WidgetWrapper = ({children}) => {
-      return (
-        <Box width={['100%', '100%', '50%', '25%']}
-             mb={[4, 4, 4, 0]} 
-        >
-          {children}
-        </Box>
-  )}
 
   return (
       <Box

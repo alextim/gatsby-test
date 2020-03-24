@@ -5,7 +5,7 @@ import SocialLinks from './SocialLinks'
 import VoiceContacts from './VoiceContacts'
 import PostalAddress from './PostalAddress'
 
-const StyledFlex = styled.div`
+const TopHeadWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,11 +17,11 @@ const StyledFlex = styled.div`
 
 const TopHead = () => {
   return (
-    <StyledFlex>
+    <TopHeadWrapper>
       <SocialLinks />
       <VoiceContacts />
       <PostalAddress />
-    </StyledFlex>
+    </TopHeadWrapper>
   )
 }
 

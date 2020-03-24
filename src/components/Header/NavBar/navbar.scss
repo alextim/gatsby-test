@@ -1,87 +1,38 @@
-.navbar-menu {
-  input[type="checkbox"] {
-    display: none;
-  }
-
-  .sub-menu li:last-child {
-    border-width: 0;
-  }
-  
-  .psevdoa,
-  li,
-  a {
-    position: relative;
-    display: block;
-    color: white;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.125);
-  }
-  
-  .psevdoa,
-  a {
-    padding: 1em 1.5em;
-    transition: all 0.125s ease-in-out;
-    &:hover {
-      background-color: white;
-      color: #09c;
-    }
-  }
-  
-  .sub-menu {
-    .psevdoa:hover,
-    a:hover {
-      color: #444;
-    }
-  }
-
-.drop-icon {
-  &::after {
-    content: '▾';
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 1em;
-    font-size: 1em;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.125);
-    text-shadow: 0 0 0 transparent;
-    color: rgba(255, 255, 255, 0.75);
-  }
-}
-
-  input[type="checkbox"]:checked + .sub-menu {
-    display: block;
-  }
-}
-  
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 48em) {
   .navbar-menu {
-    align-items: center;
-    margin-left: auto;
-    
-    .sub-menu .drop-icon::after {
+   // .sub-menu .drop-icon::after {
+     /*
+    ul label::after {
       content: ">";
       position: absolute;
       top: 0;
       right: 0;
       padding: 1em;
     }
+    */
+    /*
     .drop-icon::after {
       position: relative;
       padding-right: 0;
       padding-left: 0.25em;
       background: transparent;
     }
-
+    */
+    /*
     li {
       float: left;
       border-width: 0 1px 0 0;
     }
-
-    .sub-menu li {
+    */
+   // .sub-menu li {
+     /*
+    ul li {
       float: none;
-    }
+    }*/
 
-    .sub-menu {
+  //  .sub-menu {
+    /*
+    ul {
       border-width: 0;
       margin: 0;
       position: absolute;
@@ -94,18 +45,25 @@
         border-width: 0 0 1px;
       }
       
-      .sub-menu {
-        top: 0;
-        left: 100%;
+      ul {
+ //     .sub-menu {
+          top: 0;
+        left: 100%; 
       }
     }
+    */
 
-    input[type="checkbox"]:checked + .sub-menu {
-      display: none;
+//    input[type="checkbox"]:checked + .sub-menu {
+  /*
+    input[type="checkbox"]:checked + ul {
+        display: none;
     }
-
-    li:hover > input[type="checkbox"] + .sub-menu {
+    */
+//    li:hover > input[type="checkbox"] + .sub-menu {
+  /*
+    li:hover > input[type="checkbox"] + ul {
       display: block;
     }
+    */
   }
 }

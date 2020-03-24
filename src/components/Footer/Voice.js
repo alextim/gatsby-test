@@ -2,8 +2,8 @@ import React from 'react'
 import { Box } from '@chakra-ui/core'
 import styled from '@emotion/styled'
 import { useTheme } from 'emotion-theming'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import Utils from '../../lib/utils'
 import useOrganizationVoice from '../../hooks/useOrganizationVoice'
 

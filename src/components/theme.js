@@ -196,6 +196,18 @@ $fullhd	computed	1344px + (2 * $gap)
         bg: "rgb(249, 249, 249)",
       },
     }
+  },
+
+  home: {
+    cta: {
+      bg: "red",
+    },
+    features: {
+      bg: "grey",
+      iconColor: "yellow",
+      itemBg: "#fff",
+
+    }
   }
   
 }
