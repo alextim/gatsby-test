@@ -39,8 +39,9 @@ $fullhd	computed	1344px + (2 * $gap)
 
   colors: {
     ...chakraDefaultTheme.colors,
-    /*
-    text: '#000',
+
+    text: 'rgb(59, 64, 69)',
+    heading: 'rgb(36, 39, 41)',
     background: '#fff',
     primary: '#07c',
     secondary: '#30c',
@@ -48,7 +49,7 @@ $fullhd	computed	1344px + (2 * $gap)
     gray: '#dddddf',
     orange: '#ff7550',
     highlight: 'hsla(205, 100%, 40%, 0.125)',
-    */
+
     brands: {
   //    skype:    'rgb(0, 175, 240)',
       viber:    '#bcaec7',
@@ -79,7 +80,7 @@ $fullhd	computed	1344px + (2 * $gap)
     0, 4, 8, 16, 32, 64, 128, 256, 512
   ],
 */
-  sizes: {
+ sizes: {
     //avatar: 48,
     ...chakraDefaultTheme.sizes,
     container: {
@@ -143,6 +144,7 @@ $fullhd	computed	1344px + (2 * $gap)
       }
     },
   },
+  */
   buttons: {
     primary: {
       fontSize: 2,
@@ -150,7 +152,7 @@ $fullhd	computed	1344px + (2 * $gap)
       color: 'highlite',
       bg: 'orange',
       borderRadius: 'default',
-      px: 3,
+      px: 8,
       py: 2
     },
     outline: {
@@ -165,7 +167,7 @@ $fullhd	computed	1344px + (2 * $gap)
       bg: 'secondary',
     },
   },
-
+  /*
   styles: {
     root: {
       fontFamily: 'body',
@@ -200,12 +202,18 @@ $fullhd	computed	1344px + (2 * $gap)
 
   home: {
     cta: {
-      bg: "red",
+      colors: {
+        headingColor: "#fff",
+        text: "#ddd",
+        bg: "#3d3d3d",
+      }
     },
     features: {
-      bg: "grey",
-      iconColor: "yellow",
-      itemBg: "#fff",
+      colors: {
+        bg: "rgb(238, 238, 238)",
+        burst: "gold",
+        itemBg: "#fff",
+      }
 
     }
   }

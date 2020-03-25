@@ -1,10 +1,21 @@
 import React from 'react'
+import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import { Flex, Box, Heading, useTheme } from '@chakra-ui/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import Container from './../Container'
+import Section from './Section'
+
+const shadowed = css`
+    box-shadow: 0 0 30px hsla(0,0%,94.5%,.87);
+    transition: all .4s;
+    &:hover {
+      top: -3px;
+      box-shadow: 0 0 32px 0 hsla(0,0%,47.8%,.4);
+      position: relative;
+    }
+`
 
 const StyledFlex = styled(Flex)`
   flex-direction: column;
@@ -14,54 +25,104 @@ const StyledFlex = styled(Flex)`
 `
 
 const FeatureItemWrap = styled.div`
-  display: block;
   flex: 1;
-  margin-bottom: 1em;
-  padding-right: 1em;
-  padding-left: 1em;
-  background-color: ${ props => props.theme.home.features.itemBg };
+  padding: 0 1.25em 1.25em 1.25em;
+  margin: 0 1.25em 2em 1.25em;
+  background-color: ${ props => props.theme.home.features.colors.itemBg };
+
+  ${ shadowed };
 
   ${ props => props.theme.mediaQueries.md } {
     margin-bottom: 0;
   }
 
 `
+/**
+ * 
+ * The Shapes of CSS
+ * https://css-tricks.com/the-shapes-of-css/
+ * 
+ * 
+ */
+
+const Burst12 = styled(Flex)`
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background:  ${ props => props.bg };
+    width: ${ props => props.size };
+    height: ${ props => props.size };
+    position: relative;
+    margin: 0 auto;
+    &:before,
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: ${ props => props.size };
+        width: ${ props => props.size };
+        background: ${ props => props.bg };
+
+    } 
+    &:before {
+        transform: rotate(30deg);
+    }
+    &:after {
+        transform: rotate(60deg);
+    }    
+`
+
+const StyledLink = styled(Link)`
+    color: #f3f8fd;
+    display:block; 
+    z-index:2;
+    &:hover {
+        color: #fff;
+    }
+`
+
+const FeatureItem = ( { title, text, url, icon, color } ) => (
+    <FeatureItemWrap>
+
+        <Box mt="3em">
+            <Burst12 bg={color} size="5em">
+                <StyledLink to={url}>
+                    <FontAwesomeIcon icon={icon} size="3x" />
+                </StyledLink>
+            </Burst12>
+        </Box>
+
+        <Heading as="h3" mt="1.5em" mb="1em" fontSize={["1.25em", "1.5em"]}><Link to={url}>{title}</Link></Heading>
+        <Box mb="1em">{text}</Box>
+    </FeatureItemWrap>
+)
+
+
 
 const Features = ({settings}) => {
-    const theme = useTheme()
     const { title, subTitle, text, items } = settings
+    const theme = useTheme()
 
-    const FeatureItem = ( { title, text, url, icon } ) => (
-        <FeatureItemWrap>
-            <Box>
-                <Link to={url}>
-                    <FontAwesomeIcon icon={icon} size="sm" color={theme.home.features.iconColor}/>
-                </Link>
-            </Box>
-            <Heading as="h3">{title}</Heading>
-            <Box>{text}</Box>
-        </FeatureItemWrap>
-    )
-    
     return (
-        <Box as="section" width="100%" bg={theme.home.features.bg} py="1.5em" textAlign="center">
-            <Container>
-                <Box mb="2em">
-                    { title && <Heading as="h2" mb="0.625em">{title}</Heading> }
-                    { subTitle && <Box>{subTitle}</Box> }
-                    { text && <Box mb="1em">{text}</Box> }
-                </Box>
-                <StyledFlex wrap="wrap" alignItems="center" justifyContent="center">
-                {
-                    items.map( (item, i) => 
-                        <FeatureItem key={i} title={item.title} 
-                            text={item.text}
-                            url={item.url}
-                            icon={item.icon} /> )
-                }
-                </StyledFlex>
-            </Container>
-        </Box>
+        <Section 
+            title={title}
+            subTitle={subTitle}
+            text={text}
+            bg={theme.home.features.colors.bg}>
+
+            <StyledFlex>
+            {
+                items.map( (item, i) => 
+                    <FeatureItem key={i} title={item.title} 
+                        text={item.text}
+                        url={item.url}
+                        icon={item.icon} 
+                        color={theme.home.features.colors.burst }/> )
+            }
+            </StyledFlex>
+
+        </Section>
     )
 }
 

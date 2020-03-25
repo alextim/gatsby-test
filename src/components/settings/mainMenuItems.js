@@ -1,5 +1,5 @@
 //https://gist.github.com/fson/a14f5edf2ae3fb5294dd
-export const mainMenuItems =  [  
+export default  [  
     {
       title: 'О нас',
       url: '/about-us',
@@ -11,7 +11,7 @@ export const mainMenuItems =  [
         {
           title: 'Кавказ',
           url: '/destination/caucasus',
-       },
+        },
         {
           title: 'Альпы',
           url: '/destination/alps',

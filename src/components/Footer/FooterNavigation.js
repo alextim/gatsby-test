@@ -5,7 +5,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { Flex, Box } from '@chakra-ui/core'
 
-import footerNavigationItems from './footerNavigationItems'
+import footerNavigationItems from './../settings/footerNavigationItems'
 
 const FooterNavigation = () => {
  

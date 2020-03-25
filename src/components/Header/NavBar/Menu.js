@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import styled from '@emotion/styled'
-import { Box } from '@chakra-ui/core'
 
-import { mainMenuItems } from './mainMenuItems'
+
+import mainMenuItems from './../../settings/mainMenuItems'
 
 
 let id = 0
