@@ -214,7 +214,11 @@ $fullhd	computed	1344px + (2 * $gap)
         burst: "gold",
         itemBg: "#fff",
       }
-
+    },
+    latestNews: {
+      colors: {
+        bg: "#fff",
+      }
     }
   }
   

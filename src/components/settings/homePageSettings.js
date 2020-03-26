@@ -40,4 +40,11 @@ export default {
         ],
     },
 
+    latestNews: {
+        title: 'Последние новости',
+        buttons: {
+            primary: { title: 'Посмотреть больше', url: '/news' },
+        },        
+    }
+
 }

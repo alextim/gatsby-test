@@ -4,6 +4,7 @@ import { CSSReset, ThemeProvider } from '@chakra-ui/core'
 import { ColorModeProvider } from '@chakra-ui/core'
 import { Flex, Box } from '@chakra-ui/core'
 
+import ErrorBoundary from './ErrorBoundary'
 import theme from './theme'
 import Header from './Header'
 import Footer from './Footer'
@@ -27,7 +28,7 @@ export default props => {
   */
  
   return (
-
+ 
     <ThemeProvider theme={theme}>
       <CSSReset />
 
@@ -85,5 +86,6 @@ export default props => {
         </Flex>
       </ColorModeProvider>
     </ThemeProvider>
+
   )
 }

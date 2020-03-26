@@ -2,8 +2,9 @@ import React from 'react'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
-import { Flex, Box, Heading, useTheme } from '@chakra-ui/core'
+import { Flex, Box, useTheme } from '@chakra-ui/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import ItemHeading from './ItemHeading'
 
 import Section from './Section'
 
@@ -85,7 +86,7 @@ const StyledLink = styled(Link)`
 const FeatureItem = ( { title, text, url, icon, color } ) => (
     <FeatureItemWrap>
 
-        <Box mt="3em">
+        <Box mt="3em" mb="3em">
             <Burst12 bg={color} size="5em">
                 <StyledLink to={url}>
                     <FontAwesomeIcon icon={icon} size="3x" />
@@ -93,7 +94,7 @@ const FeatureItem = ( { title, text, url, icon, color } ) => (
             </Burst12>
         </Box>
 
-        <Heading as="h3" mt="1.5em" mb="1em" fontSize={["1.25em", "1.5em"]}><Link to={url}>{title}</Link></Heading>
+        <ItemHeading mb="1em"><Link to={url}>{title}</Link></ItemHeading>
         <Box mb="1em">{text}</Box>
     </FeatureItemWrap>
 )
@@ -118,7 +119,7 @@ const Features = ({settings}) => {
                         text={item.text}
                         url={item.url}
                         icon={item.icon} 
-                        color={theme.home.features.colors.burst }/> )
+                        color={theme.home.features.colors.burst}/> )
             }
             </StyledFlex>
 

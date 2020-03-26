@@ -15,7 +15,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 
 import SchemaOrg from './SchemaOrg'
 
-function SEO({ title, description, url, image, isBlogPost, locale }) {
+function SEO({ title, description, url, image, isBlogPost, locale = 'ru' }) {
   const data = useStaticQuery(
     graphql`
       query {
