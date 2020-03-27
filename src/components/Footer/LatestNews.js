@@ -1,10 +1,10 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { Box } from '@chakra-ui/core'
 import styled from '@emotion/styled'
 import { useTheme } from 'emotion-theming'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import useLatestNews from '../../hooks/useLatestNews'
 
 
 const StyledAnchor = styled.a`
@@ -25,32 +25,11 @@ const LatestNews = () => {
     )
   }
 
-  const data = useStaticQuery(graphql`
-    query {
-      allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
-        edges {
-          node {
-            id
-            excerpt(pruneLength: 250)
-            frontmatter {
-              date(formatString: "MMMM DD, YYYY")
-              path
-              title
-            }
-          }
-        }
-      }
-    }
-  `)
+  const edges = useLatestNews()
+  
 
-  return (
-    <>
-    {  
-        data.allMarkdownRemark.edges.map( (edge, i) => 
+  return edges.map( (edge, i) => 
           <AnimatedPostLink key={i} post={edge.node} />
-        )
-    }
-    </>
   )
 }
 

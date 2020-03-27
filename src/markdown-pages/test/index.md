@@ -1,9 +1,17 @@
 ---
-path: "/news/test"
-date: "2019-05-04"
-title: "My first blog post"
-description: "My post 1 desc"
-excerpt: "This is a excerpt"
+path: /news/test
+date: 2019-05-26
+published: true
+title: My first blog post
+description: ""
+featuredImage: ./test.jpg
+featured: true
+category:
+  - News
+  - Events
+tags:
+  - Portugal
+  - Porto
 ---
 This is my first post on my new fake blog! How exciting!
 
