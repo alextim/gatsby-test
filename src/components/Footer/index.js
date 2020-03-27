@@ -10,7 +10,7 @@ import FooterWidget from './FooterWidget'
 
 import ContactInfo from './ContactInfo'
 import Voice from './Voice'
-import LatestNews from './LatestNews'
+import LatestNewsList from './LatestNewsList'
 import SubscribeForm from './SubscribeForm'
 
 import SocialLinks from './SocialLinks'
@@ -58,7 +58,7 @@ export default () => {
                 <FooterWidget title="Позвоните нам!" children={<Voice />}/>
               </WidgetWrapper>
               <WidgetWrapper>
-                <FooterWidget title="Последние новости" children={<LatestNews />}/>
+                <FooterWidget title="Последние новости" children={<LatestNewsList />}/>
               </WidgetWrapper>
               <WidgetWrapper>
                 <FooterWidget title="Оформить подписку" children={<SubscribeForm />}/>

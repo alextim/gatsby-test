@@ -4,14 +4,14 @@ import styled from '@emotion/styled'
 import { useTheme } from 'emotion-theming'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import useLatestNews from '../../hooks/useLatestNews'
+import useLatestNewsTop5 from '../../hooks/useLatestNewsTop5'
 
 
 const StyledAnchor = styled.a`
   margin-left: ${props => props.theme.space[2]};
 `
 
-const LatestNews = () => {
+export default () => {
   const theme = useTheme()
 
   const AnimatedPostLink = ({ post }) => {
@@ -25,12 +25,10 @@ const LatestNews = () => {
     )
   }
 
-  const edges = useLatestNews()
+  const edges = useLatestNewsTop5()
   
 
   return edges.map( (edge, i) => 
           <AnimatedPostLink key={i} post={edge.node} />
   )
 }
-
-export default LatestNews

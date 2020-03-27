@@ -208,6 +208,11 @@ $fullhd	computed	1344px + (2 * $gap)
         bg: "#3d3d3d",
       }
     },
+    stickyNews : {
+      colors: {
+        bg: "#fff",
+      }
+    },
     features: {
       colors: {
         bg: "rgb(238, 238, 238)",

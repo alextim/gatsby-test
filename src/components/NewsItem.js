@@ -1,35 +1,47 @@
 import React from 'react'
-import { Flex, Box, Link, Text } from '@chakra-ui/core'
+import Img from 'gatsby-image'
+import { Flex, Box, Link, Text, Heading } from '@chakra-ui/core'
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Img from 'gatsby-image'
 
 import Utils from './../lib/utils'
-
-
-import { Heading as h3} from '@chakra-ui/core'
-
-const ItemHeading = ( {children} ) => (
-    <h3 as="h3" mt="1.5em" mb="1em" fontSize={["1.25em", "1.5em"]}>
-        {children}
-    </h3>
-)
 
 const CenterWrap = styled.span`
     display: flex;
     flex-direction: row;
     align-items: center;
 `
-const Meta = ( {icon, title} ) => (
-    <CenterWrap mr="0.625em">
-        <FontAwesomeIcon icon={icon} size="sm"/>
-        <Box ml="0.5em">{title}</Box>
-    </CenterWrap>  
-)
+const Meta = ( {icon, items} ) => 
+    <Box mr="0.75em">
+        <CenterWrap>
+            <FontAwesomeIcon icon={icon} size="sm"/>
+            <Box ml="0.4em">
+            { 
+                items.map( (item, i) => 
+                    <Box key={i} as="span" mr="0.4em">
+                    {
+                        item.url ? <Link href={item.url}>{item.title}</Link> : <Box as="span">{item.title}</Box>
+                    }
+                    </Box>
+                ) 
+            }
+            </Box>
+        </CenterWrap>
+    </Box>
 
-const NewsItem = ( {node} ) => {
+
+export default ( {node} ) => {
     const { title, path, date, category, featuredImage } = node.frontmatter
     const excerpt = node.excerpt
+    let categoryItems
+
+    if (category) {
+        categoryItems = []
+        category.forEach( (item, i) => {
+            categoryItems[i] = {}
+            categoryItems[i].title = item
+        })
+    }
 
     return (
         <Flex direction="column" alignContent="flex-start" shadow="lg" mx="1em" mb={["2em", "2em", "0"]}>
@@ -40,13 +52,20 @@ const NewsItem = ( {node} ) => {
             }
 
             <Box p="1.5em" textAlign="left">
-                <ItemHeading mb="0.25em">
+                <Heading as="h3" mt="1.5em" mb="0.25em" fontSize={["1.25em", "1.5em"]}>
                     <Link href={path}>{title}</Link>
-                </ItemHeading>
+                </Heading>
                
-                <Box fontWeight="100" fontSize="0.9em">
-                    { date && <Meta icon={['far', 'calendar-check']} title={Utils.formatDate(date)}/> }
-                </Box>
+                <Flex direction="row" fontWeight="100" fontSize="0.9em">
+                    { date && 
+                        <Meta icon={['far', 'calendar-check']} 
+                            items={[ {title: Utils.formatDate(date)} ]}/> 
+                    }
+                    { categoryItems && 
+                        <Meta icon={['far', 'folder-open']} 
+                            items={categoryItems}/> 
+                    }
+                </Flex>
 
                 <Text mt={4}>{excerpt}</Text>
                 <Link href={path}>
@@ -59,5 +78,3 @@ const NewsItem = ( {node} ) => {
         </Flex>
     )
 }
-
-export default NewsItem

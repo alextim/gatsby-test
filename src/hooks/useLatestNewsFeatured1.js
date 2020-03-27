@@ -1,21 +1,25 @@
 import { useStaticQuery, graphql } from 'gatsby'
 
-const useLatestNews = () => {
+export default () => {
     const data = useStaticQuery(graphql`
-        query LatestNewsQuery {
+        query LatestNewsQueryFeatured1 {
             allMarkdownRemark(
-                filter: { frontmatter: { published: { eq: true } }  }
-                limit: 5
+                filter: { 
+                    frontmatter: { 
+                        published: { eq: true } 
+                        featured:  { eq: true } 
+                    }  
+                }
+                limit: 1
                 sort: { order: DESC, fields: [frontmatter___date] }
             ) {
                 edges {
                     node {
-                        excerpt
+
                         frontmatter {
                             path
-                            title
-                            date
-                            category
+
+
                             featuredImage {
                                 childImageSharp {
                                   fluid(maxWidth: 800) {
@@ -32,5 +36,3 @@ const useLatestNews = () => {
     `)
     return data.allMarkdownRemark.edges
 }
-
-export default useLatestNews

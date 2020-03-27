@@ -4,16 +4,15 @@ import homePageSettings from '../components/settings/homePageSettings'
 import LayoutFullWidth from '../components/LayoutFullWidth'
 import SEO from '../components/SEO'
 import CTA from '../components/home/CTA'
+import StickyNews from '../components/home/StickyNews'
 import Features from '../components/home/Features'
-import LatestNews from '../components/home/LatestNews'
+import LatestNewsCards from '../components/home/LatestNewsCards'
 
-const IndexPage = () => (
+export default () => 
   <LayoutFullWidth>
     <SEO title="Home" />
     <CTA settings={homePageSettings.CTA}/>
+    <StickyNews settings={homePageSettings.stickyNews}/>
     <Features settings={homePageSettings.features}/>
-    <LatestNews settings={homePageSettings.latestNews}/>
+    <LatestNewsCards settings={homePageSettings.latestNews}/>
   </LayoutFullWidth>
-)
-
-export default IndexPage

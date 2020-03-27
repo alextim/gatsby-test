@@ -21,6 +21,7 @@ const loadScript = src => {
 }
 */
 export default props => {
+
   /*
   useEffect(() => {
     loadScript('https://use.fontawesome.com/fd58d214b9.js');
@@ -28,7 +29,7 @@ export default props => {
   */
  
   return (
- 
+  <ErrorBoundary>
     <ThemeProvider theme={theme}>
       <CSSReset />
 
@@ -86,6 +87,6 @@ export default props => {
         </Flex>
       </ColorModeProvider>
     </ThemeProvider>
-
+  </ErrorBoundary>
   )
 }

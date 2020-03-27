@@ -2,9 +2,9 @@ import React from 'react'
 import { Flex, useTheme } from '@chakra-ui/core'
 import styled from '@emotion/styled'
 
-import Section from './../Section'
-import NewsItem from './../../NewsItem'
-import useLatestNews from './../../../hooks/useLatestNews'
+import Section from './Section'
+import NewsItem from './../NewsItem'
+import useLatestNewsTop3 from './../../hooks/useLatestNewsTop3'
 
 const ItemsWrap = styled(Flex)`
     flex-direction: column;
@@ -14,10 +14,10 @@ const ItemsWrap = styled(Flex)`
     }
 `
 
-const LatestNews = ( {settings} ) => {
+export default ( {settings} ) => {
     const { title, buttons } = settings
     const theme = useTheme()
-    const edges = useLatestNews()
+    const edges = useLatestNewsTop3()
 
     return (
         <Section 
@@ -34,5 +34,3 @@ const LatestNews = ( {settings} ) => {
         </Section>
     )
 }
-
-export default LatestNews

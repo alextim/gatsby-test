@@ -6,7 +6,7 @@ import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import NewsItem from "../components/NewsItem"
 
-const News = ({
+export default ({
   data: {
     allMarkdownRemark: { edges },
   },
@@ -22,8 +22,6 @@ const News = ({
     </Layout>
   )
 }
-
-export default News
 
 export const pageQuery = graphql`
   query {
