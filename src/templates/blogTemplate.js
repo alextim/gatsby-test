@@ -1,22 +1,37 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
-import Utils from './../lib/utils'
+import styled from '@emotion/styled'
 
+import Utils from './../lib/utils'
 import Layout from './../components/Layout'
 import SEO from './../components/SEO'
 
+const SuggestionBar = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+`
+//background: ${props => props.theme.colors.white.light};
+//box-shadow: ${props => props.theme.shadow.suggestion};
+
+const PostSuggestion = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 1rem 3rem 0 3rem;
+`
+
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
+  pageContext
 }) {
+  const { next, prev } = pageContext;
+
   const { markdownRemark } = data // data.markdownRemark holds your post data
   const { frontmatter, html, excerpt } = markdownRemark
   const { title, description, date, url, featuredImage } = frontmatter
   const featuredImgFluid = featuredImage ? featuredImage.childImageSharp.fluid : null
   const imgSrc = featuredImgFluid ? featuredImgFluid.src : null
-
-
-
 
   return (
     <Layout>
@@ -38,6 +53,25 @@ export default function Template({
         />
       </div>
     </div>
+
+    <SuggestionBar>
+        <PostSuggestion>
+          {prev && (
+            <Link to={prev.node.frontmatter.path} rel="prev">
+              {"< "}
+              <h3>{prev.node.frontmatter.title}</h3>
+            </Link>
+          )}
+        </PostSuggestion>
+        <PostSuggestion>
+          {next && (
+            <Link to={next.node.frontmatter.path} rel="next">
+              
+              <h3>{next.node.frontmatter.title}</h3>{" >"}
+            </Link>
+          )}
+        </PostSuggestion>
+      </SuggestionBar>  
         
     </Layout>
   )
@@ -53,7 +87,7 @@ export const pageQuery = graphql`
         path
         title
         description
-        category
+        categories
         featured
         featuredImage {
           childImageSharp {

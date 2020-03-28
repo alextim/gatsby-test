@@ -15,7 +15,7 @@ const FooterWidget = ( {title, children} ) => {
       content: "";
       height: 2px;
       background: ${props => props.theme.footer.colors.widgetTitleUnderline};
-      width: ${props => props.theme.space[12]};
+      width: 2.5em;
       margin-top: ${props => props.theme.space[2]};
       margin-bottom: ${props => props.theme.space[4]};
     }

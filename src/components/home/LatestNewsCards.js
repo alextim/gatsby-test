@@ -3,7 +3,7 @@ import { Flex, useTheme } from '@chakra-ui/core'
 import styled from '@emotion/styled'
 
 import Section from './Section'
-import NewsItem from './../NewsItem'
+import NewsCard from './../NewsCard'
 import useLatestNewsTop3 from './../../hooks/useLatestNewsTop3'
 
 const ItemsWrap = styled(Flex)`
@@ -27,7 +27,7 @@ export default ( {settings} ) => {
 
             <ItemsWrap>
             {
-                edges.map( (edge, i) => <NewsItem key={i} node={edge.node}/> )
+                edges.map( (edge, i) => <NewsCard key={i} node={edge.node}/> )
             }
             </ItemsWrap>
 

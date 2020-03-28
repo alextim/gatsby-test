@@ -20,15 +20,14 @@ export default () => {
                             path
                             title
                             date
-                            category
+                            categories
                             featuredImage {
                                 childImageSharp {
                                   fluid(maxWidth: 800) {
                                     ...GatsbyImageSharpFluid
                                   }
                                 }
-                              }
-                      
+                            }
                         }
                     }
                 }

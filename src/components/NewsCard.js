@@ -31,20 +31,20 @@ const Meta = ( {icon, items} ) =>
 
 
 export default ( {node} ) => {
-    const { title, path, date, category, featuredImage } = node.frontmatter
+    const { title, path, date, categories, featuredImage } = node.frontmatter
     const excerpt = node.excerpt
     let categoryItems
 
-    if (category) {
+    if (categories) {
         categoryItems = []
-        category.forEach( (item, i) => {
+        categories.forEach( (item, i) => {
             categoryItems[i] = {}
             categoryItems[i].title = item
         })
     }
 
     return (
-        <Flex direction="column" alignContent="flex-start" shadow="lg" mx="1em" mb={["2em", "2em", "0"]}>
+        <Flex as="article" direction="column" alignContent="flex-start" shadow="lg" mx="1em" mb={["2em", "2em", "0"]}>
             { featuredImage &&
                 <Link href={path} mb="1em">
                     <Img fluid={featuredImage.childImageSharp.fluid} alt={title} width="100%" height="auto"/>

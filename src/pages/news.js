@@ -1,24 +1,21 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Box } from '@chakra-ui/core'
 
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
-import NewsItem from "../components/NewsItem"
+import PostListing from '../components/PostListing'
 
 export default ({
   data: {
     allMarkdownRemark: { edges },
   },
 }) => {
-  const Posts = edges
-    .filter(edge => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
-    .map( (edge, i) => <NewsItem key={i} node={edge.node} /> )
+
 
   return (
     <Layout>
       <SEO />
-      {Posts || <Box>No Posts</Box>}
+      <PostListing postEdges={edges} />
     </Layout>
   )
 }
@@ -37,7 +34,7 @@ export const pageQuery = graphql`
             date(formatString: "YYYY-MM-DD")
             path
             title
-            category
+            categories
             featuredImage {
               childImageSharp {
                 fluid(maxWidth: 800) {

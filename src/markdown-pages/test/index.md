@@ -6,7 +6,7 @@ title: My first blog post
 description: ""
 featuredImage: ./test.jpg
 featured: true
-category:
+categories:
   - News
   - Events
 tags:

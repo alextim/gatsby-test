@@ -1,21 +1,26 @@
 import React from 'react'
 import { useTheme } from '@chakra-ui/core'
-import { Flex, Box, Link, Text, Heading } from '@chakra-ui/core'
+import { Flex, Box, Link, Text } from '@chakra-ui/core'
 import Img from 'gatsby-image'
 import styled from '@emotion/styled'
 
 import Section from './Section'
+import BtnLink from './BtnLink'
 import useLatestNewsFeatured1 from './../../hooks/useLatestNewsFeatured1'
 
 const Wrap = styled(Box)`
-    flex: 1;
+    width: 100%;
     ${ props => props.theme.mediaQueries.md } {
-        flex: 0.5;
+        width: 50%;
     }
+`
+const StyledBtnLink = styled(BtnLink)`
+    margin: 2em;
+    width: 90%;
 `
 
 export default ( {settings} ) => {
-    const { title, subTitle, text, buttons } = settings
+    const { title, subTitle, text, trip } = settings
     const theme = useTheme()
     const edges = useLatestNewsFeatured1()
     if ( !edges.length ) {
@@ -23,6 +28,10 @@ export default ( {settings} ) => {
     }
 
     const { path, featuredImage } = edges[0].node.frontmatter
+    
+
+    const price = 100
+    const currency = 'EUR'
 
     return (
         <Section 
@@ -39,15 +48,15 @@ export default ( {settings} ) => {
                     </Link>            
                 }
                 </Wrap>
-                <Wrap>
-                    <Heading as="h3" mt="1.5em" mb="0.25em" fontSize={["1.25em", "1.5em"]}>
-                        <Link href={path}>{title}</Link>
-                    </Heading>
-                
-                    <Text mt={4}>{text}</Text>
+                <Wrap p="1em">
+                    <Text align="justify" mt={6} mb={6}>{text}</Text>
+                    { price && 
+                        <Box fontSize="1.25em">{currency} {price}</Box>
+                    }
+                    <StyledBtnLink href={path}>Подробнее</StyledBtnLink>
+
                 </Wrap>
             </Flex>
-
 
         </Section>
     )
