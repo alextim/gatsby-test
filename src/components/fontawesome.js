@@ -51,6 +51,7 @@ import {
   faRss,
 
   faShieldAlt,
+  faSun,
 
   faTag,
   faTags,
@@ -78,6 +79,7 @@ import {
   faFolderOpen,
 
   faMap,
+  faMoon,
   
   faSmileWink,
 
@@ -124,12 +126,14 @@ library.add(
   faEuroSign,
   faSmileWink,
   faShieldAlt,
+  faSun,
   
   faCheckCircle,
   faCircle,
   
   faPhoneVolume,
   faMap,
+  faMoon,
   faCalendarCheck,
   faEdit,
   faReply,

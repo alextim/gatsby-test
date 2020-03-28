@@ -2,6 +2,7 @@ import React from 'react'
 import Img from 'gatsby-image'
 import { Flex, Box, Link, Text, Heading } from '@chakra-ui/core'
 import styled from '@emotion/styled'
+import AnimatedLink from './AnimatedLink'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Utils from './../lib/utils'
@@ -20,7 +21,10 @@ const Meta = ( {icon, items} ) =>
                 items.map( (item, i) => 
                     <Box key={i} as="span" mr="0.4em">
                     {
-                        item.url ? <Link href={item.url}>{item.title}</Link> : <Box as="span">{item.title}</Box>
+                        item.url ? 
+                            <Link to={item.url}>{item.title}</Link>
+                            : 
+                            <Box as="span">{item.title}</Box>
                     }
                     </Box>
                 ) 
@@ -68,12 +72,7 @@ export default ( {node} ) => {
                 </Flex>
 
                 <Text mt={4}>{excerpt}</Text>
-                <Link href={path}>
-                    <CenterWrap>
-                        <Box mr="0.5em">Читать дальше</Box>
-                        <FontAwesomeIcon icon={['fas', 'long-arrow-alt-right']} size="sm"/>
-                    </CenterWrap>
-                </Link>
+                <AnimatedLink to={path} end="true">Читать дальше</AnimatedLink>
             </Box>
         </Flex>
     )

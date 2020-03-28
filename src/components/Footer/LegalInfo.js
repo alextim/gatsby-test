@@ -1,14 +1,12 @@
 import React from "react"
 import { Link } from 'gatsby'
-import { Flex, Box } from '@chakra-ui/core' 
-import { useTheme, useColorMode, Button } from '@chakra-ui/core' 
+import { Flex, Box, useTheme } from '@chakra-ui/core' 
 
 import useOrganizationName from '../../hooks/useOrganizationName'
+import SwitchColorMode from './SwitchColorMode'
 
 export default () => {
   const organizationName = useOrganizationName()
-  const { colorMode, toggleColorMode } = useColorMode()
-
   const theme = useTheme()
 
   return (
@@ -17,7 +15,6 @@ export default () => {
       alignItems="center"
       fontSize={theme.fontSizes.sm}
 
- 
         
         /*
       sx={{       textAlign: "center",
@@ -32,11 +29,10 @@ export default () => {
       <Box mx={2}>
           <Link className="footer-link" to="/privacy">Политика конфиденциальности</Link>
       </Box>
-      <Box>
-      <Button onClick={toggleColorMode}>
-        Toggle {colorMode === "light" ? "Dark" : "Light"}
-      </Button>
-      </Box>
+
+      <SwitchColorMode />
+
+
     </Flex>
   )
 }

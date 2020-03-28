@@ -1,34 +1,25 @@
 import React from 'react'
-import { Box } from '@chakra-ui/core'
-import styled from '@emotion/styled'
-import { useTheme } from 'emotion-theming'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Flex, useTheme } from '@chakra-ui/core'
 
+import AnimatedLink from '../AnimatedLink'
 import useLatestNewsTop5 from '../../hooks/useLatestNewsTop5'
-
-
-const StyledAnchor = styled.a`
-  margin-left: ${props => props.theme.space[2]};
-`
 
 export default () => {
   const theme = useTheme()
-
-  const AnimatedPostLink = ({ post }) => {
-    return (
-      <Box mb={theme.footer.mbWidgetLink}>
-          <FontAwesomeIcon icon={["fas","long-arrow-alt-right"]} size="xs"/> 
-          <StyledAnchor className="footer-link" href={post.frontmatter.path}>
-            {post.frontmatter.title}
-          </StyledAnchor>
-      </Box>
-    )
-  }
+  const mb = theme.footer.mbWidgetLink
 
   const edges = useLatestNewsTop5()
   
-
-  return edges.map( (edge, i) => 
-          <AnimatedPostLink key={i} post={edge.node} />
+  return (
+    <Flex direction="column" align="start">
+      {
+      edges.map( (edge, i) => 
+        <AnimatedLink key={i} 
+          to={edge.node.frontmatter.path}
+          cn="footer-link"
+          mb={mb}>{edge.node.frontmatter.title}</AnimatedLink> 
+        )
+      }
+    </Flex>
   )
 }
