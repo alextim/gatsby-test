@@ -4,25 +4,25 @@ import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import PostListing from '../components/PostListing'
+import toPosts from './toPosts'
 
 //import config from '../../data/SiteConfig'
 const config = {
     siteTitle: 'site title'
 }
 
-export default ({ data, pageContext }) => (
-  <Layout>
-      <SEO
-        title={`Posts tagged as "${pageContext.tag}" | ${config.siteTitle}`}
-      />
-            <h1>
-Tag:
-{' '}
-{pageContext.tag}
-</h1>
-      <PostListing postEdges={data.allMarkdownRemark.edges} />
-  </Layout>
-)
+export default ({ data, pageContext }) => {
+  const posts = toPosts(data.allMarkdownRemark.edges)
+  return (
+    <Layout>
+        <SEO
+          title={`Posts tagged as "${pageContext.tag}" | ${config.siteTitle}`}
+        />
+        <h1>Tag:{' '}{pageContext.tag}</h1>
+        <PostListing posts={posts} />
+    </Layout>
+  )
+}
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`

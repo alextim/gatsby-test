@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { Box } from '@chakra-ui/core'
 import styled from '@emotion/styled'
 
 const PaginationWrapper = styled.nav`
@@ -8,105 +9,68 @@ const PaginationWrapper = styled.nav`
   justify-content: center;
   align-items: center;
   margin-top: 4em;
-  justify-content: space-between;
   width: 80%;
   max-width: 770px;
   padding: 25px 0;
   margin: 0px auto;
-
-  @media (max-width: 780px) {
-    width: 90%;
-    padding: 25px 0;
-  }
 `
 
-const PageBtn = styled(Link)`
-  border-radius: 3px;
-  background-color: green;
-  border: 1px solid red;
-  color: grey;
-  padding: 8px 20px;
-  min-width: 130px;
-
+const NavBtn = styled(Link)`
+  padding: 6px 18px;
+  color: #242729;
+  display: inline-block;
+  background: #f5f5f5;
+  margin: 5px;
   &:hover {
-    background-color: grey;
-    color: black;
-    border: 1px solid blue;
-  }
-
-  @media (max-width: 564px) {
-    margin-top: 10px;
-    width: 100%;
+    background: #ff7550;
+    color: #fff;
   }
 `
 
-const PreviousBtn = styled(PageBtn)`
-  order: 1;
-  @media (max-width: 564px) {
-    order: 2;
-  }
+const CurrentPageBtn = styled(NavBtn)`
+  border: 1px solid black
 `
 
-const NextBtn = styled(PageBtn)`
-  order: 3;
+const Arrow = styled(Box)`
+  border: solid;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 2px;
+  margin-bottom: 2px;
 `
 
-const Spacer = styled.span`
-  display: block;
-  min-width: 130px;
-
-  &.previous {
-    order: 1;
-  }
-
-  &.next {
-    order: 3;
-  }
-
-  @media (max-width: 564px) {
-    display: none;
-
-    &.previous {
-      order: 2;
-    }
-
-    &.next {
-      order: 3;
-    }
-  }
+const ArrowLeft = styled(Arrow)`
+  transform: rotate(135deg);
 `
-
-const PageInfo = styled.span`
-  order: 2;
-  padding: 1em 0;
-  @media (max-width: 564px) {
-    order: 1;
-  }
+const ArrowRight = styled(Arrow)`
+  transform: rotate(-45deg);
 `
 
 export default ({ currentPage, nbPages, blogPath }) => {
-  //const isFirst = currentPage === 1;
-  //const isLast = currentPage === nbPages;
+    if (nbPages === 1) {
+      return null
+    }
+
+    const isFirst = currentPage === 1;
+    const isLast = currentPage === nbPages;
   
-    const previousUrl = currentPage === 2 ? `/${blogPath}` : `/${blogPath}/${currentPage - 1}`
-
-    return (
+     return (
       <PaginationWrapper>
-        {currentPage !== 1 ? (
-          <PreviousBtn to={previousUrl}>‹ Newer posts</PreviousBtn>
-        ) : (
-          <Spacer className="previous" />
-        )}
+        { !isFirst && <NavBtn to={currentPage === 2 ? `/${blogPath}` : `/${blogPath}/${currentPage - 1}`} rel="prev"><ArrowLeft mr="0.5em"/>Назад</NavBtn> }
+        {Array.from({ length: nbPages }, (_, i) => {
+            const key = `pagination-number${i + 1}`
+            const to = `/${blogPath}/${i === 0 ? '' : i + 1}`
+            const title = i + 1
 
-        <PageInfo>
-          Page {currentPage} of {nbPages}
-        </PageInfo>
+            if ( currentPage === i + 1 ) {
+              return <CurrentPageBtn to={to} key={key}>{title}</CurrentPageBtn>
+            } else {
+              return <NavBtn to={to} key={key}>{title}</NavBtn>
+            }
+          })}
 
-        {currentPage < nbPages ? (
-          <NextBtn to={`/${blogPath}/${currentPage + 1}`}>Older posts ›</NextBtn>
-        ) : (
-          <Spacer className="next" />
-        )}
+        { !isLast && <NavBtn to={`/${blogPath}/${currentPage + 1}`} rel="next">Вперед<ArrowRight ml="0.5em"/></NavBtn> }
+
       </PaginationWrapper>
     )
 

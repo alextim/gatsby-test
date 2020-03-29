@@ -34,5 +34,19 @@ export default () => {
             }
         }
     `)
-    return data.allMarkdownRemark.edges
+    
+    const posts = []
+    data.allMarkdownRemark.edges.forEach( (edge, i) => {
+        const { title, path, date, categories, featuredImage } = edge.node.frontmatter
+        posts[i] = {
+            title: title,
+            path: path,
+            date: date,
+            categories: categories,
+            excerpt: edge.node.excerpt,
+            featuredImage: featuredImage ? featuredImage.childImageSharp.fluid : null
+        }
+    })
+
+    return posts
 }

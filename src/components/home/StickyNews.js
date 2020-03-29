@@ -22,12 +22,12 @@ const StyledBtnLink = styled(BtnLink)`
 export default ( {settings} ) => {
     const { title, subTitle, text, trip } = settings
     const theme = useTheme()
-    const edges = useLatestNewsFeatured1()
-    if ( !edges.length ) {
+    const posts = useLatestNewsFeatured1()
+    if ( !posts.length ) {
         return
     }
 
-    const { path, featuredImage } = edges[0].node.frontmatter
+    const { path, featuredImage } = posts[0]
     
 
     const price = 100
@@ -44,7 +44,7 @@ export default ( {settings} ) => {
                 <Wrap>
                 { featuredImage &&
                     <Link href={path} mb="1em">
-                        <Img fluid={featuredImage.childImageSharp.fluid} alt={title} width="100%" height="auto"/>
+                        <Img fluid={featuredImage} alt={title} width="100%" height="auto"/>
                     </Link>            
                 }
                 </Wrap>

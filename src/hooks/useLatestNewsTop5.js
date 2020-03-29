@@ -19,5 +19,14 @@ export default () => {
             }
         }
     `)
-    return data.allMarkdownRemark.edges
+    const posts = []
+    data.allMarkdownRemark.edges.forEach( (edge, i) => {
+        const { title, path } = edge.node.frontmatter
+        posts[i] = {
+            title: title,
+            path: path,
+        }
+    })
+
+    return posts
 }

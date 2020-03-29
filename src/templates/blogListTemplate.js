@@ -5,7 +5,9 @@ import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import PostListing from '../components/PostListing'
 import Pagination from '../components/Pagination'
-import Pagination2 from '../components/Pagination2'
+
+import toPosts from './toPosts'
+
 
 export default ({
   data: {
@@ -14,22 +16,20 @@ export default ({
   pageContext
 }) => {
 
+    //.filter(edge => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
+
+  const posts = toPosts(edges)
 
   return (
     <Layout>
       <SEO />
-      <PostListing postEdges={edges} />
+      <PostListing posts={posts} />
       <Pagination
-
           nbPages={pageContext.nbPages}
           currentPage={pageContext.currentPage}
           blogPath={pageContext.blogPath}
         />
-        <Pagination2
-          totalPages={pageContext.nbPages}
-          currentPage={pageContext.currentPage}
-          url={pageContext.blogPath}
-        />
+
     </Layout>
   )
 }

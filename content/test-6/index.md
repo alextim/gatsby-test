@@ -2,10 +2,10 @@
 path: /blog/test-6
 date: 2019-05-26
 published: true
-title: My first blog post
+title: My six blog post
 description: ""
 featuredImage: ./test.jpg
-featured: true
+featured: false
 categories:
   - News
   - Events

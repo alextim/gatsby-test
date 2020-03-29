@@ -2,10 +2,10 @@
 path: /blog/test-3
 date: 2019-05-26
 published: true
-title: My first blog post
+title: My 3 blog post
 description: ""
 featuredImage: ./test.jpg
-featured: true
+featured: false
 categories:
   - News
   - Events
@@ -14,7 +14,7 @@ tags:
   - Portugal
   - Porto
 ---
-This is my first post on my new fake blog! How exciting!
+This is my 3 post on my new fake blog! How exciting!
 
 I'm sure I'll write a lot more interesting things in the future.
 

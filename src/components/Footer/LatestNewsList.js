@@ -8,16 +8,16 @@ export default () => {
   const theme = useTheme()
   const mb = theme.footer.mbWidgetLink
 
-  const edges = useLatestNewsTop5()
+  const posts = useLatestNewsTop5()
   
   return (
     <Flex direction="column" align="start">
       {
-      edges.map( (edge, i) => 
+      posts.map( (post, i) => 
         <AnimatedLink key={i} 
-          to={edge.node.frontmatter.path}
+          to={post.path}
           cn="footer-link"
-          mb={mb}>{edge.node.frontmatter.title}</AnimatedLink> 
+          mb={mb}>{post.title}</AnimatedLink> 
         )
       }
     </Flex>

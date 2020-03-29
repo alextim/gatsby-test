@@ -4,6 +4,7 @@ import { Flex, Box, Link, Text, Heading } from '@chakra-ui/core'
 import styled from '@emotion/styled'
 import AnimatedLink from './AnimatedLink'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import kebabCase from 'lodash/kebabCase'
 
 import Utils from './../lib/utils'
 
@@ -34,36 +35,36 @@ const Meta = ( {icon, items} ) =>
     </Box>
 
 
-export default ( {node} ) => {
-    const { title, path, date, categories, featuredImage } = node.frontmatter
-    const excerpt = node.excerpt
-    let categoryItems
+export default ( {post} ) => {
 
-    if (categories) {
+    let categoryItems
+//TODO: cat
+    if (post.categories) {
         categoryItems = []
-        categories.forEach( (item, i) => {
+        post.categories.forEach( (item, i) => {
             categoryItems[i] = {}
             categoryItems[i].title = item
+            categoryItems[i].url = `/${kebabCase(item)}`
         })
     }
 
     return (
         <Flex as="article" direction="column" alignContent="flex-start" shadow="lg" mx="1em" mb={["2em", "2em", "0"]}>
-            { featuredImage &&
-                <Link href={path} mb="1em">
-                    <Img fluid={featuredImage.childImageSharp.fluid} alt={title} width="100%" height="auto"/>
+            { post.featuredImage &&
+                <Link href={post.path} mb="1em">
+                    <Img fluid={post.featuredImage} alt={post.title} width="100%" height="auto"/>
                 </Link>            
             }
 
             <Box p="1.5em" textAlign="left">
                 <Heading as="h3" mt="1.5em" mb="0.25em" fontSize={["1.25em", "1.5em"]}>
-                    <Link href={path}>{title}</Link>
+                    <Link href={post.path}>{post.title}</Link>
                 </Heading>
                
                 <Flex direction="row" fontWeight="100" fontSize="0.9em">
-                    { date && 
+                    { post.date && 
                         <Meta icon={['far', 'calendar-check']} 
-                            items={[ {title: Utils.formatDate(date)} ]}/> 
+                            items={[ {title: Utils.formatDate(post.date)} ]}/> 
                     }
                     { categoryItems && 
                         <Meta icon={['far', 'folder-open']} 
@@ -71,8 +72,8 @@ export default ( {node} ) => {
                     }
                 </Flex>
 
-                <Text mt={4}>{excerpt}</Text>
-                <AnimatedLink to={path} end="true">Читать дальше</AnimatedLink>
+                <Text mt={4}>{post.excerpt}</Text>
+                <AnimatedLink to={post.path} end="true">Читать дальше</AnimatedLink>
             </Box>
         </Flex>
     )

@@ -6,7 +6,7 @@ import Section from './Section'
 import NewsCard from './../NewsCard'
 import useLatestNewsTop3 from './../../hooks/useLatestNewsTop3'
 
-const ItemsWrap = styled(Flex)`
+const InnerWrap = styled(Flex)`
     flex-direction: column;
     margin-bottom: 3em;
     ${ props => props.theme.mediaQueries.lg } {
@@ -17,7 +17,7 @@ const ItemsWrap = styled(Flex)`
 export default ( {settings} ) => {
     const { title, buttons } = settings
     const theme = useTheme()
-    const edges = useLatestNewsTop3()
+    const posts = useLatestNewsTop3()
 
     return (
         <Section 
@@ -25,11 +25,11 @@ export default ( {settings} ) => {
             bg={theme.home.latestNews.colors.bg}
             buttons={buttons}>
 
-            <ItemsWrap>
+            <InnerWrap>
             {
-                edges.map( (edge, i) => <NewsCard key={i} node={edge.node}/> )
+                posts.map( (post, i) => <NewsCard key={i} post={post}/> )
             }
-            </ItemsWrap>
+            </InnerWrap>
 
         </Section>
     )

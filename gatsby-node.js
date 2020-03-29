@@ -104,6 +104,22 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const tagSet = new Set();
   const categorySet = new Set();
   const postsEdges = result.data.allMarkdownRemark.edges
+
+  postsEdges.forEach( edge => {
+    if (edge.node.frontmatter.tags) {
+      edge.node.frontmatter.tags.forEach(tag => {
+        tagSet.add(tag);
+      });
+    }
+    if (edge.node.frontmatter.categories) {
+      edge.node.frontmatter.categories.forEach(category => {
+        categorySet.add(category)
+      })
+    }
+
+  })
+
+
 /*
 //https://github.com/maxpou/gatsby-starter-morning-dew/blob/master/gatsby-node.js
 //https://github.com/mhadaily/gatsby-starter-typescript-power-blog/blob/master/gatsby-node.js
@@ -138,21 +154,27 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     console.log('Page#: ' + index + ' ' + edge.node.frontmatter.title)
     const node = edge.node
     const path = node.frontmatter.path;
-    const next = arr[index + 1];
-    const prev = arr[index - 1];
 
+    
+    let next, prev
 
-    if (edge.node.frontmatter.tags) {
-      edge.node.frontmatter.tags.forEach(tag => {
-        tagSet.add(tag);
-      });
+    let fm = arr[index + 1]
+    if (fm) {
+      fm = fm.node.frontmatter
+      next = { 
+        title: fm.title, 
+        path:  fm.path,
+      }
     }
+    
 
-
-    if (edge.node.frontmatter.categories) {
-      edge.node.frontmatter.categories.forEach(category => {
-        categorySet.add(category)
-      })
+    fm = arr[index - 1]
+    if (fm) {
+      fm = fm.node.frontmatter
+      prev = { 
+        title: fm.title, 
+        path:  fm.path,
+      }
     }
 
     createPage({
@@ -162,6 +184,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         pathSlug: path,
         prev,
         next,
+        categorySet: categorySet,
+        tagSet: tagSet,
       }, 
     })
   })

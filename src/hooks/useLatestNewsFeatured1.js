@@ -15,11 +15,8 @@ export default () => {
             ) {
                 edges {
                     node {
-
                         frontmatter {
                             path
-
-
                             featuredImage {
                                 childImageSharp {
                                   fluid(maxWidth: 800) {
@@ -34,5 +31,14 @@ export default () => {
             }
         }
     `)
-    return data.allMarkdownRemark.edges
+    const posts = []
+    data.allMarkdownRemark.edges.forEach( (edge, i) => {
+        const { path, featuredImage } = edge.node.frontmatter
+        posts[i] = {
+            path: path,
+            featuredImage: featuredImage ? featuredImage.childImageSharp.fluid : null
+        }
+    })
+
+    return posts
 }

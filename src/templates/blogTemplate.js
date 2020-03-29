@@ -8,45 +8,94 @@ import Utils from './../lib/utils'
 import Layout from './../components/Layout'
 import SEO from './../components/SEO'
 
+import LatestPosts from './../components/widgets/LatestPosts'
+import PostArchive  from './../components/widgets/PostArchive'
+import PostCategories  from './../components/widgets/PostCategories'
+
+
+
 const SuggestionBar = styled.div`
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
 `
-//background: ${props => props.theme.colors.white.light};
-//box-shadow: ${props => props.theme.shadow.suggestion};
-
 const PostSuggestion = styled.div`
   display: flex;
   align-items: center;
   margin: 1rem 3rem 0 3rem;
 `
 
-const Category = ({items}) => 
-  <div>{
-    items.map( (item, i) => 
-      <Link key={i} to={`/${kebabCase(item)}`}>
-        <strong>{item}</strong> {i < items.length - 1 ? `, ` : ``}
-      </Link>
-    )
-  }</div>
+const PrevNext = ({ prev, next }) => (
+  <SuggestionBar>
+    <PostSuggestion>
+      {prev && (
+        <Link to={prev.path} rel="prev">
+          {"< "}
+          <h3>{prev.title}</h3>
+        </Link>
+      )}
+    </PostSuggestion>
+    <PostSuggestion>
+      {next && (
+        <Link to={next.path} rel="next">
+          
+          <h3>{next.title}</h3>{" >"}
+        </Link>
+      )}
+    </PostSuggestion>
+  </SuggestionBar>  
 
-const Tax = ({items, taxSlug}) =>
-  <div>{
-    items.map( (item, i) => 
-      <Link key={i} to={`/${taxSlug}/${kebabCase(item)}`}>
-        <strong>{item}</strong> {i < items.length - 1 ? `, ` : ``}
-      </Link>
-    )
-  }</div>
+) 
 
+const Category = ({ items }) => 
+  <div>
+    {
+      items.map( (item, i) => 
+        <Link key={i} to={`/${kebabCase(item)}`}>
+          <strong>{item}</strong> {i < items.length - 1 ? `, ` : ``}
+        </Link>
+      )
+    }
+  </div>
+
+const Tax = ({ items, taxSlug }) =>
+  <div>
+    {
+      items.map( (item, i) => 
+        <Link key={i} to={`/${taxSlug}/${kebabCase(item)}`}>
+          <strong>{item}</strong> {i < items.length - 1 ? `, ` : ``}
+        </Link>
+      )
+    }
+  </div>
+
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  ${ props => props.theme.mediaQueries.sm } {
+    flex-direction: row;
+  }
+`
+const ArticleWrap = styled.div`
+  width: 100%;
+  ${ props => props.theme.mediaQueries.md } {
+    width: 70%;
+  }  
+`
+const WidgetsWrap = styled.aside`
+  width: 100%;
+  ${ props => props.theme.mediaQueries.md } {
+    width: 30%;
+  }    
+`  
 
 
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
   pageContext
 }) {
-  const { next, prev } = pageContext;
+  const { next, prev, categorySet, tagSet } = pageContext;
 
   const { markdownRemark } = data // data.markdownRemark holds your post data
   const { frontmatter, html, excerpt } = markdownRemark
@@ -56,47 +105,38 @@ export default function Template({
 
   return (
     <Layout>
-        <SEO title={title} 
+      <SEO title={title} 
           description={description || excerpt} 
           url={url} 
           image={imgSrc}
           type="article"
           date={date}/> 
-      
-    <div className="blog-post-container">
-      <div className="blog-post">
-        <h1>{title}</h1>
-        <h2>{Utils.formatDate(date)}</h2>
-        { tags && <Tax items={tags} taxSlug="tags"/> }
-        { categories && <Category items={categories} /> }
-        { featuredImgFluid && <Img fluid={featuredImgFluid} alt={title}/> }
+      <Wrapper>
 
-        <div
-          className="blog-post-content"
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
-      </div>
-    </div>
+        <ArticleWrap>
+          <article>
+            <h1>{title}</h1>
+            <div>{Utils.formatDate(date)}</div>
+            { tags && <Tax items={tags} taxSlug="tags"/> }
+            { categories && <Category items={categories} /> }
+            { featuredImgFluid && <Img fluid={featuredImgFluid} alt={title}/> }
 
-    <SuggestionBar>
-        <PostSuggestion>
-          {prev && (
-            <Link to={prev.node.frontmatter.path} rel="prev">
-              {"< "}
-              <h3>{prev.node.frontmatter.title}</h3>
-            </Link>
-          )}
-        </PostSuggestion>
-        <PostSuggestion>
-          {next && (
-            <Link to={next.node.frontmatter.path} rel="next">
-              
-              <h3>{next.node.frontmatter.title}</h3>{" >"}
-            </Link>
-          )}
-        </PostSuggestion>
-      </SuggestionBar>  
-        
+            <div
+              className="blog-post-content"
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+          </article>
+
+          <PrevNext prev={prev} next={next} />
+        </ArticleWrap>
+
+        <WidgetsWrap>
+          <LatestPosts />
+          <PostArchive />
+          <PostCategories categorySet={categorySet}/>
+        </WidgetsWrap>
+
+      </Wrapper>
     </Layout>
   )
 }
