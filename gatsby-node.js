@@ -7,6 +7,9 @@ const moment = require('moment')
  *
  * !!!!
  * https://github.com/diogorodrigues/iceberg-gatsby-multilang
+ * 
+ * 
+ * https://github.com/mhadaily/gatsby-starter-typescript-power-blog/blob/master/gatsby-node.js
  * !!!!
  * *
  */
@@ -14,6 +17,7 @@ const moment = require('moment')
 const siteConfig = {
   dateFromFormat: 'YYYY-MM-DD', // Date format used in the frontmatter.
   dateFormat: 'DD/MM/YYYY', // Date format for display.
+  postsPerPage: 2,
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -67,6 +71,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const blogPostTemplate = path.resolve('src/templates/blogTemplate.js')
   const tagTemplate = path.resolve('src/templates/tagTemplate.js')
   const categoryTemplate = path.resolve('src/templates/categoryTemplate.js')
+  const listPostsTemplate = path.resolve('src/templates/blogListTemplate.js')
 
   const result = await graphql(`
     {
@@ -90,15 +95,47 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // Handle errors
   if (result.errors) {
+    console.error(result.errors)
     reporter.panicOnBuild(`Error while running GraphQL query.`)
     return
   }
 
+
   const tagSet = new Set();
   const categorySet = new Set();
   const postsEdges = result.data.allMarkdownRemark.edges
+/*
+//https://github.com/maxpou/gatsby-starter-morning-dew/blob/master/gatsby-node.js
+//https://github.com/mhadaily/gatsby-starter-typescript-power-blog/blob/master/gatsby-node.js
+  const posts = markdownFiles.filter(item =>
+    item.node.fileAbsolutePath.includes('/content/posts/')
+  )
+*/
 
+  const postsPerPage = siteConfig.postsPerPage
+  const nbPages = Math.ceil(postsEdges.length / postsPerPage)
+  const blogPath = 'blog'
+
+  console.log('========= Create Index Pages: count ' + nbPages + ' ===============')
+  Array.from({ length: nbPages }).forEach((_, i) => {
+    console.log(i)
+    createPage({
+      path: i === 0 ? `/${blogPath}` : `/${blogPath}/${i + 1}`,
+      component: listPostsTemplate,
+      context: {
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        currentPage: i + 1,
+        nbPages: nbPages,
+        blogPath: blogPath,
+      },
+    })
+  })
+  console.log('---- finish ----')
+
+  console.log('========= Create Pages: count ' + postsEdges.length + ' ===============')
   postsEdges.forEach(( edge, index, arr) => {
+    console.log('Page#: ' + index + ' ' + edge.node.frontmatter.title)
     const node = edge.node
     const path = node.frontmatter.path;
     const next = arr[index + 1];
@@ -128,10 +165,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }, 
     })
   })
+  console.log('---- finish ----')
+
 
   // Generate link foreach tag page
-  console.log(tagSet)
+
+  console.log('======== Tag Pages: count ' + tagSet.size + ' ===========')
   tagSet.forEach(tag => {
+    console.log('Tag: ' + tag)
     createPage({
       path: `/tags/${_.kebabCase(tag)}/`,
       component: tagTemplate,
@@ -140,11 +181,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     })
   })
+  console.log('---- finish ----')
 
   // Generate link foreach category page
-  console.log(categorySet)
+  console.log('========= Category Pages: count ' + categorySet.size + ' ==================')
   categorySet.forEach(category => {
-    console.log(category)
+    console.log('Category: ' + category)
     createPage({
       path: `/${_.kebabCase(category)}/`,
       component: categoryTemplate,
@@ -153,4 +195,5 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     })
   })
+  console.log('---- finish ----')
 }

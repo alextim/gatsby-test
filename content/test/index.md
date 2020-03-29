@@ -1,5 +1,5 @@
 ---
-path: /news/test
+path: /blog/test
 date: 2019-05-26
 published: true
 title: My first blog post

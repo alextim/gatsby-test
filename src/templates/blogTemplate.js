@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from '@emotion/styled'
+import kebabCase from 'lodash/kebabCase'
 
 import Utils from './../lib/utils'
 import Layout from './../components/Layout'
@@ -21,6 +22,26 @@ const PostSuggestion = styled.div`
   margin: 1rem 3rem 0 3rem;
 `
 
+const Category = ({items}) => 
+  <div>{
+    items.map( (item, i) => 
+      <Link key={i} to={`/${kebabCase(item)}`}>
+        <strong>{item}</strong> {i < items.length - 1 ? `, ` : ``}
+      </Link>
+    )
+  }</div>
+
+const Tax = ({items, taxSlug}) =>
+  <div>{
+    items.map( (item, i) => 
+      <Link key={i} to={`/${taxSlug}/${kebabCase(item)}`}>
+        <strong>{item}</strong> {i < items.length - 1 ? `, ` : ``}
+      </Link>
+    )
+  }</div>
+
+
+
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
   pageContext
@@ -29,7 +50,7 @@ export default function Template({
 
   const { markdownRemark } = data // data.markdownRemark holds your post data
   const { frontmatter, html, excerpt } = markdownRemark
-  const { title, description, date, url, featuredImage } = frontmatter
+  const { title, description, date, url, featuredImage, tags, categories } = frontmatter
   const featuredImgFluid = featuredImage ? featuredImage.childImageSharp.fluid : null
   const imgSrc = featuredImgFluid ? featuredImgFluid.src : null
 
@@ -46,7 +67,10 @@ export default function Template({
       <div className="blog-post">
         <h1>{title}</h1>
         <h2>{Utils.formatDate(date)}</h2>
-  { featuredImgFluid && <Img fluid={featuredImgFluid} alt={title}/> }
+        { tags && <Tax items={tags} taxSlug="tags"/> }
+        { categories && <Category items={categories} /> }
+        { featuredImgFluid && <Img fluid={featuredImgFluid} alt={title}/> }
+
         <div
           className="blog-post-content"
           dangerouslySetInnerHTML={{ __html: html }}
