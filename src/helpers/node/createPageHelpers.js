@@ -63,8 +63,8 @@ function createPostPages(data, createPage) {
     component: postTemplate,
     context: {
       id: node.id,
-      categories: getTax(data.allCategories.group),
-      tags: getTax(data.allTags.group),
+      allCategories: getTax(data.allCategories.group),
+      allTags: getTax(data.allTags.group),
     }
   }));
 }
