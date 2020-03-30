@@ -114,13 +114,6 @@ module.exports = {
       }
     },
     */
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -139,8 +132,8 @@ module.exports = {
    {
     resolve: `gatsby-source-filesystem`,
     options: {
-      path: `${__dirname}/content/posts`,
-      name: `posts`,
+      path: `${__dirname}/content/blog`,
+      name: `blog`,
     },
   },
   {
@@ -171,12 +164,6 @@ module.exports = {
   {
     resolve: `gatsby-source-filesystem`,
     options: {
-      path: `${__dirname}/src/posts`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
       name: `images`,
       path: `${__dirname}/src/images`,
     },
@@ -189,9 +176,9 @@ module.exports = {
     }
   },
   {
-    resolve: 'gatsby-plugin-page-creator',
+    resolve: `gatsby-plugin-page-creator`,
     options: {
-      path: `${__dirname}/src/posts`,
+      path: path.join(__dirname, `src/pages`),
     },
   },
   {

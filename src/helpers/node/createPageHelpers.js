@@ -8,13 +8,12 @@ const tagTemplate = path.resolve('./src/templates/tagPosts.js')
 
 /*
 https://github.com/g00glen00b/gatsby-blog/tree/fbfc7040582384ace09738fff0cee34fc228c0a1
+https://gatsby-starter-typescript-power-blog.majidhajian.com/blog/coding-is-fun-isnt-it
+https://github.com/diogorodrigues/iceberg-gatsby-multilang
 */
 
-const siteConfig = {
-  dateFromFormat: 'YYYY-MM-DD', // Date format used in the frontmatter.
-  dateFormat: 'DD/MM/YYYY', // Date format for display.
-  pageSize: 2,
-}
+const { siteConfig } = path.resolve('./src/data/siteConfig')
+
 
 function getTax(group) {
   const cats = []
@@ -25,8 +24,16 @@ function getTax(group) {
 }
 
 function createPaginationPages(component, totalItems, base, context, createPage) {
+  console.log('========================')
+  console.log(siteConfig)
+  console.log(siteConfig.pageSize)
   const pageSize = siteConfig.pageSize
   const pageCount = Math.ceil(totalItems / pageSize)
+  
+  console.log(base)
+  
+  console.log('========================')
+
 
   const pages = Array.from({length: pageCount}).map((_, index) => createPage({
     path: `${base}/page/${index + 1}`,
@@ -81,7 +88,7 @@ function createPostsPages( data, createPage) {
   return createPaginationPages(
     postsTemplate,
     data.allPosts.edges.length,
-    '/posts',
+    '/blog',
     {
       categories: getTax(data.allCategories.group),
       tags: getTax(data.allTags.group),

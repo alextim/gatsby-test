@@ -1,16 +1,11 @@
-
-const { translit } = require('./../../lib/translit')
-const { slugify } = require('./../../lib/slugify')
-
 const path = require('path')
 const _ = require('lodash')
 const moment = require('moment')
 
-const siteConfig = {
-  dateFromFormat: 'YYYY-MM-DD', // Date format used in the frontmatter.
-  dateFormat: 'DD/MM/YYYY', // Date format for display.
-  postsPerPage: 2,
-}
+const siteConfig = path.resolve('./src/data/siteConfig')
+
+const { translit } = require('./../../lib/translit')
+const { slugify } = require('./../../lib/slugify')
 
 const safeSlug = (s) => slugify(translit(s,1))
 

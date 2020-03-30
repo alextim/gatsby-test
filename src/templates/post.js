@@ -9,7 +9,7 @@ import SEO from '../components/SEO'
 
 import BlogLayout from './common/BlogLayout'
 
-
+/*
 const SuggestionBar = styled.div`
   display: flex;
   flex-wrap: nowrap;
@@ -42,7 +42,7 @@ const PrevNext = ({ prev, next }) => (
   </SuggestionBar>  
 
 ) 
-
+*/
 const Category = ({ items }) => 
   <div>
     {
@@ -99,8 +99,9 @@ export default function Template({
               dangerouslySetInnerHTML={{ __html: html }}
             />
           </article>
-
+{/*
           <PrevNext prev={prev} next={next} />
+*/}
     </BlogLayout>
   )
 }
