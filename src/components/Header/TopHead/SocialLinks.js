@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 
 import SocialLink from './SocialLink'
 import Utils from './../../../lib/utils'
-import useSocialLinks from './../../../hooks/useSocialLinks'
+import useSocialLinks from '../../../helpers/hooks/useSocialLinks'
 
 const SocialLinks = () => {
     const socialLinks = useSocialLinks()

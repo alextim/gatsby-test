@@ -5,7 +5,7 @@ import { useTheme } from 'emotion-theming'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Utils from '../../lib/utils'
-import useOrganizationVoice from '../../hooks/useOrganizationVoice'
+import useOrganizationVoice from '../../helpers/hooks/useOrganizationVoice'
 
 const StyledAnchor = styled.a`
   margin-left: ${props => props.theme.space[2]};

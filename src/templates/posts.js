@@ -1,38 +1,20 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-import Layout from '../components/Layout'
-import SEO from '../components/SEO'
-import PostListing from '../components/PostListing'
-import Pagination from '../components/Pagination'
-
-import toPosts from './toPosts'
+import ListTemplate from './common/ListTemplate'
 
 
 export default ({
-  data: {
-    allMarkdownRemark: { edges },
-  },
+  data: {allMarkdownRemark: { edges }, },
   pageContext
-}) => {
-
-    //.filter(edge => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
-
-  const posts = toPosts(edges)
-
-  return (
-    <Layout>
-      <SEO />
-      <PostListing posts={posts} />
-      <Pagination
-          nbPages={pageContext.nbPages}
-          currentPage={pageContext.currentPage}
-          blogPath={pageContext.blogPath}
-        />
-
-    </Layout>
-  )
-}
+}) => (
+  <ListTemplate edges={edges} pageContext={pageContext} 
+    seoTitle="blog" 
+    title="blog" 
+    categories={pageContext.categories}    
+    tags={pageContext.tags}
+  />
+)
 
 export const pageQuery = graphql`
   query BlogListQuery ($skip: Int!, $limit: Int!) {

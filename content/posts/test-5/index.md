@@ -1,20 +1,19 @@
 ---
-path: /blog/test-3
+path: /posts/test-5
 date: 2019-05-26
 published: true
-title: My 3 blog post
+title: My 5 blog post
 description: ""
 featuredImage: ./test.jpg
-featured: false
+featured: true
 categories:
   - News
   - Events
-  - Test
 tags:
   - Portugal
   - Porto
 ---
-This is my 3 post on my new fake blog! How exciting!
+This is my first post on my new fake blog! How exciting!
 
 I'm sure I'll write a lot more interesting things in the future.
 

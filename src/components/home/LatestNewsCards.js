@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 
 import Section from './Section'
 import NewsCard from './../NewsCard'
-import useLatestNewsTop3 from './../../hooks/useLatestNewsTop3'
+import useLatestNewsTop3 from './../../helpers/hooks/useLatestNewsTop3'
 
 const InnerWrap = styled(Flex)`
     flex-direction: column;

@@ -1,11 +1,11 @@
 ---
-path: /blog/test-5
+path: /posts/test-6
 date: 2019-05-26
 published: true
-title: My 5 blog post
+title: My six blog post
 description: ""
 featuredImage: ./test.jpg
-featured: true
+featured: false
 categories:
   - News
   - Events

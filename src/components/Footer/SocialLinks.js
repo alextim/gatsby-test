@@ -3,7 +3,7 @@ import { Flex } from '@chakra-ui/core'
 
 import SocialLink from './SocialLink'
 import Utils from '../../lib/utils'
-import useSocialLinks from '../../hooks/useSocialLinks'
+import useSocialLinks from '../../helpers/hooks/useSocialLinks'
 
 
 export default () => {

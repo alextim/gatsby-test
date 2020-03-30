@@ -76,7 +76,7 @@ export default  [
     },
     {
       title: 'Статьи и новости',
-      url: '/news',
+      url: '/posts',
     },
     {
       title: 'Контакты',

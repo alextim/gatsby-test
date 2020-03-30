@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 
 import Section from './Section'
 import BtnLink from './BtnLink'
-import useLatestNewsFeatured1 from './../../hooks/useLatestNewsFeatured1'
+import useLatestNewsFeatured1 from './../../helpers/hooks/useLatestNewsFeatured1'
 
 const Wrap = styled(Box)`
     width: 100%;
@@ -20,12 +20,14 @@ const StyledBtnLink = styled(BtnLink)`
 `
 
 export default ( {settings} ) => {
-    const { title, subTitle, text, trip } = settings
-    const theme = useTheme()
     const posts = useLatestNewsFeatured1()
     if ( !posts.length ) {
         return
     }
+    
+    const { title, subTitle, text } = settings
+    //, trip
+    const theme = useTheme()
 
     const { path, featuredImage } = posts[0]
     

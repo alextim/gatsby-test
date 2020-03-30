@@ -13,7 +13,7 @@ export default [
   },
   {
     title: 'Новости',
-    url:    '/news'
+    url:    '/posts'
   },
   {
     title: 'Контакты',

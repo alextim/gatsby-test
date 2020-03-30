@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styled from '@emotion/styled'
 
-import useOrganizationAddress from './../../../hooks/useOrganizationAddress'
+import useOrganizationAddress from '../../../helpers/hooks/useOrganizationAddress'
 
 const StyledInlineFlex = styled.div`
     display: none;

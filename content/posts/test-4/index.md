@@ -1,8 +1,8 @@
 ---
-path: /blog/test-6
+path: /posts/test-4
 date: 2019-05-26
 published: true
-title: My six blog post
+title: My 4 blog post
 description: ""
 featuredImage: ./test.jpg
 featured: false
@@ -13,7 +13,7 @@ tags:
   - Portugal
   - Porto
 ---
-This is my first post on my new fake blog! How exciting!
+This is my 4 post on my new fake blog! How exciting!
 
 I'm sure I'll write a lot more interesting things in the future.
 

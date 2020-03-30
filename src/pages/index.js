@@ -1,6 +1,7 @@
 import React from 'react'
 
-import homePageSettings from '../components/settings/homePageSettings'
+import homePageSettings from '../data/homePageSettings'
+
 import LayoutFullWidth from '../components/LayoutFullWidth'
 import SEO from '../components/SEO'
 import CTA from '../components/home/CTA'

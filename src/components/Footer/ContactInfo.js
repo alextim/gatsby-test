@@ -5,10 +5,10 @@ import { useTheme } from 'emotion-theming'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Utils from '../../lib/utils'
-import useOrganizationName from '../../hooks/useOrganizationName'
-import useOrganizationAddress from '../../hooks/useOrganizationAddress'
-import useOrganizationEmail from '../../hooks/useOrganizationEmail'
-import useSiteUrl from '../../hooks/useSiteUrl'
+import useOrganizationName from '../../helpers/hooks/useOrganizationName'
+import useOrganizationAddress from '../../helpers/hooks/useOrganizationAddress'
+import useOrganizationEmail from '../../helpers/hooks/useOrganizationEmail'
+import useSiteUrl from '../../helpers/hooks/useSiteUrl'
 
 const StyledAnchor = styled.a`
   margin-left: ${props => props.theme.space[2]};

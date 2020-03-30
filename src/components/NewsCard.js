@@ -2,11 +2,11 @@ import React from 'react'
 import Img from 'gatsby-image'
 import { Flex, Box, Link, Text, Heading } from '@chakra-ui/core'
 import styled from '@emotion/styled'
-import AnimatedLink from './AnimatedLink'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import kebabCase from 'lodash/kebabCase'
 
 import Utils from './../lib/utils'
+import AnimatedLink from './AnimatedLink'
 
 const CenterWrap = styled.span`
     display: flex;
@@ -23,7 +23,7 @@ const Meta = ( {icon, items} ) =>
                     <Box key={i} as="span" mr="0.4em">
                     {
                         item.url ? 
-                            <Link to={item.url}>{item.title}</Link>
+                            <Link href={item.url}>{item.title}</Link>
                             : 
                             <Box as="span">{item.title}</Box>
                     }
@@ -44,7 +44,7 @@ export default ( {post} ) => {
         post.categories.forEach( (item, i) => {
             categoryItems[i] = {}
             categoryItems[i].title = item
-            categoryItems[i].url = `/${kebabCase(item)}`
+            categoryItems[i].url = `/category/${kebabCase(item)}`
         })
     }
 

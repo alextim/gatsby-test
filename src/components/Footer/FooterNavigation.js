@@ -5,9 +5,9 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { Flex, Box } from '@chakra-ui/core'
 
-import footerNavigationItems from './../settings/footerNavigationItems'
+import footerNavigationItems from '../../data/footerNavigationItems'
 
-const FooterNavigation = () => {
+export default () => {
  
   return (
     <Flex py={1} mt={3} alignItems="center" justifyContent="center" flexWrap="wrap">
@@ -23,5 +23,3 @@ const FooterNavigation = () => {
     </Flex>
   )
 }
-
-export default FooterNavigation

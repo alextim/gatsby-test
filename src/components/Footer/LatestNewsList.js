@@ -2,7 +2,7 @@ import React from 'react'
 import { Flex, useTheme } from '@chakra-ui/core'
 
 import AnimatedLink from '../AnimatedLink'
-import useLatestNewsTop5 from '../../hooks/useLatestNewsTop5'
+import useLatestNewsTop5 from '../../helpers/hooks/useLatestNewsTop5'
 
 export default () => {
   const theme = useTheme()

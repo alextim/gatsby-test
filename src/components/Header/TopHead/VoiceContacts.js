@@ -4,7 +4,7 @@ import { Flex, Box, Link } from '@chakra-ui/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Utils from './../../../lib/utils'
-import useOrganizationVoice from './../../../hooks/useOrganizationVoice'
+import useOrganizationVoice from '../../../helpers/hooks/useOrganizationVoice'
 
 const StyledLink = styled(Link)`
   display: inline-flex;

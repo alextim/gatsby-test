@@ -1,5 +1,5 @@
 ---
-path: /blog/test-2
+path: /posts/test-2
 date: 2017-11-07
 published: true
 title: My second blog post

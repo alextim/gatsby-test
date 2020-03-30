@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import styled from '@emotion/styled'
 
 
-import mainMenuItems from './../../settings/mainMenuItems'
+import mainMenuItems from '../../../data/mainMenuItems'
 
 
 let id = 0

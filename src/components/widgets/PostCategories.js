@@ -2,20 +2,19 @@ import React from 'react'
 import { Link } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
 
-export default ( {categorySet} ) => {
-    const cats = []
-    categorySet.forEach( (cat, i) => cats[i] = cat )
-    return (
+export default ( {categories} ) => {
+    const base = 'category'
+    return categories ? (
         <section>
             <ul>
             {
-                cats.map( (cat, i) =>
+                categories.map( (cat, i) =>
                     <li key={i}>
-                        <Link to={`/${kebabCase(cat)}`}>{cat}</Link>
+                        <Link to={`/${base}/${kebabCase(cat)}`}>{cat}</Link>
                     </li>
                 )
             }
             </ul>
         </section>
-    )
+    ) : null
 }
