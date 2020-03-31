@@ -44,6 +44,9 @@ const allPostsQuery = `
           fields {
             slug
           }
+          frontmatter {
+            title
+          }
         }
       }
     }

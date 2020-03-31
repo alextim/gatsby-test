@@ -1,20 +1,22 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
 
-export default ( {categories} ) => {
+import SidebarWidget from '../SidebarWidget'
+import IconLink from '../IconLink'
+import useAllCategories from './../../helpers/hooks/useAllCategories'
+
+export default () => {
+    const cats = useAllCategories()
     const base = 'category'
-    return categories ? (
-        <section>
-            <ul>
-            {
-                categories.map( (cat, i) =>
-                    <li key={i}>
-                        <Link to={`/${base}/${kebabCase(cat)}`}>{cat}</Link>
-                    </li>
-                )
-            }
-            </ul>
-        </section>
-    ) : null
+    const icon = ['far', 'folder-open']
+    return cats ? 
+        <SidebarWidget title="Рубрики">
+        { cats.map((cat, i) => 
+            <IconLink key={i} 
+                to={`/${base}/${kebabCase(cat)}`}
+                icon={icon}>
+                {cat}
+            </IconLink> )}
+        </SidebarWidget>
+        : null
 }

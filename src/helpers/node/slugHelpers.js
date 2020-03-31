@@ -2,7 +2,7 @@ const path = require('path')
 const _ = require('lodash')
 const moment = require('moment')
 
-const siteConfig = path.resolve('./src/data/siteConfig')
+const siteConfig = require('./../../data/siteConfig')
 
 const { translit } = require('./../../lib/translit')
 const { slugify } = require('./../../lib/slugify')
@@ -35,22 +35,26 @@ if (
   Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
   Object.prototype.hasOwnProperty.call(node.frontmatter, 'title')
 ) {
-  slug = `/${safeSlug(node.frontmatter.title)}`;
+  slug = safeSlug(node.frontmatter.title)
 } else if (parsedFilePath.name !== 'index' && parsedFilePath.dir !== '') {
-  slug = `/${safeSlug(parsedFilePath.dir)}/${safeSlug(parsedFilePath.name)}/`;
+  slug = `${safeSlug(parsedFilePath.dir)}/${safeSlug(parsedFilePath.name)}`
 } else if (parsedFilePath.dir === '') {
-  slug = `/${safeSlug(parsedFilePath.name)}/`;
+  slug = safeSlug(parsedFilePath.name)
 } else {
-  slug = `/${safeSlug(parsedFilePath.dir)}/`;
+  slug = safeSlug(parsedFilePath.dir)
 }
 
     if (Object.prototype.hasOwnProperty.call(node, 'frontmatter')) {
-      if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug'))
-        slug = `/${safeSlug(node.frontmatter.slug)}`;
+
+      if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug')) {
+        slug = safeSlug(node.frontmatter.slug)
+      }
+
       if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'date')) {
-        const date = moment(node.frontmatter.date, siteConfig.dateFromFormat);
-        if (!date.isValid)
-          console.warn(`WARNING: Invalid date.`, node.frontmatter);
+        const date = moment(node.frontmatter.date, siteConfig.dateFromFormat)
+        if (!date.isValid) {
+          console.warn(`WARNING: Invalid date.`, node.frontmatter)
+        }
 
         createNodeField({
           node,
@@ -58,11 +62,13 @@ if (
           value: date.toISOString()
         });
       }
+      
     }
 
-    createNodeField({ node, name: 'slug', value: slug });
-    console.log(slug)
-
+    createNodeField({ node, 
+        name: 'slug', 
+        value: `${siteConfig.blogUrlBase}/${slug}`
+    });
   }
   
   module.exports = {createSlug};

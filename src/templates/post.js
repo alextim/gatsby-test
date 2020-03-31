@@ -9,7 +9,7 @@ import SEO from '../components/SEO'
 
 import BlogLayout from './common/BlogLayout'
 
-/*
+
 const SuggestionBar = styled.div`
   display: flex;
   flex-wrap: nowrap;
@@ -25,7 +25,7 @@ const PrevNext = ({ prev, next }) => (
   <SuggestionBar>
     <PostSuggestion>
       {prev && (
-        <Link to={prev.path} rel="prev">
+        <Link to={prev.url} rel="prev">
           {"< "}
           <h3>{prev.title}</h3>
         </Link>
@@ -33,7 +33,7 @@ const PrevNext = ({ prev, next }) => (
     </PostSuggestion>
     <PostSuggestion>
       {next && (
-        <Link to={next.path} rel="next">
+        <Link to={next.url} rel="next">
           
           <h3>{next.title}</h3>{" >"}
         </Link>
@@ -42,7 +42,7 @@ const PrevNext = ({ prev, next }) => (
   </SuggestionBar>  
 
 ) 
-*/
+
 const Category = ({ items }) => 
   <div>
     {
@@ -70,16 +70,17 @@ export default function Template({
   data, // this prop will be injected by the GraphQL query below.
   pageContext
 }) {
-  const { next, prev, allCategories, allTags } = pageContext;
+  const { next, prev } = pageContext;
 
   const { markdownRemark } = data // data.markdownRemark holds your post data
-  const { frontmatter, html, excerpt } = markdownRemark
-  const { title, description, date, url, featuredImage, tags, categories } = frontmatter
+  const { frontmatter, html, excerpt, fields } = markdownRemark
+  const { title, description, date, featuredImage, tags, categories } = frontmatter
   const featuredImgFluid = featuredImage ? featuredImage.childImageSharp.fluid : null
   const imgSrc = featuredImgFluid ? featuredImgFluid.src : null
+  const url = fields.slug
 
   return (
-    <BlogLayout categories={allCategories} tags={allTags}>
+    <BlogLayout>
       <SEO title={title} 
           description={description || excerpt} 
           url={url} 
@@ -99,9 +100,9 @@ export default function Template({
               dangerouslySetInnerHTML={{ __html: html }}
             />
           </article>
-{/*
+
           <PrevNext prev={prev} next={next} />
-*/}
+
     </BlogLayout>
   )
 }
@@ -111,6 +112,9 @@ export const pageQuery = graphql`
     markdownRemark(id: {eq: $id}) {
       html
       excerpt(pruneLength: 160)
+      fields {
+        slug
+      }
       frontmatter {
         date(formatString: "YYYY-MM-DD")
         path

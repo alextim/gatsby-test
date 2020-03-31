@@ -12,27 +12,15 @@ https://gatsby-starter-typescript-power-blog.majidhajian.com/blog/coding-is-fun-
 https://github.com/diogorodrigues/iceberg-gatsby-multilang
 */
 
-const { siteConfig } = path.resolve('./src/data/siteConfig')
+const siteConfig = require('./../../data/siteConfig')
 
-
-function getTax(group) {
-  const cats = []
-  group.forEach( (el, i) => {
-    cats[i] = el.fieldValue
-  })
-  return cats
-}
 
 function createPaginationPages(component, totalItems, base, context, createPage) {
-  console.log('========================')
-  console.log(siteConfig)
-  console.log(siteConfig.pageSize)
   const pageSize = siteConfig.pageSize
   const pageCount = Math.ceil(totalItems / pageSize)
   
-  console.log(base)
-  
   console.log('========================')
+  console.log('createPaginationPages: ' + base)
 
 
   const pages = Array.from({length: pageCount}).map((_, index) => createPage({
@@ -65,15 +53,40 @@ function createPaginationPages(component, totalItems, base, context, createPage)
 }
 
 function createPostPages(data, createPage) {
-  return data.allPosts.edges.map(({node}) => createPage({
-    path: node.fields.slug,
-    component: postTemplate,
-    context: {
-      id: node.id,
-      allCategories: getTax(data.allCategories.group),
-      allTags: getTax(data.allTags.group),
+
+  return data.allPosts.edges.map(({node}, index, arr) => {
+    console.log('========================')
+    console.log('createPostPages: ' + node.fields.slug)
+
+    const isFirst = index === 0    
+    const isLast  = index === arr.length - 1
+      
+    let prev, next    
+  
+    if ( !isFirst ) {
+      prev = {
+        title: arr[index - 1].node.frontmatter.title,
+        url: arr[index - 1].node.fields.slug,
+      }
     }
-  }));
+
+    if ( !isLast ) {
+      next = {
+        title: arr[index + 1].node.frontmatter.title,
+        url: arr[index + 1].node.fields.slug,        
+      }
+    }
+
+    createPage({
+      path: node.fields.slug,
+      component: postTemplate,
+      context: {
+        id: node.id,
+        prev: prev,
+        next: next
+      }
+    })
+  });
 }
 /*
 function createPagePages({allWordpressPage}, createPage) {
@@ -88,11 +101,8 @@ function createPostsPages( data, createPage) {
   return createPaginationPages(
     postsTemplate,
     data.allPosts.edges.length,
-    '/blog',
-    {
-      categories: getTax(data.allCategories.group),
-      tags: getTax(data.allTags.group),
-    },
+    siteConfig.blogUrlBase,
+    {},
     createPage
   );
 }
@@ -104,11 +114,9 @@ function createCategoryPostsPages(data, createPage) {
     `/category/${_.kebabCase(group.fieldValue)}`,
     {
       category: group.fieldValue,
-      categories: getTax(data.allCategories.group),
-      tags: getTax(data.allTags.group),
     },
     createPage
-  ));
+  ))
 }
 
 function createTagPostsPages(data, createPage) {
@@ -118,11 +126,9 @@ function createTagPostsPages(data, createPage) {
     `/tag/${_.kebabCase(group.fieldValue)}`,
     {
       group,
-      categories: getTax(data.allCategories.group),
-      tags: getTax(data.allTags.group),
     },
     createPage
-  ));
+  ))
 }
 /*
 function createLegacyCategoryTutorialsPage({allCategories}, createPage) {

@@ -10,8 +10,10 @@ export default () => {
             ) {
                 edges {
                     node {
+                        fields {
+                            slug
+                        }
                         frontmatter {
-                            path
                             title
                         }
                     }
@@ -19,14 +21,9 @@ export default () => {
             }
         }
     `)
-    const posts = []
-    data.allMarkdownRemark.edges.forEach( (edge, i) => {
-        const { title, path } = edge.node.frontmatter
-        posts[i] = {
-            title: title,
-            path: path,
-        }
-    })
-
-    return posts
+    return data.allMarkdownRemark.edges.map( edge => ({
+            title: edge.node.frontmatter.title,
+            path: edge.node.fields.slug,
+        })
+    )
 }

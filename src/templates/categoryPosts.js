@@ -13,19 +13,10 @@ export default ({ data: {allMarkdownRemark: { edges }, }, pageContext }) => (
   <ListTemplate edges={edges} pageContext={pageContext} 
     seoTitle={`"${pageContext.category}" - ${config.siteTitle}`} 
     title={`Category:${' '}${pageContext.category}`} 
-    categories={pageContext.categories}    
-    tags={pageContext.tags}
     />
 )
 
 
-//        published: { eq: true }
-/*
-          fields {
-            slug
-            date(formatString: "MMMM DD, YYYY")
-          }
-          */
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
   query CategoryPage($skip: Int!, $limit: Int!, $category: String) {
@@ -34,14 +25,16 @@ export const pageQuery = graphql`
       limit: $limit
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { 
+        published: { eq: true }        
         categories: { in: [$category] }
-
       } }
     ) {
       totalCount
       edges {
         node {
-
+          fields {
+            slug
+          }
           excerpt
           frontmatter {
             title

@@ -16,6 +16,9 @@ export default () => {
                 edges {
                     node {
                         excerpt
+                        fields {
+                            slug
+                        }
                         frontmatter {
                             path
                             title
@@ -35,18 +38,15 @@ export default () => {
         }
     `)
     
-    const posts = []
-    data.allMarkdownRemark.edges.forEach( (edge, i) => {
-        const { title, path, date, categories, featuredImage } = edge.node.frontmatter
-        posts[i] = {
+    return data.allMarkdownRemark.edges.map( edge => {
+        const { title, date, categories, featuredImage } = edge.node.frontmatter
+        return {
             title: title,
-            path: path,
+            path: edge.node.fields.slug,
             date: date,
             categories: categories,
             excerpt: edge.node.excerpt,
             featuredImage: featuredImage ? featuredImage.childImageSharp.fluid : null
         }
     })
-
-    return posts
 }

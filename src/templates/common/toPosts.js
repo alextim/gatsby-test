@@ -2,7 +2,8 @@ export default ( edges ) => {
     const posts = []
 
     edges.forEach( (edge, i) => {
-        const { title, path, date, categories, tags, featuredImage } = edge.node.frontmatter
+        const path = edge.node.fields.slug
+        const { title, date, categories, tags, featuredImage } = edge.node.frontmatter
         posts[i] = {
             title: title,
             path: path,

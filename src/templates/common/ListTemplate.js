@@ -8,14 +8,14 @@ import Pagination from '../../components/Pagination'
 import toPosts from './toPosts'
 
 
-export default ( { edges, pageContext, seoTitle, title, categories, tags } ) => {
+export default ( { edges, pageContext, seoTitle, title } ) => {
 
     //.filter(edge => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
 
   const posts = toPosts(edges)
 
   return (
-    <BlogLayout categories={categories} tags={tags}>
+    <BlogLayout>
       <SEO title={seoTitle}/>
       <h1>{title}</h1>
       <PostListing posts={posts} />
