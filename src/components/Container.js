@@ -1,9 +1,8 @@
 
-//import React from 'react'
 import PropTypes from "prop-types"
 import styled from "@emotion/styled"
 
-export const ContainerFullWidth = styled.div`
+const ContainerFullWidth = styled.div`
   min-width: ${ props => props.theme.sizes.container.min }px;
   max-width: ${ props => props.theme.sizes.container.max }px;
   margin: 0 auto;
@@ -19,13 +18,13 @@ const Container = styled(ContainerFullWidth)`
     padding: 0 1.5em;
   }
 `
-export default Container
+ 
 
 Container.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export const StrechedBackground = styled.div`
+const StrechedBackground = styled.div`
   padding-left: -1em;
   padding-right: -1em;
   ${ props => props.theme.mediaQueries.md } {
@@ -39,5 +38,4 @@ StrechedBackground.propTypes = {
 }
 
 
-export {}
-
+export { ContainerFullWidth, Container, StrechedBackground}

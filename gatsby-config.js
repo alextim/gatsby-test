@@ -17,48 +17,7 @@ module.exports = {
     image:   '/public/adrenalin-travel.svg',
     siteUrl: `${process.env.SITE_URL}`,
     baseUrl: `${process.env.BASE_URL}`,
-    organization: {
-      name: 'Adrenalin-Travel',
-      description: 'Проведение интересных приключений и путешествий по всему миру!',
-      url:         `${process.env.BASE_URL}`,
-      logo:         '/public/adrenalin-travel.svg',
-      address: {
-        streetAddress1: 'ул.Ришельевская 32',
-        streetAddress2: '',
-        city:           'Одесса',
-        postalIndex:    '65011',
-        country:        'Украина',
-        geo: {
-          latitude:  '46.4772795',
-          longitude: '30.7376567',
-        },
-      },
 
-      voice: {
-        phone: [
-          '0800300833',
-          '380933300833',
-          '380683300833',
-        ],
-        //skype: 'alextimx',	
-        whatsapp: '380933300833',	
-        telegram: 'adrenalin-travel',	
-        viber:    '380933300833',
-      },
-//      fax:      '',
-      email: [
-        'info@adrenalin.travel',
-      ],
-
-      openingHours: {
-        d1: ['10:00', '18:00'],
-        d2: ['10:00', '18:00'],
-        d3: ['10:00', '18:00'],
-        d4: ['10:00', '18:00'],
-        d5: ['10:00', '18:00'],
-      //d6: ['11:00', '19:00'],
-      },
-    },
     social: {
       twitter: 'https://twitter.com/adrenalin.travel',
       fbAppID: 'https://facebook.com/adrenalin.travel',
@@ -67,24 +26,6 @@ module.exports = {
       active: true,
       code:'UA-134987060-1',
     },
-
-
-    socialLinks: [
-      { 
-        key:   'facebook', 
-        url:   'https://www.facebook.com/travel.adrenalin',
-        icon:  ['fab', 'facebook-f'],
-        color: 'blue',
-        text:  'Facebook',
-      },
-      {
-        key:   'instagram',
-        url:   'https://www.instagram.com/adrenalin_travel/',
-        icon:  ['fab', 'instagram'],
-        color: 'red',
-        text:  'Instagram',
-      }
-    ]
   },
   plugins: [
     {

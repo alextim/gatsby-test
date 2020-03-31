@@ -1,22 +1,3 @@
-import { useStaticQuery, graphql } from 'gatsby'
+import socialLinks from './../../data/socialLinks'
 
-const useSocialLinks = () => {
-    const { site } = useStaticQuery(graphql`
-        query SocialLinksQuery {
-            site {
-                siteMetadata {
-                    socialLinks {
-                        key
-                        url
-                        icon
-                        color
-                        text
-                    }
-                }
-            }
-        }
-    `)
-    return site.siteMetadata.socialLinks
-}
-
-export default useSocialLinks
+export default () => socialLinks

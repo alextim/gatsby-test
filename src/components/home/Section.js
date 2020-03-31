@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex, Box, Heading } from '@chakra-ui/core'
 
-import Container from '../Container'
+import { Container } from '../Container'
 import BtnLink from './BtnLink'
 
 

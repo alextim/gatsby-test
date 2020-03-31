@@ -1,24 +1,42 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import { Breadcrumb } from 'gatsby-plugin-breadcrumb'
+import styled from '@emotion/styled'
 
 import LayoutFullWidth from '../components/LayoutFullWidth'
 import SEO from '../components/SEO'
 
 import ContactForm from '../components/ContactForm'
 import { Container, ContainerFullWidth } from '../components/Container'
+import PageHeading from '../components/PageHeading'
+import Banner from '../components/Banner'
 
-const mapSrc = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2747.4527823660237!2d30.73750701522612!3d46.47934612912612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c631835da02399%3A0x88a9fe53889f8e39!2sAdrenalin!5e0!3m2!1sen!2sua!4v1548063765736" width="1920" height="450" allowfullscreen="" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2747.4527823660237!2d30.73750701522612!3d46.47934612912612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c631835da02399%3A0x88a9fe53889f8e39!2sAdrenalin!5e0!3m2!1sen!2sua!4v1548063765736'
-
-
+const mapSrc = 'https://maps.google.com/maps?q=Adrenalin&t=&z=13&ie=UTF8&iwloc=&output=embed'
 const GoogleMap = () => (
   <iframe 
-    style={{border: 0}}
     title="Google Map"
+    width="100%"
+    height="450px"
+    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
     src={mapSrc}>
-
-    </iframe>
+  </iframe>
 )
+
+const CardWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  ${ props => props.theme.mediaQueries.sm } {
+    flex-direction: row;
+  }
+
+`
+const Card = styled.div`
+  ${ props => props.theme.mediaQueries.md } {
+    width: 50%;
+  }
+  ${ props => props.theme.mediaQueries.lg } {
+    width: 25%;
+  }
+`
 
 const ContactUs = (props) => {
   const { pageContext, location } = props
@@ -32,15 +50,26 @@ const ContactUs = (props) => {
       <ContainerFullWidth>
         <GoogleMap />
       </ContainerFullWidth>
+      <Banner title="Контакты" img="https://picsum.photos/1920/450"/>
 
       <Container>
-        <h1>Contact Us</h1>
-        <Breadcrumb
-              crumbs={crumbs}
-              crumbSeparator=" - "
-            />
+        <PageHeading>Контакты</PageHeading>
+        <Breadcrumb crumbs={crumbs}/>
+        <CardWrap>
+          <Card>
+            <div>Ждем Вас по адресу</div>
+          </Card>
+          <Card>
+            <div>Обращайтесь к нам</div>
+          </Card>
+          <Card>
+            <div>3</div>
+          </Card>
+          <Card>
+            <div>4</div>
+          </Card>          
+        </CardWrap>
         <ContactForm />
-        <Link to="/">Go back to the homepage</Link>
       </Container>
     </LayoutFullWidth>
   )

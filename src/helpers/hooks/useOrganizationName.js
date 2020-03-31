@@ -1,18 +1,3 @@
-import { useStaticQuery, graphql } from 'gatsby'
+import organization from './../../data/organization'
 
-const useOrganizationName = () => {
-    const { site } = useStaticQuery(graphql`
-        query OrganizationNameQuery {
-            site {
-                siteMetadata {
-                    organization {
-                        name
-                    }
-                }
-            }
-        }
-    `)
-    return site.siteMetadata.organization.name
-}
-
-export default useOrganizationName
+export default () => organization.name

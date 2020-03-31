@@ -14,6 +14,7 @@ import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from 'gatsby'
 
 import SchemaOrg from './SchemaOrg'
+import organization from './../../data/organization'
 
 function SEO({ title, description, url, image, type, date, locale = 'ru' }) {
   const data = useStaticQuery(
@@ -27,11 +28,6 @@ function SEO({ title, description, url, image, type, date, locale = 'ru' }) {
             baseUrl
             image
             author
-            organization {
-              name
-              url
-              logo
-            }
             social {
               twitter
               fbAppID
@@ -43,6 +39,9 @@ function SEO({ title, description, url, image, type, date, locale = 'ru' }) {
 
   const defaults = data.site.siteMetadata;
   const seo = data.site.siteMetadata;
+
+  const org = organization
+  org.url =seo.siteUrl
 
   if (defaults.baseUrl === '' && typeof window !== 'undefined') {
     defaults.baseUrl = window.location.origin;
@@ -100,7 +99,7 @@ function SEO({ title, description, url, image, type, date, locale = 'ru' }) {
         datePublished={datePublished}
         siteUrl={seo.siteUrl}
         author={seo.author}
-        organization={seo.organization}
+        organization={org}
         defaultTitle={title}
       />
     </>
