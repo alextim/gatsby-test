@@ -3,22 +3,27 @@
 import PropTypes from "prop-types"
 import styled from "@emotion/styled"
 
-
-const Container = styled.div`
+export const ContainerFullWidth = styled.div`
   min-width: ${ props => props.theme.sizes.container.min }px;
   max-width: ${ props => props.theme.sizes.container.max }px;
-  padding: 0 1em;
   margin: 0 auto;
+`
+
+ContainerFullWidth.propTypes = {
+  children: PropTypes.node.isRequired,
+}
+
+const Container = styled(ContainerFullWidth)`
+  padding: 0 1em;
   ${ props => props.theme.mediaQueries.md } {
     padding: 0 1.5em;
   }
 `
+export default Container
 
 Container.propTypes = {
   children: PropTypes.node.isRequired,
 }
-
-export default Container
 
 export const StrechedBackground = styled.div`
   padding-left: -1em;
@@ -33,4 +38,6 @@ StrechedBackground.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
+
+export {}
 

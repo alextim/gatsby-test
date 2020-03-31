@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from '@emotion/styled'
 
 import BlogLayout from './BlogLayout'
 import SEO from '../../components/SEO'
@@ -7,17 +8,20 @@ import Pagination from '../../components/Pagination'
 
 import toPosts from './toPosts'
 
+const Heading = styled.h1`
+  text-align: center;
+`
 
-export default ( { edges, pageContext, seoTitle, title } ) => {
+export default ( { edges, pageContext, seoTitle, title, location } ) => {
 
     //.filter(edge => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
 
   const posts = toPosts(edges)
 
   return (
-    <BlogLayout>
-      <SEO title={seoTitle}/>
-      <h1>{title}</h1>
+    <BlogLayout location={location}>
+      <SEO title={seoTitle || title}/>
+      <Heading>{title}</Heading>
       <PostListing posts={posts} />
       <Pagination
           pageCount={pageContext.pageCount}

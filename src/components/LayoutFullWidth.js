@@ -3,6 +3,7 @@ import { Global, css } from '@emotion/core'
 import { CSSReset, ThemeProvider } from '@chakra-ui/core'
 import { ColorModeProvider } from '@chakra-ui/core'
 import { Flex, Box } from '@chakra-ui/core'
+import { Breadcrumb } from 'gatsby-plugin-breadcrumb'
 
 import ErrorBoundary from './ErrorBoundary'
 import theme from './theme'
@@ -20,7 +21,7 @@ const loadScript = src => {
   document.getElementsByTagName('body')[0].appendChild(tag);
 }
 */
-export default props => {
+export default ({children, location}) => {
 
   /*
   useEffect(() => {
@@ -81,7 +82,8 @@ export default props => {
         <Flex flexDirection="column" minHeight="100vh">
           <Header />
           <Box as="main" width="100%" flex="1 1 auto">
-              {props.children}
+              {/*<Breadcrumb location={location} />*/}
+              {children}
           </Box>  
           <Footer/>
         </Flex>

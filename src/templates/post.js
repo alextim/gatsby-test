@@ -66,10 +66,10 @@ const Tax = ({ items, taxSlug }) =>
   </div>
 
 
-export default function Template({
+export default ({
   data, // this prop will be injected by the GraphQL query below.
   pageContext
-}) {
+}) => {
   const { next, prev } = pageContext;
 
   const { markdownRemark } = data // data.markdownRemark holds your post data

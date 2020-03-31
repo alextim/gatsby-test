@@ -88,6 +88,31 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-plugin-breadcrumb`,
+      options: {
+        // useAutoGen: required 'true' to use autogen
+        useAutoGen: true,
+        // autoGenHomeLabel: optional 'Home' is default
+        autoGenHomeLabel: `Root`,
+        // exlude: optional, include to overwrite these default excluded pages
+        exclude: [
+          `/dev-404-page`,
+          `/404`,
+          `/404.html`,
+          `/offline-plugin-app-shell-fallback`,
+        ],
+        // crumbLabelUpdates: optional, update specific crumbLabels in the path
+        crumbLabelUpdates: [
+          {
+            pathname: '/book',
+            crumbLabel: 'Books'
+          }
+        ],
+        // optional: if you are using path prefix
+        usePathPrefix: '/blog',
+      },
+     },
+    {
       resolve: "gatsby-plugin-chakra-ui",
       options: {
         /**

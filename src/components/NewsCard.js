@@ -8,6 +8,13 @@ import kebabCase from 'lodash/kebabCase'
 import Utils from './../lib/utils'
 import AnimatedLink from './AnimatedLink'
 
+const Wrapper = styled(Box)`
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    margin: 0 1em 2em 1em;
+`
+
 const CenterWrap = styled.span`
     display: flex;
     flex-direction: row;
@@ -49,7 +56,7 @@ export default ( {post} ) => {
     }
 
     return (
-        <Flex as="article" direction="column" alignContent="flex-start" shadow="lg" mx="1em" mb={["2em", "2em", "0"]}>
+        <Wrapper as="article" shadow="lg">
             { post.featuredImage &&
                 <Link href={post.path} mb="1em">
                     <Img fluid={post.featuredImage} alt={post.title} width="100%" height="auto"/>
@@ -75,6 +82,6 @@ export default ( {post} ) => {
                 <Text mt={4}>{post.excerpt}</Text>
                 <AnimatedLink to={post.path} end="true">Читать дальше</AnimatedLink>
             </Box>
-        </Flex>
+        </Wrapper>
     )
 }

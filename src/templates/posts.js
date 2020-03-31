@@ -9,8 +9,7 @@ export default ({
   pageContext
 }) => (
   <ListTemplate edges={edges} pageContext={pageContext} 
-    seoTitle="blog" 
-    title="blog" 
+    title="Статьи и новости" 
   />
 )
 

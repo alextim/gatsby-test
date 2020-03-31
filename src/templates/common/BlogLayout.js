@@ -37,11 +37,11 @@ const WidgetsWrap = styled(wrapper)`
 `  
 
 
-export default ({ children }) =>
-  <Layout>
+export default props =>
+  <Layout location={props.location}>
     <BlogWrapper>
       <ContentWrap>
-        {children}
+        {props.children}
       </ContentWrap>
       <WidgetsWrap as="aside">
         <LatestPosts />
