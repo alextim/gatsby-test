@@ -5,6 +5,7 @@ const postTemplate = path.resolve('./src/templates/post.js')
 const postsTemplate = path.resolve('./src/templates/posts.js')
 const categoryTemplate = path.resolve('./src/templates/categoryPosts.js')
 const tagTemplate = path.resolve('./src/templates/tagPosts.js')
+const archiveTemplate = path.resolve('./src/templates/archivePosts.js')
 
 /*
 https://github.com/g00glen00b/gatsby-blog/tree/fbfc7040582384ace09738fff0cee34fc228c0a1
@@ -107,6 +108,21 @@ function createPostsPages( data, createPage) {
   );
 }
 
+
+function createArchivePostsPages(data, createPage) {
+  return data.allYYYYMM.group.map(group => createPaginationPages(
+    archiveTemplate,
+    group.totalCount,
+    `/archive/${_.kebabCase(group.fieldValue)}`,
+    {
+      yyyymm: group.fieldValue,
+    },
+    createPage
+  ))
+}
+
+
+
 function createCategoryPostsPages(data, createPage) {
   return data.allCategories.group.map(group => createPaginationPages(
     categoryTemplate,
@@ -149,5 +165,6 @@ module.exports = {
   createPostsPages,
   createCategoryPostsPages,
   createPostPages,
+  createArchivePostsPages,
   //createLegacyCategoryTutorialsPage
 };

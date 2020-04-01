@@ -12,14 +12,14 @@ const Heading = styled.h1`
   text-align: center;
 `
 
-export default ( { edges, pageContext, seoTitle, title, location } ) => {
+export default ( { edges, pageContext, seoTitle, title } ) => {
 
     //.filter(edge => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
 
   const posts = toPosts(edges)
 
   return (
-    <BlogLayout location={location}>
+    <BlogLayout>
       <SEO title={seoTitle || title}/>
       <Heading>{title}</Heading>
       <PostListing posts={posts} />

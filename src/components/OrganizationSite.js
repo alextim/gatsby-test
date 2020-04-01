@@ -3,7 +3,7 @@ import { useTheme } from '@chakra-ui/core'
 
 import Utils from './../lib/utils'
 import useSiteUrl from './../helpers/hooks/useSiteUrl'
-import IconLink from './IconLink'
+import { IconLink } from './IconLink'
 
 
 export default () => {

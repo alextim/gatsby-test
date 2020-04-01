@@ -3,7 +3,7 @@ import { useTheme } from '@chakra-ui/core'
 
 import Utils from './../lib/utils'
 import useOrganizationVoice from './../helpers/hooks/useOrganizationVoice'
-import IconLink from './IconLink'
+import { IconLink } from './IconLink'
 
 export default () => {
     const voice = useOrganizationVoice()

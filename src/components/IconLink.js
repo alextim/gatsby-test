@@ -6,18 +6,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const A = styled.a`
     padding-left: 0.3em;
 `
-
+const Ar = styled.a`
+    padding-right: 0.3em;
+`
 const Spacer = styled.div`
     display: inline-block;
     width: 1em;
 `
 
-export default ({ children, to, icon, size="xs", color, mb, ...props }) => 
+
+const IconLink = ({ children, to, icon, size="xs", color, mb, ...props }) => (
     <Flex flexDirection="row" alignItems="center" mb={mb}>
-        <Spacer>
-            { icon && <FontAwesomeIcon icon={icon} size={size} color={color}/> }
-        </Spacer>
-        <A href={to} {...props}>
-            {children}
-        </A>
+        
+        { icon && <FontAwesomeIcon icon={icon} size={size} color={color}/> }
+        { !icon && <Spacer/> }
+
+        <A href={to} {...props}>{children}</A>
     </Flex>
+)
+
+const IconLinkR = ({ children, to, icon, size="xs", color, mb, ...props }) => (
+    <Flex flexDirection="row" alignItems="center" mb={mb}>
+        <Ar href={to} {...props}>{children}</Ar>
+
+            { icon && <FontAwesomeIcon icon={icon} size={size} color={color}/> }
+
+    </Flex>
+)
+
+export { IconLink, IconLinkR }

@@ -10,7 +10,7 @@ import Features from '../components/home/Features'
 import LatestNewsCards from '../components/home/LatestNewsCards'
 
 export default props => 
-  <LayoutFullWidth location={props.location}>
+  <LayoutFullWidth>
     <SEO title="Home" />
     <CTA settings={homePageSettings.CTA}/>
     <StickyNews settings={homePageSettings.stickyNews}/>

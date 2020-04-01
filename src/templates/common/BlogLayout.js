@@ -38,7 +38,7 @@ const WidgetsWrap = styled(wrapper)`
 
 
 export default props =>
-  <Layout location={props.location}>
+  <Layout>
     <BlogWrapper>
       <ContentWrap>
         {props.children}

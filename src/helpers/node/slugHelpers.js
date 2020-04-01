@@ -56,11 +56,19 @@ if (
           console.warn(`WARNING: Invalid date.`, node.frontmatter)
         }
 
+        const isoDate = date.toISOString()
         createNodeField({
           node,
           name: 'date',
-          value: date.toISOString()
-        });
+          value: isoDate
+        })
+        
+        const yyyymm = isoDate.toString().substr(0,7)
+        createNodeField({
+          node,
+          name: 'yyyymm',
+          value: yyyymm
+        })
       }
       
     }

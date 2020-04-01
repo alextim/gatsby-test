@@ -19,10 +19,18 @@ const {
   createCategoryPostsPages, 
   createPostsPages, 
   createTagPostsPages,
+  createArchivePostsPages,
 } = require('./src/helpers/node/createPageHelpers');
 
 const allPostsQuery = `
   query {
+    allYYYYMM: allMarkdownRemark {
+      group(field: fields___yyyymm) {
+        field
+        fieldValue
+        totalCount
+      }
+    }    
     allTags: allMarkdownRemark {
       group(field: frontmatter___tags) {
         field
@@ -67,6 +75,7 @@ exports.createPages = async ({graphql, actions: {createPage}, reporter}) => {
     createPostsPages(data, createPage),
     createCategoryPostsPages(data, createPage),
     createTagPostsPages(data, createPage),
+    createArchivePostsPages(data, createPage),
 
     // Legacy /category/t
     //createLegacyCategoryTutorialsPage(data, createPage)

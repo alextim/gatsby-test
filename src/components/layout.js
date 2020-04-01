@@ -4,7 +4,7 @@ import LayoutFullWidth from './LayoutFullWidth'
 import { Container } from './Container'
 
 export default props => (
-  <LayoutFullWidth location={props.location}>
+  <LayoutFullWidth>
     <Container>
       {props.children}
     </Container>

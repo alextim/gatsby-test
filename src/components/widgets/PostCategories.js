@@ -2,7 +2,7 @@ import React from 'react'
 import kebabCase from 'lodash/kebabCase'
 
 import SidebarWidget from '../SidebarWidget'
-import IconLink from '../IconLink'
+import { IconLink } from '../IconLink'
 import useAllCategories from './../../helpers/hooks/useAllCategories'
 
 export default () => {

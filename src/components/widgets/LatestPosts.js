@@ -1,7 +1,7 @@
 import React from 'react'
 
 import SidebarWidget from '../SidebarWidget'
-import IconLink from '../IconLink'
+import { IconLink } from '../IconLink'
 import useLatestNewsTop5 from './../../helpers/hooks/useLatestNewsTop5'
 
 export default () => {

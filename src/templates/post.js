@@ -6,53 +6,33 @@ import kebabCase from 'lodash/kebabCase'
 
 import Utils from './../lib/utils'
 import SEO from '../components/SEO'
+import { IconLink, IconLinkR } from '../components/IconLink'
 
 import BlogLayout from './common/BlogLayout'
 
 
-const SuggestionBar = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-`
-const PostSuggestion = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 1rem 3rem 0 3rem;
-`
+const PrevNext = ({ prev, next }) => {
+  const PrevNextWrap  = styled.div`
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  `
+  return (
+    <PrevNextWrap>
+        {prev && (
+          <h3><IconLink to={prev.url} rel="prev" icon="long-arrow-alt-left">
+            {prev.title}
+          </IconLink></h3>
+        )}
+        {next && (
+          <h3><IconLinkR to={next.url} rel="next" icon="long-arrow-alt-right">
+            {next.title}
+          </IconLinkR></h3>     
 
-const PrevNext = ({ prev, next }) => (
-  <SuggestionBar>
-    <PostSuggestion>
-      {prev && (
-        <Link to={prev.url} rel="prev">
-          {"< "}
-          <h3>{prev.title}</h3>
-        </Link>
-      )}
-    </PostSuggestion>
-    <PostSuggestion>
-      {next && (
-        <Link to={next.url} rel="next">
-          
-          <h3>{next.title}</h3>{" >"}
-        </Link>
-      )}
-    </PostSuggestion>
-  </SuggestionBar>  
-
-) 
-
-const Category = ({ items }) => 
-  <div>
-    {
-      items.map( (item, i) => 
-        <Link key={i} to={`/category/${kebabCase(item)}`}>
-          <strong>{item}</strong> {i < items.length - 1 ? `, ` : ``}
-        </Link>
-      )
-    }
-  </div>
+        )}
+    </PrevNextWrap>  
+  )
+}
 
 const Tax = ({ items, taxSlug }) =>
   <div>
@@ -65,12 +45,13 @@ const Tax = ({ items, taxSlug }) =>
     }
   </div>
 
+const Category = ({ items }) => <Tax items={items} taxSlug="category" />
 
 export default ({
   data, // this prop will be injected by the GraphQL query below.
   pageContext
 }) => {
-  const { next, prev } = pageContext;
+  const { next, prev } = pageContext
 
   const { markdownRemark } = data // data.markdownRemark holds your post data
   const { frontmatter, html, excerpt, fields } = markdownRemark

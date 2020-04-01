@@ -1,5 +1,4 @@
 import React from 'react'
-import { Breadcrumb } from 'gatsby-plugin-breadcrumb'
 import styled from '@emotion/styled'
 
 import LayoutFullWidth from '../components/LayoutFullWidth'
@@ -35,10 +34,15 @@ const CardsWrapper = styled.div`
 const CardHeading = styled.h3`
   font-size: 1.25em;
 `
+
+const Wrapper = styled.div`
+  width: 100%;
+  padding: 0 1em 2em 1em;
+`
+
 const Card = ({title, children}) => {
-  const Wrapper = styled.div`
-    width: 100%;
-    padding: 0 1em 2em 1em;
+  const CardWrapper = styled(Wrapper)`
+
     ${ props => props.theme.mediaQueries.md } {
       width: 50%;
     }
@@ -47,10 +51,10 @@ const Card = ({title, children}) => {
     }
   `
     return (
-      <Wrapper>
+      <CardWrapper>
         <CardHeading>{title}</CardHeading>
         {children}
-      </Wrapper>
+      </CardWrapper>
     )
 }
 
@@ -66,50 +70,45 @@ const ContactFormWrapper = styled.div`
     transparent 0, transparent 4em);                  
   }
 `
+const heading = 'Контакты'
 
-export default props => {
-  const { pageContext, location } = props
-  const {
-    breadcrumb: { crumbs },
-  } = pageContext
-  return (
-    <LayoutFullWidth location={location}>
-      <SEO title="Contact Us" />
-      
-      <ContainerFullWidth>
-        <GoogleMap />
-      </ContainerFullWidth>
+export default () =>
+  <LayoutFullWidth>
+    <SEO title={heading} />
+    
+    <ContainerFullWidth>
+      <GoogleMap />
+    </ContainerFullWidth>
 
-      <Container>
-        <PageHeading>Контакты</PageHeading>
-        <Breadcrumb crumbs={crumbs}/>
+    <Container>
+      <PageHeading>{heading}</PageHeading>
 
-        <CardsWrapper>
-          <Card key={0} title="Ждем Вас по адресу">
-            <OrganizationPostalAddress />
-          </Card>
+      <CardsWrapper>
+        <Card key={0} title="Ждем Вас по адресу">
+          <OrganizationPostalAddress />
+        </Card>
 
-          <Card key={1} title="Рабочее время">
-            <OrganizationOpeningHours />
-          </Card>
+        <Card key={1} title="Рабочее время">
+          <OrganizationOpeningHours />
+        </Card>
 
-          <Card key={2} title="Обращайтесь к нам">
-            <OrganizationPhones />
-            <OrganizationEmail />
-            <OrganizationSite />
-          </Card>
+        <Card key={2} title="Обращайтесь к нам">
+          <OrganizationPhones />
+          <OrganizationEmail />
+          <OrganizationSite />
+        </Card>
 
-          <Card key={3} title={' '}>
-            <OrganizationCloudPhones />
-          </Card>     
-        </CardsWrapper>
+        <Card key={3} title={' '}>
+          <OrganizationCloudPhones />
+        </Card>     
+      </CardsWrapper>
 
+      <Wrapper>
+        <CardHeading>Напишите нам</CardHeading>
         <ContactFormWrapper className="shadow">
-          <CardHeading>Напишите нам</CardHeading>
           <ContactForm />
         </ContactFormWrapper>
-        
-      </Container>
-    </LayoutFullWidth>
-  )
-}
+      </Wrapper>
+      
+    </Container>
+  </LayoutFullWidth>
