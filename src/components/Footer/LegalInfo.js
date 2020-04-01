@@ -27,7 +27,7 @@ export default () => {
       <Box mx={2}>© {new Date().getFullYear()} «{organizationName}». Все права защищены.</Box>
       <Box mx="auto" />
       <Box mx={2}>
-          <Link className="footer-link" to="/privacy">Политика конфиденциальности</Link>
+          <Link to="/privacy">Политика конфиденциальности</Link>
       </Box>
 
       <SwitchColorMode />

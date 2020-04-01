@@ -1,14 +1,23 @@
 import React from 'react'
-import { Flex, Box } from '@chakra-ui/core'
-import { Link } from 'gatsby'
+import { Flex } from '@chakra-ui/core'
+import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export default ({ children, to, icon }) => 
-    <Flex flexDirection="row" alignItems="center">
-        <FontAwesomeIcon icon={icon} size="xs"/>
-        <Link to={to} >
-            <Box pl="0.3em">
-                {children}
-            </Box>
-        </Link>
+const A = styled.a`
+    padding-left: 0.3em;
+`
+
+const Spacer = styled.div`
+    display: inline-block;
+    width: 1em;
+`
+
+export default ({ children, to, icon, size="xs", color, mb, ...props }) => 
+    <Flex flexDirection="row" alignItems="center" mb={mb}>
+        <Spacer>
+            { icon && <FontAwesomeIcon icon={icon} size={size} color={color}/> }
+        </Spacer>
+        <A href={to} {...props}>
+            {children}
+        </A>
     </Flex>

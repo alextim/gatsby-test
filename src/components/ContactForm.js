@@ -14,6 +14,8 @@ import {
 const FAKE_GATEWAY_URL = 'https://jsonplaceholder.typicode.com/posts';
 const required = 'This field is required';
 
+
+
 export default () => {
   const [submitted, setSubmitted] = useState(false);
   const {
@@ -123,13 +125,9 @@ export default () => {
   );
 
   return (
-    <div className="page contact-page">
-      <div className="text-side">
-        <h2>Contact me</h2>
+    <>
         {errors && errors.submit && showSubmitError(errors.submit.message)}
-      </div>
-      <div className="form-side">{submitted ? showThankYou : showForm}</div>
-    </div>
-  );
-};
-
+        {submitted ? showThankYou : showForm}
+    </>
+  )
+}

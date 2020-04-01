@@ -16,7 +16,6 @@ export default () => {
       posts.map( (post, i) => 
         <AnimatedLink key={i} 
           to={post.path}
-          cn="footer-link"
           mb={mb}>{post.title}</AnimatedLink> 
         )
       }

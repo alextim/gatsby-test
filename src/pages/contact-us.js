@@ -8,7 +8,13 @@ import SEO from '../components/SEO'
 import ContactForm from '../components/ContactForm'
 import { Container, ContainerFullWidth } from '../components/Container'
 import PageHeading from '../components/PageHeading'
-import Banner from '../components/Banner'
+import OrganizationPostalAddress from '../components/OrganizationPostalAddress'
+import OrganizationPhones from '../components/OrganizationPhones'
+import OrganizationEmail from '../components/OrganizationEmail'
+import OrganizationSite from '../components/OrganizationSite'
+import OrganizationCloudPhones from '../components/OrganizationCloudPhones'
+import OrganizationOpeningHours from '../components/OrganizationOpeningHours'
+
 
 const mapSrc = 'https://maps.google.com/maps?q=Adrenalin&t=&z=13&ie=UTF8&iwloc=&output=embed'
 const GoogleMap = () => (
@@ -16,29 +22,52 @@ const GoogleMap = () => (
     title="Google Map"
     width="100%"
     height="450px"
-    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+    frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"
     src={mapSrc}>
   </iframe>
 )
 
-const CardWrap = styled.div`
+
+const CardsWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  ${ props => props.theme.mediaQueries.sm } {
-    flex-direction: row;
-  }
-
+  flex-wrap: wrap;
 `
-const Card = styled.div`
-  ${ props => props.theme.mediaQueries.md } {
-    width: 50%;
-  }
-  ${ props => props.theme.mediaQueries.lg } {
-    width: 25%;
+const CardHeading = styled.h3`
+  font-size: 1.25em;
+`
+const Card = ({title, children}) => {
+  const Wrapper = styled.div`
+    width: 100%;
+    padding: 0 1em 2em 1em;
+    ${ props => props.theme.mediaQueries.md } {
+      width: 50%;
+    }
+    ${ props => props.theme.mediaQueries.lg } {
+      width: 25%;
+    }
+  `
+    return (
+      <Wrapper>
+        <CardHeading>{title}</CardHeading>
+        {children}
+      </Wrapper>
+    )
+}
+
+const ContactFormWrapper = styled.div`
+  width: 100%;
+  margin: 2em 0;
+  padding: 2em;
+  border-top: 8px solid transparent;
+  border-image: 16 repeating-linear-gradient(-45deg, 
+    red, red 1em,
+    transparent 0, transparent 2em, 
+    #58a 0, #58a 3em,
+    transparent 0, transparent 4em);                  
   }
 `
 
-const ContactUs = (props) => {
+export default props => {
   const { pageContext, location } = props
   const {
     breadcrumb: { crumbs },
@@ -50,29 +79,37 @@ const ContactUs = (props) => {
       <ContainerFullWidth>
         <GoogleMap />
       </ContainerFullWidth>
-      <Banner title="Контакты" img="https://picsum.photos/1920/450"/>
 
       <Container>
         <PageHeading>Контакты</PageHeading>
         <Breadcrumb crumbs={crumbs}/>
-        <CardWrap>
-          <Card>
-            <div>Ждем Вас по адресу</div>
+
+        <CardsWrapper>
+          <Card key={0} title="Ждем Вас по адресу">
+            <OrganizationPostalAddress />
           </Card>
-          <Card>
-            <div>Обращайтесь к нам</div>
+
+          <Card key={1} title="Рабочее время">
+            <OrganizationOpeningHours />
           </Card>
-          <Card>
-            <div>3</div>
+
+          <Card key={2} title="Обращайтесь к нам">
+            <OrganizationPhones />
+            <OrganizationEmail />
+            <OrganizationSite />
           </Card>
-          <Card>
-            <div>4</div>
-          </Card>          
-        </CardWrap>
-        <ContactForm />
+
+          <Card key={3} title={' '}>
+            <OrganizationCloudPhones />
+          </Card>     
+        </CardsWrapper>
+
+        <ContactFormWrapper className="shadow">
+          <CardHeading>Напишите нам</CardHeading>
+          <ContactForm />
+        </ContactFormWrapper>
+        
       </Container>
     </LayoutFullWidth>
   )
 }
-
-export default ContactUs

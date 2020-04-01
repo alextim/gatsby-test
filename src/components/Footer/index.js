@@ -38,10 +38,11 @@ export default () => {
         bg={theme.footer.colors.bg}
         as="footer"
         width="100%"
+        className="footer-link"
       >
         <Global
             styles={css`
-              .footer-link {
+              .footer-link a {
                   color: ${theme.footer.colors.text};
                   &:hover {
                     color: ${theme.footer.colors.highlited};

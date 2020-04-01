@@ -74,6 +74,9 @@ export default ({children, location}) => {
           p {
             margin-bottom: 0.625em;
           }
+          .shadow {
+            box-shadow: 0 5px 13px rgba(0,0,0,.17);
+          }
         }
        `}
       />
