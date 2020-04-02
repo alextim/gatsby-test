@@ -27,7 +27,7 @@ const StyledLink = styled(Link)`
   }
 `
 
-const SocialLink = ({ fontAwesomeIcon, name, text, url, color }) => (
+const SocialLink = ({ icon, name, text, url, color }) => (
     <StyledLink
       href={url}
       target="_blank"
@@ -36,12 +36,12 @@ const SocialLink = ({ fontAwesomeIcon, name, text, url, color }) => (
       aria-label={name}
       title={text}
     >
-      <FontAwesomeIcon icon={fontAwesomeIcon} />
+      <FontAwesomeIcon icon={icon} />
     </StyledLink>
  )
 
 SocialLink.propTypes = {
-  fontAwesomeIcon: PropTypes.array.isRequired,
+  icon: PropTypes.array.isRequired,
   name: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   color: PropTypes.string,

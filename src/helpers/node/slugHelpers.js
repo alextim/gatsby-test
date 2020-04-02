@@ -4,8 +4,8 @@ const moment = require('moment')
 
 const siteConfig = require('./../../data/siteConfig')
 
-const { translit } = require('./../../lib/translit')
-const { slugify } = require('./../../lib/slugify')
+const translit = require('./../../lib/translit')
+const slugify = require('./../../lib/slugify')
 
 const safeSlug = (s) => slugify(translit(s,1))
 
@@ -62,8 +62,8 @@ if (
           name: 'date',
           value: isoDate
         })
-        
-        const yyyymm = isoDate.toString().substr(0,7)
+
+        const yyyymm = isoDate.toString().substr(0,7).replace('-', '')
         createNodeField({
           node,
           name: 'yyyymm',

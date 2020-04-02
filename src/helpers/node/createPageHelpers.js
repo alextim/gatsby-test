@@ -7,6 +7,8 @@ const categoryTemplate = path.resolve('./src/templates/categoryPosts.js')
 const tagTemplate = path.resolve('./src/templates/tagPosts.js')
 const archiveTemplate = path.resolve('./src/templates/archivePosts.js')
 
+const postArchiveHelper = require('./../../helpers/postArchiveHelper')
+
 /*
 https://github.com/g00glen00b/gatsby-blog/tree/fbfc7040582384ace09738fff0cee34fc228c0a1
 https://gatsby-starter-typescript-power-blog.majidhajian.com/blog/coding-is-fun-isnt-it
@@ -113,7 +115,7 @@ function createArchivePostsPages(data, createPage) {
   return data.allYYYYMM.group.map(group => createPaginationPages(
     archiveTemplate,
     group.totalCount,
-    `/archive/${_.kebabCase(group.fieldValue)}`,
+    `/blog/${postArchiveHelper.getPath(group.fieldValue)}`,
     {
       yyyymm: group.fieldValue,
     },

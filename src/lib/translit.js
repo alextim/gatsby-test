@@ -1,5 +1,6 @@
 // /* #!/usr/bin/env node; */
 /* jshint -W100 */
+/*eslint dot-location: ["error", "object"]*/
 /**
 * @name      translit.js
 * @author    XGuest <xguest@list.ru>
@@ -75,7 +76,7 @@ function translit(str, typ) {
         str = str.replace(/(i(?=.[^аеиоуъ\s]+))/ig, '$1`'); // "i`" ГОСТ ст. рус. и болг.
         return [prep(0),                   // Возвращаем массив функций
           function(str) {                  // str - транслируемая строка.
-            return str.replace(/i``/ig, 'i`').    // "i`" в ГОСТ ст. рус. и болг.
+            return str.replace(/i``/ig, 'i`').    /* "i`" в ГОСТ ст. рус. и болг. */
              replace(/((c)z)(?=[ieyj])/ig, '$1'); // "cz" в символ "c"
           }];
       } else {                             // Обратная транслитерация в кириллицу
@@ -157,4 +158,4 @@ function translit(str, typ) {
           }
         }));
   }
-  module.exports = { translit }
+  module.exports = translit

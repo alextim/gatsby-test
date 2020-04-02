@@ -2,11 +2,9 @@ import React from 'react'
 import Img from 'gatsby-image'
 import { Flex, Box, Link, Text, Heading } from '@chakra-ui/core'
 import styled from '@emotion/styled'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import kebabCase from 'lodash/kebabCase'
 
-import Utils from './../lib/utils'
 import AnimatedLink from './AnimatedLink'
+import { DateMeta, CategoryMeta } from './Meta'
 
 const Wrapper = styled(Box)`
     display: flex;
@@ -15,45 +13,8 @@ const Wrapper = styled(Box)`
     margin: 0 1em 2em 1em;
 `
 
-const CenterWrap = styled.span`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-`
-const Meta = ( {icon, items} ) => 
-    <Box mr="0.75em">
-        <CenterWrap>
-            <FontAwesomeIcon icon={icon} size="sm"/>
-            <Box ml="0.4em">
-            { 
-                items.map( (item, i) => 
-                    <Box key={i} as="span" mr="0.4em">
-                    {
-                        item.url ? 
-                            <Link href={item.url}>{item.title}</Link>
-                            : 
-                            <Box as="span">{item.title}</Box>
-                    }
-                    </Box>
-                ) 
-            }
-            </Box>
-        </CenterWrap>
-    </Box>
-
-
 export default ( {post} ) => {
 
-    let categoryItems
-//TODO: cat
-    if (post.categories) {
-        categoryItems = []
-        post.categories.forEach( (item, i) => {
-            categoryItems[i] = {}
-            categoryItems[i].title = item
-            categoryItems[i].url = `/category/${kebabCase(item)}`
-        })
-    }
 
     return (
         <Wrapper as="article" shadow="lg">
@@ -70,13 +31,9 @@ export default ( {post} ) => {
                
                 <Flex direction="row" fontWeight="100" fontSize="0.9em">
                     { post.date && 
-                        <Meta icon={['far', 'calendar-check']} 
-                            items={[ {title: Utils.formatDate(post.date)} ]}/> 
-                    }
-                    { categoryItems && 
-                        <Meta icon={['far', 'folder-open']} 
-                            items={categoryItems}/> 
-                    }
+                        <DateMeta date={post.date} /> }
+                    { post.categories && 
+                        <CategoryMeta icon={['far', 'folder-open']} categories={post.categories}/> }
                 </Flex>
 
                 <Text mt={4}>{post.excerpt}</Text>

@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 import ListTemplate from './common/ListTemplate'
+import postArchiveHelper from './../helpers/postArchiveHelper'
 
 
 //import config from '../../data/SiteConfig'
@@ -9,12 +10,15 @@ const config = {
     siteTitle: 'site title'
 }
 
-export default ({ data: {allMarkdownRemark: { edges }, }, pageContext }) => (
+export default ({ data: {allMarkdownRemark: { edges }, }, pageContext }) => {
+  const title = `Архив за ${postArchiveHelper.getTitle(pageContext.yyyymm)}`
+  return (
   <ListTemplate edges={edges} pageContext={pageContext} 
-    seoTitle={`"${pageContext.tag}" - ${config.siteTitle}`} 
-    title={`Tag:${' '}${pageContext.tag}`} 
+    seoTitle={`"${title}" - ${config.siteTitle}`} 
+    title={title} 
     />
 )
+  }
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`

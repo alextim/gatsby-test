@@ -1,15 +1,14 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from '@emotion/styled'
-import kebabCase from 'lodash/kebabCase'
+import { Flex, Heading } from '@chakra-ui/core'
 
-import Utils from './../lib/utils'
+
+import { DateMeta, CategoryMeta, TagMeta } from '../components/Meta'
 import SEO from '../components/SEO'
 import { IconLink, IconLinkR } from '../components/IconLink'
-
 import BlogLayout from './common/BlogLayout'
-
 
 const PrevNext = ({ prev, next }) => {
   const PrevNextWrap  = styled.div`
@@ -34,19 +33,6 @@ const PrevNext = ({ prev, next }) => {
   )
 }
 
-const Tax = ({ items, taxSlug }) =>
-  <div>
-    {
-      items.map( (item, i) => 
-        <Link key={i} to={`/${taxSlug}/${kebabCase(item)}`}>
-          <strong>{item}</strong> {i < items.length - 1 ? `, ` : ``}
-        </Link>
-      )
-    }
-  </div>
-
-const Category = ({ items }) => <Tax items={items} taxSlug="category" />
-
 export default ({
   data, // this prop will be injected by the GraphQL query below.
   pageContext
@@ -70,11 +56,13 @@ export default ({
           date={date}/> 
 
           <article>
-            <h1>{title}</h1>
-            <div>{Utils.formatDate(date)}</div>
-            { tags && <Tax items={tags} taxSlug="tag"/> }
-            { categories && <Category items={categories} /> }
-            { featuredImgFluid && <Img fluid={featuredImgFluid} alt={title}/> }
+            <Heading as="h1">{title}</Heading>
+            <Flex direction="row" fontWeight="100" fontSize="0.9em">
+              { date && <DateMeta date={date} /> }
+              { categories && <CategoryMeta icon={['far', 'folder-open']} categories={categories} /> }
+            </Flex>
+            { tags && <TagMeta tags={tags} /> }
+            { featuredImgFluid && <Img fluid={featuredImgFluid} alt={title} /> }
 
             <div
               className="blog-post-content"

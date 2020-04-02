@@ -12,8 +12,7 @@ export default () => {
   const hostName = Utils.extractHostname(siteUrl)
   
   return (
-    <IconLink icon={["fas","link"]} url={siteUrl}  
-              mb={theme.footer.mbWidgetLink}>
+    <IconLink icon="link" url={siteUrl} mb={theme.footer.mbWidgetLink}>
       {hostName}
     </IconLink>
   )

@@ -8,7 +8,7 @@ import { IconLink } from './IconLink'
 export default () => {
     const voice = useOrganizationVoice()
     const theme = useTheme()
-    let icon = ["fas","phone"]
+    const icon = "phone"
 
     return  voice.phone.map( (phone, i) => (
 //TODO:  \AT_Lib\trackCallLink($title) 

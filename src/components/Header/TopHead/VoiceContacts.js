@@ -55,7 +55,7 @@ const VoiceContacts = () => {
               href={Utils.phoneUrl(phone)} 
               title="Бесплатные звонки со всех мобильных операторов на территории Украины" 
             >
-              <FontAwesomeIcon icon={["fas","phone-volume"]} size="xs" color=""/> 
+              <FontAwesomeIcon icon="phone-volume" size="xs" color=""/> 
               <Box ml="0.5em">{Utils.formatPhone(phone)}</Box>
             </StyledPhoneLink>
         ) }
