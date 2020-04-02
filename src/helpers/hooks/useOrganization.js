@@ -1,3 +1,3 @@
 import organization from './../../data/organization'
 
-export default () => organization.name
+export default () => organization

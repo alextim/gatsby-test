@@ -2,11 +2,11 @@ import React from "react"
 import { Link } from 'gatsby'
 import { Flex, Box, useTheme } from '@chakra-ui/core' 
 
-import useOrganizationName from '../../helpers/hooks/useOrganizationName'
+import useOrganization from '../../helpers/hooks/useOrganization'
 import SwitchColorMode from './SwitchColorMode'
 
 export default () => {
-  const organizationName = useOrganizationName()
+  const { name } = useOrganization()
   const theme = useTheme()
 
   return (
@@ -24,7 +24,7 @@ export default () => {
       }}
         */
     >
-      <Box mx={2}>© {new Date().getFullYear()} «{organizationName}». Все права защищены.</Box>
+      <Box mx={2}>© {new Date().getFullYear()} «{name}». Все права защищены.</Box>
       <Box mx="auto" />
       <Box mx={2}>
           <Link to="/privacy">Политика конфиденциальности</Link>

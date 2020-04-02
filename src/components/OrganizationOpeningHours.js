@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { Grid } from '@chakra-ui/core'
 
-import useOrganizationOpeningHours from './../helpers/hooks/useOrganizationOpeningHours'
+import useOrganization from './../helpers/hooks/useOrganization'
 
 const Wrapper = styled(Grid)`
   grid-template-columns: 2em 3em 1em auto;
@@ -18,7 +18,7 @@ const TimeRow = ({dow, timeStart, timeFinish}) => (
 )
 
 export default () => {
-  const openingHours = useOrganizationOpeningHours()
+  const { openingHours } = useOrganization()
   const dow = [ 'Пн', 'Вт', 'Ср', 'Чт', 'Пт' , 'Сб', 'Вс' ]
 
 

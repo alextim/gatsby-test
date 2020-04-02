@@ -15,7 +15,7 @@ export default () => {
       { 
         items.map( (item, i) => (
             <SocialLink key={i}
-              fontAwesomeIcon={item.icon}
+              icon={item.icon}
               name={ Utils.upperFirst(item.key) }
               url={item.url}
               color={item.color}

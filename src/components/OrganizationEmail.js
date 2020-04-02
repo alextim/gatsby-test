@@ -2,7 +2,7 @@ import React from 'react'
 import { useTheme } from '@chakra-ui/core'
 
 import Utils from './../lib/utils'
-import useOrganizationEmail from './../helpers/hooks/useOrganizationEmail'
+import useOrganization from './../helpers/hooks/useOrganization'
 
 import { IconLink } from './IconLink'
 
@@ -10,7 +10,7 @@ import { IconLink } from './IconLink'
 export default () => {
   const theme = useTheme()
   
-  const email = useOrganizationEmail()
+  const { email } = useOrganization()
   
   const emailStyle = {
       unicodeBidi: "bidi-override",

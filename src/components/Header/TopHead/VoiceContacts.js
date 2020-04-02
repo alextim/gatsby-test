@@ -4,7 +4,7 @@ import { Flex, Box, Link } from '@chakra-ui/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Utils from './../../../lib/utils'
-import useOrganizationVoice from '../../../helpers/hooks/useOrganizationVoice'
+import useOrganization from '../../../helpers/hooks/useOrganization'
 
 const StyledLink = styled(Link)`
   display: inline-flex;
@@ -39,7 +39,7 @@ const IconOnlyLink = ({icon, color, url, name}) => (
 )  
 
 const VoiceContacts = () => {
-    const voice = useOrganizationVoice()
+    const { voice } = useOrganization()
 
     //const whatsappColor = theme.colors.brands.whatsapp
     //const viberColor = theme.colors.brands.viber

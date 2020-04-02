@@ -2,11 +2,11 @@ import React from 'react'
 import { useTheme } from '@chakra-ui/core'
 
 import Utils from './../lib/utils'
-import useOrganizationVoice from './../helpers/hooks/useOrganizationVoice'
+import useOrganization from './../helpers/hooks/useOrganization'
 import { IconLink } from './IconLink'
 
 export default () => {
-    const voice = useOrganizationVoice()
+    const { voice } = useOrganization()
 
     const theme = useTheme()
 

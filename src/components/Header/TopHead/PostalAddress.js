@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styled from '@emotion/styled'
 
-import useOrganizationAddress from '../../../helpers/hooks/useOrganizationAddress'
+import useOrganization from '../../../helpers/hooks/useOrganization'
 
 const StyledInlineFlex = styled.div`
     display: none;
@@ -16,7 +16,8 @@ const StyledInlineFlex = styled.div`
 `
 
 const PostalAddress = () => {
-    const { streetAddress1, streetAddress2, city, country } = useOrganizationAddress()
+    const { address } = useOrganization()
+    const { streetAddress1, streetAddress2, city, country } = address
     const nbsp = '\xa0'
     const addressInOneLine =
         streetAddress1 +
