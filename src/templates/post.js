@@ -33,24 +33,21 @@ const PrevNext = ({ prev, next }) => {
   )
 }
 
-export default ({
-  data, // this prop will be injected by the GraphQL query below.
-  pageContext
-}) => {
-  const { next, prev } = pageContext
+export default ({ data, pageContext }) => {
+  const { next, prev, pathname } = pageContext
 
   const { markdownRemark } = data // data.markdownRemark holds your post data
-  const { frontmatter, html, excerpt, fields } = markdownRemark
+  const { frontmatter, html, excerpt } = markdownRemark // , fields
   const { title, description, date, featuredImage, tags, categories } = frontmatter
   const featuredImgFluid = featuredImage ? featuredImage.childImageSharp.fluid : null
   const imgSrc = featuredImgFluid ? featuredImgFluid.src : null
-  const url = fields.slug
+  //const url = fields.slug
 
   return (
     <BlogLayout>
       <SEO title={title} 
           description={description || excerpt} 
-          url={url} 
+          pathname={pathname}
           image={imgSrc}
           type="article"
           date={date}/> 

@@ -42,7 +42,10 @@ const SocialLink = ({ icon, name, text, url, color }) => (
  )
 
 SocialLink.propTypes = {
-  fontAwesomeIcon: PropTypes.array.isRequired,
+  icon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+  ]).isRequired,
   name: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   color: PropTypes.string,

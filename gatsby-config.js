@@ -1,10 +1,7 @@
-const activeEnv =
-  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development'
+const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development'
 console.log(`Using environment config: '${activeEnv}'`)
 
-require('dotenv').config({
-  path: `.env.${activeEnv}`,
-})
+require('dotenv').config({ path: `.env.${activeEnv}`,})
 
 const path = require('path')
 
@@ -15,8 +12,6 @@ module.exports = {
     author: `@AlexTim`,
     image:   '/public/adrenalin-travel.svg',
     siteUrl: `${process.env.SITE_URL}`,
-    baseUrl: `${process.env.BASE_URL}`,
-
     social: {
       twitter: 'https://twitter.com/adrenalin.travel',
       fbAppID: 'https://facebook.com/adrenalin.travel',

@@ -21,8 +21,8 @@ export default ({ posts }) => (
     <Wrapper>
     {   
         posts.map( (post, i) =>
-            <ItemWrap>
-                <NewsCard key={i} post={post} />
+            <ItemWrap key={i}>
+                <NewsCard post={post} />
             </ItemWrap>
         )
     }

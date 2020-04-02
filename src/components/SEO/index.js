@@ -1,61 +1,30 @@
 /**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
+ * 
+ * Method 3: Generate the current page URL with the pathname property from location data
+ * 
+ * * https://css-tricks.com/how-to-the-get-current-page-url-in-gatsby/
+ * 
+ * 
  */
 
-// https://github.com/marisamorby/marisamorby.com/blob/master/packages/gatsby-theme-blog-sanity/src/components/seo.js
-// https://github.com/jlengstorf/gatsby-theme-jason-blog/blob/master/src/components/SEO/SEO.js
+import React from 'react'
+import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
 
-import React from "react"
-import PropTypes from "prop-types"
-import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from 'gatsby'
-
+import useSiteMetadata from './../../helpers/hooks/useSiteMetadata'
+import useOrganization from './../../helpers/hooks/useOrganization'
 import SchemaOrg from './SchemaOrg'
-import organization from './../../data/organization'
 
-function SEO({ title, description, url, image, type, date, locale = 'ru' }) {
-  const data = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            siteUrl
-            baseUrl
-            image
-            author
-            social {
-              twitter
-              fbAppID
-            }
-          }
-        }
-      }`
-  )
+function SEO({ title, description, pathname, image, type, date, locale = 'ru' }) {
+  const meta = useSiteMetadata()
+  const org = useOrganization()
 
-  const defaults = data.site.siteMetadata;
-  const seo = data.site.siteMetadata;
+  const url = `${meta.siteUrl}${pathname}`
 
-  const org = organization
-  org.url =seo.siteUrl
-
-  if (defaults.baseUrl === '' && typeof window !== 'undefined') {
-    defaults.baseUrl = window.location.origin;
-  }
-
-  if (defaults.baseUrl === '') {
-    console.error('Please set a baseUrl in your site metadata!')
-    return null;
-  }
-
-  title = title || defaults.title
-  description = description || defaults.description;
-  url = url || defaults.baseUrl + window.location.pathname
-  image = image ? new URL(image, defaults.baseUrl) : false
+  title = title || meta.title
+  description = description || meta.description;
+  image = image ? new URL(image, meta.siteUrl) : false
+  // TODO: switch content content: `website`, 
   type = type || 'website'
   //TODO:
   const isBlogPost = type === 'article'
@@ -73,18 +42,17 @@ function SEO({ title, description, url, image, type, date, locale = 'ru' }) {
 
         {/* OpenGraph tags */}
         <meta property="og:url" content={url} />
-        { /* TODO: switch content content: `website`,  */ }
-        <meta property="og:type" content="article" />
+        <meta property="og:type" content={type} />
         <meta property="og:locale" content={locale} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         {image && <meta property="og:image" content={image} />}
-        {seo.social.fbAppID && <meta property="fb:app_id" content={seo.social.fbAppID} />}
+        {meta.social.fbAppID && <meta property="fb:app_id" content={meta.social.fbAppID} />}
 
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
         { /* TODO: AUTHOR*/ }
-        {seo.author && <meta name="twitter:creator" content={seo.author} />}
+        {meta.author && <meta name="twitter:creator" content={meta.author} />}
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         {image && <meta name="twitter:image" content={image} />}
@@ -97,8 +65,8 @@ function SEO({ title, description, url, image, type, date, locale = 'ru' }) {
         image={image}
         description={description}
         datePublished={datePublished}
-        siteUrl={seo.siteUrl}
-        author={seo.author}
+        siteUrl={meta.siteUrl}
+        author={meta.author}
         organization={org}
         defaultTitle={title}
       />

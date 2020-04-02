@@ -60,7 +60,7 @@ export default React.memo(
             },
             publisher: {
               '@type': 'Organization',
-              url: organization.url,
+              url: siteUrl,
               logo: {
                 '@type': 'ImageObject',
                 url: organization.logo

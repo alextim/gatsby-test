@@ -4,16 +4,8 @@ import { graphql } from 'gatsby'
 import ListTemplate from './common/ListTemplate'
 
 
-//import config from '../../data/SiteConfig'
-const config = {
-    siteTitle: 'site title'
-}
-
 export default ({ data: {allMarkdownRemark: { edges }, }, pageContext }) => (
-  <ListTemplate edges={edges} pageContext={pageContext} 
-    seoTitle={`"${pageContext.tag}" - ${config.siteTitle}`} 
-    title={`Tag:${' '}${pageContext.tag}`} 
-    />
+  <ListTemplate edges={edges} pageContext={pageContext} title={`Таг:${' '}${pageContext.tag}`} />
 )
 
 /* eslint no-undef: "off" */

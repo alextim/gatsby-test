@@ -72,9 +72,9 @@ const ContactFormWrapper = styled.div`
 `
 const heading = 'Контакты'
 
-export default () =>
+export default ({location}) =>
   <LayoutFullWidth>
-    <SEO title={heading} />
+    <SEO title={heading} pathname={location.pathname} />
     
     <ContainerFullWidth>
       <GoogleMap />

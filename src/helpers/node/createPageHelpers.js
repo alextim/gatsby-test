@@ -18,19 +18,19 @@ https://github.com/diogorodrigues/iceberg-gatsby-multilang
 const siteConfig = require('./../../data/siteConfig')
 
 
-function createPaginationPages(component, totalItems, base, context, createPage) {
+function createPaginationPages(component, totalItems, pathBase, context, createPage) {
   const pageSize = siteConfig.pageSize
   const pageCount = Math.ceil(totalItems / pageSize)
   
   console.log('========================')
-  console.log('createPaginationPages: ' + base)
+  console.log('createPaginationPages: ' + pathBase)
 
 
   const pages = Array.from({length: pageCount}).map((_, index) => createPage({
-    path: `${base}/page/${index + 1}`,
+    path: `${pathBase}/page/${index + 1}`,
     component,
     context: {
-      base,
+      base: pathBase,
       limit: pageSize,
       skip: index * pageSize,
       pageCount,
@@ -40,10 +40,10 @@ function createPaginationPages(component, totalItems, base, context, createPage)
   }))
 
   const firstPage = pageCount > 0 && createPage({
-    path: base,
+    path: pathBase,
     component,
     context: {
-      base,
+      base: pathBase,
       limit: pageSize,
       skip: 0,
       pageCount,
@@ -54,6 +54,7 @@ function createPaginationPages(component, totalItems, base, context, createPage)
 
   return [...pages, firstPage]
 }
+
 
 function createPostPages(data, createPage) {
 
@@ -84,6 +85,7 @@ function createPostPages(data, createPage) {
       path: node.fields.slug,
       component: postTemplate,
       context: {
+        pathname: node.fields.slug,
         id: node.id,
         prev: prev,
         next: next

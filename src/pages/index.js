@@ -9,9 +9,9 @@ import StickyNews from '../components/home/StickyNews'
 import Features from '../components/home/Features'
 import LatestNewsCards from '../components/home/LatestNewsCards'
 
-export default props => 
+export default ({location}) => 
   <LayoutFullWidth>
-    <SEO title="Home" />
+    <SEO title="Home" pathname={location.pathname} />
     <CTA settings={homePageSettings.CTA}/>
     <StickyNews settings={homePageSettings.stickyNews}/>
     <Features settings={homePageSettings.features}/>

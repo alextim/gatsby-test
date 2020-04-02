@@ -11,16 +11,12 @@ import toPosts from './toPosts'
 const Heading = styled.h1`
   text-align: center;
 `
-
-export default ( { edges, pageContext, seoTitle, title } ) => {
-
-    //.filter(edge => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
-
+export default ( { edges, pageContext, title } ) => {
   const posts = toPosts(edges)
 
   return (
     <BlogLayout>
-      <SEO title={seoTitle || title}/>
+      <SEO title={title} pathname={pageContext.base}/>
       <Heading>{title}</Heading>
       <PostListing posts={posts} />
       <Pagination

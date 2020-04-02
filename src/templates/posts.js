@@ -4,13 +4,8 @@ import { graphql } from 'gatsby'
 import ListTemplate from './common/ListTemplate'
 
 
-export default ({
-  data: {allMarkdownRemark: { edges }, },
-  pageContext
-}) => (
-  <ListTemplate edges={edges} pageContext={pageContext} 
-    title="Статьи и новости" 
-  />
+export default ({ data: {allMarkdownRemark: { edges }, },  pageContext }) => (
+  <ListTemplate edges={edges} pageContext={pageContext} title="Статьи и новости" />
 )
 
 export const pageQuery = graphql`
