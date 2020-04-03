@@ -30,7 +30,7 @@ function createPaginationPages(component, totalItems, pathBase, context, createP
     path: `${pathBase}/page/${index + 1}`,
     component,
     context: {
-      base: pathBase,
+      base: `${pathBase}/page/${index + 1}`,
       limit: pageSize,
       skip: index * pageSize,
       pageCount,

@@ -7,8 +7,9 @@ description: ""
 featuredImage: ./test.jpg
 featured: false
 categories:
-  - News
+  - Новости
   - Events
+  - Детали
 tags:
   - Portugal
   - Porto
