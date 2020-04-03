@@ -1,5 +1,6 @@
 const path = require('path')
 const _ = require('lodash')
+const catHelper = require('./../categoryHelper')
 
 const postTemplate = path.resolve('./src/templates/post.js')
 const postsTemplate = path.resolve('./src/templates/posts.js')
@@ -30,7 +31,8 @@ function createPaginationPages(component, totalItems, pathBase, context, createP
     path: `${pathBase}/page/${index + 1}`,
     component,
     context: {
-      base: `${pathBase}/page/${index + 1}`,
+      base: pathBase,
+      pathname: `${pathBase}/page/${index + 1}`,
       limit: pageSize,
       skip: index * pageSize,
       pageCount,
@@ -44,6 +46,7 @@ function createPaginationPages(component, totalItems, pathBase, context, createP
     component,
     context: {
       base: pathBase,
+      pathname: pathBase,
       limit: pageSize,
       skip: 0,
       pageCount,
@@ -102,7 +105,7 @@ function createPagePages({allWordpressPage}, createPage) {
   }));
 }
 */
-function createPostsPages( data, createPage) {
+function createPostsPages(data, createPage) {
   return createPaginationPages(
     postsTemplate,
     data.allPosts.edges.length,
@@ -128,15 +131,17 @@ function createArchivePostsPages(data, createPage) {
 
 
 function createCategoryPostsPages(data, createPage) {
-  return data.allCategories.group.map(group => createPaginationPages(
-    categoryTemplate,
-    group.totalCount,
-    `/category/${_.kebabCase(group.fieldValue)}`,
-    {
-      category: group.fieldValue,
-    },
-    createPage
-  ))
+  return data.allCategories.group.map(group => 
+      createPaginationPages(
+        categoryTemplate,
+        group.totalCount,
+        `/category/${_.kebabCase(group.fieldValue)}`,
+        {
+          category: group.fieldValue,
+        },
+        createPage
+      )
+    )
 }
 
 function createTagPostsPages(data, createPage) {

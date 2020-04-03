@@ -8,6 +8,7 @@ import LatestPosts from '../../components/widgets/LatestPosts'
 import PostArchive  from '../../components/widgets/PostArchive'
 import PostCategories  from '../../components/widgets/PostCategories'
 
+
 const BlogWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,11 +38,11 @@ const WidgetsWrap = styled(wrapper)`
 `  
 
 
-export default props =>
+export default ({children}) =>
   <Layout>
     <BlogWrapper>
       <ContentWrap>
-        {props.children}
+        {children}
       </ContentWrap>
       <WidgetsWrap as="aside">
         <LatestPosts />

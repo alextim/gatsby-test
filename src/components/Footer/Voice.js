@@ -1,6 +1,6 @@
 import React from 'react'
-import OrganizationPhones from '../OrganizationPhones'
-import OrganizationCloudPhones from '../OrganizationCloudPhones'
+import OrganizationPhones from '../organization/OrganizationPhones'
+import OrganizationCloudPhones from '../organization/OrganizationCloudPhones'
 
 export default () => 
   <>

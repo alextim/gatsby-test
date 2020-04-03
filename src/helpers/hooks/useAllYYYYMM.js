@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 export default () => {
     const data = useStaticQuery(graphql`
         query AllYYYMMQuery {
-            allMarkdownRemark {
+            allMdx {
                 group(field: fields___yyyymm) {
                     field
                     fieldValue
@@ -12,5 +12,5 @@ export default () => {
             }
         }
     `)
-    return data.allMarkdownRemark.group.map( group => group.fieldValue )
+    return data.allMdx.group.map( group => group.fieldValue )
 }

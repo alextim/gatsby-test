@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { Grid } from '@chakra-ui/core'
 
-import useOrganization from './../helpers/hooks/useOrganization'
+import useOrganization from '../../helpers/hooks/useOrganization'
 
 const Wrapper = styled(Grid)`
   grid-template-columns: 2em 3em 1em auto;

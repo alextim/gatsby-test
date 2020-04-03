@@ -1,4 +1,4 @@
-import categories from './../data/categories'
+const categories = require('./../data/categories').categories
 
 const translit = require('./../lib/translit')
 const slugify = require('./../lib/slugify')
@@ -17,8 +17,9 @@ const getSafeCategorySlug = s => {
 }
 
 
-const getCategoryUrlAndNames = (cats, base) => 
-    cats.map( cat => ({ name: cat, url: `/${base}/${getSafeCategorySlug(cat)}` }) )
+function getCategoryUrlAndNames (cats, base) {
+    return cats.map( cat => ({ name: cat, url: `/${base}/${getSafeCategorySlug(cat)}` }) )
+}
 
 
-export { getCategoryUrlAndNames }
+module.exports = { getSafeCategorySlug, getCategoryUrlAndNames }

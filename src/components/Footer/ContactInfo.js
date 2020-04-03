@@ -1,8 +1,8 @@
 import React from 'react'
 
-import OrganizationPostalAddress from './../OrganizationPostalAddress'
-import OrganizationEmail from './../OrganizationEmail'
-import OrganizationSite from './../OrganizationSite'
+import OrganizationPostalAddress from './../organization/OrganizationPostalAddress'
+import OrganizationEmail from './../organization/OrganizationEmail'
+import OrganizationSite from './../organization/OrganizationSite'
 
 export default () => 
   <>

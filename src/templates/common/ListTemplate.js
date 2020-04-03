@@ -16,7 +16,7 @@ export default ( { edges, pageContext, title } ) => {
 
   return (
     <BlogLayout>
-      <SEO title={title} pathname={pageContext.base}/>
+      <SEO title={title} pathname={pageContext.pathname}/>
       <Heading>{title}</Heading>
       <PostListing posts={posts} />
       <Pagination

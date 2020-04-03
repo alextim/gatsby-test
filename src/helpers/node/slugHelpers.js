@@ -10,9 +10,8 @@ const slugify = require('./../../lib/slugify')
 const safeSlug = (s) => slugify(translit(s,1))
 
 function createSlug(node, {createNodeField}, getNode) {
-  if (node.internal.type !== 'MarkdownRemark') {
-    return;
-  }
+
+  if (node.internal.type === 'Mdx') {
 /*
     if (node.fileAbsolutePath != null) {
       const matcher = /posts\/\d{4}-\d{2}-\d{2}-(.+?)\/index.md$/;
@@ -76,7 +75,8 @@ if (
     createNodeField({ node, 
         name: 'slug', 
         value: `${siteConfig.blogUrlBase}/${slug}`
-    });
+    })
   }
-  
-  module.exports = {createSlug};
+}  
+
+module.exports = {createSlug};

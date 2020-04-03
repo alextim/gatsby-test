@@ -4,13 +4,13 @@ import { graphql } from 'gatsby'
 import ListTemplate from './common/ListTemplate'
 
 
-export default ({ data: {allMarkdownRemark: { edges }, },  pageContext }) => (
+export default ({ data: {allMdx: { edges }, },  pageContext }) => (
   <ListTemplate edges={edges} pageContext={pageContext} title="Статьи и новости" />
 )
 
 export const pageQuery = graphql`
   query BlogListQuery ($skip: Int!, $limit: Int!) {
-    allMarkdownRemark(
+    allMdx(
       filter: { 
         frontmatter: { 
           published: { eq: true } 

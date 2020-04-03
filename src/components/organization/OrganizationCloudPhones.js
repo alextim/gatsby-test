@@ -1,9 +1,9 @@
 import React from 'react'
 import { useTheme } from '@chakra-ui/core'
 
-import Utils from './../lib/utils'
-import useOrganization from './../helpers/hooks/useOrganization'
-import { IconLink } from './IconLink'
+import Utils from '../../lib/utils'
+import useOrganization from '../../helpers/hooks/useOrganization'
+import { IconLink } from '../IconLink'
 
 export default () => {
     const { voice } = useOrganization()

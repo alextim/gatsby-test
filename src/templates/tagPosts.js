@@ -4,14 +4,14 @@ import { graphql } from 'gatsby'
 import ListTemplate from './common/ListTemplate'
 
 
-export default ({ data: {allMarkdownRemark: { edges }, }, pageContext }) => (
+export default ({ data: {allMdx: { edges }, }, pageContext }) => (
   <ListTemplate edges={edges} pageContext={pageContext} title={`Таг:${' '}${pageContext.tag}`} />
 )
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
   query TagPage($skip: Int!, $limit: Int!, $tag: String) {
-    allMarkdownRemark(
+    allMdx(
       skip: $skip
       limit: $limit      
       sort: { fields: [frontmatter___date], order: DESC }

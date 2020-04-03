@@ -3,12 +3,17 @@ import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from '@emotion/styled'
 import { Flex, Heading } from '@chakra-ui/core'
-
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { MDXProvider } from "@mdx-js/react"
 
 import { DateMeta, CategoryMeta, TagMeta } from '../components/Meta'
 import SEO from '../components/SEO'
 import { IconLink, IconLinkR } from '../components/IconLink'
 import BlogLayout from './common/BlogLayout'
+
+import HelloWorld from '../components/HelloWorld'
+
+const shortcodes = {HelloWorld}
 
 const PrevNext = ({ prev, next }) => {
   const PrevNextWrap  = styled.div`
@@ -35,9 +40,7 @@ const PrevNext = ({ prev, next }) => {
 
 export default ({ data, pageContext }) => {
   const { next, prev, pathname } = pageContext
-
-  const { markdownRemark } = data // data.markdownRemark holds your post data
-  const { frontmatter, html, excerpt } = markdownRemark // , fields
+  const { frontmatter, body, excerpt } = data.mdx // , fields
   const { title, description, date, featuredImage, tags, categories } = frontmatter
   const featuredImgFluid = featuredImage ? featuredImage.childImageSharp.fluid : null
   const imgSrc = featuredImgFluid ? featuredImgFluid.src : null
@@ -60,11 +63,9 @@ export default ({ data, pageContext }) => {
             </Flex>
             { tags && <TagMeta tags={tags} /> }
             { featuredImgFluid && <Img fluid={featuredImgFluid} alt={title} /> }
-
-            <div
-              className="blog-post-content"
-              dangerouslySetInnerHTML={{ __html: html }}
-            />
+            <MDXProvider components={shortcodes}>
+              <MDXRenderer>{body}</MDXRenderer>
+            </MDXProvider>
           </article>
 
           <PrevNext prev={prev} next={next} />
@@ -75,8 +76,8 @@ export default ({ data, pageContext }) => {
 
 export const pageQuery = graphql`
   query BlogPostById($id: String!) {
-    markdownRemark(id: {eq: $id}) {
-      html
+    mdx(id: {eq: $id}) {
+      body
       excerpt(pruneLength: 160)
       fields {
         slug

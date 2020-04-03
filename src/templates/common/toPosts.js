@@ -1,19 +1,14 @@
-export default ( edges ) => {
-    const posts = []
-
-    edges.forEach( (edge, i) => {
-        const path = edge.node.fields.slug
-        const { title, date, categories, tags, featuredImage } = edge.node.frontmatter
-        posts[i] = {
+export default ( edges ) => 
+    edges.map( ({node}) => {
+        const path = node.fields.slug
+        const { title, date, categories, tags, featuredImage } = node.frontmatter
+        return {
             title: title,
             path: path,
             date: date,
             categories: categories,
             tags: tags,
-            excerpt: edge.node.excerpt,
+            excerpt: node.excerpt,
             featuredImage: featuredImage ? featuredImage.childImageSharp.fluid : null
         }
     })
-
-    return posts  
-}

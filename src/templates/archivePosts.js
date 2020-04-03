@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import ListTemplate from './common/ListTemplate'
 import postArchiveHelper from './../helpers/postArchiveHelper'
 
-export default ({ data: {allMarkdownRemark: { edges }, }, pageContext }) => (
+export default ({ data: {allMdx: { edges }, }, pageContext }) => (
   <ListTemplate edges={edges} pageContext={pageContext} 
     title={`Архив за ${postArchiveHelper.getTitle(pageContext.yyyymm)}`} />
 )
@@ -13,7 +13,7 @@ export default ({ data: {allMarkdownRemark: { edges }, }, pageContext }) => (
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
   query ArchivePage($skip: Int!, $limit: Int!, $yyyymm: String) {
-    allMarkdownRemark(
+    allMdx(
       skip: $skip
       limit: $limit      
       sort: { fields: [frontmatter___date], order: DESC }

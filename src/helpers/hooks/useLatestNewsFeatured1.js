@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 export default () => {
     const data = useStaticQuery(graphql`
         query LatestNewsQueryFeatured1 {
-            allMarkdownRemark(
+            allMdx(
                 filter: { 
                     frontmatter: { 
                         published: { eq: true } 
@@ -21,9 +21,9 @@ export default () => {
                         frontmatter {
                             featuredImage {
                                 childImageSharp {
-                                  fluid(maxWidth: 800) {
+                                    fluid(maxWidth: 800) {
                                     ...GatsbyImageSharpFluid
-                                  }
+                                    }
                                 }
                             }
                         }
@@ -32,9 +32,9 @@ export default () => {
             }
         }
     `)
-    return data.allMarkdownRemark.edges.map( edge => ({
-            path: edge.node.fields.slug,
-            featuredImage: edge.node.frontmatter.featuredImage ? edge.node.frontmatter.featuredImage.childImageSharp.fluid : null
+    return data.allMdx.edges.map( ({node}) => ({
+            path: node.fields.slug,
+            featuredImage: node.frontmatter.featuredImage ? node.frontmatter.featuredImage.childImageSharp.fluid : null
         })
     )
 }

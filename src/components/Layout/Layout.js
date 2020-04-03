@@ -1,12 +1,12 @@
 import React from 'react'
 
 import LayoutFullWidth from './LayoutFullWidth'
-import { Container } from './Container'
+import { Container } from '../Container'
 
-export default props => (
+export default ({children}) => (
   <LayoutFullWidth>
     <Container>
-      {props.children}
+      {children}
     </Container>
   </LayoutFullWidth>
 )

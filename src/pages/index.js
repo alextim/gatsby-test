@@ -2,7 +2,7 @@ import React from 'react'
 
 import homePageSettings from '../data/homePageSettings'
 
-import LayoutFullWidth from '../components/LayoutFullWidth'
+import { LayoutFullWidth } from '../components/Layout'
 import SEO from '../components/SEO'
 import CTA from '../components/home/CTA'
 import StickyNews from '../components/home/StickyNews'

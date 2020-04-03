@@ -1,18 +1,18 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import LayoutFullWidth from '../components/LayoutFullWidth'
+import { LayoutFullWidth } from '../components/Layout'
 import SEO from '../components/SEO'
 
-import ContactForm from '../components/ContactForm'
+import ContactForm from '../components/forms/ContactForm'
 import { Container, ContainerFullWidth } from '../components/Container'
 import PageHeading from '../components/PageHeading'
-import OrganizationPostalAddress from '../components/OrganizationPostalAddress'
-import OrganizationPhones from '../components/OrganizationPhones'
-import OrganizationEmail from '../components/OrganizationEmail'
-import OrganizationSite from '../components/OrganizationSite'
-import OrganizationCloudPhones from '../components/OrganizationCloudPhones'
-import OrganizationOpeningHours from '../components/OrganizationOpeningHours'
+import OrganizationPostalAddress from '../components/organization/OrganizationPostalAddress'
+import OrganizationPhones from '../components/organization/OrganizationPhones'
+import OrganizationEmail from '../components/organization/OrganizationEmail'
+import OrganizationSite from '../components/organization/OrganizationSite'
+import OrganizationCloudPhones from '../components/organization/OrganizationCloudPhones'
+import OrganizationOpeningHours from '../components/organization/OrganizationOpeningHours'
 
 
 const mapSrc = 'https://maps.google.com/maps?q=Adrenalin&t=&z=13&ie=UTF8&iwloc=&output=embed'

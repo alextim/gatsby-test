@@ -72,37 +72,13 @@ module.exports = {
     },
   },
   {
-    resolve: `gatsby-transformer-remark`,
-    options: {
-      plugins: [
-        {
-          resolve: `gatsby-remark-relative-images`,
-        },
-        {
-          resolve: `gatsby-remark-images`,
-          options: {
-            maxWidth: 590,
-          },
-        },
-        {
-          resolve: `gatsby-remark-responsive-iframe`,
-          options: {
-            wrapperStyle: `margin-bottom: 1.0725rem`,
-          },
-        },
-      // `gatsby-remark-prismjs`,
-      //  `gatsby-remark-copy-linked-files`,
-       // `gatsby-remark-smartypants`,
-      ],
-    },
-  },
-  {
     resolve: `gatsby-source-filesystem`,
     options: {
       name: `images`,
       path: `${__dirname}/src/images`,
     },
   },
+  /*
   {
     resolve: `gatsby-source-filesystem`,
     options: {
@@ -110,18 +86,48 @@ module.exports = {
       path: `${__dirname}/src/pages`
     }
   },
+  */
+  /*
   {
     resolve: `gatsby-plugin-page-creator`,
     options: {
       path: path.join(__dirname, `src/pages`),
     },
   },
+  */
   {
     resolve: `gatsby-plugin-mdx`,
     options: {
-      defaultLayouts: { default: path.resolve('./src/components/Layout.js') },
+      extensions: ['.mdx', '.md'],
+      // a workaround to solve mdx-remark plugin compat issue
+      // https://github.com/gatsbyjs/gatsby/issues/15486
+      plugins: [
+        `gatsby-remark-images`,
+      ],
+      gatsbyRemarkPlugins: [
+        {
+          resolve: `gatsby-remark-images`,
+          options: {
+            maxWidth: 590,
+          },
+        },
+        {
+          resolve: `gatsby-remark-relative-images`,
+        },
+        {
+          resolve: `gatsby-remark-responsive-iframe`,
+          options: {
+            wrapperStyle: `margin-bottom: 1.0725rem`,
+          },
+        },
+        {
+          resolve: `gatsby-remark-copy-linked-files`,
+        },
+      ],
     },
-  },    // this (optional) plugin enables Progressive Web App + Offline functionality
+  },  
+  
+  // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],

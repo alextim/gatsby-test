@@ -2,7 +2,7 @@ import React from 'react'
 import { Box } from '@chakra-ui/core'
 import { useTheme } from 'emotion-theming'
 
-import useOrganization from './../helpers/hooks/useOrganization'
+import useOrganization from '../../helpers/hooks/useOrganization'
 
 
 export default () => {

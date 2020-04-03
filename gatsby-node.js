@@ -24,28 +24,28 @@ const {
 
 const allPostsQuery = `
   query {
-    allYYYYMM: allMarkdownRemark {
+    allYYYYMM: allMdx {
       group(field: fields___yyyymm) {
         field
         fieldValue
         totalCount
       }
     }    
-    allTags: allMarkdownRemark {
+    allTags: allMdx {
       group(field: frontmatter___tags) {
         field
         fieldValue
         totalCount
       }
     }
-    allCategories: allMarkdownRemark {
+    allCategories: allMdx {
       group(field: frontmatter___categories) {
         field
         fieldValue
         totalCount
       }
     }
-    allPosts: allMarkdownRemark {
+    allPosts: allMdx {
       edges {
         node {
           id

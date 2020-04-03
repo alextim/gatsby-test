@@ -1,9 +1,9 @@
 import React from 'react'
 import { useTheme } from '@chakra-ui/core'
 
-import Utils from './../lib/utils'
-import useSiteMetadata from './../helpers/hooks/useSiteMetadata'
-import { IconLink } from './IconLink'
+import Utils from '../../lib/utils'
+import useSiteMetadata from '../../helpers/hooks/useSiteMetadata'
+import { IconLink } from '../IconLink'
 
 
 export default () => {
