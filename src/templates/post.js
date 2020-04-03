@@ -11,9 +11,9 @@ import SEO from '../components/SEO'
 import { IconLink, IconLinkR } from '../components/IconLink'
 import BlogLayout from './common/BlogLayout'
 
-import HelloWorld from '../components/HelloWorld'
+//import HelloWorld from '../components/HelloWorld'
 
-const shortcodes = {HelloWorld}
+const shortcodes = {IconLink}
 
 const PrevNext = ({ prev, next }) => {
   const PrevNextWrap  = styled.div`
