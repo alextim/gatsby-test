@@ -1,20 +1,32 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Box } from '@chakra-ui/core'
-/*
 import {
-  Label,
+  FormErrorMessage,
+  FormLabel,
+  FormControl,
   Input,
-  Select,
-  Textarea,
-  Radio,
-  Checkbox,
-} from '@rebass/forms'
-*/
+  Button,
+} from "@chakra-ui/core";
 const FAKE_GATEWAY_URL = 'https://jsonplaceholder.typicode.com/posts';
 const required = 'This field is required';
 
 
+function validateName(value) {
+  let error;
+  if (!value) {
+    error = "Имя является обязательным."
+  } 
+  return error || true;
+}
+
+function validateEmail(value) {
+  let error;
+  if (!value) {
+    error = "Адрес почты является обязательным."
+  }
+
+  return error || true;
+}
 
 export default () => {
   const [submitted, setSubmitted] = useState(false);
@@ -25,11 +37,13 @@ export default () => {
     errors,
     reset,
     formState: { isSubmitting }
-  } = useForm();
+  } = useForm()
 
-  const onSubmit = async data => {
+  const onSubmit = async (data, e) => {
     try {
+      console.log('Submit event', e)
       console.log(data);
+      
       await fetch(FAKE_GATEWAY_URL, {
         method: "POST",
         mode: "cors",
@@ -39,8 +53,10 @@ export default () => {
           "Content-type": "application/json; charset=UTF-8"
         }
       });
+      alert(JSON.stringify(data))
       setSubmitted(true);
       reset();
+      
     } catch (error) {
       setError(
         "submit",
@@ -50,84 +66,69 @@ export default () => {
     }
   };
 
-  const showSubmitError = msg => <p className="msg-error">{msg}</p>;
 
-  const showThankYou = (
-    <div className="msg-confirm">
-      <p>Awesome! Your message was sent.</p>
-      <button type="button" onClick={() => setSubmitted(false)}>
-        Send another message?
-      </button>
-    </div>
-  );
-
-  const showForm = (
-    <Box as="form" onSubmit={handleSubmit(onSubmit)} method="post">
-      <div className="field">
-        <label className="label" htmlFor="name">Name</label>
-        <div className="control">
-          <input className={("input").concat(errors.name ? " is-danger": "")}
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Your name"
-              ref={register({ required })}
-              disabled={isSubmitting}
-            />
-        </div>
-        {errors.name && <p className="help is-danger">{errors.name.message}</p>}
-      </div>
-
-      <label htmlFor="email">
-        <h5>Email</h5>
-        <input
-          type="email"
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} method="post">
+      <FormControl isInvalid={errors.email}>
+        <FormLabel htmlFor="email">E-mail</FormLabel>
+        <Input
           name="email"
-          id="email"
-          placeholder="your@email.address"
+          placeholder="Ваш E-mail"
           ref={register({ 
+            validate: validateEmail,
             required: true,
             maxLength: 10,
             pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+              message: "Недопустимый e-mail."
             }
-          }) }
+          })}
           disabled={isSubmitting}
         />
-        {errors.email && errors.email.type === 'required' && <div className="msg-error">E-mail is required</div>}
-        {errors.email && errors.email.type === 'maxLength' && <div className="msg-error">Max length exceeded</div> }
-        {errors.email && errors.email.type === 'pattern' && <div className="msg-error">invalid email address</div> }
-      </label>
+        <FormErrorMessage>
+          {errors.email && errors.email.message}
+        </FormErrorMessage>
+      </FormControl>
 
-      <label htmlFor="question">
-        <h5>Message</h5>
-        <textarea
+
+      <FormControl isInvalid={errors.name}>
+        <FormLabel htmlFor="name">Имя</FormLabel>
+        <Input
+          name="name"
+          placeholder="name"
+          ref={register({ 
+            validate: validateName,
+            pattern: {
+              value: /^[a-zA-Zа-яА-ЯёЁ\s]*$/,
+              message: "Допускаются только буквы и пробел."
+            }
+          })}
+          disabled={isSubmitting}
+        />
+        <FormErrorMessage>
+          {errors.name && errors.name.message}
+        </FormErrorMessage>
+      </FormControl>
+
+
+      <FormControl isInvalid={errors.note}>
+        <FormLabel htmlFor="note">Сообщение</FormLabel>
+        <Input as="textarea"
           ref={register({ required })}
-          name="question"
-          id="question"
+          name="note"
           rows="3"
           placeholder="Your message"
           disabled={isSubmitting}
         />
-        {errors.question && (
-          <div className="msg-error">{errors.question.message}</div>
-        )}
-      </label>
+        <FormErrorMessage>
+          {errors.note && errors.note.message}
+        </FormErrorMessage>
+      </FormControl>
 
-      <div className="field">
-        <div className="control">
-          <button className="button is-link" type="submit" disabled={isSubmitting}>
-            Send
-          </button>
-        </div>
-      </div>
-    </Box>
-  );
+      <Button isLoading={isSubmitting} type="submit">
+        Submit
+      </Button>
+    </form>
 
-  return (
-    <>
-        {errors && errors.submit && showSubmitError(errors.submit.message)}
-        {submitted ? showThankYou : showForm}
-    </>
   )
 }
