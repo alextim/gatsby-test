@@ -11,10 +11,10 @@ import {
   } from '@chakra-ui/core'
 
 
-export default ({ title, isOpen, onClose, status }) => {
+export default ({ title, isOpen, onClose, status, finalFocusRef }) => {
   return (
     <>
-      <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
+      <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} finalFocusRef={finalFocusRef}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{title}</ModalHeader>

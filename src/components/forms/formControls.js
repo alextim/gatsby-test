@@ -7,7 +7,8 @@ import {
     Button,
 } from '@chakra-ui/core'
 
-
+const EMAIL_MAX_LENGTH = 20
+const NAME_MAX_LENGTH = 20
 /*
 const required = 'This field is required';
 
@@ -31,7 +32,7 @@ function validateEmail(value) {
 */
 const Submit = props =>   <Button type="submit">{props.children}</Button>
 
-const EmailControl = ({register,errors}) =>
+const EmailControl = ({register, errors, ...props}) =>
 
     <FormControl isInvalid={errors.email}>
         <FormLabel htmlFor="email">E-mail</FormLabel>
@@ -39,15 +40,20 @@ const EmailControl = ({register,errors}) =>
                 name="email"
                 type="email"
                 placeholder="Ваш E-mail"
-                ref={register({ 
+                ref={ e => register(e, { 
                     //validate: validateEmail,
-                    required: true,
-                    maxLength: 20,
+                    required: 'Адрес почты является обязательным',
+                    maxLength : {
+                        value: EMAIL_MAX_LENGTH,
+                        message: `Максимальная длина e-mail ${EMAIL_MAX_LENGTH} символов` 
+                    },
                     pattern: {
+                        ///^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                         message: "Недопустимый e-mail."
                     }
                 })}
+                {...props}
             />
         <FormErrorMessage>
             {errors.email && errors.email.message}
@@ -63,7 +69,11 @@ const NameControl = ({register, errors}) =>
             placeholder="Ваше имя"
             ref={register({ 
                 //validate: validateName,
-                required: true,
+                required: 'Имя является обязательным',
+                maxLength : {
+                    value: NAME_MAX_LENGTH,
+                    message: `Максимальная длина имени ${NAME_MAX_LENGTH} символов` 
+                },
                 pattern: {
                     value: /^[a-zA-Zа-яА-ЯёЁ\s]*$/,
                     message: "Допускаются только буквы и пробел."

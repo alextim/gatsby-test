@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDisclosure } from '@chakra-ui/core'
 
@@ -16,10 +16,14 @@ const MESSAGE_FAILURE = 'Данные не сохранены. Пожалуйс�
 
 export default () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [status, setStatus] = useState({ wait: true, message:'Processing...' })
+  const [status, setStatus] = useState({})
+  const emailRef = useRef()
+
   
   const waitAndClose = () => setTimeout(function() {
+    emailRef.current.focus()
     onClose()
+ 
   }, SHOW_MODAL_DURATION);
 
   const {
@@ -56,18 +60,23 @@ export default () => {
     ) 
   }
 
-
+  const customRegister = (e, o) => {
+    register(e, o)
+    emailRef.current = e
+  }
+ 
   return (
     <>
-      <SendFormDataModal title="Обработка данных" isOpen={isOpen} onClose={onClose} status={status} />
-
       <form onSubmit={handleSubmit(onSubmit)} method="post">
-        <EmailControl register={register} errors={errors} />
+        <EmailControl register={customRegister} errors={errors} autoFocus/>
         <NameControl register={register} errors={errors} />
         <NoteControl register={register} errors={errors} />
     
         <Submit>Отправить</Submit>
       </form>
+
+      <SendFormDataModal title="Обработка данных" isOpen={isOpen} onClose={onClose} status={status} 
+       />
     </>
   )
 }
