@@ -1,134 +1,73 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import {
-  FormErrorMessage,
-  FormLabel,
-  FormControl,
-  Input,
-  Button,
-} from "@chakra-ui/core";
-const FAKE_GATEWAY_URL = 'https://jsonplaceholder.typicode.com/posts';
-const required = 'This field is required';
+import { useDisclosure } from '@chakra-ui/core'
+
+import SendFormDataModal from './SendFormDataModal'
+import { EmailControl, NameControl, NoteControl, Submit } from './formControls'
+import { saveContact } from './dataLayer'
 
 
-function validateName(value) {
-  let error;
-  if (!value) {
-    error = "Имя является обязательным."
-  } 
-  return error || true;
-}
+const SHOW_MODAL_DURATION = 5000
 
-function validateEmail(value) {
-  let error;
-  if (!value) {
-    error = "Адрес почты является обязательным."
-  }
+const MESSAGE_PROCESSING = 'Отправка данных. Пожалуйста подождите'
+const MESSAGE_DONE = 'Данные сохранены. Спасибо, мы обязательно свяжемся с вами'
+const MESSAGE_FAILURE = 'Данные не сохранены. Пожалуйста повторите вашу попытку позже'
 
-  return error || true;
-}
 
 export default () => {
-  const [submitted, setSubmitted] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [status, setStatus] = useState({ wait: true, message:'Processing...' })
+  
+  const waitAndClose = () => setTimeout(function() {
+    onClose()
+  }, SHOW_MODAL_DURATION);
+
   const {
     register,
     handleSubmit,
     setError,
     errors,
     reset,
-    formState: { isSubmitting }
   } = useForm()
 
-  const onSubmit = async (data, e) => {
-    try {
-      console.log('Submit event', e)
-      console.log(data);
-      
-      await fetch(FAKE_GATEWAY_URL, {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        }
-      });
-      alert(JSON.stringify(data))
-      setSubmitted(true);
-      reset();
-      
-    } catch (error) {
-      setError(
-        "submit",
-        "submitError",
-        `Oops! There seems to be an issue! ${error.message}`
-      );
-    }
-  };
+  const onSubmit = (data, e) => {
+    e.preventDefault();
+    
+    saveContact(data, 
+      () => {
+        setStatus(() => ({ wait: true, message: MESSAGE_PROCESSING }))
+        onOpen()
+      },
+      () => {
+        setStatus(() => ({ wait: false, message: MESSAGE_DONE }))
+        reset()
+        waitAndClose()
+      },
+      (error) => {
+        const msg = `${MESSAGE_FAILURE} ${error.message}`
+        setStatus(() => ({ wait: false, message: msg }))
+        setError(
+          'submit',
+          'submitError',
+          msg
+        )
+        waitAndClose() 
+      }
+    ) 
+  }
 
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} method="post">
-      <FormControl isInvalid={errors.email}>
-        <FormLabel htmlFor="email">E-mail</FormLabel>
-        <Input
-          name="email"
-          placeholder="Ваш E-mail"
-          ref={register({ 
-            validate: validateEmail,
-            required: true,
-            maxLength: 10,
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: "Недопустимый e-mail."
-            }
-          })}
-          disabled={isSubmitting}
-        />
-        <FormErrorMessage>
-          {errors.email && errors.email.message}
-        </FormErrorMessage>
-      </FormControl>
+    <>
+      <SendFormDataModal title="Обработка данных" isOpen={isOpen} onClose={onClose} status={status} />
 
-
-      <FormControl isInvalid={errors.name}>
-        <FormLabel htmlFor="name">Имя</FormLabel>
-        <Input
-          name="name"
-          placeholder="name"
-          ref={register({ 
-            validate: validateName,
-            pattern: {
-              value: /^[a-zA-Zа-яА-ЯёЁ\s]*$/,
-              message: "Допускаются только буквы и пробел."
-            }
-          })}
-          disabled={isSubmitting}
-        />
-        <FormErrorMessage>
-          {errors.name && errors.name.message}
-        </FormErrorMessage>
-      </FormControl>
-
-
-      <FormControl isInvalid={errors.note}>
-        <FormLabel htmlFor="note">Сообщение</FormLabel>
-        <Input as="textarea"
-          ref={register({ required })}
-          name="note"
-          rows="3"
-          placeholder="Your message"
-          disabled={isSubmitting}
-        />
-        <FormErrorMessage>
-          {errors.note && errors.note.message}
-        </FormErrorMessage>
-      </FormControl>
-
-      <Button isLoading={isSubmitting} type="submit">
-        Submit
-      </Button>
-    </form>
-
+      <form onSubmit={handleSubmit(onSubmit)} method="post">
+        <EmailControl register={register} errors={errors} />
+        <NameControl register={register} errors={errors} />
+        <NoteControl register={register} errors={errors} />
+    
+        <Submit>Отправить</Submit>
+      </form>
+    </>
   )
 }
