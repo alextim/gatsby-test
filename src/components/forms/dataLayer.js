@@ -7,12 +7,12 @@ https://medium.com/capbase-engineering/asynchronous-functional-programming-using
 */
 
 
-const postData = (url, data, onLoading, onSuccess, onError) => {
+const postData = (url, data, abortController, onSuccess, onError) => {
     console.log('postData: start', url, data)
-    onLoading()
   
     // Default options are marked with *
     fetch(url, {
+      signal: abortController ? abortController.signal : null,
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -34,9 +34,14 @@ const postData = (url, data, onLoading, onSuccess, onError) => {
       onSuccess()
       //return response.json()
     }).catch(error => {
-      console.warn('postData: Error', data);
-      console.warn(error)
+      if (error.name === 'AbortError') {
+        console.log('Fetch aborted');
+      } else {
+        console.warn('postData: Error', data);
+        console.warn(error)
+      }
       onError(error)
+  
     })
   }
   
@@ -54,7 +59,7 @@ const logResponse = (response) => {
 
 const FAKE_GATEWAY_URL = 'https://jsonplaceholder.typicode.com/posts'
 
-const saveContact = (data, onLoading, onSuccess, onError) => 
-    postData (FAKE_GATEWAY_URL, data, onLoading, onSuccess, onError)
+const saveContact = (data, abortController, onSuccess, onError) => 
+    postData (FAKE_GATEWAY_URL, data, abortController, onSuccess, onError)
 
 export { saveContact }

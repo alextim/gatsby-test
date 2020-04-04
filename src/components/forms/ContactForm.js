@@ -19,12 +19,17 @@ export default () => {
   const [status, setStatus] = useState({})
   const emailRef = useRef()
 
-  
-  const waitAndClose = () => setTimeout(function() {
-    emailRef.current.focus()
-    onClose()
- 
-  }, SHOW_MODAL_DURATION);
+  const abortController = new window.AbortController()
+
+  const waitAndClose = () => console.log(2222222222222222222222222222)
+
+//  const waitAndClose = () => setTimeout(() => {
+//    emailRef.current.focus()
+//    onClose()
+//    emailRef.current.focus()
+//    console.log(emailRef)
+// 
+//  }, SHOW_MODAL_DURATION);
 
   const {
     register,
@@ -36,25 +41,28 @@ export default () => {
 
   const onSubmit = (data, e) => {
     e.preventDefault();
-    
-    saveContact(data, 
-      () => {
-        setStatus(() => ({ wait: true, message: MESSAGE_PROCESSING }))
-        onOpen()
-      },
+   
+    setStatus(() => ({ wait: true, message: MESSAGE_PROCESSING }))
+    onOpen()
+
+    saveContact(data, abortController,
       () => {
         setStatus(() => ({ wait: false, message: MESSAGE_DONE }))
         reset()
         waitAndClose()
       },
       (error) => {
-        const msg = `${MESSAGE_FAILURE} ${error.message}`
-        setStatus(() => ({ wait: false, message: msg }))
-        setError(
-          'submit',
-          'submitError',
-          msg
-        )
+        if (error.name === 'AbortError') {
+          setStatus(() => ({ wait: false, message: 'aborted' }))  
+        } else {
+          const msg = `${MESSAGE_FAILURE} ${error.message}`
+          setStatus(() => ({ wait: false, message: msg }))
+          setError(
+            'submit',
+            'submitError',
+            msg
+          )
+        }
         waitAndClose() 
       }
     ) 
@@ -68,7 +76,7 @@ export default () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} method="post">
-        <EmailControl register={customRegister} errors={errors} autoFocus/>
+        <EmailControl register={customRegister} errors={errors} />
         <NameControl register={register} errors={errors} />
         <NoteControl register={register} errors={errors} />
     
@@ -76,6 +84,12 @@ export default () => {
       </form>
 
       <SendFormDataModal title="Обработка данных" isOpen={isOpen} onClose={onClose} status={status} 
+        finalFocusRef={emailRef}
+        onAbort={() => {
+          abortController.abort()
+          setStatus(() => ({ wait: false, message: 'aborted' }))
+          waitAndClose()
+        }}
        />
     </>
   )

@@ -11,7 +11,7 @@ import {
   } from '@chakra-ui/core'
 
 
-export default ({ title, isOpen, onClose, status, finalFocusRef }) => {
+export default ({ title, isOpen, onAbort, onClose, status, finalFocusRef }) => {
   return (
     <>
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} finalFocusRef={finalFocusRef}>
@@ -28,7 +28,9 @@ export default ({ title, isOpen, onClose, status, finalFocusRef }) => {
           </ModalBody>
 
           <ModalFooter>
-            { !status.wait && <Button onClick={onClose}>Закрыть</Button> }
+            <Button onClick={ status.wait ? onAbort : onClose }>
+             { status.wait ? 'Отменить' : 'Закрыть' }
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
