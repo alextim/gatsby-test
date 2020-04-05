@@ -9,8 +9,8 @@ const apiUrl = FAKE_GATEWAY_URL
 const msgDone = 'Спасибо! Ваша подписка оформлена! Получайте от нас последние новости и предложения!'
 
 export default () => (
-    <Baseform apiUrl={apiUrl} msgDone={msgDone}>
-      <EmailControl label="" />
-      <Submit>Подписаться</Submit>
-    </Baseform>
+  <Baseform apiUrl={apiUrl} msgDone={msgDone}>
+    <EmailControl label="" />
+    <Submit>Подписаться</Submit>
+  </Baseform>
 )
