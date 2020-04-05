@@ -62,4 +62,4 @@ const FAKE_GATEWAY_URL = 'https://jsonplaceholder.typicode.com/posts'
 const saveContact = (data, abortController, onSuccess, onError) => 
     postData (FAKE_GATEWAY_URL, data, abortController, onSuccess, onError)
 
-export { saveContact }
+export { saveContact, postData }
