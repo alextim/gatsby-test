@@ -1,5 +1,5 @@
-import styled from '@emotion/styled'
-import { Link} from '@chakra-ui/core'
+import styled from '@emotion/styled';
+import { Link} from '@chakra-ui/core';
 
 const BtnLink = styled(Link)`
     display: inline-block;
@@ -26,6 +26,6 @@ const BtnLink = styled(Link)`
     ${ props => props.theme.mediaQueries.md } {
         padding: 0.625em 2.1875em;
     }
-`
+`;
 
-export default BtnLink
+export default BtnLink;

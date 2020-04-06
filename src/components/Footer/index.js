@@ -1,21 +1,21 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import { Global, css } from '@emotion/core'
-import { Flex, Box, useTheme } from '@chakra-ui/core'
+import React from 'react';
+import styled from '@emotion/styled';
+import { Global, css } from '@emotion/core';
+import { Flex, Box, useTheme } from '@chakra-ui/core';
 
 
-import { Container } from './../Container'
+import { Container } from './../Container';
 
-import FooterWidget from './FooterWidget'
+import FooterWidget from './FooterWidget';
 
-import ContactInfo from './ContactInfo'
-import Voice from './Voice'
-import LatestNewsList from './LatestNewsList'
-import SubscribeForm from './SubscribeForm'
+import ContactInfo from './ContactInfo';
+import Voice from './Voice';
+import LatestNewsList from './LatestNewsList';
+import SubscribeForm from './SubscribeForm';
 
-import SocialLinks from './SocialLinks'
-import FooterNavigation from './FooterNavigation'
-import LegalInfo from './LegalInfo'
+import SocialLinks from './SocialLinks';
+import FooterNavigation from './FooterNavigation';
+import LegalInfo from './LegalInfo';
 
 const WidgetWrapper = styled.div`
   width: 100%;
@@ -27,10 +27,10 @@ const WidgetWrapper = styled.div`
     width: 25%;
     margin-bottom: 0;
   }
-`
+`;
 
 export default () => {
-  const theme = useTheme()
+  const theme = useTheme();
 
   return (
       <Box
@@ -81,5 +81,5 @@ export default () => {
         </Box>
    
       </Box>
-    )
-} 
+    );
+};

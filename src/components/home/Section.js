@@ -1,8 +1,8 @@
-import React from 'react'
-import { Flex, Box, Heading } from '@chakra-ui/core'
+import React from 'react';
+import { Flex, Box, Heading } from '@chakra-ui/core';
 
-import { Container } from '../Container'
-import BtnLink from './BtnLink'
+import { Container } from '../Container';
+import BtnLink from './BtnLink';
 
 
 const ButtonsWrap = ({items}) => (
@@ -10,10 +10,9 @@ const ButtonsWrap = ({items}) => (
         <BtnLink href={items.primary.url}>{items.primary.title}</BtnLink>
         { items.secondary && <BtnLink href={items.secondary.url}>{items.secondary.title}</BtnLink>}
     </Flex>
-)
+);
 
-const Section = ( {title, subTitle, text, buttons, children, headingColor,...props} ) => {
-    return (
+const Section = ( {title, subTitle, text, buttons, children, headingColor,...props} ) => (
         <Box as="section" width="100%" pt="2em" pb="2.5em" textAlign="center" {...props}>
             <Container>
                 <Box mb="2em" mx="1.25em">
@@ -25,7 +24,6 @@ const Section = ( {title, subTitle, text, buttons, children, headingColor,...pro
                 { buttons && <ButtonsWrap items={buttons}/> }
             </Container>
         </Box>
-    )
-}
+    );
 
-export default Section
+export default Section;

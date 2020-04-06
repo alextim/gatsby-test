@@ -1,6 +1,5 @@
-import React, { useRef } from 'react'
-import { useForm } from 'react-hook-form'
-
+import React, { useState, useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import {
   Modal,
   ModalOverlay,
@@ -9,45 +8,91 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-} from '@chakra-ui/core'
+} from '@chakra-ui/core';
+import { Spinner, Button } from '@chakra-ui/core';
 
-import { Button } from '@chakra-ui/core'
-
-import { BaseformContext } from './BaseformContext'
-import InquiryForm from './InquiryForm'
+import { BaseformContext } from './BaseformContext';
 
 
-export default ({ isOpen, onClose }) => {
+export default ({ children, sendData, isOpen, onClose }) => {
   const {
-    //handleSubmit,
+    handleSubmit,
     //setError,
     //reset,
     register,
     errors,    
-  } = useForm()
-  const focusRef = useRef()
+  } = useForm();
+
+  const focusRef = useRef();
+  const [status, setStatus] = useState('form');
+  const [message, setMessage] = useState(null);
+  
+  const waitAndClose = () => {
+    setTimeout(() => {
+      onClose();
+      setStatus('form');
+    }, 5000);
+  };
+
+  sendData.onSend = () => {
+    setStatus('sending');
+    setMessage('Обработка данных. Пожалуйста, подождите.');
+  };
+  
+  sendData.onSuccess = () => {
+    setStatus('done');
+    setMessage('ok');
+    waitAndClose();
+  };
+
+  sendData.onCancel = () => {
+    setStatus('done');
+    setMessage('cancelled'); 
+    waitAndClose();
+  };
+
+  sendData.onError = (error) => {
+    setStatus('done'); 
+    setMessage(`error: ${error}`);
+    waitAndClose();
+  };
+
+  const cancel = () => sendData.cancel();
+
+  const onSubmit = (data, e) => {
+    e.preventDefault();
+
+    sendData.send(data);
+  };
+  
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="96%">
+    <Modal isOpen={isOpen} onClose={onClose} size={status === 'form' ?  "96%" : "sm"}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
-        <ModalCloseButton />
+        <ModalHeader>Заявка</ModalHeader>
+        {status !== 'sending' && <ModalCloseButton />}
         <ModalBody>
-          <form onSubmit={()=>alert('hello')} method="post">
-            <BaseformContext.Provider value={{errors, register, focusRef}}>
-              <InquiryForm />
-            </BaseformContext.Provider>
-          </form>
-        </ModalBody>
+          {status === 'form' && 
+              <form onSubmit={handleSubmit(onSubmit)} method="post">
+                <BaseformContext.Provider value={{errors, register, focusRef}}>
+                  {children}
+                </BaseformContext.Provider>
+              </form>
+          }
+          
+          {status === 'sending' && <Spinner />}
 
-        <ModalFooter>
-          <Button variantColor="blue" mr={3} onClick={onClose}>
-            Close
-          </Button>
-          <Button variant="ghost">Secondary Action</Button>
-        </ModalFooter>
+          {status !== 'form' && <div>{message}</div>}
+        </ModalBody>
+        {status !== 'form' &&
+          <ModalFooter>
+            <Button onClick={ status === 'sending' ? cancel : onClose }>
+              {status === 'sending' ? 'Отменить' : 'Закрыть'}
+            </Button>
+          </ModalFooter>
+        }
       </ModalContent>
     </Modal>
-  )
-}
+  );
+};

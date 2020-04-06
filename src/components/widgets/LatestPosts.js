@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-import SidebarWidget from '../SidebarWidget'
-import { IconLink } from '../IconLink'
-import useLatestNewsTop5 from './../../helpers/hooks/useLatestNewsTop5'
+import SidebarWidget from '../SidebarWidget';
+import { IconLink } from '../IconLink';
+import useLatestNewsTop5 from './../../helpers/hooks/useLatestNewsTop5';
 
 export default () => {
-    const posts = useLatestNewsTop5()
-    const icon = 'tag'
+    const posts = useLatestNewsTop5();
+    const icon = 'tag';
     return posts ? 
         <SidebarWidget title="Последние публикации">
         { posts.map((post, i) => 
@@ -16,5 +16,5 @@ export default () => {
                 {post.title}
             </IconLink> )}
         </SidebarWidget>
-        : null
-}
+        : null;
+};

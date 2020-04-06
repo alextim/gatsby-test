@@ -1,12 +1,12 @@
-import React from 'react'
-import { css } from '@emotion/core'
-import styled from '@emotion/styled'
-import { Link } from 'gatsby'
-import { Flex, Box, useTheme } from '@chakra-ui/core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ItemHeading from './ItemHeading'
+import React from 'react';
+import { css } from '@emotion/core';
+import styled from '@emotion/styled';
+import { Link } from 'gatsby';
+import { Flex, Box, useTheme } from '@chakra-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Section from './Section'
+import ItemHeading from './ItemHeading';
+import Section from './Section';
 
 const shadowed = css`
     box-shadow: 0 0 30px hsla(0,0%,94.5%,.87);
@@ -16,14 +16,14 @@ const shadowed = css`
       box-shadow: 0 0 32px 0 hsla(0,0%,47.8%,.4);
       position: relative;
     }
-`
+`;
 
 const StyledFlex = styled(Flex)`
   flex-direction: column;
   ${ props => props.theme.mediaQueries.md } {
       flex-direction: row;
   }
-`
+`;
 
 const FeatureItemWrap = styled.div`
   flex: 1;
@@ -36,8 +36,8 @@ const FeatureItemWrap = styled.div`
   ${ props => props.theme.mediaQueries.md } {
     margin-bottom: 0;
   }
+`;
 
-`
 /**
  * 
  * The Shapes of CSS
@@ -72,7 +72,7 @@ const Burst12 = styled(Flex)`
     &:after {
         transform: rotate(60deg);
     }    
-`
+`;
 
 const StyledLink = styled(Link)`
     color: #f3f8fd;
@@ -81,7 +81,7 @@ const StyledLink = styled(Link)`
     &:hover {
         color: #fff;
     }
-`
+`;
 
 const FeatureItem = ( { title, text, url, icon, color } ) => (
     <FeatureItemWrap>
@@ -97,13 +97,11 @@ const FeatureItem = ( { title, text, url, icon, color } ) => (
         <ItemHeading mb="1em"><Link to={url}>{title}</Link></ItemHeading>
         <Box mb="1em">{text}</Box>
     </FeatureItemWrap>
-)
-
-
+);
 
 const Features = ({settings}) => {
-    const { title, subTitle, text, items } = settings
-    const theme = useTheme()
+    const { title, subTitle, text, items } = settings;
+    const theme = useTheme();
 
     return (
         <Section 
@@ -124,7 +122,7 @@ const Features = ({settings}) => {
             </StyledFlex>
 
         </Section>
-    )
-}
+    );
+};
 
-export default Features
+export default Features;

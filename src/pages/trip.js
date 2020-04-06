@@ -1,13 +1,13 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import { Button, useDisclosure } from '@chakra-ui/core'
+import React from 'react';
+import styled from '@emotion/styled';
+import { Button, useDisclosure } from '@chakra-ui/core';
 
-import Layout from '../components/Layout'
-import SEO from '../components/SEO'
-import Popupform from './../components/forms/Popupform'
+import Layout from '../components/Layout';
+import SEO from '../components/SEO';
+import InquiryPopupForm from './../components/forms/InquiryPopupForm';
 
 export default  ({location}) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Layout>
       <SEO title="Page two" pathname={location.pathname} />
@@ -17,19 +17,19 @@ export default  ({location}) => {
         </LeftWrapper>
         <RightWrapper>
           <Button onClick={onOpen}>Записаться</Button>
-          <Popupform isOpen={isOpen} onClose={onClose} />
+          <InquiryPopupForm isOpen={isOpen} onClose={onClose} />
         </RightWrapper>
       </HeadWrapper>
     </Layout>
-  )
-}
+  );
+};
 
 
 export const HeadWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-`
+`;
 
 export const LeftWrapper = styled.div`
   width: 100%;
@@ -37,7 +37,7 @@ export const LeftWrapper = styled.div`
   ${ props => props.theme.mediaQueries.md } {
     width: 50%;
   }
-`
+`;
 
 export const RightWrapper = styled.div`
   width: 100%;
@@ -45,4 +45,4 @@ export const RightWrapper = styled.div`
   ${ props => props.theme.mediaQueries.md } {
     width: 50%;
   }
-`
+`;

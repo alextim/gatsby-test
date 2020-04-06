@@ -3,7 +3,7 @@
  * https://github.com/FortAwesome/react-fontawesome
  */
 
-import { library } from '@fortawesome/fontawesome-svg-core'
+import { library } from '@fortawesome/fontawesome-svg-core';
 // import your icons
 import { 
   faAngleDown,
@@ -60,7 +60,7 @@ import {
   faThumbtack,
   faTimes,
   faTshirt,
-} from '@fortawesome/free-solid-svg-icons'
+} from '@fortawesome/free-solid-svg-icons';
 
 import { 
   faCalendar,
@@ -84,7 +84,7 @@ import {
   faSmileWink,
 
   faUser,
-} from '@fortawesome/free-regular-svg-icons'
+} from '@fortawesome/free-regular-svg-icons';
 
 import { 
   faFacebook,
@@ -95,7 +95,7 @@ import {
   faSkype,
   faViber,
   faWhatsapp,
-} from '@fortawesome/free-brands-svg-icons'
+} from '@fortawesome/free-brands-svg-icons';
 
 library.add(
   faMountain,
@@ -176,4 +176,4 @@ library.add(
   faViber,
   faWhatsapp,
   faTelegram,
-)
+);

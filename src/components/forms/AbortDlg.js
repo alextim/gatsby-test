@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button } from '@chakra-ui/core'
+import React from 'react';
+import { Button } from '@chakra-ui/core';
 import {
     AlertDialog,
     AlertDialogBody,
@@ -7,15 +7,15 @@ import {
     AlertDialogHeader,
     AlertDialogContent,
     AlertDialogOverlay,
-  } from '@chakra-ui/core'
+  } from '@chakra-ui/core';
 
-  export default ({isOpen, setIsOpen, onAbort}) => {
-    const onClose = () => setIsOpen(false)
+export default ({isOpen, setIsOpen, onAbort}) => {
+    const onClose = () => setIsOpen(false);
     const onAbortClick = () => {
-        onAbort()
-        onClose()
-    }
-    const cancelRef = React.useRef()
+        onAbort();
+        onClose();
+    };
+    const cancelRef = React.useRef();
     
     return (
 
@@ -41,5 +41,5 @@ import {
             </AlertDialogContent>
         </AlertDialog>
 
-    )
-}
+    );
+};

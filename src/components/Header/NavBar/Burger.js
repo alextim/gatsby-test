@@ -1,6 +1,6 @@
-import React from 'react'
-import { Box } from '@chakra-ui/core'
-import styled from '@emotion/styled'
+import React from 'react';
+import { Box } from '@chakra-ui/core';
+import styled from '@emotion/styled';
 
 const BurgerSpan = styled(Box)`
     background-color: currentColor;
@@ -13,7 +13,7 @@ const BurgerSpan = styled(Box)`
     transition-property: background-color,opacity,transform;
     transition-timing-function: ease-out;
     width: 16px;
-`
+`;
 
 const BurgerPseudoBox = styled(Box)`
     color: #4a4a4a;
@@ -26,7 +26,7 @@ const BurgerPseudoBox = styled(Box)`
     hover {
         background-color: rgba(0,0,0,.05);
     }
-`
+`;
 
 const Burger = ({handleToggleCallback, isActive}) => (
     <BurgerPseudoBox
@@ -48,6 +48,6 @@ const Burger = ({handleToggleCallback, isActive}) => (
             transform={isActive ? "translateY(-5px) rotate(-45deg)" : ""} 
         />
     </BurgerPseudoBox>
-)
+);
 
-export default Burger
+export default Burger;

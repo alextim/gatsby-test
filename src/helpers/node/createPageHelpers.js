@@ -1,14 +1,14 @@
-const path = require('path')
-const _ = require('lodash')
-const catHelper = require('./../categoryHelper')
+const path = require('path');
+const _ = require('lodash');
+const catHelper = require('./../categoryHelper');
 
-const postTemplate = path.resolve('./src/templates/post.js')
-const postsTemplate = path.resolve('./src/templates/posts.js')
-const categoryTemplate = path.resolve('./src/templates/categoryPosts.js')
-const tagTemplate = path.resolve('./src/templates/tagPosts.js')
-const archiveTemplate = path.resolve('./src/templates/archivePosts.js')
+const postTemplate = path.resolve('./src/templates/post.js');
+const postsTemplate = path.resolve('./src/templates/posts.js');
+const categoryTemplate = path.resolve('./src/templates/categoryPosts.js');
+const tagTemplate = path.resolve('./src/templates/tagPosts.js');
+const archiveTemplate = path.resolve('./src/templates/archivePosts.js');
 
-const postArchiveHelper = require('./../../helpers/postArchiveHelper')
+const postArchiveHelper = require('./../../helpers/postArchiveHelper');
 
 /*
 https://github.com/g00glen00b/gatsby-blog/tree/fbfc7040582384ace09738fff0cee34fc228c0a1
@@ -16,15 +16,15 @@ https://gatsby-starter-typescript-power-blog.majidhajian.com/blog/coding-is-fun-
 https://github.com/diogorodrigues/iceberg-gatsby-multilang
 */
 
-const siteConfig = require('./../../data/siteConfig')
+const siteConfig = require('./../../data/siteConfig');
 
 
 function createPaginationPages(component, totalItems, pathBase, context, createPage) {
-  const pageSize = siteConfig.pageSize
-  const pageCount = Math.ceil(totalItems / pageSize)
+  const pageSize = siteConfig.pageSize;
+  const pageCount = Math.ceil(totalItems / pageSize);
   
-  console.log('========================')
-  console.log('createPaginationPages: ' + pathBase)
+  console.log('========================');
+  console.log('createPaginationPages: ' + pathBase);
 
 
   const pages = Array.from({length: pageCount}).map((_, index) => createPage({
@@ -39,7 +39,7 @@ function createPaginationPages(component, totalItems, pathBase, context, createP
       currentPage: index + 1,
       ...context
     },
-  }))
+  }));
 
   const firstPage = pageCount > 0 && createPage({
     path: pathBase,
@@ -53,35 +53,35 @@ function createPaginationPages(component, totalItems, pathBase, context, createP
       currentPage: 1,
       ...context
     }
-  })
+  });
 
-  return [...pages, firstPage]
+  return [...pages, firstPage];
 }
 
 
 function createPostPages(data, createPage) {
 
   return data.allPosts.edges.map(({node}, index, arr) => {
-    console.log('========================')
-    console.log('createPostPages: ' + node.fields.slug)
+    console.log('========================');
+    console.log('createPostPages: ' + node.fields.slug);
 
-    const isFirst = index === 0    
-    const isLast  = index === arr.length - 1
+    const isFirst = index === 0;
+    const isLast  = index === arr.length - 1;
       
-    let prev, next    
+    let prev, next;
   
     if ( !isFirst ) {
       prev = {
         title: arr[index - 1].node.frontmatter.title,
         url: arr[index - 1].node.fields.slug,
-      }
+      };
     }
 
     if ( !isLast ) {
       next = {
         title: arr[index + 1].node.frontmatter.title,
         url: arr[index + 1].node.fields.slug,        
-      }
+      };
     }
 
     createPage({
@@ -125,7 +125,7 @@ function createArchivePostsPages(data, createPage) {
       yyyymm: group.fieldValue,
     },
     createPage
-  ))
+  ));
 }
 
 
@@ -141,7 +141,7 @@ function createCategoryPostsPages(data, createPage) {
         },
         createPage
       )
-    )
+    );
 }
 
 function createTagPostsPages(data, createPage) {
@@ -153,7 +153,7 @@ function createTagPostsPages(data, createPage) {
       group,
     },
     createPage
-  ))
+  ));
 }
 /*
 function createLegacyCategoryTutorialsPage({allCategories}, createPage) {

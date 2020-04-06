@@ -1,11 +1,11 @@
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from 'react';
+import { graphql } from 'gatsby';
 
-import ListTemplate from './common/ListTemplate'
+import ListTemplate from './common/ListTemplate';
 
 export default ({ data: {allMdx: { edges }, }, pageContext }) => (
   <ListTemplate edges={edges} pageContext={pageContext} title={`Category:${' '}${pageContext.category}`} />
-)
+);
 
 
 /* eslint no-undef: "off" */
@@ -44,4 +44,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

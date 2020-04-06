@@ -1,15 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-import { CSSReset, ThemeProvider } from '@chakra-ui/core'
-import { ColorModeProvider } from '@chakra-ui/core'
-import { Flex, Box } from '@chakra-ui/core'
+import { CSSReset, ThemeProvider } from '@chakra-ui/core';
+import { ColorModeProvider } from '@chakra-ui/core';
+import { Flex, Box } from '@chakra-ui/core';
 
-import ErrorBoundary from '../ErrorBoundary'
-import theme from '../theme'
-import Header from '../Header'
-import Footer from '../Footer'
-import '../fontawesome'
-import GlobalStyles from './GlobalStyles'
+import ErrorBoundary from '../ErrorBoundary';
+import theme from '../theme';
+import Header from '../Header';
+import Footer from '../Footer';
+import '../fontawesome';
+import GlobalStyles from './GlobalStyles';
 
 /*
 const loadScript = src => {
@@ -45,5 +45,5 @@ export default ({children}) => {
       </ColorModeProvider>
     </ThemeProvider>
   </ErrorBoundary>
-  )
-}
+  );
+};

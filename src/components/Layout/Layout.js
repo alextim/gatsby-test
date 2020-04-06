@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-import LayoutFullWidth from './LayoutFullWidth'
-import { Container } from '../Container'
+import LayoutFullWidth from './LayoutFullWidth';
+import { Container } from '../Container';
 
 export default ({children}) => (
   <LayoutFullWidth>
@@ -9,4 +9,4 @@ export default ({children}) => (
       {children}
     </Container>
   </LayoutFullWidth>
-)
+);

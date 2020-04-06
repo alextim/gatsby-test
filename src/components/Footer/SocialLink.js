@@ -1,8 +1,8 @@
-import React from 'react'
-import { Link } from '@chakra-ui/core' 
-import styled from '@emotion/styled'
-import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react';
+import { Link } from '@chakra-ui/core';
+import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const StyledLink = styled(Link)`
   display: flex;
@@ -25,7 +25,7 @@ const StyledLink = styled(Link)`
     border: 0.125em  solid transparent;
     transition: all .4s ease-out 0s;
   }
-`
+`;
 
 const SocialLink = ({ icon, name, text, url, color }) => (
     <StyledLink
@@ -38,7 +38,7 @@ const SocialLink = ({ icon, name, text, url, color }) => (
     >
       <FontAwesomeIcon icon={icon} />
     </StyledLink>
- )
+ );
 
 SocialLink.propTypes = {
   icon: PropTypes.array.isRequired,

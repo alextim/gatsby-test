@@ -1,4 +1,4 @@
-import { useStaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby';
 
 export default () => {
     const data = useStaticQuery(graphql`
@@ -11,6 +11,6 @@ export default () => {
                 }
             }
         }
-    `)
-    return data.allMdx.group.map( group => group.fieldValue )
-}
+    `);
+    return data.allMdx.group.map( group => group.fieldValue );
+};

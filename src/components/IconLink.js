@@ -1,18 +1,20 @@
-import React from 'react'
-import { Flex } from '@chakra-ui/core'
-import styled from '@emotion/styled'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react';
+import { Flex } from '@chakra-ui/core';
+import styled from '@emotion/styled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const A = styled.a`
     padding-left: 0.3em;
-`
+`;
+
 const Ar = styled.a`
     padding-right: 0.3em;
-`
+`;
+
 const Spacer = styled.div`
     display: inline-block;
     width: 1em;
-`
+`;
 
 
 const IconLink = ({ children, to, icon, size="xs", color, mb, ...props }) => (
@@ -23,7 +25,7 @@ const IconLink = ({ children, to, icon, size="xs", color, mb, ...props }) => (
 
         <A href={to} {...props}>{children}</A>
     </Flex>
-)
+);
 
 const IconLinkR = ({ children, to, icon, size="xs", color, mb, ...props }) => (
     <Flex flexDirection="row" alignItems="center" mb={mb}>
@@ -32,6 +34,6 @@ const IconLinkR = ({ children, to, icon, size="xs", color, mb, ...props }) => (
             { icon && <FontAwesomeIcon icon={icon} size={size} color={color}/> }
 
     </Flex>
-)
+);
 
-export { IconLink, IconLinkR }
+export { IconLink, IconLinkR };

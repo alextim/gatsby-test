@@ -1,4 +1,4 @@
-import Layout from './Layout'
-import LayoutFullWidth from './LayoutFullWidth'
+import Layout from './Layout';
+import LayoutFullWidth from './LayoutFullWidth';
 
-export { LayoutFullWidth, Layout as default }
+export { LayoutFullWidth, Layout as default };

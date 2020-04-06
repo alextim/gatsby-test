@@ -1,3 +1,3 @@
-import socialLinks from './../../data/socialLinks'
+import socialLinks from './../../data/socialLinks';
 
-export default () => socialLinks
+export default () => socialLinks;

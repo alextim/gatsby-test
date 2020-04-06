@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 import {
     FormErrorMessage,
     FormLabel,
     FormControl,    
     Input,
-} from '@chakra-ui/core'
+} from '@chakra-ui/core';
 
-import { BaseformContext } from '../BaseformContext'
+import { BaseformContext } from '../BaseformContext';
 
-const EMAIL_MAX_LENGTH = 20
+const EMAIL_MAX_LENGTH = 20;
 
 
 const emailRules = { 
@@ -23,9 +23,9 @@ const emailRules = {
         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
         message: "Недопустимый e-mail."
     }
-}
+};
 
-export default ({ customRegister, label="E-mail" }) =>
+export default ({ customRegister, label="E-mail" }) => (
     <BaseformContext.Consumer>
         {context => {
             const { register, errors } = context
@@ -45,3 +45,4 @@ export default ({ customRegister, label="E-mail" }) =>
             )}
         }
     </BaseformContext.Consumer>
+);

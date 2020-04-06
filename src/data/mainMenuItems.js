@@ -82,6 +82,4 @@ export default  [
       title: 'Контакты',
       url: '/contact-us',
     }
-]
-
-
+];

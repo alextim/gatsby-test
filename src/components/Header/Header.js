@@ -1,19 +1,19 @@
-import React from 'react'
-import { Box, useTheme } from '@chakra-ui/core'
-import styled from '@emotion/styled'
+import React from 'react';
+import { Box, useTheme } from '@chakra-ui/core';
+import styled from '@emotion/styled';
 
-import { Container } from './../Container'
-import TopHead from './TopHead'
-import NavBar2 from './NavBar'
+import { Container } from './../Container';
+import TopHead from './TopHead';
+import NavBar2 from './NavBar';
 
 const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-`
+`;
 
 export default () => {
-  const theme = useTheme()
+  const theme = useTheme();
 
   return (
     <HeaderWrapper>
@@ -33,5 +33,5 @@ export default () => {
         </Container>
       </Box>
     </HeaderWrapper>
-  )
-}
+  );
+};

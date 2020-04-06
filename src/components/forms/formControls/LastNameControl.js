@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-import NameControl from './NameControl'
+import NameControl from './NameControl';
 
-const controlName = 'lastname'
-const maxLength = 20
-const label = 'Фамилия'
-const placeholder = 'Ваша фамилия' 
+const controlName = 'lastname';
+const maxLength = 20;
+const label = 'Фамилия';
+const placeholder = 'Ваша фамилия'; 
 
 export default() => (
     <NameControl 
@@ -14,4 +14,4 @@ export default() => (
           placeholder={placeholder}
           maxLength={maxLength}
   />
-)     
+);

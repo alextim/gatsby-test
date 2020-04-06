@@ -1,9 +1,9 @@
-import React from 'react'
-import styled from '@emotion/styled'
+import React from 'react';
+import styled from '@emotion/styled';
 
-import SocialLinks from './SocialLinks'
-import VoiceContacts from './VoiceContacts'
-import PostalAddress from './PostalAddress'
+import SocialLinks from './SocialLinks';
+import VoiceContacts from './VoiceContacts';
+import PostalAddress from './PostalAddress';
 
 const TopHeadWrapper = styled.div`
   display: flex;
@@ -13,16 +13,15 @@ const TopHeadWrapper = styled.div`
   ${ props => props.theme.mediaQueries.md } {
     flex-direction: row;
   }
-`
+`;
 
-const TopHead = () => {
-  return (
+const TopHead = () => (
     <TopHeadWrapper>
       <SocialLinks />
       <VoiceContacts />
       <PostalAddress />
     </TopHeadWrapper>
-  )
-}
+);
 
-export default TopHead
+
+export default TopHead;

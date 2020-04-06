@@ -7,28 +7,28 @@
  * 
  */
 
-import React from 'react'
-import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 
-import useSiteMetadata from './../../helpers/hooks/useSiteMetadata'
-import useOrganization from './../../helpers/hooks/useOrganization'
-import SchemaOrg from './SchemaOrg'
+import useSiteMetadata from './../../helpers/hooks/useSiteMetadata';
+import useOrganization from './../../helpers/hooks/useOrganization';
+import SchemaOrg from './SchemaOrg';
 
 function SEO({ title, description, pathname, image, type, date, locale = 'ru' }) {
-  const meta = useSiteMetadata()
-  const org = useOrganization()
+  const meta = useSiteMetadata();
+  const org = useOrganization();
 
-  const url = `${meta.siteUrl}${pathname}`
+  const url = `${meta.siteUrl}${pathname}`;
 
-  title = title || meta.title
+  title = title || meta.title;
   description = description || meta.description;
-  image = image ? new URL(image, meta.siteUrl) : false
+  image = image ? new URL(image, meta.siteUrl) : false;
   // TODO: switch content content: `website`, 
-  type = type || 'website'
+  type = type || 'website';
   //TODO:
-  const isBlogPost = type === 'article'
-  const datePublished = isBlogPost ? date : false
+  const isBlogPost = type === 'article';
+  const datePublished = isBlogPost ? date : false;
 
   return (
     <>
@@ -71,7 +71,7 @@ function SEO({ title, description, pathname, image, type, date, locale = 'ru' })
         defaultTitle={title}
       />
     </>
-  )
+  );
 }
 
 SEO.propTypes = {
@@ -85,4 +85,4 @@ SEO.defaultProps = {
 };
 
 
-export default SEO
+export default SEO;

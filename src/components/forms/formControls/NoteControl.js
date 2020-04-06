@@ -1,18 +1,18 @@
-import React from 'react'
+import React from 'react';
 import {
     FormErrorMessage,
     FormLabel,
     FormControl,    
     Textarea,
-} from '@chakra-ui/core'
+} from '@chakra-ui/core';
 
-import { BaseformContext } from '../BaseformContext'
+import { BaseformContext } from '../BaseformContext';
 
 const noteRules = {
     required: true
-}
+};
 
-export default ({ customRegister, ...props }) =>
+export default ({ customRegister, ...props }) => (
     <BaseformContext.Consumer>
         {context => {
             const { register, errors } = context
@@ -33,3 +33,4 @@ export default ({ customRegister, ...props }) =>
                 )}
             }
     </BaseformContext.Consumer>
+);

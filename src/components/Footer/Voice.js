@@ -1,9 +1,10 @@
-import React from 'react'
-import OrganizationPhones from '../organization/OrganizationPhones'
-import OrganizationCloudPhones from '../organization/OrganizationCloudPhones'
+import React from 'react';
+import OrganizationPhones from '../organization/OrganizationPhones';
+import OrganizationCloudPhones from '../organization/OrganizationCloudPhones';
 
-export default () => 
+export default () => (
   <>
     <OrganizationPhones />
     <OrganizationCloudPhones />
   </>
+);

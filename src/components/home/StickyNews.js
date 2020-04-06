@@ -1,39 +1,40 @@
-import React from 'react'
-import { useTheme } from '@chakra-ui/core'
-import { Flex, Box, Link, Text } from '@chakra-ui/core'
-import Img from 'gatsby-image'
-import styled from '@emotion/styled'
+import React from 'react';
+import { useTheme } from '@chakra-ui/core';
+import { Flex, Box, Link, Text } from '@chakra-ui/core';
+import Img from 'gatsby-image';
+import styled from '@emotion/styled';
 
-import Section from './Section'
-import BtnLink from './BtnLink'
-import useLatestNewsFeatured1 from './../../helpers/hooks/useLatestNewsFeatured1'
+import Section from './Section';
+import BtnLink from './BtnLink';
+import useLatestNewsFeatured1 from './../../helpers/hooks/useLatestNewsFeatured1';
 
 const Wrap = styled(Box)`
     width: 100%;
     ${ props => props.theme.mediaQueries.md } {
         width: 50%;
     }
-`
+`;
+
 const StyledBtnLink = styled(BtnLink)`
     margin: 2em;
     width: 90%;
-`
+`;
 
 export default ( {settings} ) => {
-    const posts = useLatestNewsFeatured1()
+    const posts = useLatestNewsFeatured1();
     if ( !posts.length ) {
-        return
+        return;
     }
     
-    const { title, subTitle, text } = settings
+    const { title, subTitle, text } = settings;
     //, trip
-    const theme = useTheme()
+    const theme = useTheme();
 
-    const { path, featuredImage } = posts[0]
+    const { path, featuredImage } = posts[0];
     
 
-    const price = 100
-    const currency = 'EUR'
+    const price = 100;
+    const currency = 'EUR';
 
     return (
         <Section 
@@ -61,5 +62,5 @@ export default ( {settings} ) => {
             </Flex>
 
         </Section>
-    )
-}
+    );
+};

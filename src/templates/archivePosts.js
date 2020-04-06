@@ -1,13 +1,13 @@
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from 'react';
+import { graphql } from 'gatsby';
 
-import ListTemplate from './common/ListTemplate'
-import postArchiveHelper from './../helpers/postArchiveHelper'
+import ListTemplate from './common/ListTemplate';
+import postArchiveHelper from './../helpers/postArchiveHelper';
 
 export default ({ data: {allMdx: { edges }, }, pageContext }) => (
   <ListTemplate edges={edges} pageContext={pageContext} 
     title={`Архив за ${postArchiveHelper.getTitle(pageContext.yyyymm)}`} />
-)
+);
 
 
 /* eslint no-undef: "off" */
@@ -50,4 +50,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

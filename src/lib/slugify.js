@@ -10,5 +10,5 @@ function slugify(string) {
       .replace(/^-+/, '')
       .replace(/-+$/, '');
   }
-  module.exports = slugify
+  module.exports = slugify;
   //https://medium.com/@mhagemann/the-ultimate-way-to-slugify-a-url-string-in-javascript-b8e4a0d849e1

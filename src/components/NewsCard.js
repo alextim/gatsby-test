@@ -1,21 +1,19 @@
-import React from 'react'
-import Img from 'gatsby-image'
-import { Flex, Box, Link, Text, Heading } from '@chakra-ui/core'
-import styled from '@emotion/styled'
+import React from 'react';
+import Img from 'gatsby-image';
+import { Flex, Box, Link, Text, Heading } from '@chakra-ui/core';
+import styled from '@emotion/styled';
 
-import AnimatedLink from './AnimatedLink'
-import { DateMeta, CategoryMeta } from './Meta'
+import AnimatedLink from './AnimatedLink';
+import { DateMeta, CategoryMeta } from './Meta';
 
 const Wrapper = styled(Box)`
     display: flex;
     flex-direction: column;
     align-content: flex-start;
     margin: 0 1em 2em 1em;
-`
+`;
 
 export default ( {post} ) => {
-
-
     return (
         <Wrapper as="article" shadow="lg">
             { post.featuredImage &&
@@ -40,5 +38,5 @@ export default ( {post} ) => {
                 <AnimatedLink to={post.path} end="true">Читать дальше</AnimatedLink>
             </Box>
         </Wrapper>
-    )
-}
+    );
+};

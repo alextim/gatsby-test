@@ -1,10 +1,10 @@
-import React from 'react'
-import { Flex, useTheme } from '@chakra-ui/core'
-import styled from '@emotion/styled'
+import React from 'react';
+import { Flex, useTheme } from '@chakra-ui/core';
+import styled from '@emotion/styled';
 
-import Section from './Section'
-import NewsCard from './../NewsCard'
-import useLatestNewsTop3 from './../../helpers/hooks/useLatestNewsTop3'
+import Section from './Section';
+import NewsCard from './../NewsCard';
+import useLatestNewsTop3 from './../../helpers/hooks/useLatestNewsTop3';
 
 const InnerWrap = styled(Flex)`
     flex-direction: column;
@@ -12,12 +12,12 @@ const InnerWrap = styled(Flex)`
     ${ props => props.theme.mediaQueries.lg } {
         flex-direction: row;
     }
-`
+`;
 
 export default ( {settings} ) => {
-    const { title, buttons } = settings
-    const theme = useTheme()
-    const posts = useLatestNewsTop3()
+    const { title, buttons } = settings;
+    const theme = useTheme();
+    const posts = useLatestNewsTop3();
 
     return (
         <Section 
@@ -32,5 +32,5 @@ export default ( {settings} ) => {
             </InnerWrap>
 
         </Section>
-    )
-}
+    );
+};

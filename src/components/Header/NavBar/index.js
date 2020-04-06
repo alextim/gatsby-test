@@ -1,11 +1,11 @@
-import React from 'react'
-import { Flex } from '@chakra-ui/core'
+import React from 'react';
+import { Flex } from '@chakra-ui/core';
 
-import Brand from './Brand'
-import Burger from './Burger'
-import Menu from './Menu'
-import NavbarEnd from './NavbarEnd'
-//import StrechedBackground from './../../Container'
+import Brand from './Brand';
+import Burger from './Burger';
+import Menu from './Menu';
+import NavbarEnd from './NavbarEnd';
+//import StrechedBackground from './../../Container';
 
 //import './navbar.scss'
 
@@ -19,8 +19,8 @@ const Navbar2 = () => {
   * 
   * 
   * */
-  const [isActive, setisActive] = React.useState(false)
-  const handleToggle = () => setisActive(!isActive)
+  const [isActive, setisActive] = React.useState(false);
+  const handleToggle = () => setisActive(!isActive);
 
   return (
      <Flex as="nav" 
@@ -36,8 +36,8 @@ const Navbar2 = () => {
       <Menu isActive={isActive}/>
       <NavbarEnd />
     </Flex>
-    )
-}
+    );
+};
 
 
-export default Navbar2
+export default Navbar2;

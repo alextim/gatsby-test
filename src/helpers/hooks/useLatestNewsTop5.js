@@ -1,4 +1,4 @@
-import { useStaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby';
 
 export default () => {
     const data = useStaticQuery(graphql`
@@ -20,10 +20,11 @@ export default () => {
                 }
             }
         }
-    `)
+    `);
+
     return data.allMdx.edges.map( ({node}) => ({
             title: node.frontmatter.title,
             path: node.fields.slug,
         })
-    )
-}
+    );
+};

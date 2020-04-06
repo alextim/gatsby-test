@@ -1,10 +1,10 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import { Flex, Box, Link } from '@chakra-ui/core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react';
+import styled from '@emotion/styled';
+import { Flex, Box, Link } from '@chakra-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Utils from './../../../lib/utils'
-import useOrganization from '../../../helpers/hooks/useOrganization'
+import Utils from './../../../lib/utils';
+import useOrganization from '../../../helpers/hooks/useOrganization';
 
 const StyledLink = styled(Link)`
   display: inline-flex;
@@ -20,12 +20,12 @@ const StyledLink = styled(Link)`
     transition: all .4s ease-out 0s;
     text-decoration: none;
   }
-`
+`;
 
 const StyledPhoneLink = styled(StyledLink)`
   width: auto;
   padding: 0 0.5em;
-`
+`;
   
 const IconOnlyLink = ({icon, color, url, name}) => (
   <StyledLink
@@ -36,16 +36,16 @@ const IconOnlyLink = ({icon, color, url, name}) => (
   >
       <FontAwesomeIcon icon={icon} size="lg" color={color}/>
   </StyledLink>
-)  
+);  
 
 const VoiceContacts = () => {
-    const { voice } = useOrganization()
+    const { voice } = useOrganization();
 
-    //const whatsappColor = theme.colors.brands.whatsapp
-    //const viberColor = theme.colors.brands.viber
-    //const telegramColor = theme.colors.brands.telegram
+    //const whatsappColor = theme.colors.brands.whatsapp;
+    //const viberColor = theme.colors.brands.viber;
+    //const telegramColor = theme.colors.brands.telegram;
 
-    const phone = voice.phone[0]
+    const phone = voice.phone[0];
             // TODO: onclick="trackCall('Phone','0800300833');"
 
   return (
@@ -84,8 +84,8 @@ const VoiceContacts = () => {
 
         ) }
     </Flex>
-  )
-}
+  );
+};
 
 
-export default VoiceContacts
+export default VoiceContacts;

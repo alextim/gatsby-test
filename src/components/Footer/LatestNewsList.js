@@ -1,14 +1,14 @@
-import React from 'react'
-import { Flex, useTheme } from '@chakra-ui/core'
+import React from 'react';
+import { Flex, useTheme } from '@chakra-ui/core';
 
-import AnimatedLink from '../AnimatedLink'
-import useLatestNewsTop5 from '../../helpers/hooks/useLatestNewsTop5'
+import AnimatedLink from '../AnimatedLink';
+import useLatestNewsTop5 from '../../helpers/hooks/useLatestNewsTop5';
 
 export default () => {
-  const theme = useTheme()
-  const mb = theme.footer.mbWidgetLink
+  const theme = useTheme();
+  const mb = theme.footer.mbWidgetLink;
 
-  const posts = useLatestNewsTop5()
+  const posts = useLatestNewsTop5();
   
   return (
     <Flex direction="column" align="start">
@@ -20,5 +20,5 @@ export default () => {
         )
       }
     </Flex>
-  )
-}
+  );
+};

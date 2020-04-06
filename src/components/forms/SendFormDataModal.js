@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button, Box, Spinner } from '@chakra-ui/core'
+import React from 'react';
+import { Button, Box, Spinner } from '@chakra-ui/core';
 import {
     Modal,
     ModalOverlay,
@@ -8,7 +8,7 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
-  } from '@chakra-ui/core'
+  } from '@chakra-ui/core';
 
 
 export default ({ title, isOpen, onAbort, onClose, status, finalFocusRef }) => (
@@ -32,4 +32,4 @@ export default ({ title, isOpen, onAbort, onClose, status, finalFocusRef }) => (
       </ModalFooter>
     </ModalContent>
   </Modal>
-)
+);

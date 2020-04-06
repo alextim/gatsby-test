@@ -1,12 +1,12 @@
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from 'react';
+import { graphql } from 'gatsby';
 
-import ListTemplate from './common/ListTemplate'
+import ListTemplate from './common/ListTemplate';
 
 
 export default ({ data: {allMdx: { edges }, },  pageContext }) => (
   <ListTemplate edges={edges} pageContext={pageContext} title="Статьи и новости" />
-)
+);
 
 export const pageQuery = graphql`
   query BlogListQuery ($skip: Int!, $limit: Int!) {
@@ -44,4 +44,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

@@ -1,7 +1,7 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 const PageHeading = styled.h1`
     text-align: center;
-`
+`;
 
-export default PageHeading
+export default PageHeading;

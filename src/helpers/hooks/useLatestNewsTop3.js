@@ -1,4 +1,4 @@
-import { useStaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby';
 
 export default () => {
     const data = useStaticQuery(graphql`
@@ -36,7 +36,7 @@ export default () => {
                 }
             }
         }
-    `)
+    `);
     
     return data.allMdx.edges.map( ({node}) => {
         const { title, date, categories, featuredImage } = node.frontmatter
@@ -48,5 +48,5 @@ export default () => {
             excerpt: node.excerpt,
             featuredImage: featuredImage ? featuredImage.childImageSharp.fluid : null
         }
-    })
-}
+    });
+};

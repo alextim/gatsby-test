@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import { Box } from '@chakra-ui/core'
+import React from 'react';
+import styled from '@emotion/styled';
+import { Box } from '@chakra-ui/core';
 
-import Layout from '../../components/Layout'
+import Layout from '../../components/Layout';
 
-import LatestPosts from '../../components/widgets/LatestPosts'
-import PostArchive  from '../../components/widgets/PostArchive'
-import PostCategories  from '../../components/widgets/PostCategories'
+import LatestPosts from '../../components/widgets/LatestPosts';
+import PostArchive  from '../../components/widgets/PostArchive';
+import PostCategories  from '../../components/widgets/PostCategories';
 
 
 const BlogWrapper = styled.div`
@@ -15,7 +15,7 @@ const BlogWrapper = styled.div`
   ${ props => props.theme.mediaQueries.lg } {
     flex-direction: row;
   }
-`
+`;
 
 const wrapper = styled(Box)`
   padding: 0 1em;
@@ -24,21 +24,22 @@ const wrapper = styled(Box)`
   ${ props => props.theme.mediaQueries.lg } {
     padding: 0 1.5em;
   } 
-`
+`;
 
 const ContentWrap = styled(wrapper)`
   ${ props => props.theme.mediaQueries.lg } {
     width: 70%;
   }  
-`
+`;
+
 const WidgetsWrap = styled(wrapper)`
   ${ props => props.theme.mediaQueries.lg } {
     width: 30%;
   }    
-`  
+`;  
 
 
-export default ({children}) =>
+export default ({children}) => (
   <Layout>
     <BlogWrapper>
       <ContentWrap>
@@ -51,3 +52,4 @@ export default ({children}) =>
       </WidgetsWrap>
     </BlogWrapper>
   </Layout>
+);

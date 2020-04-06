@@ -1,23 +1,22 @@
-import React from 'react'
-import { useTheme } from '@chakra-ui/core'
+import React from 'react';
+import { useTheme } from '@chakra-ui/core';
 
-import Utils from '../../lib/utils'
-import useOrganization from '../../helpers/hooks/useOrganization'
-import { IconLink } from '../IconLink'
+import Utils from '../../lib/utils';
+import useOrganization from '../../helpers/hooks/useOrganization';
+import { IconLink } from '../IconLink';
 
 export default () => {
-    const { voice } = useOrganization()
+    const { voice } = useOrganization();
 
-    const theme = useTheme()
+    const theme = useTheme();
 
-    const whatsappColor = theme.colors.brands.whatsapp
-    const viberColor = theme.colors.brands.viber
-    const telegramColor = theme.colors.brands.telegram
+    const whatsappColor = theme.colors.brands.whatsapp;
+    const viberColor = theme.colors.brands.viber;
+    const telegramColor = theme.colors.brands.telegram;
 
     return (
       <>
-        {
-          voice.whatsapp && (
+        {voice.whatsapp && (
               <IconLink 
                 icon={["fab","whatsapp"]}
                 color={whatsappColor}
@@ -30,8 +29,7 @@ export default () => {
               </IconLink>
           )
         } 
-        {
-          voice.telegram && (
+        {voice.telegram && (
               <IconLink 
                 icon={["fab","telegram"]} 
                 color={telegramColor}
@@ -44,8 +42,7 @@ export default () => {
               </IconLink>
           )
         }  
-        {
-          voice.viber && (
+        {voice.viber && (
               <IconLink 
                 icon={["fab","viber"]} 
                 color={viberColor}
@@ -61,5 +58,5 @@ export default () => {
         } 
 
       </>
-    )
-}
+    );
+};

@@ -1,3 +1,3 @@
-import organization from './../../data/organization'
+import organization from './../../data/organization';
 
-export default () => organization
+export default () => organization;

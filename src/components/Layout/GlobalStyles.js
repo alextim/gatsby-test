@@ -1,5 +1,5 @@
-import React from 'react'
-import { Global, css } from '@emotion/core'
+import React from 'react';
+import { Global, css } from '@emotion/core';
 
 export default ({theme}) => (
     <Global
@@ -62,4 +62,4 @@ export default ({theme}) => (
     }
    `}
   />
-)
+);

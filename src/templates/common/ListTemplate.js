@@ -6,13 +6,14 @@ import SEO from '../../components/SEO'
 import PostListing from '../../components/PostListing'
 import Pagination from '../../components/Pagination'
 
-import toPosts from './toPosts'
+import toPosts from './toPosts';
 
 const Heading = styled.h1`
   text-align: center;
-`
+`;
+
 export default ( { edges, pageContext, title } ) => {
-  const posts = toPosts(edges)
+  const posts = toPosts(edges);
 
   return (
     <BlogLayout>
@@ -26,5 +27,5 @@ export default ( { edges, pageContext, title } ) => {
         />
 
     </BlogLayout>
-  )
-}
+  );
+};

@@ -158,4 +158,4 @@ function translit(str, typ) {
           }
         }));
   }
-  module.exports = translit
+  module.exports = translit;

@@ -1,14 +1,14 @@
-import React from 'react'
-import { useTheme } from '@chakra-ui/core'
+import React from 'react';
+import { useTheme } from '@chakra-ui/core';
 
-import Utils from '../../lib/utils'
-import useOrganization from '../../helpers/hooks/useOrganization'
-import { IconLink } from '../IconLink'
+import Utils from '../../lib/utils';
+import useOrganization from '../../helpers/hooks/useOrganization';
+import { IconLink } from '../IconLink';
 
 export default () => {
-    const { voice } = useOrganization()
-    const theme = useTheme()
-    const icon = "phone"
+    const { voice } = useOrganization();
+    const theme = useTheme();
+    const icon = "phone";
 
     return  voice.phone.map( (phone, i) => (
 //TODO:  \AT_Lib\trackCallLink($title) 
@@ -22,5 +22,5 @@ export default () => {
                 {Utils.formatPhone(phone)}
             </IconLink>
         )
-    )
-}
+    );
+};

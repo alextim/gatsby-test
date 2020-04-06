@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from '@emotion/styled'
+import React from 'react';
+import styled from '@emotion/styled';
 
-import SocialLink from './SocialLink'
-import Utils from './../../../lib/utils'
-import useSocialLinks from '../../../helpers/hooks/useSocialLinks'
+import SocialLink from './SocialLink';
+import Utils from './../../../lib/utils';
+import useSocialLinks from '../../../helpers/hooks/useSocialLinks';
 
 const SocialLinks = () => {
-    const socialLinks = useSocialLinks()
+    const socialLinks = useSocialLinks();
 
     const StyledFlex = styled.div`
       display: none;
@@ -16,7 +16,8 @@ const SocialLinks = () => {
         align-items: center;
         margin-right: auto;
       }
-    `
+    `;
+
     return (
       <StyledFlex>
       { 
@@ -31,7 +32,7 @@ const SocialLinks = () => {
         ))
       }
       </StyledFlex>
-    )
-}
+    );
+};
 
-export default SocialLinks
+export default SocialLinks;

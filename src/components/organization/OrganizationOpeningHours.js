@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import { Grid } from '@chakra-ui/core'
+import React from 'react';
+import styled from '@emotion/styled';
+import { Grid } from '@chakra-ui/core';
 
-import useOrganization from '../../helpers/hooks/useOrganization'
+import useOrganization from '../../helpers/hooks/useOrganization';
 
 const Wrapper = styled(Grid)`
   grid-template-columns: 2em 3em 1em auto;
-`
+`;
 
 const TimeRow = ({dow, timeStart, timeFinish}) => (
   <>
@@ -15,13 +15,11 @@ const TimeRow = ({dow, timeStart, timeFinish}) => (
     <div>-</div>
     <div>{timeFinish}</div>
   </> 
-)
+);
 
 export default () => {
-  const { openingHours } = useOrganization()
-  const dow = [ 'Пн', 'Вт', 'Ср', 'Чт', 'Пт' , 'Сб', 'Вс' ]
-
-
+  const { openingHours } = useOrganization();
+  const dow = [ 'Пн', 'Вт', 'Ср', 'Чт', 'Пт' , 'Сб', 'Вс' ];
 
   return (
     <Wrapper>
@@ -31,6 +29,5 @@ export default () => {
       ))
     }
     </Wrapper>
-  )
-}
-
+  );
+};

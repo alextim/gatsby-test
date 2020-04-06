@@ -1,4 +1,4 @@
-const Utils = require('./../lib/utils')
+const Utils = require('./../lib/utils');
 
 const postArchiveHelper= {
     getTitle: s => {
@@ -12,4 +12,4 @@ const postArchiveHelper= {
     getPath: s => `${s.substr(0, 4)}/${s.substr(5)}`
 }
 
-module.exports = postArchiveHelper
+module.exports = postArchiveHelper;

@@ -1,26 +1,27 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import Img from 'gatsby-image'
-import styled from '@emotion/styled'
-import { Flex, Heading } from '@chakra-ui/core'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
-import { MDXProvider } from "@mdx-js/react"
+import React from 'react';
+import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
+import styled from '@emotion/styled';
+import { Flex, Heading } from '@chakra-ui/core';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { MDXProvider } from "@mdx-js/react";
 
-import { DateMeta, CategoryMeta, TagMeta } from '../components/Meta'
-import SEO from '../components/SEO'
-import { IconLink, IconLinkR } from '../components/IconLink'
-import BlogLayout from './common/BlogLayout'
+import { DateMeta, CategoryMeta, TagMeta } from '../components/Meta';
+import SEO from '../components/SEO';
+import { IconLink, IconLinkR } from '../components/IconLink';
+import BlogLayout from './common/BlogLayout';
 
-//import HelloWorld from '../components/HelloWorld'
+//import HelloWorld from '../components/HelloWorld';
 
-const shortcodes = {IconLink}
+const shortcodes = {IconLink};
 
 const PrevNext = ({ prev, next }) => {
   const PrevNextWrap  = styled.div`
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-  `
+  `;
+
   return (
     <PrevNextWrap>
         {prev && (
@@ -35,16 +36,16 @@ const PrevNext = ({ prev, next }) => {
 
         )}
     </PrevNextWrap>  
-  )
-}
+  );
+};
 
 export default ({ data, pageContext }) => {
-  const { next, prev, pathname } = pageContext
-  const { frontmatter, body, excerpt } = data.mdx // , fields
-  const { title, description, date, featuredImage, tags, categories } = frontmatter
-  const featuredImgFluid = featuredImage ? featuredImage.childImageSharp.fluid : null
-  const imgSrc = featuredImgFluid ? featuredImgFluid.src : null
-  //const url = fields.slug
+  const { next, prev, pathname } = pageContext;
+  const { frontmatter, body, excerpt } = data.mdx; // , fields
+  const { title, description, date, featuredImage, tags, categories } = frontmatter;
+  const featuredImgFluid = featuredImage ? featuredImage.childImageSharp.fluid : null;
+  const imgSrc = featuredImgFluid ? featuredImgFluid.src : null;
+  //const url = fields.slug;
 
   return (
     <BlogLayout>
@@ -71,8 +72,8 @@ export default ({ data, pageContext }) => {
           <PrevNext prev={prev} next={next} />
 
     </BlogLayout>
-  )
-}
+  );
+};
 
 export const pageQuery = graphql`
   query BlogPostById($id: String!) {
@@ -99,4 +100,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

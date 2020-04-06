@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import { Box } from '@chakra-ui/core'
-import styled from '@emotion/styled'
+import React from 'react';
+import { Link } from 'gatsby';
+import { Box } from '@chakra-ui/core';
+import styled from '@emotion/styled';
 
 const PaginationWrapper = styled.nav`
   display: flex;
@@ -13,7 +13,7 @@ const PaginationWrapper = styled.nav`
   max-width: 770px;
   padding: 25px 0;
   margin: 0px auto;
-`
+`;
 
 const NavBtn = styled(Link)`
   padding: 6px 18px;
@@ -25,11 +25,11 @@ const NavBtn = styled(Link)`
     background: #ff7550;
     color: #fff;
   }
-`
+`;
 
 const CurrentPageBtn = styled(NavBtn)`
   border: 1px solid black
-`
+`;
 
 const Arrow = styled(Box)`
   border: solid;
@@ -37,18 +37,19 @@ const Arrow = styled(Box)`
   display: inline-block;
   padding: 2px;
   margin-bottom: 2px;
-`
+`;
 
 const ArrowLeft = styled(Arrow)`
   transform: rotate(135deg);
-`
+`;
+
 const ArrowRight = styled(Arrow)`
   transform: rotate(-45deg);
-`
+`;
 
 export default ({ currentPage, pageCount, base }) => {
     if (pageCount === 1) {
-      return null
+      return null;
     }
 
     const isFirst = currentPage === 1;
@@ -58,20 +59,19 @@ export default ({ currentPage, pageCount, base }) => {
       <PaginationWrapper>
         { !isFirst && <NavBtn to={currentPage === 2 ? `/${base}` : `/${base}/page/${currentPage - 1}`} rel="prev"><ArrowLeft mr="0.5em"/>Назад</NavBtn> }
         {Array.from({ length: pageCount }, (_, i) => {
-            const key = `pagination-number${i + 1}`
-            const to = i === 0 ? `/${base}` : `/${base}/page/${i + 1}`
-            const title = i + 1
+            const key = `pagination-number${i + 1}`;
+            const to = i === 0 ? `/${base}` : `/${base}/page/${i + 1}`;
+            const title = i + 1;
 
             if ( currentPage === i + 1 ) {
-              return <CurrentPageBtn to={to} key={key}>{title}</CurrentPageBtn>
+              return <CurrentPageBtn to={to} key={key}>{title}</CurrentPageBtn>;
             } else {
-              return <NavBtn to={to} key={key}>{title}</NavBtn>
+              return <NavBtn to={to} key={key}>{title}</NavBtn>;
             }
           })}
 
         { !isLast && <NavBtn to={`/${base}/page/${currentPage + 1}`} rel="next">Вперед<ArrowRight ml="0.5em"/></NavBtn> }
 
       </PaginationWrapper>
-    )
-
-}
+    );
+};

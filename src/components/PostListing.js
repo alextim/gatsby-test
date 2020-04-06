@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from '@emotion/styled'
+import React from 'react';
+import styled from '@emotion/styled';
 
-import NewsCard from '../components/NewsCard'
+import NewsCard from '../components/NewsCard';
 
 const Wrapper = styled.div`
     display: flex;
@@ -9,13 +9,14 @@ const Wrapper = styled.div`
     ${ props => props.theme.mediaQueries.lg } {
         flex-direction: row;
     }
-`
+`;
+
 const ItemWrap = styled.div`
     width: 100%;
     ${ props => props.theme.mediaQueries.lg } {
         width: 50%;
     }
-`
+`;
 
 export default ({ posts }) => (
     <Wrapper>
@@ -27,4 +28,4 @@ export default ({ posts }) => (
         )
     }
     </Wrapper>
-)
+);

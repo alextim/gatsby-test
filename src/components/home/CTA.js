@@ -1,11 +1,11 @@
-import React from 'react'
-import { useTheme } from '@chakra-ui/core'
+import React from 'react';
+import { useTheme } from '@chakra-ui/core';
 
-import Section from './Section'
+import Section from './Section';
 
 const CTA = ( {settings} ) => {
-    const { title, subTitle, text, buttons } = settings
-    const theme = useTheme()
+    const { title, subTitle, text, buttons } = settings;
+    const theme = useTheme();
 
     return (
         <Section 
@@ -17,7 +17,7 @@ const CTA = ( {settings} ) => {
             bg={theme.home.cta.colors.bg}
             buttons={buttons}>
         </Section>
-    )
-}
+    );
+};
 
-export default CTA
+export default CTA;

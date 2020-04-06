@@ -11,4 +11,4 @@ export default ( edges ) =>
             excerpt: node.excerpt,
             featuredImage: featuredImage ? featuredImage.childImageSharp.fluid : null
         }
-    })
+    });

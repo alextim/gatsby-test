@@ -1,17 +1,17 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import styled from '@emotion/styled'
+import React from 'react';
+import { Link } from 'gatsby';
+import styled from '@emotion/styled';
 
 
-import mainMenuItems from '../../../data/mainMenuItems'
+import mainMenuItems from '../../../data/mainMenuItems';
 
 
-let id = 0
+let id = 0;
 
 const getId = () => {
-  id = id + 1
-  return 'sm' + id.toString()
-}
+  id = id + 1;
+  return 'sm' + id.toString();
+};
 
 const StyledCheckbox = styled.input`
   display: none;
@@ -23,7 +23,7 @@ const StyledCheckbox = styled.input`
       display: none;
     }
   }
-`
+`;
 
 const StyledLi = styled.li`
     display: block;
@@ -52,7 +52,7 @@ const StyledLi = styled.li`
             border-width: 0 1px 0 0;
         }
     }
-`
+`;
 
 const StyledUl = styled.ul`
     display: none;
@@ -102,7 +102,7 @@ const StyledUl = styled.ul`
         }
     }
 
-`
+`;
 
 const StyledLabel = styled.label`
     &::after {
@@ -125,12 +125,13 @@ const StyledLabel = styled.label`
         padding-left: 0.25em;
         background: transparent;
     }
-`
+`;
+
 const MenuItem = ({title, url}) => (
     <StyledLi>
         <Link to={url}>{title}</Link>
     </StyledLi>
-)
+);
 
 const MenuItems = ({items}) => (
     items.map ( (item, i) => {
@@ -140,7 +141,7 @@ const MenuItems = ({items}) => (
           return (<MenuItem key={i} title={item.title} url={item.url}/>)
         }
     } )
-)
+);
 
 const MenuDropdown = ({title, id, items}) => (
   <StyledLi>
@@ -156,7 +157,7 @@ const MenuDropdown = ({title, id, items}) => (
     </StyledUl>
 
   </StyledLi>
-)
+);
 
 
 const Menu = ({isActive}) => {
@@ -170,13 +171,14 @@ const Menu = ({isActive}) => {
             margin-left: auto;
             width: auto;
         }
-    `
+    `;
+
     return (
-    <StyledMenuWrap>
-        <MenuItems items={mainMenuItems} />
-    </StyledMenuWrap>
-)
-}
+      <StyledMenuWrap>
+          <MenuItems items={mainMenuItems} />
+      </StyledMenuWrap>
+  );
+};
 
 
-export default Menu
+export default Menu;

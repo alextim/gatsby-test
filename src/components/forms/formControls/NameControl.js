@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 import {
     FormErrorMessage,
     FormLabel,
     FormControl,    
     Input,
-} from '@chakra-ui/core'
+} from '@chakra-ui/core';
 
-import { BaseformContext } from '../BaseformContext'
+import { BaseformContext } from '../BaseformContext';
 
 export default ({ customRegister, controlName, label, placeholder, maxLength }) => {
     const nameRules = { 
@@ -20,7 +20,7 @@ export default ({ customRegister, controlName, label, placeholder, maxLength }) 
             value: /^[a-zA-Zа-яА-ЯёЁ\s]*$/,
             message: "Допускаются только буквы и пробел."
         }
-    }
+    };
     return (
         <BaseformContext.Consumer>
             {context => {
@@ -42,5 +42,5 @@ export default ({ customRegister, controlName, label, placeholder, maxLength }) 
                 )}
             }
         </BaseformContext.Consumer>
-    )
-}
+    );
+};

@@ -1,14 +1,14 @@
-import React from 'react'
-import { Flex } from '@chakra-ui/core'
+import React from 'react';
+import { Flex } from '@chakra-ui/core';
 
-import SocialLink from './SocialLink'
-import Utils from '../../lib/utils'
-import useSocialLinks from '../../helpers/hooks/useSocialLinks'
+import SocialLink from './SocialLink';
+import Utils from '../../lib/utils';
+import useSocialLinks from '../../helpers/hooks/useSocialLinks';
 
 
 export default () => {
 //  const type = "circle"
-  const items = useSocialLinks()
+  const items = useSocialLinks();
 
   return (
    <Flex py={1} alignItems="center" justifyContent="center" flexWrap="wrap">
@@ -24,5 +24,5 @@ export default () => {
         ))
       }
     </Flex>
-  )
-}
+  );
+};
