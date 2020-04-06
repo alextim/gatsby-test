@@ -4,16 +4,16 @@ import { useDisclosure } from '@chakra-ui/core';
 
 import SendFormDataModal from './SendFormDataModal';
 import { BaseformContext } from './BaseformContext';
+import FormStatusEnum from './FormStatusEnum';
+import { MODAL_CLOSE_DELAY } from './formUtils';
 
 
-const SHOW_MODAL_DURATION = 3000;
-
-const MESSAGE_PROCESSING = 'Отправка данных. Пожалуйста подождите';
-const MESSAGE_DONE       = 'Данные сохранены.';
-const MESSAGE_FAILURE    = 'Данные не сохранены. Пожалуйста повторите вашу попытку позже';
+const MESSAGE_SENDING = 'Пожалуйста подождите';
+const MESSAGE_SUCCESS = 'Данные сохранены.';
+const MESSAGE_ERROR   = 'Данные не сохранены. Пожалуйста повторите вашу попытку позже';
 
 
-export default ({sendData, msgProcessing, msgDone, msgFailure, children}) => {
+export default ({sendData, msgSending, msgSuccess, msgError, children}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     handleSubmit,
@@ -22,39 +22,53 @@ export default ({sendData, msgProcessing, msgDone, msgFailure, children}) => {
     register,
     errors,    
   } = useForm();
-  const [status, setStatus] = useState({});
+  const [status, setStatus] = useState(FormStatusEnum.Sending);
+  const [message, setMessage] = useState('');
   const focusRef = useRef();
 
+
   sendData.onSend = () => {
-    setStatus(() => ({ wait: true, message: msgProcessing || MESSAGE_PROCESSING }));
+    setStatus(FormStatusEnum.Sending);
+    setMessage(msgSending || MESSAGE_SENDING);
     onOpen();
   };
+ 
   
   sendData.onSuccess = () => {
-    setStatus(() => ({ wait: false, message: msgDone || MESSAGE_DONE }));
+    setStatus(FormStatusEnum.Success);
+    setMessage(msgSuccess || MESSAGE_SUCCESS);
     waitAndClose();
     reset();
   };
 
+
   sendData.onCancel = () => {
-    setStatus(() => ({ wait: false, message: 'cancelled' }));
+    setStatus(FormStatusEnum.Cancelled);
+    setMessage('Отменено пользователем');
     waitAndClose();
   };
 
+
   sendData.onError = (error) => {
+    setStatus(FormStatusEnum.Error);
       //setError('submit', 'submitError', msg );
-      setStatus(() => ({ wait: false, message: `${msgFailure || MESSAGE_FAILURE} ${error.message}` }));
-      waitAndClose(); 
+    const msg = `${msgError || MESSAGE_ERROR}\n${error.message}`
+    setMessage(msg);
+    waitAndClose(); 
   };
 
+
   const cancel = () => sendData.cancel();
+
 
   const close = () => {
     onClose();
     focusRef.current && focusRef.current.focus();
   }; 
 
-  const waitAndClose = () => setTimeout(() => close(), SHOW_MODAL_DURATION);
+
+  const waitAndClose = () => setTimeout(() => close(), MODAL_CLOSE_DELAY);
+
 
   const onSubmit = (data, e) => {
     e.preventDefault();
@@ -69,7 +83,9 @@ export default ({sendData, msgProcessing, msgDone, msgFailure, children}) => {
           {children}
         </BaseformContext.Provider>
       </form>
-      <SendFormDataModal title="Обработка данных" isOpen={isOpen} onClose={onClose} status={status} 
+      <SendFormDataModal 
+        message={message} status={status}
+        isOpen={isOpen} onClose={onClose}  
         finalFocusRef={focusRef}
         onAbort={cancel}
       />

@@ -12,9 +12,10 @@ import {
 import { Spinner, Button } from '@chakra-ui/core';
 
 import { BaseformContext } from './BaseformContext';
+import FormStatusEnum from './FormStatusEnum';
+import { getTitle, MODAL_CLOSE_DELAY } from './formUtils';
 
-
-export default ({ children, sendData, isOpen, onClose }) => {
+export default ({ children, title, successMsg, sendData, isOpen, onClose }) => {
   const {
     handleSubmit,
     //setError,
@@ -23,57 +24,66 @@ export default ({ children, sendData, isOpen, onClose }) => {
     errors,    
   } = useForm();
 
+
   const focusRef = useRef();
-  const [status, setStatus] = useState('form');
+  const [status, setStatus] = useState(FormStatusEnum.Form);
   const [message, setMessage] = useState(null);
   
+
   const waitAndClose = () => {
     setTimeout(() => {
       onClose();
-      setStatus('form');
-    }, 5000);
+      setStatus(FormStatusEnum.Form);
+    }, MODAL_CLOSE_DELAY);
   };
+
 
   sendData.onSend = () => {
-    setStatus('sending');
-    setMessage('Обработка данных. Пожалуйста, подождите.');
+    setStatus(FormStatusEnum.Sending);
+    setMessage('Пожалуйста, подождите.');
   };
   
+
   sendData.onSuccess = () => {
-    setStatus('done');
-    setMessage('ok');
+    setStatus(FormStatusEnum.Success);
+    setMessage(successMsg);
     waitAndClose();
   };
+
 
   sendData.onCancel = () => {
-    setStatus('done');
-    setMessage('cancelled'); 
+    setStatus(FormStatusEnum.Cancelled);
+    setMessage('Отменено пользователем'); 
     waitAndClose();
   };
 
+
   sendData.onError = (error) => {
-    setStatus('done'); 
-    setMessage(`error: ${error}`);
+    setStatus(FormStatusEnum.Error); 
+    setMessage(`Данные не сохранены. Повторите вашу попытку позже. ${error.message}`);
     waitAndClose();
   };
+
 
   const cancel = () => sendData.cancel();
 
+
   const onSubmit = (data, e) => {
     e.preventDefault();
-
     sendData.send(data);
   };
   
+  title = getTitle(status, title)
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size={status === 'form' ?  "96%" : "sm"}>
+    <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} 
+            size={status === FormStatusEnum.Form ?  "96%" : "sm"}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Заявка</ModalHeader>
-        {status !== 'sending' && <ModalCloseButton />}
+        <ModalHeader>{title}</ModalHeader>
+        {status !== FormStatusEnum.Sending && <ModalCloseButton />}
         <ModalBody>
-          {status === 'form' && 
+          {status === FormStatusEnum.Form && 
               <form onSubmit={handleSubmit(onSubmit)} method="post">
                 <BaseformContext.Provider value={{errors, register, focusRef}}>
                   {children}
@@ -81,14 +91,14 @@ export default ({ children, sendData, isOpen, onClose }) => {
               </form>
           }
           
-          {status === 'sending' && <Spinner />}
+          {status === FormStatusEnum.Sending && <Spinner />}
 
-          {status !== 'form' && <div>{message}</div>}
+          {status !== FormStatusEnum.Form && <div>{message}</div>}
         </ModalBody>
-        {status !== 'form' &&
+        {status !== FormStatusEnum.Form &&
           <ModalFooter>
-            <Button onClick={ status === 'sending' ? cancel : onClose }>
-              {status === 'sending' ? 'Отменить' : 'Закрыть'}
+            <Button onClick={ status === FormStatusEnum.Sending ? cancel : onClose }>
+              {status === FormStatusEnum.Sending ? 'Отменить' : 'Закрыть'}
             </Button>
           </ModalFooter>
         }

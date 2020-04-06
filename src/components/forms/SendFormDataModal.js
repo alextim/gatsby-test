@@ -10,26 +10,31 @@ import {
     ModalCloseButton,
   } from '@chakra-ui/core';
 
+import FormStatusEnum from './FormStatusEnum';
+import { getTitle } from './formUtils';
 
-export default ({ title, isOpen, onAbort, onClose, status, finalFocusRef }) => (
-  <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} finalFocusRef={finalFocusRef}>
-    <ModalOverlay />
-    <ModalContent>
-      <ModalHeader>{title}</ModalHeader>
-      {!status.wait && <ModalCloseButton />}
 
-      <ModalBody pb={6}>
-        {status.wait && <Spinner />}
+export default ({ status, message, isOpen, onAbort, onClose, finalFocusRef }) => {
+  const title = getTitle(status, '');
 
-        <Box>{status.message}</Box>
+  return (
+    <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} finalFocusRef={finalFocusRef}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>{title}</ModalHeader>
+        {status !== FormStatusEnum.Sending && <ModalCloseButton />}
 
-      </ModalBody>
+        <ModalBody pb={6}>
+          {status === FormStatusEnum.Sending && <Spinner />}
+          <Box>{message}</Box>
+        </ModalBody>
 
-      <ModalFooter>
-        <Button onClick={status.wait ? onAbort : onClose}>
-          {status.wait ? 'Отменить' : 'Закрыть'}
-        </Button>
-      </ModalFooter>
-    </ModalContent>
-  </Modal>
-);
+        <ModalFooter>
+          <Button onClick={status === FormStatusEnum.Sending ? onAbort : onClose}>
+            {status === FormStatusEnum.Sending? 'Отменить' : 'Закрыть'}
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  );
+}

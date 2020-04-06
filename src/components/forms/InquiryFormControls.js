@@ -5,6 +5,7 @@ import { FirstNameControl, LastNameControl, EmailControl, NoteControl, Submit } 
 
 export default () => (
   <>
+    <div>Получив эту заявку, мы сможем связаться с вами и обсудить детали путешествия.</div>
     <InnerWrapper>
       <LeftWrapper>
         <FirstNameControl />

@@ -16,7 +16,10 @@ class SendDataMoc {
       console.log(this.#url);
       console.log(data);
       this.onSend();
-      this.#timer = setTimeout(() => this.onError('test error'), 10000);
+      this.#timer = setTimeout(() => 
+  //     this.onError({message: 'Test Err Message'})
+      this.onSuccess()
+      , 10000);
     }
 
     cancel() {
