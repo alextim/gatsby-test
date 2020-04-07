@@ -16,7 +16,21 @@ const dateRules = {
     required: 'Дата обязательна',
 };
 
-export default ({ customRegister, label="Дата", icon=false }) => (
+const DatePickerController = ({control}) => (
+    <Controller
+        as={<ReactDatePicker clearIcon={null} />}
+        control={control}
+        rules={dateRules}
+        valueName="value" // DateSelect value's name is selected
+        onChange={([value]) => value}
+        name="date"
+        className="input"
+        placeholderText="Дата"
+    />
+);
+
+
+export default ({ label="Дата", icon=false }) => (
     <BaseformContext.Consumer>
         {context => {
             const { errors, control } = context;
@@ -27,28 +41,10 @@ export default ({ customRegister, label="Дата", icon=false }) => (
                     { icon ?
                             <InputGroup>
                                 <InputLeftElement children={<FontAwesomeIcon icon="calendar" />} />
-                                <Controller
-                                    as={<ReactDatePicker clearIcon={null} />}
-                                    control={control}
-                                    rules={dateRules}
-                                    valueName="value" // DateSelect value's name is selected
-                                    onChange={([value]) => value}
-                                    name="date"
-                                    className="input"
-                                    placeholderText="Дата"
-                                />
+                                <DatePickerController control={control} />
                             </InputGroup>
                         :
-                            <Controller
-                            as={<ReactDatePicker clearIcon={null} />}
-                                control={control}
-                                rules={dateRules}
-                                valueName="value" // DateSelect value's name is selected
-                                onChange={([value]) => value}
-                                name="date"
-                                className="input"
-                                placeholderText="Дата"
-                            /> 
+                            <DatePickerController control={control} /> 
                     }
                     <FormErrorMessage>
                         {errors.date && errors.date.message}
