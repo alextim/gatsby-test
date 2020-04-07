@@ -21,7 +21,8 @@ export default ({sendData, msgSending, msgSuccess, msgError, children}) => {
     //setError,
     reset,
     register,
-    errors,    
+    errors,
+    control,  
   } = useForm();
 
   const [status, setStatus] = useState(FormStatusEnum.Sending);
@@ -73,7 +74,7 @@ export default ({sendData, msgSending, msgSuccess, msgError, children}) => {
    return (
     <>    
       <form onSubmit={handleSubmit(onSubmit)} method="post">
-        <BaseformContext.Provider value={{errors, register, focusRef}}>
+        <BaseformContext.Provider value={{errors, register, control, focusRef}}>
           {children}
         </BaseformContext.Provider>
       </form>

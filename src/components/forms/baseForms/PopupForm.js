@@ -22,7 +22,8 @@ export default ({ children, title, successMsg, sendData, isOpen, onClose, formSi
     //setError,
     //reset,
     register,
-    errors,    
+    errors,
+    control,  
   } = useForm();
 
   const focusRef = useRef();
@@ -78,7 +79,7 @@ export default ({ children, title, successMsg, sendData, isOpen, onClose, formSi
         <ModalBody>
           {status === FormStatusEnum.Form && 
               <form onSubmit={handleSubmit(onSubmit)} method="post">
-                <BaseformContext.Provider value={{errors, register, focusRef}}>
+                <BaseformContext.Provider value={{errors, register, control, focusRef}}>
                   {children}
                 </BaseformContext.Provider>
               </form>

@@ -3,7 +3,7 @@ import React from 'react';
 import { SendTripInquiry } from './dataLayer';
 import { PopupForm } from './baseForms';
 import { InnerWrapper, LeftWrapper, RightWrapper } from './wrappers';
-import { FirstNameControl, LastNameControl, EmailControl, NoteControl, Submit } from './formControls';
+import { FirstNameControl, LastNameControl, EmailControl, DateControl, NoteControl, Submit } from './formControls';
 
 
 export default ({ isOpen, onClose }) => {
@@ -22,6 +22,7 @@ export default ({ isOpen, onClose }) => {
                 <FirstNameControl />
                 <LastNameControl />
                 <EmailControl />
+                <DateControl />
             </LeftWrapper>
             <RightWrapper>
                 <NoteControl />
