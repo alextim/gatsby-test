@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import NewsCard from '../components/NewsCard';
 
+
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -18,13 +19,12 @@ const ItemWrap = styled.div`
     }
 `;
 
+
 export default ({ posts }) => (
     <Wrapper>
     {   
         posts.map( (post, i) =>
-            <ItemWrap key={i}>
-                <NewsCard post={post} />
-            </ItemWrap>
+            <ItemWrap key={i}><NewsCard post={post} /></ItemWrap>
         )
     }
     </Wrapper>

@@ -5,6 +5,7 @@ import SidebarWidget from '../SidebarWidget';
 import { IconLink } from '../IconLink';
 import useAllCategories from './../../helpers/hooks/useAllCategories';
 
+
 export default () => {
     const cats = useAllCategories();
     const base = 'category';

@@ -6,7 +6,8 @@ import {
     Input,
 } from '@chakra-ui/core';
 
-import { BaseformContext } from '../BaseformContext';
+import { BaseformContext } from '../baseForms/BaseformContext';
+
 
 export default ({ customRegister, controlName, label, placeholder, maxLength }) => {
     const nameRules = { 

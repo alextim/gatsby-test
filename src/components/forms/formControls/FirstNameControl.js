@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BaseformContext } from '../BaseformContext';
+import { BaseformContext } from '../baseForms/BaseformContext';
 import NameControl from './NameControl';
 
 
@@ -8,6 +8,7 @@ const controlName = 'firstname';
 const maxLength = 40;
 const label = 'Имя';
 const placeholder = 'Ваше имя';
+
 
 export default() => (
     <BaseformContext.Consumer>

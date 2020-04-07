@@ -5,10 +5,12 @@ import { IconLink } from '../IconLink';
 import useAllYYYYMM from './../../helpers/hooks/useAllYYYYMM';
 import postArchiveHelper from './../../helpers/postArchiveHelper';
 
+
 export default () => {
     const dates = useAllYYYYMM();
     const base = 'blog';
     const icon = 'paperclip';
+    
     return dates ? 
         <SidebarWidget title="Ахивы">
         { 

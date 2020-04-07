@@ -15,6 +15,7 @@ const MESSAGE_ERROR   = 'Данные не сохранены. Пожалуйс�
 
 export default ({sendData, msgSending, msgSuccess, msgError, children}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const {
     handleSubmit,
     //setError,
@@ -22,6 +23,7 @@ export default ({sendData, msgSending, msgSuccess, msgError, children}) => {
     register,
     errors,    
   } = useForm();
+
   const [status, setStatus] = useState(FormStatusEnum.Sending);
   const [message, setMessage] = useState('');
   const focusRef = useRef();
@@ -32,8 +34,7 @@ export default ({sendData, msgSending, msgSuccess, msgError, children}) => {
     setMessage(msgSending || MESSAGE_SENDING);
     onOpen();
   };
- 
-  
+   
   sendData.onSuccess = () => {
     setStatus(FormStatusEnum.Success);
     setMessage(msgSuccess || MESSAGE_SUCCESS);
@@ -41,42 +42,35 @@ export default ({sendData, msgSending, msgSuccess, msgError, children}) => {
     reset();
   };
 
-
   sendData.onCancel = () => {
     setStatus(FormStatusEnum.Cancelled);
     setMessage('Отменено пользователем');
     waitAndClose();
   };
 
-
   sendData.onError = (error) => {
     setStatus(FormStatusEnum.Error);
       //setError('submit', 'submitError', msg );
-    const msg = `${msgError || MESSAGE_ERROR}\n${error.message}`
+    const msg = `${msgError || MESSAGE_ERROR}\n${error.message}`;
     setMessage(msg);
     waitAndClose(); 
   };
 
-
   const cancel = () => sendData.cancel();
-
 
   const close = () => {
     onClose();
     focusRef.current && focusRef.current.focus();
   }; 
 
-
   const waitAndClose = () => setTimeout(() => close(), MODAL_CLOSE_DELAY);
-
 
   const onSubmit = (data, e) => {
     e.preventDefault();
     sendData.send(data);
   };
 
- 
-  return (
+   return (
     <>    
       <form onSubmit={handleSubmit(onSubmit)} method="post">
         <BaseformContext.Provider value={{errors, register, focusRef}}>
@@ -91,4 +85,4 @@ export default ({sendData, msgSending, msgSuccess, msgError, children}) => {
       />
     </>
   );
-}
+};

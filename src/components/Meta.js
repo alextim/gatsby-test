@@ -43,13 +43,16 @@ const DateMeta = ({date}) => (
         items={[ {name: Utils.formatDate(date)} ]}/> 
 );
 
+
 const CategoryMeta = ({categories}) => {
     const categoryItems = getCategoryUrlAndNames(categories, 'category');
+
     return (
         <Meta icon={['far', 'folder-open']} 
             items={categoryItems}/>
     );
 };
+
 
 const TagMeta = ({tags}) => {
     const base = 'tag';
@@ -57,10 +60,8 @@ const TagMeta = ({tags}) => {
         url: `/${base}/${kebabCase(item)}`,
         name: item,
     }));
-    return (
-        <Meta icon={['far', 'folder-open']} 
-            items={tagItems}/>
-    );
+
+    return (<Meta icon={['far', 'folder-open']} items={tagItems}/>);
 };
 
 export { Meta as default, DateMeta, CategoryMeta, TagMeta };

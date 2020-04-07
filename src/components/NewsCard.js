@@ -6,12 +6,14 @@ import styled from '@emotion/styled';
 import AnimatedLink from './AnimatedLink';
 import { DateMeta, CategoryMeta } from './Meta';
 
+
 const Wrapper = styled(Box)`
     display: flex;
     flex-direction: column;
     align-content: flex-start;
     margin: 0 1em 2em 1em;
 `;
+
 
 export default ( {post} ) => {
     return (

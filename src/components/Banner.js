@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { ContainerFullWidth } from './Container';
 import PageHeaing from './PageHeading';
 
+
 const Wrapper = styled(ContainerFullWidth)`
     position: relative;
     text-align: center;

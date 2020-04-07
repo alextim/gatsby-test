@@ -4,10 +4,12 @@ import { Button, useDisclosure } from '@chakra-ui/core';
 
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-import InquiryPopupForm from './../components/forms/InquiryPopupForm';
+import TripInquiryForm from '../components/forms/TripInquiryForm';
+
 
 export default  ({location}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Layout>
       <SEO title="Page two" pathname={location.pathname} />
@@ -17,7 +19,7 @@ export default  ({location}) => {
         </LeftWrapper>
         <RightWrapper>
           <Button onClick={onOpen}>Записаться</Button>
-          <InquiryPopupForm isOpen={isOpen} onClose={onClose} />
+          <TripInquiryForm isOpen={isOpen} onClose={onClose} />
         </RightWrapper>
       </HeadWrapper>
     </Layout>
@@ -25,13 +27,14 @@ export default  ({location}) => {
 };
 
 
-export const HeadWrapper = styled.div`
+const HeadWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 `;
 
-export const LeftWrapper = styled.div`
+
+const LeftWrapper = styled.div`
   width: 100%;
   margin-bottom: 1rem;
   ${ props => props.theme.mediaQueries.md } {
@@ -39,7 +42,8 @@ export const LeftWrapper = styled.div`
   }
 `;
 
-export const RightWrapper = styled.div`
+
+const RightWrapper = styled.div`
   width: 100%;
   margin-bottom: 1rem;
   ${ props => props.theme.mediaQueries.md } {

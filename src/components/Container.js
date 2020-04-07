@@ -2,6 +2,7 @@
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 
+
 const ContainerFullWidth = styled.div`
   min-width: ${ props => props.theme.sizes.container.min }px;
   max-width: ${ props => props.theme.sizes.container.max }px;

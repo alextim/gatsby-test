@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import { Box } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 
+
 const PaginationWrapper = styled.nav`
   display: flex;
   flex-wrap: wrap;
@@ -46,6 +47,7 @@ const ArrowLeft = styled(Arrow)`
 const ArrowRight = styled(Arrow)`
   transform: rotate(-45deg);
 `;
+
 
 export default ({ currentPage, pageCount, base }) => {
     if (pageCount === 1) {

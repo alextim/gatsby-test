@@ -15,7 +15,8 @@ import { BaseformContext } from './BaseformContext';
 import FormStatusEnum from './FormStatusEnum';
 import { getTitle, MODAL_CLOSE_DELAY } from './formUtils';
 
-export default ({ children, title, successMsg, sendData, isOpen, onClose }) => {
+
+export default ({ children, title, successMsg, sendData, isOpen, onClose, formSize="96%" }) => {
   const {
     handleSubmit,
     //setError,
@@ -24,12 +25,10 @@ export default ({ children, title, successMsg, sendData, isOpen, onClose }) => {
     errors,    
   } = useForm();
 
-
   const focusRef = useRef();
   const [status, setStatus] = useState(FormStatusEnum.Form);
   const [message, setMessage] = useState(null);
   
-
   const waitAndClose = () => {
     setTimeout(() => {
       onClose();
@@ -37,12 +36,10 @@ export default ({ children, title, successMsg, sendData, isOpen, onClose }) => {
     }, MODAL_CLOSE_DELAY);
   };
 
-
   sendData.onSend = () => {
     setStatus(FormStatusEnum.Sending);
     setMessage('Пожалуйста, подождите.');
   };
-  
 
   sendData.onSuccess = () => {
     setStatus(FormStatusEnum.Success);
@@ -50,13 +47,11 @@ export default ({ children, title, successMsg, sendData, isOpen, onClose }) => {
     waitAndClose();
   };
 
-
   sendData.onCancel = () => {
     setStatus(FormStatusEnum.Cancelled);
     setMessage('Отменено пользователем'); 
     waitAndClose();
   };
-
 
   sendData.onError = (error) => {
     setStatus(FormStatusEnum.Error); 
@@ -64,20 +59,18 @@ export default ({ children, title, successMsg, sendData, isOpen, onClose }) => {
     waitAndClose();
   };
 
-
   const cancel = () => sendData.cancel();
-
 
   const onSubmit = (data, e) => {
     e.preventDefault();
     sendData.send(data);
   };
   
-  title = getTitle(status, title)
-
+  title = getTitle(status, title);
+  
   return (
     <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} 
-            size={status === FormStatusEnum.Form ?  "96%" : "sm"}>
+            size={status === FormStatusEnum.Form ?  formSize : "sm"}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{title}</ModalHeader>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+
 const Wrapper = styled.section`
     margin: 0 0 50px 0;
     padding: 25px;
@@ -25,6 +26,7 @@ const Heading = styled.h2`
         bottom: -1px;
     }
 `;
+
 
 export default ({children, title}) => (
     <Wrapper>

@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { SendContact } from './dataLayer';
-import Baseform from './Baseform';
+import { InlineForm } from './baseForms';
 import { InnerWrapper, LeftWrapper, RightWrapper } from './wrappers';
 import { FirstNameControl, EmailControl, NoteControl, Submit } from './formControls';
 
 const msgSuccess = 'Спасибо! Ваше сообщение доставлено! Мы обязательно ответим вам в ближайшее время.';
 
 export default () => (
-  <Baseform sendData={new SendContact()} msgSuccess={msgSuccess}>
+  <InlineForm sendData={new SendContact()} msgSuccess={msgSuccess}>
     <InnerWrapper>
       <LeftWrapper>
         <FirstNameControl />
@@ -19,5 +19,5 @@ export default () => (
       </RightWrapper>
     </InnerWrapper>
     <Submit>Отправить</Submit>
-  </Baseform>
+  </InlineForm>
 );
