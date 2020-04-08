@@ -1,13 +1,12 @@
 import React from 'react';
-import { Controller } from "react-hook-form";
+import { Controller } from 'react-hook-form';
 import {
     FormErrorMessage,
     FormLabel,
     FormControl,    
-    Input,
     InputGroup, InputLeftElement
 } from '@chakra-ui/core';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactDatePicker from 'react-date-picker';
 
 import { BaseformContext } from '../baseForms/BaseformContext';

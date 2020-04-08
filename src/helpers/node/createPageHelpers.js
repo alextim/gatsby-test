@@ -1,6 +1,6 @@
 const path = require('path');
 const _ = require('lodash');
-const catHelper = require('./../categoryHelper');
+//const catHelper = require('./../categoryHelper');
 
 const postTemplate = path.resolve('./src/templates/post.js');
 const postsTemplate = path.resolve('./src/templates/posts.js');

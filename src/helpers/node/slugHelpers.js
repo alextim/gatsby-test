@@ -1,8 +1,17 @@
 const path = require('path');
 const _ = require('lodash');
-const moment = require('moment');
 
-const siteConfig = require('./../../data/siteConfig');
+const date_fns = require('date-fns');
+/**
+//const moment = require('moment');
+//const siteConfig = require('./../../data/siteConfig');
+ * 
+ * TODO: moment
+ * https://github.com/you-dont-need/You-Dont-Need-Momentjs
+ * https://github.com/you-dont-need/You-Dont-Need-Momentjs#string--date-format
+ * https://github.com/date-fns/date-fns
+ *
+ */
 
 const translit = require('./../../lib/translit');
 const slugify = require('./../../lib/slugify');
@@ -50,12 +59,19 @@ if (
       }
 
       if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'date')) {
-        const date = moment(node.frontmatter.date, siteConfig.dateFromFormat);
-        if (!date.isValid) {
-          console.warn(`WARNING: Invalid date.`, node.frontmatter);
+        
+  //      const date = moment(node.frontmatter.date, siteConfig.dateFromFormat);
+ //       let date_p;
+  //      console.log(node.frontmatter.date);
+          const date = date_fns.parseISO(node.frontmatter.date);
+        
+//        if (!date.isValid) {
+        if (date === 'Invalid Date') {
+              console.warn(`WARNING: Invalid date.`, node.frontmatter);
         }
 
-        const isoDate = date.toISOString();
+//        const isoDate = date.toISOString();
+        const isoDate = date_fns.formatISO(date)
         createNodeField({
           node,
           name: 'date',
@@ -74,7 +90,8 @@ if (
 
     createNodeField({ node, 
         name: 'slug', 
-        value: `${siteConfig.blogUrlBase}/${slug}`
+ //       value: `${siteConfig.blogUrlBase}/${slug}`
+        value: `/${slug}`
     });
   }
 }  

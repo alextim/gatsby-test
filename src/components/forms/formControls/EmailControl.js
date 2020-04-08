@@ -38,7 +38,7 @@ export default ({ customRegister, label="E-mail", icon=false }) => (
                     { label && <FormLabel htmlFor="email">{label}</FormLabel> }
                     { icon ?
                             <InputGroup>
-                                <InputLeftElement children={<FontAwesomeIcon icon="envelope" />} />
+                                <InputLeftElement children={<FontAwesomeIcon icon={["far", "envelope"]} />} />
                                 <Input
                                     name="email"
                                     type="email"
