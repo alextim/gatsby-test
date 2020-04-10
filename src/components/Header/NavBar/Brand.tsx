@@ -1,12 +1,12 @@
 import React from 'react';
-import {Link} from 'gatsby';
+import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 
 // import logo from './../../../images/adrenalin-logo.svg'
 /**
- * 
+ *
  * http://css.yoksel.ru/a11y-for-logotypes/
- * 
+ *
  * https://yoksel.github.io/url-encoder/
  * http://css.yoksel.ru/svg-icons/
  * https://tympanus.net/codrops/2020/02/11/how-to-create-a-physics-based-3d-cloth-with-cannon-js-and-three-js/

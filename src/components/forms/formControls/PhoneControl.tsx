@@ -30,37 +30,32 @@ const phoneRules = {
   }
 };
 
-export default ({ customRegister, label="Телефон", icon=false }) => (
+export default ({ customRegister, label = 'Телефон', icon = false }) => (
   <BaseformContext.Consumer>
-    {context => {
-      const { register, errors } = context;
-      const phoneRegister = customRegister ? e => customRegister(e, phoneRules) : register(phoneRules); 
-
-      return (
-        <FormControl isInvalid={errors.phone} mb="1rem">
-          { label && <FormLabel htmlFor="phone">{label}</FormLabel> }
-          { icon ?
-            <InputGroup>
-              <InputLeftElement children={<FontAwesomeIcon icon="phone" />} />
-              <Input
-                name="phone"
-                type="phone"
-                placeholder="Ваш телефон"
-                ref={phoneRegister}
-              />
-            </InputGroup> :
+    {context => context && (
+      <FormControl isInvalid={context.errors.phone} mb="1rem">
+        { label && <FormLabel htmlFor="phone">{label}</FormLabel> }
+        { icon ?
+          <InputGroup>
+            <InputLeftElement children={<FontAwesomeIcon icon="phone" />} />
             <Input
+              ref={customRegister ? e => customRegister(e, phoneRules) : context.register(phoneRules)}
               name="phone"
               type="phone"
               placeholder="Ваш телефон"
-              ref={phoneRegister}
             />
-          }
-          <FormErrorMessage>
-            {errors.phone && errors.phone.message}
-          </FormErrorMessage>
-        </FormControl>
-      );
-    }}
+          </InputGroup> :
+          <Input
+            ref={customRegister ? e => customRegister(e, phoneRules) : context.register(phoneRules)}
+            name="phone"
+            type="phone"
+            placeholder="Ваш телефон"
+          />
+        }
+        <FormErrorMessage>
+          {context.errors.phone && context.errors.phone.message}
+        </FormErrorMessage>
+      </FormControl>
+    )}
   </BaseformContext.Consumer>
 );

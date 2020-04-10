@@ -14,23 +14,20 @@ const noteRules = {
 
 export default ({ customRegister, ...props }) => (
   <BaseformContext.Consumer>
-    {context => {
-      const { register, errors } = context;
-      return (
-        <FormControl isInvalid={errors.note}>
-          <FormLabel htmlFor="note">Сообщение</FormLabel>
-          <Textarea
-            ref={customRegister ? e => customRegister(e, noteRules) : register(noteRules)}
-            name="note"
-            placeholder="Ваше сообщение"
-            mb="1rem"
-            {...props}
-          />
-          <FormErrorMessage>
-            {errors.note && errors.note.message}
-          </FormErrorMessage>
-        </FormControl>
-        );
-    }}
+    {context => context && (
+      <FormControl isInvalid={context.errors.note}>
+        <FormLabel htmlFor="note">Сообщение</FormLabel>
+        <Textarea
+          ref={customRegister ? e => customRegister(e, noteRules) : context.register(noteRules)}
+          name="note"
+          placeholder="Ваше сообщение"
+          mb="1rem"
+          {...props}
+        />
+        <FormErrorMessage>
+          {context.errors.note && context.errors.note.message}
+        </FormErrorMessage>
+      </FormControl>
+    )}
   </BaseformContext.Consumer>
 );

@@ -6,20 +6,12 @@ const ContainerFullWidth = styled.div`
   margin: 0 auto;
 `;
 
-ContainerFullWidth.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
 const Container = styled(ContainerFullWidth)`
   padding: 0 1em;
   ${props => props.theme.mediaQueries.md} {
     padding: 0 1.5em;
   }
 `;
-
-Container.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 const StrechedBackground = styled.div`
   padding-left: -1em;

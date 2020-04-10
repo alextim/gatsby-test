@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/core';
 import { Spinner, Button } from '@chakra-ui/core';
 
-import { BaseformContext } from './BaseformContext';
+import { IBaseformContext, BaseformContext } from './BaseformContext';
 import FormStatusEnum from './FormStatusEnum';
 import { getTitle, MODAL_CLOSE_DELAY } from './formUtils';
 
@@ -68,6 +68,10 @@ export default ({ children, title, successMsg, sendData, isOpen, onClose, formSi
 
   title = getTitle(status, title);
 
+  const context: IBaseformContext = {
+    errors, register, control, focusRef,
+  };
+
   return (
     <Modal
       closeOnOverlayClick={false}
@@ -82,7 +86,7 @@ export default ({ children, title, successMsg, sendData, isOpen, onClose, formSi
         <ModalBody>
           {status === FormStatusEnum.Form &&
               <form onSubmit={handleSubmit(onSubmit)} method="post">
-                <BaseformContext.Provider value={{errors, register, control, focusRef}}>
+                <BaseformContext.Provider value={context}>
                   {children}
                 </BaseformContext.Provider>
               </form>

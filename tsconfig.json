@@ -1,16 +1,19 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "esnext",
-    "jsx": "preserve",
-    "lib": ["dom", "es2015", "es2017"],
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "removeComments": false,
-    "preserveConstEnums": true
+      "sourceMap": true,
+      "noImplicitAny": true,
+      "module": "commonjs",
+      "strict": true,
+      "noEmit": true,
+      "target": "esnext",
+      "jsx": "react",
+      "allowJs": true,
+      "lib": ["dom", "es2015", "es2017"],
+      "noImplicitReturns": true,
+      "esModuleInterop": true,
   },
-  "include": ["./src/**/*"]
+  "exclude": ["./node_modules", "./public", "./.cache"],
+  "include": [
+      "./src/**/*"
+  ]
 }

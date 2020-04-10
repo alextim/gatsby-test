@@ -23,7 +23,8 @@ const Navbar2 = () => {
   const handleToggle = () => setisActive(!isActive);
 
   return (
-    <Flex as="nav" 
+    <Flex
+      as="nav"
       role="navigation" aria-label="main navigation"
       flexWrap="wrap"
       justifyContent="space-between"
@@ -31,8 +32,8 @@ const Navbar2 = () => {
       bg="white"
     >
       <Brand />
-      <Burger handleToggleCallback={handleToggle} isActive={isActive}/>
-      <Menu isActive={isActive}/>
+      <Burger handleToggleCallback={handleToggle} isActive={isActive} />
+      <Menu isActive={isActive} />
       <NavbarEnd />
     </Flex>
   );

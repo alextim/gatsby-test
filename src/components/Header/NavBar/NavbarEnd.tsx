@@ -20,7 +20,7 @@ export default () => {
 
   return (
     <NavbarEndWrap>
-      <Box display={{md: 'none'}}>Закажите ваше путешествие прямо сейчас!</Box>
+      <Box display={{ md: 'none' }}>Закажите ваше путешествие прямо сейчас!</Box>
       <Button onClick={onOpen}>Перезвоните мне</Button>
       <CallbackInquiryForm isOpen={isOpen} onClose={onClose} />
     </NavbarEndWrap>

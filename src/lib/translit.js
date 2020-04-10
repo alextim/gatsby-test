@@ -1,6 +1,6 @@
 // /* #!/usr/bin/env node; */
 /* jshint -W100 */
-/*eslint dot-location: ["error", "object"]*/
+/* eslint dot-location: ["error", "object"] */
 /**
 * @name      translit.js
 * @author    XGuest <xguest@list.ru>
@@ -45,7 +45,7 @@
 *  }
 * };
 **/
-function translit(str, typ) {
+export default (str, typ) => {
   var func = (function(typ) {
   /** Function Expression
   * Вспомогательная функция.
@@ -157,10 +157,8 @@ function translit(str, typ) {
       function(R) {                      // CallBack Функция RegExp
         if (R.toLowerCase() === R) {     // Обработка строки с учетом регистра
           return trantab[R];
-        } else {
-          return trantab[R.toLowerCase()].toUpperCase();
         }
+        return trantab[R.toLowerCase()].toUpperCase();
+        
       }));
 }
-
-module.exports = translit;

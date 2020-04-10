@@ -3,7 +3,11 @@ import React from 'react';
 import Layout from '../components/Layout';
 import Seo from '../components/SEO';
 
-const NotFoundPage = ({ location }) => (
+interface Props {
+  location: Location;
+}
+
+const NotFoundPage = ({ location }: Props) => (
   <Layout>
     <Seo title="404: Not found" pathname={location.pathname}/>
     <h1>NOT FOUND</h1>

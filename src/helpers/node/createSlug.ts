@@ -1,7 +1,6 @@
-const path = require('path');
-// const _ = require('lodash');
-
-const date_fns = require('date-fns');
+import { GatsbyNode } from 'gatsby';
+import { parse as pathParse } from 'path';
+import { parseISO, formatISO } from 'date-fns';
 /**
 //const moment = require('moment');
 //const siteConfig = require('./../../data/siteConfig');
@@ -13,14 +12,26 @@ const date_fns = require('date-fns');
  *
  */
 
-const translit = require('./../../lib/translit');
-const slugify = require('./../../lib/slugify');
+import translit from '../../lib/translit';
+import slugify from '../../lib/slugify';
 
-const safeSlug = (s) => slugify(translit(s,1));
+interface INode {
+  fields: {
+    slug: string;
+  };
+  frontmatter: {
+    title: string;
+    slug: string;
+    date: string;
+  };
+}
 
-function createSlug(node, {createNodeField}, getNode) {
+const safeSlug = (s: string): string => slugify(translit(s, 1));
+
+export const createSlug: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions;
   if (node.internal.type === 'Mdx') {
-  /*
+    /*
     if (node.fileAbsolutePath != null) {
       const matcher = /posts\/\d{4}-\d{2}-\d{2}-(.+?)\/index.md$/;
       const [, slug] = node.fileAbsolutePath.match(matcher) || [];
@@ -32,17 +43,17 @@ function createSlug(node, {createNodeField}, getNode) {
         });
       }
     }
-*/
+    */
     let slug;
 
     const fileNode = getNode(node.parent);
-    const parsedFilePath = path.parse(fileNode.relativePath);
+    const parsedFilePath = pathParse(fileNode.relativePath);
 
     if (
       Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
       Object.prototype.hasOwnProperty.call(node.frontmatter, 'title')
     ) {
-      slug = safeSlug(node.frontmatter.title);
+      slug = safeSlug((node as INode).frontmatter.title);
     } else if (parsedFilePath.name !== 'index' && parsedFilePath.dir !== '') {
       slug = `${safeSlug(parsedFilePath.dir)}/${safeSlug(parsedFilePath.name)}`;
     } else if (parsedFilePath.dir === '') {
@@ -52,21 +63,20 @@ function createSlug(node, {createNodeField}, getNode) {
     }
 
     if (Object.prototype.hasOwnProperty.call(node, 'frontmatter')) {
-
       if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug')) {
-        slug = safeSlug(node.frontmatter.slug);
+        slug = safeSlug((node as INode).frontmatter.slug);
       }
 
       if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'date')) {
         // const date = moment(node.frontmatter.date, siteConfig.dateFromFormat);
-        const date = date_fns.parseISO(node.frontmatter.date);
+        const date = parseISO((node as INode).frontmatter.date);
         // if (!date.isValid) {
-        if (date === 'Invalid Date') {
-          console.warn(`WARNING: Invalid date.`, node.frontmatter);
+        if (String(date) === 'Invalid Date') {
+          console.warn('WARNING: Invalid date.', node.frontmatter);
         }
 
         // const isoDate = date.toISOString();
-        const isoDate = date_fns.formatISO(date);
+        const isoDate = formatISO(date);
         createNodeField({
           node,
           name: 'date',
@@ -80,7 +90,6 @@ function createSlug(node, {createNodeField}, getNode) {
           value: yyyymm,
         });
       }
-
     }
 
     createNodeField({ node,
@@ -89,6 +98,4 @@ function createSlug(node, {createNodeField}, getNode) {
       value: `/${slug}`,
     });
   }
-}
-
-module.exports = {createSlug};
+};

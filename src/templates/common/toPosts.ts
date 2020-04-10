@@ -1,5 +1,5 @@
 export default (edges) =>
-  edges.map(({node}) => {
+  edges.map(({ node }) => {
     const path = node.fields.slug;
     const { title, date, categories, tags, featuredImage } = node.frontmatter;
     return {

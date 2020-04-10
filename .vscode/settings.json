@@ -1,0 +1,14 @@
+{
+    "[json]": {
+      "editor.formatOnSave": true // Because eslint autoFixOnSave doesn't format json
+    }, 
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact"
+    ]
+}

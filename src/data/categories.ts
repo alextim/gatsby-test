@@ -1,7 +1,6 @@
-const categories = [
+export default [
   {
     key: 'news',
     name: 'Новости',
   },
 ];
-exports.categories = categories;

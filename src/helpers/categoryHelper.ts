@@ -1,7 +1,7 @@
-const { categories } = require('./../data/categories');
+import categories from './../data/categories';
 
-const translit = require('./../lib/translit');
-const slugify = require('./../lib/slugify');
+import translit from './../lib/translit';
+import slugify from './../lib/slugify';
 
 const getSafeCategorySlug = (s: string): string => {
   let path;
@@ -16,11 +16,14 @@ const getSafeCategorySlug = (s: string): string => {
   return slug;
 };
 
-function getCategoryUrlAndNames(cats: readonly string[], base: string): Array<{
+function getCategoryUrlAndNames(
+  cats: readonly string[],
+  base: string,
+): Array<{
   name: string;
   url: string;
 }> {
-  return cats.map(cat => ({ name: cat, url: `/${base}/${getSafeCategorySlug(cat)}` }));
+  return cats.map((cat) => ({ name: cat, url: `/${base}/${getSafeCategorySlug(cat)}` }));
 }
 
-module.exports = { getSafeCategorySlug, getCategoryUrlAndNames };
+export { getSafeCategorySlug, getCategoryUrlAndNames };

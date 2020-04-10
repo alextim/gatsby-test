@@ -31,12 +31,12 @@ const BurgerPseudoBox = styled(Box)`
 const Burger = ({ handleToggleCallback, isActive }) => (
   <BurgerPseudoBox
     aria-label="Menu" aria-controls="navigation"
-    onClick={handleToggleCallback}
     role="button"
     display={{ sm: 'block', md: 'none' }}
+    onClick={handleToggleCallback}
   >
-    <BurgerSpan as="span" 
-      top="calc(50% - 6px)" 
+    <BurgerSpan as="span"
+      top="calc(50% - 6px)"
       transform={isActive ? 'translateY(5px) rotate(45deg)' : ''}
     />
     <BurgerSpan as="span" 
@@ -45,7 +45,7 @@ const Burger = ({ handleToggleCallback, isActive }) => (
     />
     <BurgerSpan as="span" 
       top="calc(50% + 4px)"
-      transform={isActive ? 'translateY(-5px) rotate(-45deg)' : ''} 
+      transform={isActive ? 'translateY(-5px) rotate(-45deg)' : ''}
     />
   </BurgerPseudoBox>
 );

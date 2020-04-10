@@ -7,7 +7,7 @@ import mainMenuItems from '../../../data/mainMenuItems';
 let id = 0;
 
 const getId = () => {
-  id = id + 1;
+  ++id;
   return 'sm' + id.toString();
 };
 
@@ -135,6 +135,7 @@ const MenuItems = ({ items }) => (
     if (item.hasOwnProperty('children')) {
       return (<MenuDropdown key={i} title={item.title}  id={getId()} items={item.children} />);
     }
+
     return (<MenuItem key={i} title={item.title} url={item.url}/>);
   })
 );
@@ -146,10 +147,10 @@ const MenuDropdown = ({ title, id, items }) => (
       {title}
     </StyledLabel>
 
-    <StyledCheckbox type="checkbox" id={id}/>
+    <StyledCheckbox type="checkbox" id={id} />
 
     <StyledUl>
-        <MenuItems items={items} />
+      <MenuItems items={items} />
     </StyledUl>
 
   </StyledLi>

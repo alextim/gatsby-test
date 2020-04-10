@@ -1,6 +1,6 @@
-const Utils = require('./../lib/utils');
+import Utils from './../lib/utils';
 
-const postArchiveHelper = {
+export default {
   getTitle: (s: string): string => {
     const y = s.substr(0, 4);
     const m = s.substr(5);
@@ -11,5 +11,3 @@ const postArchiveHelper = {
 
   getPath: (s: string): string => `${s.substr(0, 4)}/${s.substr(5)}`,
 };
-
-module.exports = postArchiveHelper;

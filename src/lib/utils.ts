@@ -15,10 +15,9 @@ const Utils = {
     let hostname;
     // find & remove protocol (http, ftp, etc.) and get hostname
 
-    if (url.indexOf("//") > -1) {
+    if (url.includes('//')) {
       hostname = url.split('/')[2];
-    }
-    else {
+    } else {
       hostname = url.split('/')[0];
     }
 
@@ -33,15 +32,26 @@ const Utils = {
   formatPhone: (phone: string): string => {
     switch (phone.length) {
       case 7:
-        return phone.substr(0, 3) + ' ' + phone.substr(3, 2) + ' ' + phone.substr(5, 2)
+        return phone.substr(0, 3) + ' ' + phone.substr(3, 2) + ' ' + phone.substr(5, 2);
       case 10:
-        return phone.substr(0, 1) + ' ' + phone.substr(1, 3) + ' ' + phone.substr(4, 3) + ' ' + phone.substr(7,3)
+        return phone.substr(0, 1) + ' ' + phone.substr(1, 3) + ' ' + phone.substr(4, 3) + ' ' + phone.substr(7, 3);
       default:
-        return '+' + phone.substr(0, 2) + ' (' + phone.substr(2, 3) + ') ' + phone.substr(5, 1) + ' ' + phone.substr(6, 3) + ' ' + phone.substr(9, 3)
+        return (
+          '+' +
+          phone.substr(0, 2) +
+          ' (' +
+          phone.substr(2, 3) +
+          ') ' +
+          phone.substr(5, 1) +
+          ' ' +
+          phone.substr(6, 3) +
+          ' ' +
+          phone.substr(9, 3)
+        );
     }
   },
 
-  isMobile: () => (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)),
+  isMobile: (): boolean => /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent),
   /****
   *
   *   https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
@@ -58,10 +68,10 @@ const Utils = {
       return check;
     },
 */
-  phoneUrl:    (phone: string): string => 'tel:' + (phone.lengh > 10 ? `+${phone}` : phone),
+  phoneUrl: (phone: string): string => 'tel:' + (phone.length > 10 ? `+${phone}` : phone),
   whatsappUrl: (whatsapp: string): string => `https://wa.me/${whatsapp}`,
   telegramUrl: (telegram: string): string => `tg://resolve?domain=${telegram}`,
-  viberUrl:    (viber: string): string => `viber://add?number=${Utils.isMobile() ? "+" : ""}${viber}`,
+  viberUrl: (viber: string): string => `viber://add?number=${Utils.isMobile() ? '+' : ''}${viber}`,
 
   formatDate: (s: string): string => {
     const d = new Date(s);
@@ -74,4 +84,4 @@ const Utils = {
   },
 };
 
-module.exports = Utils;
+export default Utils;

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDisclosure } from '@chakra-ui/core';
 
 import SendFormDataModal from './SendFormDataModal';
-import { BaseformContext } from './BaseformContext';
+import { IBaseformContext, BaseformContext } from './BaseformContext';
 import FormStatusEnum from './FormStatusEnum';
 import { MODAL_CLOSE_DELAY } from './formUtils';
 
@@ -68,16 +68,20 @@ export default ({ sendData, msgSending, msgSuccess, msgError, children }) => {
     sendData.send(data);
   };
 
+  const context: IBaseformContext = {
+    errors, register, control, focusRef,
+  };
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} method="post">
-        <BaseformContext.Provider value={{errors, register, control, focusRef}}>
+        <BaseformContext.Provider value={context}>
           {children}
         </BaseformContext.Provider>
       </form>
       <SendFormDataModal
         message={message} status={status}
-        isOpen={isOpen} onClose={onClose}  
+        isOpen={isOpen} onClose={onClose}
         finalFocusRef={focusRef}
         onAbort={cancel}
       />

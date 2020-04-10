@@ -3,8 +3,8 @@ import { Controller } from 'react-hook-form';
 import {
   FormErrorMessage,
   FormLabel,
-  FormControl,  
-  InputGroup, InputLeftElement
+  FormControl,
+  InputGroup, InputLeftElement,
 } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactDatePicker from 'react-date-picker';
@@ -21,34 +21,29 @@ const DatePickerController = ({ control }) => (
     control={control}
     rules={dateRules}
     valueName="value" // DateSelect value's name is selected
-    onChange={([value]) => value}
     name="date"
     className="input"
     placeholderText="Дата"
+    onChange={([value]) => value}
   />
 );
 
-
-export default ({ label='Дата', icon=false }) => (
+export default ({ label = 'Дата', icon = false }) => (
   <BaseformContext.Consumer>
-    {context => {
-      const { errors, control } = context;
-
-      return (
-        <FormControl isInvalid={errors.date} mb="1rem">
-          { label && <FormLabel htmlFor="date">{label}</FormLabel> }
-          { icon ?
-            <InputGroup>
-              <InputLeftElement children={<FontAwesomeIcon icon="calendar" />} />
-              <DatePickerController control={control} />
-            </InputGroup> :
-            <DatePickerController control={control} />
-          }
-          <FormErrorMessage>
-            {errors.date && errors.date.message}
-          </FormErrorMessage>
-        </FormControl>
-      )}
-    }
+    {context => context && (
+      <FormControl isInvalid={context.errors.date} mb="1rem">
+        { label && <FormLabel htmlFor="date">{label}</FormLabel> }
+        { icon ?
+          <InputGroup>
+            <InputLeftElement children={<FontAwesomeIcon icon="calendar" />} />
+            <DatePickerController control={context.control} />
+          </InputGroup> :
+          <DatePickerController control={context.control} />
+        }
+        <FormErrorMessage>
+          {context.errors.date && context.errors.date.message}
+        </FormErrorMessage>
+      </FormControl>
+    )}
   </BaseformContext.Consumer>
 );

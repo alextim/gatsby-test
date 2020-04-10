@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   FormErrorMessage,
   FormLabel,
@@ -8,40 +8,47 @@ import {
 
 import { BaseformContext } from '../baseForms/BaseformContext';
 
-export default ({ customRegister, controlName, label, placeholder, maxLength }) => {
-  const nameRules = {
-    //validate: validateName,
-    required: `Поле "${label}" является обязательным`,
-    maxLength: {
-      value: maxLength,
-      message: `Максимальная длина ${maxLength} символов`,
-    },
-    pattern: {
-      value: /^[a-zA-Zа-яА-ЯёЁ\s]*$/,
-      message: 'Допускаются только буквы и пробел.',
-    }
-  };
+export interface INameControlProps {
+  readonly customRegister: any;
+  readonly controlName: string;
+  readonly label: string;
+  readonly placeholder: string;
+  readonly maxLength: number;
+}
 
-  return (
-    <BaseformContext.Consumer>
-      {context => {
-        const { register, errors } = context;
+const NameControl: React.FC<INameControlProps> =
+  ({ customRegister, controlName, label, placeholder, maxLength }) => {
+    const nameRules = {
+      // validate: validateName,
+      required: `Поле "${label}" является обязательным`,
+      maxLength: {
+        value: maxLength,
+        message: `Максимальная длина ${maxLength} символов`,
+      },
+      pattern: {
+        value: /^[a-zA-Zа-яА-ЯёЁ\s]*$/,
+        message: 'Допускаются только буквы и пробел.',
+      },
+    };
 
-        return (
-          <FormControl isInvalid={errors[controlName]} mb="1rem">
+    return (
+      <BaseformContext.Consumer>
+        {context => context && (
+          <FormControl isInvalid={context.errors[controlName]} mb="1rem">
             <FormLabel htmlFor={controlName}>{label}</FormLabel>
             <Input
+              ref={customRegister ? e => customRegister(e, nameRules) : context.register(nameRules)}
               name={controlName}
               placeholder={placeholder}
-              ref={customRegister ? e => customRegister(e, nameRules) : register(nameRules)}
             />
 
             <FormErrorMessage>
-              {errors[controlName] && errors[controlName].message}
+              {context.errors[controlName] && context.errors[controlName].message}
             </FormErrorMessage>
           </FormControl>
-        );
-      }}
-    </BaseformContext.Consumer>
-  );
+        )}
+      </BaseformContext.Consumer>
+    );
 };
+
+export default NameControl;
