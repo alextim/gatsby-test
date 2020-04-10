@@ -2,11 +2,12 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Button, useDisclosure } from '@chakra-ui/core';
 
+import { IPageProps } from '../types';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import TripInquiryForm from '../components/forms/TripInquiryForm';
 
-export default ({ location }) => {
+const Trip = ({ location }: IPageProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -44,3 +45,5 @@ const RightWrapper = styled.div`
     width: 50%;
   }
 `;
+
+export default Trip;

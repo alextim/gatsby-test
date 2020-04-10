@@ -2,7 +2,6 @@
 //https://theme-ui.com/theme-spec
 import { theme as chakraDefaultTheme } from '@chakra-ui/core';
 
-const theme = {
 /*************
 * Prefix	Description
 * https://basscss.com/
@@ -32,6 +31,7 @@ $fullhd	computed	1344px + (2 * $gap)
 *
 *
 */
+const theme = {
   ...chakraDefaultTheme,
   // breakpoints: ['40em', '48em', '64em', '76em'],
 

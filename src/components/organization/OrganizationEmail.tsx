@@ -3,12 +3,10 @@ import { useTheme } from '@chakra-ui/core';
 
 import Utils from '../../lib/utils';
 import useOrganization from '../../helpers/hooks/useOrganization';
-
 import { IconLink } from '../IconLink';
 
-export default () => {
+const OrganizationEmail = () => {
   const theme = useTheme();
-
   const { email } = useOrganization();
 
   const emailStyle = {
@@ -32,11 +30,13 @@ export default () => {
         icon={['far', 'envelope']}
         url=""
         style={emailStyle}
-        onClick={onClick}
         mb={theme.footer.mbWidgetLink}
+        onClick={onClick}
       >
         {reversed}
       </IconLink>
     );
   });
 };
+
+export default OrganizationEmail;

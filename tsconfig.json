@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
       "sourceMap": true,
-      "noImplicitAny": true,
       "module": "commonjs",
       "strict": true,
       "noEmit": true,
       "target": "esnext",
       "jsx": "react",
       "allowJs": true,
-      "lib": ["dom", "es2015", "es2017"],
-      "noImplicitReturns": true,
+      "lib": ["dom", "esnext"],
+      "isolatedModules": true,
       "esModuleInterop": true,
+      "noImplicitAny": true,
+      "noImplicitReturns": true,
+      "noUnusedLocals": false
   },
   "exclude": ["./node_modules", "./public", "./.cache"],
   "include": [

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { IPageProps } from '../types';
 import homePageSettings from '../data/homePageSettings';
 
 import { LayoutFullWidth } from '../components/Layout';
@@ -9,7 +10,7 @@ import StickyNews from '../components/home/StickyNews';
 import Features from '../components/home/Features';
 import LatestNewsCards from '../components/home/LatestNewsCards';
 
-export default ({ location }) => (
+const Home = ({ location }: IPageProps): React.FC => (
   <LayoutFullWidth>
     <SEO title="Home" pathname={location.pathname} />
     <CTA settings={homePageSettings.CTA}/>
@@ -18,3 +19,5 @@ export default ({ location }) => (
     <LatestNewsCards settings={homePageSettings.latestNews}/>
   </LayoutFullWidth>
 );
+
+export default Home;

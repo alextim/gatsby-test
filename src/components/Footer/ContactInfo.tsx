@@ -4,10 +4,12 @@ import OrganizationPostalAddress from '../organization/OrganizationPostalAddress
 import OrganizationEmail from '../organization/OrganizationEmail';
 import OrganizationSite from '../organization/OrganizationSite';
 
-export default () => (
+const ContactInfo = () => (
   <>
     <OrganizationPostalAddress />
     <OrganizationEmail />
     <OrganizationSite />
   </>
 );
+
+export default ContactInfo;

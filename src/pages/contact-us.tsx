@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+import { IPageProps } from '../types';
 import { LayoutFullWidth } from '../components/Layout';
 import SEO from '../components/SEO';
 
@@ -73,7 +74,7 @@ const ContactFormWrapper = styled.div`
 
 const heading = 'Контакты';
 
-export default ({ location }) => (
+const ContactUs = ({ location }: IPageProps) => (
   <LayoutFullWidth>
     <SEO title={heading} pathname={location.pathname} />
 
@@ -114,3 +115,5 @@ export default ({ location }) => (
     </Container>
   </LayoutFullWidth>
 );
+
+export default ContactUs;

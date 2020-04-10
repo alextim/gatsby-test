@@ -8,7 +8,13 @@ const Wrapper = styled(Grid)`
   grid-template-columns: 2em 3em 1em auto;
 `;
 
-const TimeRow = ({ dow, timeStart, timeFinish }) => (
+interface ITimeRowProps {
+  dow: string;
+  timeStart: string;
+  timeFinish: string;
+}
+
+const TimeRow = ({ dow, timeStart, timeFinish }: ITimeRowProps) => (
   <>
     <div>{dow}:</div>
     <div>{timeStart}</div>
@@ -17,17 +23,17 @@ const TimeRow = ({ dow, timeStart, timeFinish }) => (
   </>
 );
 
-export default () => {
+const OrganizationOpeningHours = () => {
   const { openingHours } = useOrganization();
   const dow = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
   return (
     <Wrapper>
-      { 
-        openingHours.map((time, i) => (
-          <TimeRow key={i} dow={dow[i]} timeStart={time[0]} timeFinish={time[1]} />
-        ))
-      }
+      {openingHours.map((time, i) => (
+        <TimeRow key={i} dow={dow[i]} timeStart={time[0]} timeFinish={time[1]} />
+      ))}
     </Wrapper>
   );
 };
+
+export default OrganizationOpeningHours;

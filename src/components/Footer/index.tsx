@@ -20,15 +20,15 @@ const WidgetWrapper = styled.div`
   width: 100%;
   margin-bottom: 1.5em;
   ${props => props.theme.mediaQueries.md} {
-  width: 50%;
+    width: 50%;
   }
   ${props => props.theme.mediaQueries.lg} {
-  width: 25%;
-  margin-bottom: 0;
+    width: 25%;
+    margin-bottom: 0;
   }
 `;
 
-export default () => {
+const Footer = () => {
   const theme = useTheme();
 
   return (
@@ -44,24 +44,32 @@ export default () => {
           .footer-link a {
             color: ${theme.footer.colors.text};
             &:hover {
-            color: ${theme.footer.colors.highlited};
+              color: ${theme.footer.colors.highlited};
             }
           }
-       `}
+        `}
       />
       <Container>
         <Flex flexWrap="wrap" py={[2, 3, 3, 5]}>
           <WidgetWrapper>
-            <FooterWidget title="Контакты" children={<ContactInfo />}/>
+            <FooterWidget title="Контакты">
+              <ContactInfo />
+            </FooterWidget>
           </WidgetWrapper>
           <WidgetWrapper>
-            <FooterWidget title="Позвоните нам!" children={<Voice />}/>
+            <FooterWidget title="Позвоните нам!">
+              <Voice />
+            </FooterWidget>
           </WidgetWrapper>
           <WidgetWrapper>
-            <FooterWidget title="Последние новости" children={<LatestNewsList />}/>
+            <FooterWidget title="Последние новости">
+              <LatestNewsList />
+            </FooterWidget>
           </WidgetWrapper>
           <WidgetWrapper>
-            <FooterWidget title="Оформить подписку" children={<SubscribeForm />}/>
+            <FooterWidget title="Оформить подписку">
+              <SubscribeForm />
+            </FooterWidget>
           </WidgetWrapper>
         </Flex>
       </Container>
@@ -82,3 +90,5 @@ export default () => {
     </Box>
   );
 };
+
+export default Footer;
