@@ -3,7 +3,14 @@ import { useTheme } from '@chakra-ui/core';
 
 import Section from './Section';
 
-const CTA = ({ settings }) => {
+export interface ICTASettings {
+  title: string;
+  subTitle: string;
+  text: string;
+  buttons: {};
+}
+
+const CTA: React.FC<ICTASettings> = ({ settings }) => {
   const { title, subTitle, text, buttons } = settings;
   const theme = useTheme();
 

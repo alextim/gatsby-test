@@ -4,7 +4,7 @@ import { useTheme } from 'emotion-theming';
 
 import useOrganization from '../../helpers/hooks/useOrganization';
 
-export default () => {
+const OrganizationPostalAddress: React.FC = () => {
   const theme = useTheme();
   const { name, address } = useOrganization();
 
@@ -17,3 +17,5 @@ export default () => {
     </>
   );
 };
+
+export default OrganizationPostalAddress;

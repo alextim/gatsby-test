@@ -4,7 +4,7 @@ import { Flex, useTheme } from '@chakra-ui/core';
 import AnimatedLink from '../AnimatedLink';
 import useLatestNewsTop5 from '../../helpers/hooks/useLatestNewsTop5';
 
-export default () => {
+const LatestNewsList: React.FC = () => {
   const theme = useTheme();
   const mb = theme.footer.mbWidgetLink;
 
@@ -26,3 +26,5 @@ export default () => {
     </Flex>
   );
 };
+
+export default LatestNewsList;

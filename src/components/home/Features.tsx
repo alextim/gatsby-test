@@ -20,7 +20,7 @@ const shadowed = css`
 
 const StyledFlex = styled(Flex)`
   flex-direction: column;
-  ${props => props.theme.mediaQueries.md} {
+  ${(props) => props.theme.mediaQueries.md} {
     flex-direction: row;
   }
 `;
@@ -29,11 +29,11 @@ const FeatureItemWrap = styled.div`
   flex: 1;
   padding: 0 1.25em 1.25em 1.25em;
   margin: 0 1.25em 2em 1.25em;
-  background-color: ${props => props.theme.home.features.colors.itemBg};
+  background-color: ${(props) => props.theme.home.features.colors.itemBg};
 
   ${shadowed};
 
-  ${props => props.theme.mediaQueries.md} {
+  ${(props) => props.theme.mediaQueries.md} {
     margin-bottom: 0;
   }
 `;
@@ -50,21 +50,20 @@ const Burst12 = styled(Flex)`
   align-items: center;
   justify-content: center;
   color: #fff;
-  background: ${props => props.bg};
-  width: ${props => props.size};
-  height: ${props => props.size};
+  background: ${(props) => props.bg};
+  width: ${(props) => props.size};
+  height: ${(props) => props.size};
   position: relative;
   margin: 0 auto;
   &:before,
   &:after {
-    content: "";
+    content: ''';
     position: absolute;
     top: 0;
     left: 0;
-    height: ${props => props.size};
-    width: ${props => props.size};
-    background: ${props => props.bg};
-
+    height: ${(props) => props.size};
+    width: ${(props) => props.size};
+    background: ${(props) => props.bg};
   } 
   &:before {
     transform: rotate(30deg);
@@ -76,14 +75,22 @@ const Burst12 = styled(Flex)`
 
 const StyledLink = styled(Link)`
   color: #f3f8fd;
-  display:block; 
-  z-index:2;
+  display: block; 
+  z-index: 2;
   &:hover {
     color: #fff;
   }
 `;
 
-const FeatureItem = ({ title, text, url, icon, color }) => (
+interface IFeatureItem {
+  title: string;
+  text: string;
+  url: string;
+  icon: string | [string, string]
+  color: string;
+}
+
+const FeatureItem: React.FC<IFeatureItem> = ({ title, text, url, icon, color }) => (
   <FeatureItemWrap>
 
     <Box mt="3em" mb="3em">
@@ -105,7 +112,14 @@ const FeatureItem = ({ title, text, url, icon, color }) => (
   </FeatureItemWrap>
 );
 
-const Features = ({ settings }) => {
+export interface IFeaturesSettings {
+  title: string;
+  subTitle: string;
+  text: string;
+  items: {};
+}
+
+const Features: React.FC<IFeaturesSettings> = ({ settings }) => {
   const { title, subTitle, text, items } = settings;
   const theme = useTheme();
 

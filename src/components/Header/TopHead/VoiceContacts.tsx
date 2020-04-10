@@ -15,10 +15,10 @@ const StyledLink = styled(Link)`
   width: 2.75em;
   margin: 0;
   &:hover {
-  color:  ${props => props.theme.footer.colors.highlited};
-  background-color: #517fa4;
-  transition: all .4s ease-out 0s;
-  text-decoration: none;
+    color:  ${(props) => props.theme.footer.colors.highlited};
+    background-color: #517fa4;
+    transition: all 0.4s ease-out 0s;
+    text-decoration: none;
   }
 `;
 
@@ -27,18 +27,25 @@ const StyledPhoneLink = styled(StyledLink)`
   padding: 0 0.5em;
 `;
 
-const IconOnlyLink = ({icon, color, url, name}) => (
+interface IIconOnlyLink {
+  icon: string | [string, string];
+  color?: string;
+  url: string;
+  name: string;
+}
+
+const IconOnlyLink: React.FC<IIconOnlyLink> = ({ icon, color, url, name }) => (
   <StyledLink
     href={url}
     title={name}
     target="_blank"
     rel="noindex noopener noreferrer"
   >
-    <FontAwesomeIcon icon={icon} size="lg" color={color}/>
+    <FontAwesomeIcon icon={icon} size="lg" color={color} />
   </StyledLink>
 );
 
-const VoiceContacts = () => {
+const VoiceContacts: React.FC = () => {
   const { voice } = useOrganization();
 
   // const whatsappColor = theme.colors.brands.whatsapp;
@@ -64,7 +71,7 @@ const VoiceContacts = () => {
       }
       { 
         voice.telegram &&
-        <IconOnlyLink 
+        <IconOnlyLink
           icon={['fab', 'telegram']} 
           url={Utils.telegramUrl(voice.telegram)} 
           name="Telegram"
@@ -72,7 +79,7 @@ const VoiceContacts = () => {
       }
       { 
         voice.whatsapp &&
-        <IconOnlyLink 
+        <IconOnlyLink
           icon={['fab', 'whatsapp']}
           url={Utils.whatsappUrl(voice.whatsapp)} 
           name="WhatsApp"
@@ -80,7 +87,7 @@ const VoiceContacts = () => {
       }
       { 
         voice.viber &&
-        <IconOnlyLink 
+        <IconOnlyLink
           icon={['fab', 'viber']} 
           url={Utils.viberUrl(voice.viber)} 
           name="Viber"

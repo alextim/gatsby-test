@@ -5,7 +5,7 @@ import Utils from '../../lib/utils';
 import useSiteMetadata from '../../helpers/hooks/useSiteMetadata';
 import { IconLink } from '../IconLink';
 
-export default () => {
+const OrganizationSite: React.FC = () => {
   const theme = useTheme();
   const { siteUrl } = useSiteMetadata();
   const hostName = Utils.extractHostname(siteUrl);
@@ -16,3 +16,5 @@ export default () => {
     </IconLink>
   );
 };
+
+export default OrganizationSite;

@@ -7,15 +7,15 @@ import useOrganization from '../../../helpers/hooks/useOrganization';
 
 const StyledInlineFlex = styled.div`
   display: none;
-  ${props => props.theme.mediaQueries.md} {
+  ${(props) => props.theme.mediaQueries.md} {
     display: inline-flex;
     align-items: center;
     padding-bottom: 0.5em;
-    padding-bottom: 0; 
+    padding-bottom: 0;
   }
 `;
 
-const PostalAddress = () => {
+const PostalAddress: React.FC = () => {
   const { address } = useOrganization();
   const { streetAddress1, streetAddress2, city, country } = address;
   const nbsp = '\xa0';
@@ -29,7 +29,9 @@ const PostalAddress = () => {
   return (
     <StyledInlineFlex>
       <FontAwesomeIcon icon={['far', 'map']} size="sm" />
-      <Box ml="0.5em">{ addressInOneLine }</Box>
+      <Box ml="0.5em">
+        {addressInOneLine}
+      </Box>
     </StyledInlineFlex>
   );
 };

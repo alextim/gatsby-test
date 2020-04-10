@@ -9,7 +9,7 @@ import NavbarEnd from './NavbarEnd';
 
 // import './navbar.scss'
 
-const Navbar2 = () => {
+const Navbar: React.FC = () => {
   /*
   * https://stackoverflow.com/questions/44154760/passing-states-between-components
   * https://www.pluralsight.com/guides/react-communicating-between-components
@@ -39,4 +39,4 @@ const Navbar2 = () => {
   );
 };
 
-export default Navbar2;
+export default Navbar;

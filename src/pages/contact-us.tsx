@@ -42,10 +42,10 @@ const Wrapper = styled.div`
 
 const Card = ({ title, children }) => {
   const CardWrapper = styled(Wrapper)`
-  ${props => props.theme.mediaQueries.md} {
+  ${(props) => props.theme.mediaQueries.md} {
     width: 50%;
   }
-  ${props => props.theme.mediaQueries.lg} {
+  ${(props) => props.theme.mediaQueries.lg} {
     width: 25%;
   }
   `;

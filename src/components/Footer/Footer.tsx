@@ -10,7 +10,7 @@ import FooterWidget from './FooterWidget';
 import ContactInfo from './ContactInfo';
 import Voice from './Voice';
 import LatestNewsList from './LatestNewsList';
-import SubscribeForm from './SubscribeForm';
+import Subscribe from './Subscribe';
 
 import SocialLinks from './SocialLinks';
 import FooterNavigation from './FooterNavigation';
@@ -19,16 +19,16 @@ import LegalInfo from './LegalInfo';
 const WidgetWrapper = styled.div`
   width: 100%;
   margin-bottom: 1.5em;
-  ${props => props.theme.mediaQueries.md} {
+  ${(props) => props.theme.mediaQueries.md} {
     width: 50%;
   }
-  ${props => props.theme.mediaQueries.lg} {
+  ${(props) => props.theme.mediaQueries.lg} {
     width: 25%;
     margin-bottom: 0;
   }
 `;
 
-const Footer = () => {
+const Footer: React.FC = () => {
   const theme = useTheme();
 
   return (
@@ -68,7 +68,7 @@ const Footer = () => {
           </WidgetWrapper>
           <WidgetWrapper>
             <FooterWidget title="Оформить подписку">
-              <SubscribeForm />
+              <Subscribe />
             </FooterWidget>
           </WidgetWrapper>
         </Flex>

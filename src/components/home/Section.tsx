@@ -4,7 +4,7 @@ import { Flex, Box, Heading } from '@chakra-ui/core';
 import { Container } from '../Container';
 import BtnLink from './BtnLink';
 
-const ButtonsWrap = ({ items }) => (
+const ButtonsWrap: React.FC = ({ items }) => (
   <Flex flex="wrap" alignItems="center" justifyContent="center">
     <BtnLink href={items.primary.url}>
       {items.primary.title}
@@ -18,7 +18,7 @@ const ButtonsWrap = ({ items }) => (
   </Flex>
 );
 
-const Section = ({ title, subTitle, text, buttons, children, headingColor, ...props }) => (
+const Section: React.FC = ({ title, subTitle, text, buttons, children, headingColor, ...props }) => (
   <Box as="section" width="100%" pt="2em" pb="2.5em" textAlign="center" {...props}>
     <Container>
       <Box mb="2em" mx="1.25em">

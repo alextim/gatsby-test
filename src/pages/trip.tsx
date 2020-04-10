@@ -33,7 +33,7 @@ const HeadWrapper = styled.div`
 const LeftWrapper = styled.div`
   width: 100%;
   margin-bottom: 1rem;
-  ${props => props.theme.mediaQueries.md} {
+  ${(props) => props.theme.mediaQueries.md} {
     width: 50%;
   }
 `;
@@ -41,7 +41,7 @@ const LeftWrapper = styled.div`
 const RightWrapper = styled.div`
   width: 100%;
   margin-bottom: 1rem;
-  ${props => props.theme.mediaQueries.md} {
+  ${(props) => props.theme.mediaQueries.md} {
     width: 50%;
   }
 `;

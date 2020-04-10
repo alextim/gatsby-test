@@ -10,12 +10,12 @@ const TopHeadWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  ${props => props.theme.mediaQueries.md} {
+  ${(props) => props.theme.mediaQueries.md} {
     flex-direction: row;
   }
 `;
 
-const TopHead = () => (
+const TopHead: React.FC = () => (
   <TopHeadWrapper>
     <SocialLinks />
     <VoiceContacts />

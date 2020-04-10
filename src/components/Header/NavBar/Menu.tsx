@@ -6,7 +6,7 @@ import mainMenuItems from '../../../data/mainMenuItems';
 
 let id = 0;
 
-const getId = () => {
+const getId = (): string => {
   ++id;
   return 'sm' + id.toString();
 };
@@ -16,7 +16,7 @@ const StyledCheckbox = styled.input`
   &:checked + ul {
     display: block;
   }
-  ${props => props.theme.mediaQueries.md} {
+  ${(props) => props.theme.mediaQueries.md} {
     &:checked + ul {
       display: none;
     }
@@ -24,150 +24,160 @@ const StyledCheckbox = styled.input`
 `;
 
 const StyledLi = styled.li`
-    display: block;
-    position: relative;
-    padding: 1em 1.5em;
+  display: block;
+  position: relative;
+  padding: 1em 1.5em;
 
-    color: black;
-    
-    border-style: solid;
-    border-width: 0 0 1px;
-    border-color: rgba(0, 0, 0, 0.05);
+  color: black;
+  border-style: solid;
+  border-width: 0 0 1px;
+  border-color: rgba(0, 0, 0, 0.05);
 
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.125);
-    transition: all 0.125s ease-in-out;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.125);
+  transition: all 0.125s ease-in-out;
 
-    &:hover {
-        color: white;
-        background-color: #ff7550;
+  &:hover {
+    color: white;
+    background-color: #ff7550;
+  }
+  ${(props) => props.theme.mediaQueries.md} {
+    &:hover > input[type="checkbox"] + ul {
+      display: block;
     }
-    ${props => props.theme.mediaQueries.md} {
-        &:hover > input[type="checkbox"] + ul {
-            display: block;
-        }
-        li {
-            float: left;
-            border-width: 0 1px 0 0;
-        }
+    li {
+      float: left;
+      border-width: 0 1px 0 0;
     }
+  }
 `;
 
 const StyledUl = styled.ul`
-    display: none;
+  display: none;
 
-    margin: 0 1em;
-    margin-top: 1em;
+  margin: 0 1em;
+  margin-top: 1em;
 
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.05);
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.05);
 
-    border-width: 1px 1px 0;
-    background-color: white;
+  border-width: 1px 1px 0;
+  background-color: white;
+
+  ul {
+    li {
+      color: black;
+      &:last-child {
+        border-width: 0;
+      }
+    }
+  }
+
+  ${(props) => props.theme.mediaQueries.md} {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 12em;
+    margin: 0;
+
+    border-width: 0;
+    z-index: 3000;
 
     ul {
-        li {
-          color: black;
-          &:last-child {
-            border-width: 0;
-          }
-        }
+      top: 0;
+      left: 100%; 
     }
-
-    ${props => props.theme.mediaQueries.md} {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 12em;
-        margin: 0;
-
-        border-width: 0;
-        z-index: 3000;
-
-        ul {
-            top: 0;
-            left: 100%; 
-        }
-        li {
-            float: none;
-            border-width: 0 0 1px;
-        }
-        label::after {
-            content: ">";
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 1em;
-        }
+    li {
+      float: none;
+      border-width: 0 0 1px;
     }
+    label::after {
+      content: ">";
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 1em;
+    }
+  }
 `;
 
 const StyledLabel = styled.label`
-    &::after {
-        content: '▾';
-        position: absolute;
-        right: 0;
-        top: 0;
-        padding: 1em;
+  &::after {
+    content: '▾';
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 1em;
 
-        font-size: 1em;
-        text-align: center;
-        color: rgba(255, 255, 255, 0.75);
-        background-color: rgba(0, 0, 0, 0.125);
-        text-shadow: 0 0 0 transparent;
-        
-    }
-    ${props => props.theme.mediaQueries.md} {
-        position: relative;
-        padding-right: 0;
-        padding-left: 0.25em;
-        background: transparent;
-    }
+    font-size: 1em;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(0, 0, 0, 0.125);
+    text-shadow: 0 0 0 transparent;
+  }
+  ${(props) => props.theme.mediaQueries.md} {
+    position: relative;
+    padding-right: 0;
+    padding-left: 0.25em;
+    background: transparent;
+  }
 `;
 
-const MenuItem = ({ title, url }) => (
+interface IMenuItem {
+  title: string;
+  url: string;
+  children?: Array<IMenuItem>;
+}
+
+const MenuItem: React.FC<IMenuItem> = ({ title, url }) => (
   <StyledLi>
     <Link to={url}>{title}</Link>
   </StyledLi>
 );
 
-const MenuItems = ({ items }) => (
+const MenuItems: React.FC<Array<IMenuItem>> = ({ items }) => (
   items.map((item, i) => {
     if (item.hasOwnProperty('children')) {
-      return (<MenuDropdown key={i} title={item.title}  id={getId()} items={item.children} />);
+      return (<MenuDropdown key={i} title={item.title} id={getId()} items={item.children} />);
     }
 
-    return (<MenuItem key={i} title={item.title} url={item.url}/>);
+    return (<MenuItem key={i} title={item.title} url={item.url} />);
   })
 );
 
-const MenuDropdown = ({ title, id, items }) => (
-  <StyledLi>
+interface IMenuDropdown {
+  title: string;
+  id: string;
+  items: Array<IMenuItem>;
+}
 
+const MenuDropdown: React.FC<IMenuDropdown> = ({ title, id, items }) => (
+  <StyledLi>
     <StyledLabel htmlFor={id}>
       {title}
     </StyledLabel>
-
     <StyledCheckbox type="checkbox" id={id} />
-
     <StyledUl>
       <MenuItems items={items} />
     </StyledUl>
-
   </StyledLi>
 );
 
-const Menu = ({ isActive }) => {
-  const StyledMenuWrap = styled.ul`
-        display: ${isActive ? 'none' : 'block'};
-        width: 100%;
+export interface IMenu {
+  isActive: boolean;
+}
 
-        ${props => props.theme.mediaQueries.md} {
-            display: flex;
-            align-items: center;
-            margin-left: auto;
-            width: auto;
-        }
-    `;
+const Menu: React.FC<IMenu> = ({ isActive }) => {
+  const StyledMenuWrap = styled.ul`
+    display: ${isActive ? 'none' : 'block'};
+    width: 100%;
+
+    ${(props) => props.theme.mediaQueries.md} {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      width: auto;
+    }
+  `;
 
   return (
     <StyledMenuWrap>

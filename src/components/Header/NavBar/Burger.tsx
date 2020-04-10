@@ -10,7 +10,7 @@ const BurgerSpan = styled(Box)`
   position: absolute;
   transform-origin: center;
   transition-duration: 86ms;
-  transition-property: background-color,opacity,transform;
+  transition-property: background-color, opacity, transform;
   transition-timing-function: ease-out;
   width: 16px;
 `;
@@ -24,13 +24,19 @@ const BurgerPseudoBox = styled(Box)`
   width: 3.25rem;
   margin-left: auto;
   hover {
-    background-color: rgba(0,0,0,.05);
+    background-color: rgba(0, 0, 0, 0.05);
   }
 `;
 
-const Burger = ({ handleToggleCallback, isActive }) => (
+export interface IBurger {
+  handleToggleCallback: (event: React.MouseEvent<HTMLElement>) => void;
+  isActive: boolean;
+}
+
+const Burger: React.FC<IBurger> = ({ handleToggleCallback, isActive }) => (
   <BurgerPseudoBox
-    aria-label="Menu" aria-controls="navigation"
+    aria-label="Menu"
+    aria-controls="navigation"
     role="button"
     display={{ sm: 'block', md: 'none' }}
     onClick={handleToggleCallback}
@@ -39,11 +45,11 @@ const Burger = ({ handleToggleCallback, isActive }) => (
       top="calc(50% - 6px)"
       transform={isActive ? 'translateY(5px) rotate(45deg)' : ''}
     />
-    <BurgerSpan as="span" 
+    <BurgerSpan as="span"
       top="calc(50% - 1px)"
       opacity={isActive ? 0 : ''}
     />
-    <BurgerSpan as="span" 
+    <BurgerSpan as="span"
       top="calc(50% + 4px)"
       transform={isActive ? 'translateY(-5px) rotate(-45deg)' : ''}
     />

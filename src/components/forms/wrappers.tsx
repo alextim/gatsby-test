@@ -9,21 +9,21 @@ export const InnerWrapper = styled.div`
 
 export const LeftWrapper = styled.div`
   width: 100%;
-  ${props => props.theme.mediaQueries.md} {
+  ${(props) => props.theme.mediaQueries.md} {
     padding-right: 1rem;
     width: 50%;
   }
-  ${props => props.theme.mediaQueries.lg} {
+  ${(props) => props.theme.mediaQueries.lg} {
     width: 30%;
   }
 `;
 
 export const RightWrapper = styled.div`
   width: 100%;
-  ${props => props.theme.mediaQueries.md} {
+  ${(props) => props.theme.mediaQueries.md} {
     width: 50%;
   }
-  ${props => props.theme.mediaQueries.lg} {
+  ${(props) => props.theme.mediaQueries.lg} {
     width: 70%;
   }
 `;

@@ -5,7 +5,7 @@ import { Flex, Box, useTheme } from '@chakra-ui/core';
 import useOrganization from '../../helpers/hooks/useOrganization';
 import SwitchColorMode from './SwitchColorMode';
 
-export default () => {
+const LegalInfo: Rect.FC = () => {
   const { name } = useOrganization();
   const theme = useTheme();
 
@@ -30,7 +30,8 @@ export default () => {
       </Box>
 
       <SwitchColorMode />
-
     </Flex>
   );
 };
+
+export default LegalInfo;

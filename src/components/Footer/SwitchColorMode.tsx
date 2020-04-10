@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, useColorMode } from '@chakra-ui/core'; 
+import { Box, useColorMode } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default () => {
+const SwitchColorMode: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Box 
+    <Box
       ml="1em"
       onClick={toggleColorMode}
       role="switch"
@@ -18,3 +18,5 @@ export default () => {
     </Box>
   );
 };
+
+export default SwitchColorMode;

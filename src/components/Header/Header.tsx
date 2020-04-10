@@ -12,7 +12,7 @@ const HeaderWrapper = styled.div`
   width: 100%;
 `;
 
-export default () => {
+const Header: React.FC = () => {
   const theme = useTheme();
 
   return (
@@ -35,3 +35,5 @@ export default () => {
     </HeaderWrapper>
   );
 };
+
+export default Header;

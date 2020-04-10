@@ -10,7 +10,7 @@ import useLatestNewsFeatured1 from '../../helpers/hooks/useLatestNewsFeatured1';
 
 const Wrap = styled(Box)`
   width: 100%;
-  ${props => props.theme.mediaQueries.md} {
+  ${(props) => props.theme.mediaQueries.md} {
     width: 50%;
   }
 `;

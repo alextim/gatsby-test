@@ -7,34 +7,35 @@ const StyledLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  color: ${props => props.theme.footer.colors.text};
+
+  color: ${(props) => props.theme.footer.colors.text};
   text-decoration: none;
-  
+
   height: 2em;
   width: 2em;
   margin: 0 0.625em;
 
-  border: 0.125em solid ${props => props.theme.footer.colors.text};
+  border: 0.125em solid ${(props) => props.theme.footer.colors.text};
   border-radius: 100%;
 
   &:hover {
-    color: ${props => props.theme.footer.colors.highlited};
+    color: ${(props) => props.theme.footer.colors.highlited};
     background-color: #517fa4;
-    border: 0.125em  solid transparent;
-    transition: all .4s ease-out 0s;
+    border: 0.125em solid transparent;
+    transition: all 0.4s ease-out 0s;
   }
 `;
 
-const SocialLink = ({ icon, name, text, url, color }) => (
-  <StyledLink
-    href={url}
-    target="_blank"
-    color={color}
-    rel="noreferrer"
-    aria-label={name}
-    title={text}
-  >
+export interface ISocialLink {
+  icon: string | [string, string];
+  name: string;
+  text: string;
+  url: string;
+  color?: string;
+}
+
+const SocialLink: Rect.FC<ISocialLink> = ({ icon, name, text, url, color }) => (
+  <StyledLink href={url} target="_blank" rel="noreferrer" color={color} aria-label={name} title={text}>
     <FontAwesomeIcon icon={icon} />
   </StyledLink>
 );

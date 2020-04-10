@@ -9,12 +9,17 @@ import useLatestNewsTop3 from '../../helpers/hooks/useLatestNewsTop3';
 const InnerWrap = styled(Flex)`
   flex-direction: column;
   margin-bottom: 3em;
-  ${props => props.theme.mediaQueries.lg} {
+  ${(props) => props.theme.mediaQueries.lg} {
     flex-direction: row;
   }
 `;
 
-export default ( {settings} ) => {
+export interface ILatestNewsCards {
+  title: string;
+  buttons: {};
+}
+
+const LatestNewsCards: React.FC<ILatestNewsCards> = ({ settings }) => {
   const { title, buttons } = settings;
   const theme = useTheme();
   const posts = useLatestNewsTop3();
@@ -27,9 +32,13 @@ export default ( {settings} ) => {
     >
 
       <InnerWrap>
-        { posts.map((post, i) => (<NewsCard key={i} post={post}/>)) }
+        {posts.map((post, i) => (
+          <NewsCard key={i} post={post} />
+        ))}
       </InnerWrap>
 
     </Section>
   );
 };
+
+export default LatestNewsCards;

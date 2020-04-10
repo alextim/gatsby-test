@@ -9,9 +9,9 @@ const StyledLink = styled(Link)`
   align-items: center;
 
   text-align: center;
-  color: ${props => props.theme.header.colors.topHead.text};
+  color: ${(props) => props.theme.header.colors.topHead.text};
   text-decoration: none;
-  
+
   height: 2.75em;
   width: 2.75em;
   margin: 0;
@@ -19,14 +19,22 @@ const StyledLink = styled(Link)`
   border: none;
 
   &:hover {
-  color: ${props => props.theme.footer.colors.highlited};
-  background-color: #517fa4;
-  border: 0.625em solid transparent;
-  transition: all .4s ease-out 0s;
+    color: ${(props) => props.theme.footer.colors.highlited};
+    background-color: #517fa4;
+    border: 0.625em solid transparent;
+    transition: all 0.4s ease-out 0s;
   }
 `;
 
-const SocialLink = ({ icon, name, text, url, color }) => (
+export interface IScocialLink {
+  icon: string | [string, string];
+  name: string;
+  text: string;
+  url: string;
+  color?: string;
+}
+
+const SocialLink: React.FC<IScocialLink> = ({ icon, name, text, url, color }) => (
   <StyledLink
     href={url}
     target="_blank"

@@ -14,7 +14,7 @@ interface ITimeRowProps {
   timeFinish: string;
 }
 
-const TimeRow = ({ dow, timeStart, timeFinish }: ITimeRowProps) => (
+const TimeRow: React.FC<ITimeRowProps> = ({ dow, timeStart, timeFinish }) => (
   <>
     <div>{dow}:</div>
     <div>{timeStart}</div>
@@ -23,7 +23,7 @@ const TimeRow = ({ dow, timeStart, timeFinish }: ITimeRowProps) => (
   </>
 );
 
-const OrganizationOpeningHours = () => {
+const OrganizationOpeningHours: React.FC = () => {
   const { openingHours } = useOrganization();
   const dow = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
