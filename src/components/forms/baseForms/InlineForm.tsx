@@ -11,7 +11,7 @@ const MESSAGE_SENDING = 'Пожалуйста подождите';
 const MESSAGE_SUCCESS = 'Данные сохранены.';
 const MESSAGE_ERROR = 'Данные не сохранены. Пожалуйста повторите вашу попытку позже';
 
-export default ({ sendData, msgSending, msgSuccess, msgError, children }) => {
+const InlineForm = ({ sendData, msgSending, msgSuccess, msgError, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
@@ -26,6 +26,13 @@ export default ({ sendData, msgSending, msgSuccess, msgError, children }) => {
   const [status, setStatus] = useState(FormStatusEnum.Sending);
   const [message, setMessage] = useState('');
   const focusRef = useRef();
+
+  const close = () => {
+    onClose();
+    focusRef.current && focusRef.current.focus();
+  };
+
+  const waitAndClose = () => setTimeout(() => close(), MODAL_CLOSE_DELAY);
 
   sendData.onSend = () => {
     setStatus(FormStatusEnum.Sending);
@@ -56,13 +63,6 @@ export default ({ sendData, msgSending, msgSuccess, msgError, children }) => {
 
   const cancel = () => sendData.cancel();
 
-  const close = () => {
-    onClose();
-    focusRef.current && focusRef.current.focus();
-  };
-
-  const waitAndClose = () => setTimeout(() => close(), MODAL_CLOSE_DELAY);
-
   const onSubmit = (data, e) => {
     e.preventDefault();
     sendData.send(data);
@@ -75,16 +75,18 @@ export default ({ sendData, msgSending, msgSuccess, msgError, children }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} method="post">
-        <BaseformContext.Provider value={context}>
-          {children}
-        </BaseformContext.Provider>
+        <BaseformContext.Provider value={context}>{children}</BaseformContext.Provider>
       </form>
       <SendFormDataModal
-        message={message} status={status}
-        isOpen={isOpen} onClose={onClose}
+        message={message}
+        status={status}
+        isOpen={isOpen}
         finalFocusRef={focusRef}
         onAbort={cancel}
+        onClose={onClose}
       />
     </>
   );
 };
+
+export default InlineForm;

@@ -15,7 +15,7 @@ import { IBaseformContext, BaseformContext } from './BaseformContext';
 import FormStatusEnum from './FormStatusEnum';
 import { getTitle, MODAL_CLOSE_DELAY } from './formUtils';
 
-export default ({ children, title, successMsg, sendData, isOpen, onClose, formSize="96%" }) => {
+const PopupForm = ({ children, title, successMsg, sendData, isOpen, onClose, formSize="96%" }) => {
   const {
     handleSubmit,
     // setError,
@@ -27,7 +27,7 @@ export default ({ children, title, successMsg, sendData, isOpen, onClose, formSi
 
   const focusRef = useRef();
   const [status, setStatus] = useState(FormStatusEnum.Form);
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState('');
 
   const waitAndClose = () => {
     setTimeout(() => {
@@ -84,13 +84,13 @@ export default ({ children, title, successMsg, sendData, isOpen, onClose, formSi
         <ModalHeader>{title}</ModalHeader>
         {status !== FormStatusEnum.Sending && <ModalCloseButton />}
         <ModalBody>
-          {status === FormStatusEnum.Form &&
-              <form onSubmit={handleSubmit(onSubmit)} method="post">
-                <BaseformContext.Provider value={context}>
-                  {children}
-                </BaseformContext.Provider>
-              </form>
-          }
+          {status === FormStatusEnum.Form && (
+            <form onSubmit={handleSubmit(onSubmit)} method="post">
+              <BaseformContext.Provider value={context}>
+                {children}
+              </BaseformContext.Provider>
+            </form>
+          )}
 
           {status === FormStatusEnum.Sending && <Spinner />}
 
@@ -98,7 +98,7 @@ export default ({ children, title, successMsg, sendData, isOpen, onClose, formSi
         </ModalBody>
         {status !== FormStatusEnum.Form &&
           <ModalFooter>
-            <Button onClick={ status === FormStatusEnum.Sending ? cancel : onClose }>
+            <Button onClick={status === FormStatusEnum.Sending ? cancel : onClose}>
               {status === FormStatusEnum.Sending ? 'Отменить' : 'Закрыть'}
             </Button>
           </ModalFooter>
@@ -107,3 +107,5 @@ export default ({ children, title, successMsg, sendData, isOpen, onClose, formSi
     </Modal>
   );
 };
+
+export default PopupForm;

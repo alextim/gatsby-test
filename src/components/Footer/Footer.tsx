@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
 
   return (
     <Box
-      color={theme.footer.colors.text} 
+      color={theme.footer.colors.text}
       bg={theme.footer.colors.bg}
       as="footer"
       width="100%"
@@ -86,7 +86,6 @@ const Footer: React.FC = () => {
           <LegalInfo />
         </Container>
       </Box>
-
     </Box>
   );
 };

@@ -13,16 +13,14 @@ import {
 import FormStatusEnum from './FormStatusEnum';
 import { getTitle } from './formUtils';
 
-export default ({ status, message, isOpen, onAbort, onClose, finalFocusRef }) => {
+const SendFormDataModal = ({ status, message, isOpen, onAbort, onClose, finalFocusRef }) => {
   const title = getTitle(status, '');
 
   return (
     <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} finalFocusRef={finalFocusRef}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>
-          {title}
-        </ModalHeader>
+        <ModalHeader>{title}</ModalHeader>
         {status !== FormStatusEnum.Sending && <ModalCloseButton />}
 
         <ModalBody pb={6}>
@@ -32,10 +30,12 @@ export default ({ status, message, isOpen, onAbort, onClose, finalFocusRef }) =>
 
         <ModalFooter>
           <Button onClick={status === FormStatusEnum.Sending ? onAbort : onClose}>
-            {status === FormStatusEnum.Sending? 'Отменить' : 'Закрыть'}
+            {status === FormStatusEnum.Sending ? 'Отменить' : 'Закрыть'}
           </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
   );
 };
+
+export default SendFormDataModal;
