@@ -4,7 +4,7 @@ import { Flex, Box, Link, Text } from '@chakra-ui/core';
 import Img from 'gatsby-image';
 import styled from '@emotion/styled';
 
-import { IStickyNews } from '../../types/homePageTypes';
+import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
 import Section from './Section';
 import BtnLink from './BtnLink';
 import useLatestNewsFeatured1 from '../../helpers/hooks/useLatestNewsFeatured1';
@@ -21,13 +21,14 @@ const StyledBtnLink = styled(BtnLink)`
   width: 90%;
 `;
 
-const StickyNews: React.FC<IStickyNews> = ({ settings }) => {
+const StickyNews: React.FC = () => {
   const posts = useLatestNewsFeatured1();
   if (!posts.length) {
     return;
   }
 
-  const { title, subTitle, text } = settings;
+  const stickyNews = useHomePageSettings();
+  const { title, subTitle, text } = stickyNews;
   // , trip
   const theme = useTheme();
 

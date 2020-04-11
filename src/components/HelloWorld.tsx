@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default () => (
-  <div style={{ color: 'red', background: 'green' }}>
-    Hello, World!
-  </div>
+const HelloWorld = () => (
+  <div style={{ color: 'red', background: 'green' }}>Hello, World!</div>
 );
+
+export default HelloWorld;

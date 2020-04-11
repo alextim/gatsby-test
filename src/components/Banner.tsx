@@ -5,24 +5,29 @@ import { ContainerFullWidth } from './Container';
 import PageHeaing from './PageHeading';
 
 const Wrapper = styled(ContainerFullWidth)`
-    position: relative;
-    text-align: center;
-    color: white;
+  position: relative;
+  text-align: center;
+  color: white;
 `;
 
 const CenteredWrap = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const SImg = styled.img`
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 `;
 
-export default ({ img, title }) => (
+interface IProps {
+  img: string;
+  title: string;
+}
+
+const Banner: React.FC<IProps> = ({ img, title }) => (
   <Wrapper>
     <SImg src={img} />
     <CenteredWrap>
@@ -30,3 +35,6 @@ export default ({ img, title }) => (
     </CenteredWrap>
   </Wrapper>
 );
+
+export default Banner;
+

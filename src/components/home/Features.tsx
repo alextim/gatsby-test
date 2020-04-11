@@ -5,6 +5,7 @@ import { Link } from 'gatsby';
 import { Flex, Box, useTheme } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
 import { IFeatureItem, IFeaturesSettings } from '../../types/homePageTypes';
 import ItemHeading from './ItemHeading';
 import Section from './Section';
@@ -101,8 +102,9 @@ const FeatureItem: React.FC<IFeatureItem> = ({ title, text, url, icon, color }) 
   </FeatureItemWrap>
 );
 
-const Features: React.FC<IFeaturesSettings> = ({ settings }) => {
-  const { title, subTitle, text, items } = settings;
+const Features: React.FC = () => {
+  const { features } = useHomePageSettings();
+  const { title, subTitle, text, items } = features;
   const theme = useTheme();
 
   return (

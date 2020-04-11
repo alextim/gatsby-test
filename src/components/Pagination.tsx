@@ -47,7 +47,13 @@ const ArrowRight = styled(Arrow)`
   transform: rotate(-45deg);
 `;
 
-export default ({ currentPage, pageCount, base }) => {
+interface IProps {
+  currentPage: number;
+  pageCount: number;
+  base: string;
+}
+
+const Pagination: React.FC<IProps> = ({ currentPage, pageCount, base }) => {
   if (pageCount === 1) {
     return null;
   }
@@ -57,41 +63,36 @@ export default ({ currentPage, pageCount, base }) => {
 
   return (
     <PaginationWrapper>
-      {
-        !isFirst &&
-        <NavBtn
-          to={currentPage === 2 ? `/${base}` : `/${base}/page/${currentPage - 1}`} 
-          rel="prev"
-        >
+      {!isFirst && (
+        <NavBtn to={currentPage === 2 ? `/${base}` : `/${base}/page/${currentPage - 1}`} rel="prev">
           <ArrowLeft mr="0.5em" />
           Назад
         </NavBtn>
-      }
-      {
-        Array.from({ length: pageCount }, (_, i) => {
-          const key = `pagination-number${i + 1}`;
-          const to = i === 0 ? `/${base}` : `/${base}/page/${i + 1}`;
-          const title = i + 1;
+      )}
+      {Array.from({ length: pageCount }, (_, i) => {
+        const key = `pagination-number${i + 1}`;
+        const to = i === 0 ? `/${base}` : `/${base}/page/${i + 1}`;
+        const title = i + 1;
 
-          if (currentPage === i + 1) {
-            return <CurrentPageBtn to={to} key={key}>{title}</CurrentPageBtn>;
-          }
+        if (currentPage === i + 1) {
+          return (
+            <CurrentPageBtn to={to} key={key}>{title}</CurrentPageBtn>
+          );
+        }
 
-          return <NavBtn to={to} key={key}>{title}</NavBtn>;
-        })
-      }
+        return (
+          <NavBtn to={to} key={key}>{title}</NavBtn>
+        );
+      })}
 
-      {
-        !isLast &&
-        <NavBtn
-          to={`/${base}/page/${currentPage + 1}`}
-          rel="next"
-        >
+      {!isLast && (
+        <NavBtn to={`/${base}/page/${currentPage + 1}`} rel="next">
           Вперед
           <ArrowRight ml="0.5em" />
         </NavBtn>
-      }
-
+      )}
     </PaginationWrapper>
   );
 };
+
+export default Pagination;

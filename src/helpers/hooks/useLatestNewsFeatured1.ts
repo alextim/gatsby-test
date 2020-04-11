@@ -1,6 +1,21 @@
 import { useStaticQuery, graphql } from 'gatsby';
 
-export default (): Array<{
+interface IEdge {
+  node: {
+    frontmatter: {
+      featuredImage?: {
+        childImageSharp: {
+          fluid: any;
+        };
+      };
+    };
+    fields: {
+      slug: string;
+    };
+  };
+}
+
+const useLatestNewsFeatured1 = (): Array<{
   path: string;
   featuredImage: any;
 }> => {
@@ -36,11 +51,10 @@ export default (): Array<{
         }
   `);
 
-  return data.allMdx.edges.map(({ node: {
-    fields: {slug},
-    frontmatter: {featuredImage},
-  }}) => ({
-    path: slug,
-    featuredImage: featuredImage ? featuredImage.childImageSharp.fluid : null,
+  return data.allMdx.edges.map(({ node }: IEdge) => ({
+    path: node.fields.slug,
+    featuredImage: node.frontmatter.featuredImage ? node.frontmatter.featuredImage.childImageSharp.fluid : null,
   }));
 };
+
+export default useLatestNewsFeatured1;

@@ -10,14 +10,24 @@ const Icons = () => (
   </div>
 );
 
-export default ({ children, to, cn, mb, end = 'false' }) => (
+interface IProps {
+  children: React.ReactNode;
+  to: string;
+  cn?: string;
+  end: boolean;
+  mb?: string | number | [];
+}
+
+const AnimatedLink: React.FC<IProps> = ({ children, to, cn, mb, end = false }) => (
   <Flex direction="row" className="fa-hover" mb={mb}>
-    { end === 'false' && <Icons /> }
+    {!end && <Icons />}
     <Link className={cn} to={to}>
-      <Box pl={end === 'false' ? '0.3em' : '0'} pr={end === 'true' ? '0.3em' : '0'}>
+      <Box pl={!end ? '0.3em' : '0'} pr={end ? '0.3em' : '0'}>
         {children}
       </Box>
     </Link>
-    { end === 'true' && <Icons /> }
+    {end && <Icons />}
   </Flex>
 );
+
+export default AnimatedLink;

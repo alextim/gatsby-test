@@ -1,16 +1,18 @@
 import { useStaticQuery, graphql } from 'gatsby';
 
-export default (): string[] => {
+const useAllYYYYMM = (): string[] => {
   const data = useStaticQuery(graphql`
-        query AllYYYMMQuery {
-            allMdx {
-                group(field: fields___yyyymm) {
-                    field
-                    fieldValue
-                    totalCount
-                }
-            }
+    query AllYYYMMQuery {
+      allMdx {
+        group(field: fields___yyyymm) {
+          field
+          fieldValue
+          totalCount
         }
-    `);
-  return data.allMdx.group.map(group => group.fieldValue);
+      }
+    }
+  `);
+  return data.allMdx.group.map((group: { fieldValue: string }) => group.fieldValue);
 };
+
+export default useAllYYYYMM;

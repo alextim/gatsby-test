@@ -2,10 +2,11 @@ import React from 'react';
 import { useTheme } from '@chakra-ui/core';
 
 import Section from './Section';
-import { ICTASettings } from '../../types/homePageTypes';
+import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
 
-const CTA: React.FC<ICTASettings> = ({ settings }) => {
-  const { title, subTitle, text, actions } = settings;
+const CTA: React.FC = () => {
+  const { CTA } = useHomePageSettings();
+  const { title, subTitle, text, actions } = CTA;
   const theme = useTheme();
 
   return (

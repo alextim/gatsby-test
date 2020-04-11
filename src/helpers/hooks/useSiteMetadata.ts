@@ -12,7 +12,7 @@ interface ISiteMetadata {
   };
 }
 
-export default (): ISiteMetadata => {
+const useSiteMetadata = (): ISiteMetadata => {
   const { site } = useStaticQuery(graphql`
     query SiteMetadataQuery {
       site {
@@ -26,10 +26,12 @@ export default (): ISiteMetadata => {
             twitter
             fbAppID
           }
+        }
       }
     }
-  }
   `);
 
   return site.siteMetadata;
 };
+
+export default useSiteMetadata;
