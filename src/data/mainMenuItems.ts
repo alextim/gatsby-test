@@ -1,5 +1,5 @@
 // https://gist.github.com/fson/a14f5edf2ae3fb5294dd
-export default [
+const mainMenuItems = [
   {
     title: 'О нас',
     url: '/about-us',
@@ -83,3 +83,5 @@ export default [
     url: '/contact-us',
   },
 ];
+
+export default mainMenuItems;

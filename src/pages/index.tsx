@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IPageProps } from '../types';
+import { IPageProps } from '../types/types';
 import homePageSettings from '../data/homePageSettings';
 
 import { LayoutFullWidth } from '../components/Layout';
@@ -10,7 +10,7 @@ import StickyNews from '../components/home/StickyNews';
 import Features from '../components/home/Features';
 import LatestNewsCards from '../components/home/LatestNewsCards';
 
-const Home = ({ location }: IPageProps): React.FC => (
+const Home: React.FC<IPageProps> = ({ location }) => (
   <LayoutFullWidth>
     <SEO title="Home" pathname={location.pathname} />
     <CTA settings={homePageSettings.CTA}/>

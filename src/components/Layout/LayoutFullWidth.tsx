@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { CSSReset, ThemeProvider } from '@chakra-ui/core';
 import { ColorModeProvider } from '@chakra-ui/core';
 import { Flex, Box } from '@chakra-ui/core';
@@ -21,7 +20,8 @@ const loadScript = src => {
 }
 */
 
-export default ({ children }) => {
+
+const LayoutFullWidth: React.FC<React.ReactNode> = ({ children }) => {
   /*
   useEffect(() => {
     loadScript('https://use.fontawesome.com/fd58d214b9.js');
@@ -32,7 +32,7 @@ export default ({ children }) => {
     <ErrorBoundary>
       <ThemeProvider theme={theme}>
         <CSSReset />
-        <GlobalStyles theme={theme}/>
+        <GlobalStyles />
 
         <ColorModeProvider>
           <Flex flexDirection="column" minHeight="100vh">
@@ -40,10 +40,12 @@ export default ({ children }) => {
             <Box as="main" width="100%" flex="1 1 auto">
               {children}
             </Box>
-            <Footer/>
+            <Footer />
           </Flex>
         </ColorModeProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
 };
+
+export default LayoutFullWidth;

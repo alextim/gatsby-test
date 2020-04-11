@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import { IPageProps } from '../types';
+import { IPageProps } from '../types/types';
 import { LayoutFullWidth } from '../components/Layout';
 import SEO from '../components/SEO';
 
@@ -74,7 +74,7 @@ const ContactFormWrapper = styled.div`
 
 const heading = 'Контакты';
 
-const ContactUs = ({ location }: IPageProps) => (
+const ContactUs: React.FC<IPageProps> = ({ location }) => (
   <LayoutFullWidth>
     <SEO title={heading} pathname={location.pathname} />
 

@@ -5,20 +5,20 @@ import SidebarWidget from '../SidebarWidget';
 import { IconLink } from '../IconLink';
 import useAllCategories from '../../helpers/hooks/useAllCategories';
 
-export default () => {
+const PostCategories = () => {
   const cats = useAllCategories();
   const base = 'category';
   const icon = ['far', 'folder-open'];
 
-  return cats ?
+  return cats ? (
     <SidebarWidget title="Рубрики">
-      { 
-        cats.map((cat, i) => (
-          <IconLink key={i} to={`/${base}/${kebabCase(cat)}`} icon={icon}>
-            {cat}
-          </IconLink>
-        ))
-      }
-    </SidebarWidget> :
-    null;
+      {cats.map((cat, i) => (
+        <IconLink key={i} to={`/${base}/${kebabCase(cat)}`} icon={icon}>
+          {cat}
+        </IconLink>
+      ))}
+    </SidebarWidget>
+  ) : null;
 };
+
+export default PostCategories;

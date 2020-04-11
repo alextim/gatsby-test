@@ -3,22 +3,25 @@ import { Flex, Box, Heading } from '@chakra-ui/core';
 
 import { Container } from '../Container';
 import BtnLink from './BtnLink';
+import { IActions } from '../../types/homePageTypes';
 
-const ButtonsWrap: React.FC = ({ items }) => (
+const Actions: React.FC<IActions> = ({ items }) => (
   <Flex flex="wrap" alignItems="center" justifyContent="center">
-    <BtnLink href={items.primary.url}>
-      {items.primary.title}
-    </BtnLink>
-    {
-      items.secondary &&
-      <BtnLink href={items.secondary.url}>
-        {items.secondary.title}
-      </BtnLink>
-    }
+    <BtnLink href={items.primary.url}>{items.primary.title}</BtnLink>
+    {items.secondary && (<BtnLink href={items.secondary.url}>{items.secondary.title}</BtnLink>)}
   </Flex>
 );
 
-const Section: React.FC = ({ title, subTitle, text, buttons, children, headingColor, ...props }) => (
+export interface ISection {
+  title?: string;
+  subTitle?: string;
+  text?: string;
+  actions?: IActions;
+  children: React.ReactNode;
+  headingColor?: string;
+}
+
+const Section: React.FC<ISection> = ({ title, subTitle, text, actions, children, headingColor, ...props }) => (
   <Box as="section" width="100%" pt="2em" pb="2.5em" textAlign="center" {...props}>
     <Container>
       <Box mb="2em" mx="1.25em">
@@ -27,7 +30,7 @@ const Section: React.FC = ({ title, subTitle, text, buttons, children, headingCo
         { text && <Box mb="1em" dangerouslySetInnerHTML={{ __html: text }}/> }
       </Box>
       { children }
-      { buttons && <ButtonsWrap items={buttons}/> }
+      { actions && <Actions items={actions}/> }
     </Container>
   </Box>
 );

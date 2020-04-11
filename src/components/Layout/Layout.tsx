@@ -3,10 +3,10 @@ import React from 'react';
 import LayoutFullWidth from './LayoutFullWidth';
 import { Container } from '../Container';
 
-export default ({ children }) => (
+const Layout: React.FC<React.ReactNode> = ({ children }) => (
   <LayoutFullWidth>
-    <Container>
-      {children}
-    </Container>
+    <Container>{children}</Container>
   </LayoutFullWidth>
 );
+
+export default Layout;

@@ -1,4 +1,4 @@
-export default [
+const footerNavigationItems = [
   {
     title: 'Домой',
     url: '/',
@@ -20,3 +20,5 @@ export default [
     url: '/contact-us',
   },
 ];
+
+export default footerNavigationItems;

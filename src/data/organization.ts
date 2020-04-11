@@ -1,4 +1,4 @@
-export default {
+const organization = {
   name: 'Adrenalin-Travel',
   description: 'Проведение интересных приключений и путешествий по всему миру!',
   logo: '/public/adrenalin-travel.svg',
@@ -15,20 +15,14 @@ export default {
   },
 
   voice: {
-    phone: [
-      '0800300833',
-      '380933300833',
-      '380683300833',
-    ],
+    phone: ['0800300833', '380933300833', '380683300833'],
     // skype: 'alextimx',
     whatsapp: '380933300833',
     telegram: 'adrenalin-travel',
     viber: '380933300833',
   },
   // fax:      '',
-  email: [
-    'info@adrenalin.travel',
-  ],
+  email: ['info@adrenalin.travel'],
 
   openingHours: [
     ['10:00', '18:00'],
@@ -39,3 +33,5 @@ export default {
     // ['11:00', '19:00'],
   ],
 };
+
+export default organization;

@@ -5,6 +5,7 @@ import { Link } from 'gatsby';
 import { Flex, Box, useTheme } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { IFeatureItem, IFeaturesSettings } from '../../types/homePageTypes';
 import ItemHeading from './ItemHeading';
 import Section from './Section';
 
@@ -75,24 +76,15 @@ const Burst12 = styled(Flex)`
 
 const StyledLink = styled(Link)`
   color: #f3f8fd;
-  display: block; 
+  display: block;
   z-index: 2;
   &:hover {
     color: #fff;
   }
 `;
 
-interface IFeatureItem {
-  title: string;
-  text: string;
-  url: string;
-  icon: string | [string, string]
-  color: string;
-}
-
 const FeatureItem: React.FC<IFeatureItem> = ({ title, text, url, icon, color }) => (
   <FeatureItemWrap>
-
     <Box mt="3em" mb="3em">
       <Burst12 bg={color} size="5em">
         <StyledLink to={url}>
@@ -102,37 +94,27 @@ const FeatureItem: React.FC<IFeatureItem> = ({ title, text, url, icon, color }) 
     </Box>
 
     <ItemHeading mb="1em">
-      <Link to={url}>
-        {title}
-      </Link>
+      <Link to={url}>{title}</Link>
     </ItemHeading>
-    <Box mb="1em">
-      {text}
-    </Box>
+
+    <Box mb="1em">{text}</Box>
   </FeatureItemWrap>
 );
-
-export interface IFeaturesSettings {
-  title: string;
-  subTitle: string;
-  text: string;
-  items: {};
-}
 
 const Features: React.FC<IFeaturesSettings> = ({ settings }) => {
   const { title, subTitle, text, items } = settings;
   const theme = useTheme();
 
-  return(
+  return (
     <Section
       title={title}
       subTitle={subTitle}
       text={text}
-      bg={theme.home.features.colors.bg}>
+      bg={theme.home.features.colors.bg}
+    >
 
       <StyledFlex>
-        {
-          items.map((item, i) => (
+        {items.map((item, i) => (
             <FeatureItem
               key={i}
               title={item.title}
@@ -141,10 +123,8 @@ const Features: React.FC<IFeaturesSettings> = ({ settings }) => {
               icon={item.icon}
               color={theme.home.features.colors.burst}
             />
-          ))
-        }
+        ))}
       </StyledFlex>
-
     </Section>
   );
 };

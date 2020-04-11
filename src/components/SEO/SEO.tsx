@@ -18,7 +18,7 @@ interface SEOProps {
   readonly pathname: string;
   readonly image?: string;
   readonly type?: string;
-  readonly date?: any;
+  readonly date?: string;
   readonly locale?: string;
 }
 
@@ -28,13 +28,13 @@ const SEO: React.FC<SEOProps> = ({ title, description, pathname, image, type, da
 
   const url = `${meta.siteUrl}${pathname}`;
 
-  const title_ = title || meta.title;
-  const description_ = description || meta.description;
-  const image_ = image ? new URL(image, meta.siteUrl) : false;
+  const metaTitle = title || meta.title;
+  const metaDescription = description || meta.description;
+  const metaImage = image ? new URL(image, meta.siteUrl).href : '';
   // TODO: switch content content: `website`
-  const type_ = type || 'website';
+  const metaType = type || 'website';
   // TODO:
-  const isBlogPost = type_ === 'article';
+  const isBlogPost = metaType === 'article';
   const datePublished = isBlogPost ? date : false;
 
   return (
@@ -42,40 +42,40 @@ const SEO: React.FC<SEOProps> = ({ title, description, pathname, image, type, da
       <Helmet>
         <html lang={locale} />
         {/* General tags */}
-        <title>{title_}</title>
+        <title>{metaTitle}</title>
         <link rel="canonical" href={url} />
-        <meta name="description" content={description_} />
-        {image && <meta name="image" content={image_} />}
+        <meta name="description" content={metaDescription} />
+        {metaImage && <meta name="image" content={metaImage} />}
 
         {/* OpenGraph tags */}
         <meta property="og:url" content={url} />
-        <meta property="og:type" content={type_} />
+        <meta property="og:type" content={metaType} />
         <meta property="og:locale" content={locale} />
-        <meta property="og:title" content={title_} />
-        <meta property="og:description" content={description_} />
-        {image && <meta property="og:image" content={image_} />}
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        {metaImage && <meta property="og:image" content={metaImage} />}
         {meta.social.fbAppID && <meta property="fb:app_id" content={meta.social.fbAppID} />}
 
         {/* Twitter Card tags */}
-        <meta name="twitter:card" content="summary_large_image_" />
+        <meta name="twitter:card" content="summary_large_metaImage" />
         {/* TODO: AUTHOR */}
         {meta.author && <meta name="twitter:creator" content={meta.author} />}
-        <meta name="twitter:title" content={title_} />
-        <meta name="twitter:description" content={description_} />
-        {image && <meta name="twitter:image" content={image_} />}
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        {metaImage && <meta name="twitter:image" content={metaImage} />}
       </Helmet>
 
       <SchemaOrg
         isBlogPost={isBlogPost}
         url={url}
-        title={title_}
-        image={image_}
-        description={description_}
+        title={metaTitle}
+        image={metaImage}
+        description={metaDescription}
         datePublished={datePublished}
         siteUrl={meta.siteUrl}
         author={meta.author}
         organization={org}
-        defaultTitle={title_}
+        defaultTitle={metaTitle}
       />
     </>
   );

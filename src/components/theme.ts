@@ -49,7 +49,7 @@ const theme = {
     highlight: 'hsla(205, 100%, 40%, 0.125)',
 
     brands: {
-    // skype:    'rgb(0, 175, 240)',
+      // skype:    'rgb(0, 175, 240)',
       viber: '#bcaec7',
       whatsapp: '#25d366',
       telegram: '#0088cc',
@@ -224,7 +224,6 @@ const theme = {
       }
     }
   }
-  
 };
 
 theme.mediaQueries = theme.breakpoints.map(bp => `@media screen and (min-width: ${bp})`);

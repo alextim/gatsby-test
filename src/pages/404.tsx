@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { IPageProps } from '../types';
+import { IPageProps } from '../types/types';
 import Layout from '../components/Layout';
 import Seo from '../components/SEO';
 
-const NotFoundPage = ({ location }: IPageProps) => (
+const NotFoundPage: React.FC<IPageProps> = ({ location }) => (
   <Layout>
     <Seo title="404: Not found" pathname={location.pathname} />
     <h1>NOT FOUND</h1>

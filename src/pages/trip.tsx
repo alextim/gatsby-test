@@ -2,12 +2,12 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Button, useDisclosure } from '@chakra-ui/core';
 
-import { IPageProps } from '../types';
+import { IPageProps } from '../types/types';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import TripInquiryForm from '../components/forms/TripInquiryForm';
 
-const Trip = ({ location }: IPageProps) => {
+const Trip: React.FC<IPageProps> = ({ location }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (

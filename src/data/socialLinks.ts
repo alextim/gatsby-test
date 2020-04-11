@@ -1,4 +1,4 @@
-export default [
+const socialLinks = [
   {
     key: 'facebook',
     url: 'https://www.facebook.com/travel.adrenalin',
@@ -14,3 +14,5 @@ export default [
     text: 'Instagram',
   },
 ];
+
+export default socialLinks;
