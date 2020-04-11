@@ -2,7 +2,6 @@ import React from 'react';
 
 import { IPageProps } from '../types/types';
 
-
 import { LayoutFullWidth } from '../components/Layout';
 import SEO from '../components/SEO';
 import CTA from '../components/home/CTA';

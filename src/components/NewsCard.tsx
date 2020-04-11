@@ -21,8 +21,9 @@ interface IProps {
     date?: string;
     categories?: any;
     excerpt?: string;
-  }
+  };
 }
+
 const NewsCard: React.FC<IProps> = ({ post }) => (
   <Wrapper as="article" shadow="lg">
     {post.featuredImage && (

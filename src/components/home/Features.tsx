@@ -6,16 +6,16 @@ import { Flex, Box, useTheme } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
-import { IFeatureItem, IFeaturesSettings } from '../../types/homePageTypes';
+import { IFeatureItem } from '../../types/homePageTypes';
 import ItemHeading from './ItemHeading';
 import Section from './Section';
 
 const shadowed = css`
-  box-shadow: 0 0 30px hsla(0,0%,94.5%,.87);
-  transition: all .4s;
+  box-shadow: 0 0 30px hsla(0, 0%, 94.5%, 0.87);
+  transition: all 0.4s;
   &:hover {
     top: -3px;
-    box-shadow: 0 0 32px 0 hsla(0,0%,47.8%,.4);
+    box-shadow: 0 0 32px 0 hsla(0, 0%, 47.8%, 0.4);
     position: relative;
   }
 `;
@@ -94,7 +94,7 @@ const FeatureItem: React.FC<IFeatureItem> = ({ title, text, url, icon, color }) 
       </Burst12>
     </Box>
 
-    <ItemHeading mb="1em">
+    <ItemHeading>
       <Link to={url}>{title}</Link>
     </ItemHeading>
 
@@ -108,23 +108,17 @@ const Features: React.FC = () => {
   const theme = useTheme();
 
   return (
-    <Section
-      title={title}
-      subTitle={subTitle}
-      text={text}
-      bg={theme.home.features.colors.bg}
-    >
-
+    <Section title={title} ubTitle={subTitle} text={text} bg={theme.home.features.colors.bg}>
       <StyledFlex>
         {items.map((item, i) => (
-            <FeatureItem
-              key={i}
-              title={item.title}
-              text={item.text}
-              url={item.url}
-              icon={item.icon}
-              color={theme.home.features.colors.burst}
-            />
+          <FeatureItem
+            key={i}
+            title={item.title}
+            text={item.text}
+            url={item.url}
+            icon={item.icon}
+            color={theme.home.features.colors.burst}
+          />
         ))}
       </StyledFlex>
     </Section>

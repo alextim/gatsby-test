@@ -9,13 +9,12 @@ import { MDXProvider } from '@mdx-js/react';
 import { DateMeta, CategoryMeta, TagMeta } from '../components/Meta';
 import SEO from '../components/SEO';
 import { IconLink } from '../components/IconLink';
-import PrevNext from '../components/PrevNext'
+import PrevNext from '../components/PrevNext';
 import BlogLayout from './common/BlogLayout';
 
 //import HelloWorld from '../components/HelloWorld';
 
 const shortcodes = { IconLink };
-
 
 const post = ({ data, pageContext }) => {
   const { next, prev, pathname } = pageContext;
@@ -27,14 +26,14 @@ const post = ({ data, pageContext }) => {
 
   return (
     <BlogLayout>
-      <SEO 
-        title={title} 
-        description={description || excerpt} 
+      <SEO
+        title={title}
+        description={description || excerpt}
         pathname={pathname}
         image={imgSrc}
         type="article"
         date={date}
-      /> 
+      />
 
       <article>
         <Heading as="h1">{title}</Heading>

@@ -24,7 +24,8 @@ const OrganizationCloudPhones: React.FC = () => {
           mb={theme.footer.mbWidgetLink}
           to={Utils.whatsappUrl(voice.whatsapp)}
           title="WhatsApp"
-          target="_blank" rel="noindex noopener noreferrer"
+          target="_blank"
+          rel="noindex noopener noreferrer"
         >
           {Utils.formatPhone(voice.whatsapp)}
         </IconLink>
@@ -38,7 +39,8 @@ const OrganizationCloudPhones: React.FC = () => {
           mb={theme.footer.mbWidgetLink}
           to={Utils.telegramUrl(voice.telegram)}
           title="Telegram"
-          target="_blank" rel="noindex noopener noreferrer"
+          target="_blank"
+          rel="noindex noopener noreferrer"
         >
           {voice.telegram}
         </IconLink>

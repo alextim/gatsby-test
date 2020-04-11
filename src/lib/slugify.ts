@@ -1,6 +1,7 @@
 // https://andrew.stwrt.ca/posts/js-slugify/
 export default (s: string): string =>
-  s.trim()
+  s
+    .trim()
     .toLowerCase()
     .replace(/\s+/g, '-')
     .replace(/[^\w-]+/g, '')

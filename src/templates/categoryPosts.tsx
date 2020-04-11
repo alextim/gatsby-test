@@ -3,9 +3,12 @@ import { graphql } from 'gatsby';
 
 import ListTemplate from './common/ListTemplate';
 
-export default ({ data: {allMdx: { edges }, }, pageContext }) => (
-  <ListTemplate edges={edges} pageContext={pageContext} title={`Category:${' '}${pageContext.category}`} />
-);
+const categoryPosts = ({
+  data: {
+    allMdx: { edges },
+  },
+  pageContext,
+}) => <ListTemplate edges={edges} pageContext={pageContext} title={`Category:${' '}${pageContext.category}`} />;
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
@@ -14,10 +17,7 @@ export const pageQuery = graphql`
       skip: $skip
       limit: $limit
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { 
-        published: { eq: true }        
-        categories: { in: [$category] }
-      } }
+      filter: { frontmatter: { published: { eq: true }, categories: { in: [$category] } } }
     ) {
       totalCount
       edges {
@@ -30,11 +30,11 @@ export const pageQuery = graphql`
             title
             date
             featuredImage {
-                childImageSharp {
-                  fluid(maxWidth: 800) {
-                    ...GatsbyImageSharpFluid
-                  }
+              childImageSharp {
+                fluid(maxWidth: 800) {
+                  ...GatsbyImageSharpFluid
                 }
+              }
             }
             categories
             tags
@@ -44,3 +44,5 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export default categoryPosts;

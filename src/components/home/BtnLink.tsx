@@ -15,12 +15,12 @@ const BtnLink = styled(Link)`
   line-height: 1.8;
   border: none;
   cursor: pointer;
-  transition: all .3s ease 0s;
+  transition: all 0.3s ease 0s;
   &:hover {
     color: #222;
     background-color: #fff;
     text-decoration: none;
-    box-shadow: 0 2px 7px 0 rgba(162,160,160,.54);
+    box-shadow: 0 2px 7px 0 rgba(162, 160, 160, 0.54);
   }
 
   ${(props) => props.theme.mediaQueries.md} {

@@ -17,13 +17,16 @@ import OrganizationOpeningHours from '../components/organization/OrganizationOpe
 
 const mapSrc = 'https://maps.google.com/maps?q=Adrenalin&t=&z=13&ie=UTF8&iwloc=&output=embed';
 const GoogleMap = () => (
-  <iframe 
+  <iframe
     title="Google Map"
     width="100%"
     height="450px"
-    frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"
-    src={mapSrc}>
-  </iframe>
+    frameBorder={0}
+    scrolling="no"
+    marginHeight={0}
+    marginWidth={0}
+    src={mapSrc}
+  />
 );
 
 const CardsWrapper = styled.div`
@@ -40,24 +43,26 @@ const Wrapper = styled.div`
   padding: 0 1em 2em 1em;
 `;
 
-const Card = ({ title, children }) => {
-  const CardWrapper = styled(Wrapper)`
+interface IProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+const CardWrapper = styled(Wrapper)`
   ${(props) => props.theme.mediaQueries.md} {
     width: 50%;
   }
   ${(props) => props.theme.mediaQueries.lg} {
     width: 25%;
   }
-  `;
-  return (
-    <CardWrapper>
-      <CardHeading>
-        {title}
-      </CardHeading>
-      {children}
-    </CardWrapper>
-  );
-};
+`;
+
+const Card: React.FC<IProps> = ({ title, children }) => (
+  <CardWrapper>
+    <CardHeading>{title}</CardHeading>
+    {children}
+  </CardWrapper>
+);
 
 const ContactFormWrapper = styled.div`
   width: 100%;
@@ -111,7 +116,6 @@ const ContactUs: React.FC<IPageProps> = ({ location }) => (
           <ContactForm />
         </ContactFormWrapper>
       </Wrapper>
-
     </Container>
   </LayoutFullWidth>
 );

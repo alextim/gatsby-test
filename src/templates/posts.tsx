@@ -3,22 +3,21 @@ import { graphql } from 'gatsby';
 
 import ListTemplate from './common/ListTemplate';
 
-export default ({ data: {allMdx: { edges }, },  pageContext }) => (
-  <ListTemplate edges={edges} pageContext={pageContext} title="Статьи и новости" />
-);
+const posts = ({
+  data: {
+    allMdx: { edges },
+  },
+  pageContext,
+}) => <ListTemplate edges={edges} pageContext={pageContext} title="Статьи и новости" />;
 
 export const pageQuery = graphql`
-  query BlogListQuery ($skip: Int!, $limit: Int!) {
+  query BlogListQuery($skip: Int!, $limit: Int!) {
     allMdx(
-      filter: { 
-        frontmatter: { 
-          published: { eq: true } 
-        }  
-      }
-      sort: { order: DESC, fields: [frontmatter___date]  }
+      filter: { frontmatter: { published: { eq: true } } }
+      sort: { order: DESC, fields: [frontmatter___date] }
       limit: $limit
       skip: $skip
-      ) {
+    ) {
       edges {
         node {
           id
@@ -44,3 +43,5 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export default posts;

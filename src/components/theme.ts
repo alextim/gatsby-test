@@ -53,7 +53,7 @@ const theme = {
       viber: '#bcaec7',
       whatsapp: '#25d366',
       telegram: '#0088cc',
-    }
+    },
   },
 
   /*
@@ -195,7 +195,7 @@ const theme = {
         text: 'rgb(132, 133, 134)',
         bg: 'rgb(249, 249, 249)',
       },
-    }
+    },
   },
 
   home: {
@@ -204,29 +204,28 @@ const theme = {
         headingColor: '#fff',
         text: '#ddd',
         bg: '#3d3d3d',
-      }
+      },
     },
-    stickyNews : {
+    stickyNews: {
       colors: {
         bg: '#fff',
-      }
+      },
     },
     features: {
       colors: {
         bg: 'rgb(238, 238, 238)',
         burst: 'gold',
         itemBg: '#fff',
-      }
+      },
     },
     latestNews: {
       colors: {
         bg: '#fff',
-      }
-    }
-  }
+      },
+    },
+  },
+  mediaQueries: chakraDefaultTheme.breakpoints.map((bp: string) => `@media screen and (min-width: ${bp})`),
 };
-
-theme.mediaQueries = theme.breakpoints.map(bp => `@media screen and (min-width: ${bp})`);
 
 theme.mediaQueries.sm = theme.mediaQueries[0];
 theme.mediaQueries.md = theme.mediaQueries[1];

@@ -25,12 +25,16 @@ const Section: React.FC<ISection> = ({ title, subTitle, text, actions, children,
   <Box as="section" width="100%" pt="2em" pb="2.5em" textAlign="center" {...props}>
     <Container>
       <Box mb="2em" mx="1.25em">
-        { title && <Heading as="h2" mb="0.625em" color={headingColor} fontSize={['1.25em', '2em']}>{title}</Heading> }
-        { subTitle && <Box>{subTitle}</Box> }
-        { text && <Box mb="1em" dangerouslySetInnerHTML={{ __html: text }}/> }
+        {title && (
+          <Heading as="h2" mb="0.625em" color={headingColor} fontSize={['1.25em', '2em']}>
+            {title}
+          </Heading>
+        )}
+        {subTitle && <Box>{subTitle}</Box>}
+        {text && <Box mb="1em" dangerouslySetInnerHTML={{ __html: text }} />}
       </Box>
-      { children }
-      { actions && <Actions items={actions}/> }
+      {children}
+      {actions && <Actions items={actions} />}
     </Container>
   </Box>
 );

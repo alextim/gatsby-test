@@ -23,7 +23,9 @@ const LegalInfo: Rect.FC = () => {
       }}
       */
     >
-      <Box mx={2}>© {new Date().getFullYear()} «{name}». Все права защищены.</Box>
+      <Box mx={2}>
+        {'© '}{new Date().getFullYear()} «{name}». Все права защищены.
+      </Box>
       <Box mx="auto" />
       <Box mx={2}>
         <Link to="/privacy">Политика конфиденциальности</Link>

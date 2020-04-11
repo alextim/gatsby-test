@@ -48,7 +48,9 @@ const StickyNews: React.FC = () => {
           )}
         </Wrap>
         <Wrap p="1em">
-          <Text align="justify" mt={6} mb={6}>{text}</Text>
+          <Text align="justify" mt={6} mb={6}>
+            {text}
+          </Text>
           {price && (
             <Box fontSize="1.25em">
               {currency} {price}

@@ -11,17 +11,16 @@ const SocialLinks: React.FC = () => {
 
   return (
     <Flex py={1} alignItems="center" justifyContent="center" flexWrap="wrap">
-      {
-        items.map((item, i) => (
-          <SocialLink key={i}
-            icon={item.icon}
-            name={Utils.upperFirst(item.key)}
-            url={item.url}
-            color={item.color}
-            text={item.text}
-          />
-        ))
-      }
+      {items.map((item, i) => (
+        <SocialLink
+          key={i}
+          icon={item.icon}
+          name={Utils.upperFirst(item.key)}
+          url={item.url}
+          color={item.color}
+          text={item.text}
+        />
+      ))}
     </Flex>
   );
 };

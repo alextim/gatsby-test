@@ -20,7 +20,6 @@ const loadScript = src => {
 }
 */
 
-
 const LayoutFullWidth: React.FC<React.ReactNode> = ({ children }) => {
   /*
   useEffect(() => {

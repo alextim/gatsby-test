@@ -5,16 +5,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const SwitchColorMode: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Box
-      ml="1em"
-      onClick={toggleColorMode}
-      role="switch"
-      aria-checked={colorMode === 'dark' ? 'true' : 'false'}
-    >
-      <FontAwesomeIcon icon={['far', 'moon']} size="sm" color="white"
-        style={{display: colorMode === 'dark' ? 'block' : 'none'}} />
-      <FontAwesomeIcon icon="sun" size="sm" color="yellow"
-        style={{display: colorMode !== 'dark' ? 'block' : 'none'}} />
+    <Box ml="1em" role="switch" aria-checked={colorMode === 'dark' ? 'true' : 'false'} onClick={toggleColorMode}>
+      <FontAwesomeIcon
+        icon={['far', 'moon']}
+        size="sm"
+        color="white"
+        style={{ display: colorMode === 'dark' ? 'block' : 'none' }}
+      />
+      <FontAwesomeIcon
+        icon="sun"
+        size="sm"
+        color="yellow"
+        style={{ display: colorMode !== 'dark' ? 'block' : 'none' }}
+      />
     </Box>
   );
 };

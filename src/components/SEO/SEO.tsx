@@ -5,14 +5,14 @@
  *
  * */
 
-import * as React from 'react';
+import React from 'react';
 import Helmet from 'react-helmet';
 
 import useSiteMetadata from '../../helpers/hooks/useSiteMetadata';
 import useOrganization from '../../helpers/hooks/useOrganization';
 import SchemaOrg from './SchemaOrg';
 
-interface SEOProps {
+interface ISEOProps {
   readonly title?: string;
   readonly description?: string;
   readonly pathname: string;
@@ -22,7 +22,7 @@ interface SEOProps {
   readonly locale?: string;
 }
 
-const SEO: React.FC<SEOProps> = ({ title, description, pathname, image, type, date, locale }) => {
+const SEO: React.FC<ISEOProps> = ({ title, description, pathname, image, type, date, locale }) => {
   const meta = useSiteMetadata();
   const org = useOrganization();
 

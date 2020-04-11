@@ -16,7 +16,7 @@ const Heading = styled.h2`
   border-bottom: 1px solid #f5f5f5;
   padding-bottom: 10px;
   &:after {
-    content: "";
+    content: '';
     display: block;
     width: 50px;
     height: 2px;

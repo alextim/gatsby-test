@@ -12,6 +12,7 @@ const useAllYYYYMM = (): string[] => {
       }
     }
   `);
+
   return data.allMdx.group.map((group: { fieldValue: string }) => group.fieldValue);
 };
 

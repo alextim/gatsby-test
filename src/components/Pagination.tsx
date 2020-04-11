@@ -28,7 +28,7 @@ const NavBtn = styled(Link)`
 `;
 
 const CurrentPageBtn = styled(NavBtn)`
-  border: 1px solid black
+  border: 1px solid black;
 `;
 
 const Arrow = styled(Box)`
@@ -76,12 +76,16 @@ const Pagination: React.FC<IProps> = ({ currentPage, pageCount, base }) => {
 
         if (currentPage === i + 1) {
           return (
-            <CurrentPageBtn to={to} key={key}>{title}</CurrentPageBtn>
+            <CurrentPageBtn to={to} key={key}>
+              {title}
+            </CurrentPageBtn>
           );
         }
 
         return (
-          <NavBtn to={to} key={key}>{title}</NavBtn>
+          <NavBtn to={to} key={key}>
+            {title}
+          </NavBtn>
         );
       })}
 

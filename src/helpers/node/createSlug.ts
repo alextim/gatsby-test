@@ -83,7 +83,7 @@ export const createSlug: GatsbyNode['onCreateNode'] = ({ node, actions, getNode 
           value: isoDate,
         });
 
-        const yyyymm = isoDate.toString().substr(0,7).replace('-', '');
+        const yyyymm = isoDate.toString().substr(0, 7).replace('-', '');
         createNodeField({
           node,
           name: 'yyyymm',
@@ -92,7 +92,8 @@ export const createSlug: GatsbyNode['onCreateNode'] = ({ node, actions, getNode 
       }
     }
 
-    createNodeField({ node,
+    createNodeField({
+      node,
       name: 'slug',
       // value: `${siteConfig.blogUrlBase}/${slug}`
       value: `/${slug}`,
