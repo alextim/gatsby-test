@@ -17,13 +17,9 @@ const Header: React.FC = () => {
 
   return (
     <HeaderWrapper>
-      <Box
-        color={theme.header.colors.topHead.text}  
-        bg={theme.header.colors.topHead.bg} 
-        fontSize={theme.fontSizes.sm}
-      >
+      <Box color={theme.header.colors.topHead.text} bg={theme.header.colors.topHead.bg} fontSize={theme.fontSizes.sm}>
         <Container>
-           <TopHead />
+          <TopHead />
         </Container>
       </Box>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@chakra-ui/core' ;
+import { Link } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -35,14 +35,7 @@ export interface IScocialLink {
 }
 
 const SocialLink: React.FC<IScocialLink> = ({ icon, name, text, url, color }) => (
-  <StyledLink
-    href={url}
-    target="_blank"
-    color={color}
-    rel="noreferrer"
-    aria-label={name}
-    title={text}
-  >
+  <StyledLink href={url} target="_blank" color={color} rel="noreferrer" aria-label={name} title={text}>
     <FontAwesomeIcon icon={icon} />
   </StyledLink>
 );

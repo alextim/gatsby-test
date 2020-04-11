@@ -14,7 +14,7 @@ interface IProps {
   children: React.ReactNode;
   to: string;
   cn?: string;
-  end: boolean;
+  end?: boolean;
   mb?: string | number | [];
 }
 

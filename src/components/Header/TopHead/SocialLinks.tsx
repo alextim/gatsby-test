@@ -11,27 +11,25 @@ const SocialLinks: React.FC = () => {
   const StyledFlex = styled.div`
     display: none;
     ${(props) => props.theme.mediaQueries.md} {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-right: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-right: auto;
     }
   `;
 
   return (
     <StyledFlex>
-      { 
-        socialLinks.map((item, i) => (
-          <SocialLink
-            key={i}
-            icon={item.icon}
-            name={Utils.upperFirst(item.key)}
-            url={item.url}
-            color={item.color}
-            text={item.text}
-          />
-        ))
-      }
+      {socialLinks.map((item, i) => (
+        <SocialLink
+          key={i}
+          icon={item.icon}
+          name={Utils.upperFirst(item.key)}
+          url={item.url}
+          color={item.color}
+          text={item.text}
+        />
+      ))}
     </StyledFlex>
   );
 };

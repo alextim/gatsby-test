@@ -9,7 +9,8 @@ import TripDatesControl from './TripDatesControl';
 import Submit from './Submit';
 
 export {
-  FirstNameControl, LastNameControl,
+  FirstNameControl,
+  LastNameControl,
   EmailControl,
   PhoneControl,
   NoteControl,

@@ -12,17 +12,11 @@ const LatestNewsList: React.FC = () => {
 
   return (
     <Flex direction="column" align="start">
-      {
-        posts.map((post, i) => (
-          <AnimatedLink
-            key={i}
-            to={post.path}
-            mb={mb}
-          >
-            {post.title}
-          </AnimatedLink>
-        ))
-      }
+      {posts.map((post, i) => (
+        <AnimatedLink key={i} to={post.path} mb={mb}>
+          {post.title}
+        </AnimatedLink>
+      ))}
     </Flex>
   );
 };

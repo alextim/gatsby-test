@@ -8,12 +8,7 @@ const label = 'Фамилия';
 const placeholder = 'Ваша фамилия';
 
 const LastNameControl = () => (
-  <NameControl
-    controlName={controlName}
-    label={label}
-    placeholder={placeholder}
-    maxLength={maxLength}
-  />
+  <NameControl controlName={controlName} label={label} placeholder={placeholder} maxLength={maxLength} />
 );
 
 export default LastNameControl;

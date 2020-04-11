@@ -8,7 +8,7 @@ import { IActions } from '../../types/homePageTypes';
 const Actions: React.FC<IActions> = ({ items }) => (
   <Flex flex="wrap" alignItems="center" justifyContent="center">
     <BtnLink href={items.primary.url}>{items.primary.title}</BtnLink>
-    {items.secondary && (<BtnLink href={items.secondary.url}>{items.secondary.title}</BtnLink>)}
+    {items.secondary && <BtnLink href={items.secondary.url}>{items.secondary.title}</BtnLink>}
   </Flex>
 );
 

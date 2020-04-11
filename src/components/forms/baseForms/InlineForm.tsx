@@ -69,7 +69,10 @@ const InlineForm = ({ sendData, msgSending, msgSuccess, msgError, children }) =>
   };
 
   const context: IBaseformContext = {
-    errors, register, control, focusRef,
+    errors,
+    register,
+    control,
+    focusRef,
   };
 
   return (

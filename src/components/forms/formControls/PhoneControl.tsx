@@ -1,6 +1,5 @@
 import React from 'react';
-import { FormErrorMessage, FormLabel, FormControl, Input, InputGroup, InputLeftElement,
-} from '@chakra-ui/core';
+import { FormErrorMessage, FormLabel, FormControl, Input, InputGroup, InputLeftElement } from '@chakra-ui/core';
 //https://final-form.org/docs/react-final-form/getting-started
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -9,7 +8,7 @@ import { BaseformContext } from '../baseForms/BaseformContext';
 const PHONE_MIN_LENGTH = 6;
 const PHONE_MAX_LENGTH = 15;
 
-const phoneRules = { 
+const phoneRules = {
   required: 'Номер телефона является обязательным',
   maxLength: {
     value: PHONE_MAX_LENGTH,
@@ -22,36 +21,39 @@ const phoneRules = {
   pattern: {
     value: /[0-9]+$/i,
     message: 'Допускаются только цифры',
-  }
+  },
 };
 
 const PhoneControl = ({ customRegister, label = 'Телефон', icon = false }) => (
   <BaseformContext.Consumer>
-    {context => context && (
-      <FormControl isInvalid={context.errors.phone} mb="1rem">
-        { label && <FormLabel htmlFor="phone">{label}</FormLabel> }
-        { icon ?
-          <InputGroup>
-            <InputLeftElement children={<FontAwesomeIcon icon="phone" />} />
+    {(context) =>
+      context && (
+        <FormControl isInvalid={context.errors.phone} mb="1rem">
+          {label && <FormLabel htmlFor="phone">{label}</FormLabel>}
+          {icon ? (
+            <InputGroup>
+              <InputLeftElement>
+                <FontAwesomeIcon icon="phone" />
+              </InputLeftElement>
+              <Input
+                ref={customRegister ? (e) => customRegister(e, phoneRules) : context.register(phoneRules)}
+                name="phone"
+                type="phone"
+                placeholder="Ваш телефон"
+              />
+            </InputGroup>
+          ) : (
             <Input
-              ref={customRegister ? e => customRegister(e, phoneRules) : context.register(phoneRules)}
+              ref={customRegister ? (e) => customRegister(e, phoneRules) : context.register(phoneRules)}
               name="phone"
               type="phone"
               placeholder="Ваш телефон"
             />
-          </InputGroup> :
-          <Input
-            ref={customRegister ? e => customRegister(e, phoneRules) : context.register(phoneRules)}
-            name="phone"
-            type="phone"
-            placeholder="Ваш телефон"
-          />
-        }
-        <FormErrorMessage>
-          {context.errors.phone && context.errors.phone.message}
-        </FormErrorMessage>
-      </FormControl>
-    )}
+          )}
+          <FormErrorMessage>{context.errors.phone && context.errors.phone.message}</FormErrorMessage>
+        </FormControl>
+      )
+    }
   </BaseformContext.Consumer>
 );
 

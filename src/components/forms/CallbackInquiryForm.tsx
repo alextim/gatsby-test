@@ -11,8 +11,9 @@ const CallbackInquiryForm = ({ isOpen, onClose }) => {
     <PopupForm
       title="Обратный звонок"
       successMsg="Спасибо! Ваша заявка принята. Мы обязательно свяжемся с вами в ближайшее время."
-      sendData={sendData} 
-      isOpen={isOpen} onClose={onClose}
+      sendData={sendData}
+      isOpen={isOpen}
+      onClose={onClose}
       formSize="md"
     >
       <div>Оставьте свои данные, и мы сразу свяжемся с вами.</div>

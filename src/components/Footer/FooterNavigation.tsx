@@ -9,15 +9,13 @@ import footerNavigationItems from '../../data/footerNavigationItems';
 
 const FooterNavigation: React.FC = () => (
   <Flex py={1} mt={3} alignItems="center" justifyContent="center" flexWrap="wrap">
-    {
-      footerNavigationItems.map((item, i) => (
-        <Box key={i} mx={2}>
-          <Link className="footer-link" to={item.url}>
-            {item.title}
-          </Link>
-        </Box>
-      ))
-    }
+    {footerNavigationItems.map((item, i) => (
+      <Box key={i} mx={2}>
+        <Link className="footer-link" to={item.url}>
+          {item.title}
+        </Link>
+      </Box>
+    ))}
   </Flex>
 );
 

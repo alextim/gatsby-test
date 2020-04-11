@@ -10,13 +10,13 @@ interface IEdge {
       featuredImage: {
         childImageSharp: {
           fluid: any;
-        }
-      }
+        };
+      };
     };
     fields: {
       slug: string;
     };
-  }
+  };
 }
 
 const useLatestNewsTop3 = (): Array<{
@@ -30,12 +30,7 @@ const useLatestNewsTop3 = (): Array<{
   const data = useStaticQuery(graphql`
     query LatestNewsQueryTop3 {
       allMdx(
-        filter: {
-          frontmatter: { 
-            published: { eq: true } 
-            featured:  { ne: true } 
-          }  
-        }
+        filter: { frontmatter: { published: { eq: true }, featured: { ne: true } } }
         limit: 3
         sort: { order: DESC, fields: [frontmatter___date] }
       ) {
@@ -60,7 +55,7 @@ const useLatestNewsTop3 = (): Array<{
             }
           }
         }
-        }
+      }
     }
   `);
 

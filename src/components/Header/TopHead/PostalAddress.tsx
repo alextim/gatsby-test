@@ -29,9 +29,7 @@ const PostalAddress: React.FC = () => {
   return (
     <StyledInlineFlex>
       <FontAwesomeIcon icon={['far', 'map']} size="sm" />
-      <Box ml="0.5em">
-        {addressInOneLine}
-      </Box>
+      <Box ml="0.5em">{addressInOneLine}</Box>
     </StyledInlineFlex>
   );
 };

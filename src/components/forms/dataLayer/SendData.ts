@@ -13,7 +13,7 @@ export interface ISendData {
   onError: (error: any) => void;
 }
 class SendData implements ISendData {
-  #abortController = null;
+  #abortController;
   onSend;
   onSuccess;
   onCancel;
@@ -21,7 +21,7 @@ class SendData implements ISendData {
   #url;
 
   constructor(url: string) {
-    this.#abortController = null;
+    this.#abortController;
     this.#url = url;
   }
 
@@ -45,26 +45,27 @@ class SendData implements ISendData {
       },
       //redirect: 'follow', // manual, *follow, error
       //referrerPolicy: 'no-referrer', // no-referrer, *client
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
-    }).then(response => {
-      this.logResponse(response);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      console.log('SendData: send - Success', data);
-      this.onSuccess();
-      //return response.json();
-    }).catch(error => {
-      if (error.name === 'AbortError') {
-        console.log('SendData: send - Fetch aborted');
-        this.onCancel();
-      } else {
-        console.warn('SendData: send - Error', data);
-        console.warn(error);
-        this.onError(error);
-      }
-
-    });
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
+    })
+      .then((response) => {
+        this.logResponse(response);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        console.log('SendData: send - Success', data);
+        this.onSuccess();
+        // return response.json();
+      })
+      .catch((error) => {
+        if (error.name === 'AbortError') {
+          console.log('SendData: send - Fetch aborted');
+          this.onCancel();
+        } else {
+          console.warn('SendData: send - Error', data);
+          console.warn(error);
+          this.onError(error);
+        }
+      });
   }
 
   cancel() {

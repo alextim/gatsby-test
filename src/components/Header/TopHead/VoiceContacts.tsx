@@ -15,7 +15,7 @@ const StyledLink = styled(Link)`
   width: 2.75em;
   margin: 0;
   &:hover {
-    color:  ${(props) => props.theme.footer.colors.highlited};
+    color: ${(props) => props.theme.footer.colors.highlited};
     background-color: #517fa4;
     transition: all 0.4s ease-out 0s;
     text-decoration: none;
@@ -35,12 +35,7 @@ interface IIconOnlyLink {
 }
 
 const IconOnlyLink: React.FC<IIconOnlyLink> = ({ icon, color, url, name }) => (
-  <StyledLink
-    href={url}
-    title={name}
-    target="_blank"
-    rel="noindex noopener noreferrer"
-  >
+  <StyledLink href={url} title={name} target="_blank" rel="noindex noopener noreferrer">
     <FontAwesomeIcon icon={icon} size="lg" color={color} />
   </StyledLink>
 );
@@ -55,45 +50,24 @@ const VoiceContacts: React.FC = () => {
   const phone = voice.phone[0];
   // TODO: onclick="trackCall('Phone','0800300833');"
 
+  const phoneTitle = 'Бесплатные звонки со всех мобильных операторов на территории Украины';
+
   return (
     <Flex flexDirection="row" alignItems="center" mx="1em">
-      { 
-        phone &&
-        <StyledPhoneLink
-          href={Utils.phoneUrl(phone)} 
-          title="Бесплатные звонки со всех мобильных операторов на территории Украины"
-        >
+      {phone && (
+        <StyledPhoneLink href={Utils.phoneUrl(phone)} title={phoneTitle}>
           <FontAwesomeIcon icon="phone-volume" size="xs" color="" />
-          <Box ml="0.5em">
-            {Utils.formatPhone(phone)}
-          </Box>
+          <Box ml="0.5em">{Utils.formatPhone(phone)}</Box>
         </StyledPhoneLink>
-      }
-      { 
-        voice.telegram &&
-        <IconOnlyLink
-          icon={['fab', 'telegram']} 
-          url={Utils.telegramUrl(voice.telegram)} 
-          name="Telegram"
-        />
-      }
-      { 
-        voice.whatsapp &&
-        <IconOnlyLink
-          icon={['fab', 'whatsapp']}
-          url={Utils.whatsappUrl(voice.whatsapp)} 
-          name="WhatsApp"
-        />
-      }
-      { 
-        voice.viber &&
-        <IconOnlyLink
-          icon={['fab', 'viber']} 
-          url={Utils.viberUrl(voice.viber)} 
-          name="Viber"
-        />
-      }
-  </Flex>
+      )}
+      {voice.telegram && (
+        <IconOnlyLink icon={['fab', 'telegram']} url={Utils.telegramUrl(voice.telegram)} name="Telegram" />
+      )}
+      {voice.whatsapp && (
+        <IconOnlyLink icon={['fab', 'whatsapp']} url={Utils.whatsappUrl(voice.whatsapp)} name="WhatsApp" />
+      )}
+      {voice.viber && <IconOnlyLink icon={['fab', 'viber']} url={Utils.viberUrl(voice.viber)} name="Viber" />}
+    </Flex>
   );
 };
 

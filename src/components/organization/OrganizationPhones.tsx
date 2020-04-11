@@ -12,19 +12,18 @@ const OrganizationPhones: React.FC = () => {
 
   return (
     <>
-      { voice.phone.map((phone, i) => (
-          // TODO: \AT_Lib\trackCallLink($title)
-          <IconLink
-            key={i}
-            icon={i === 0 ? icon : ''}
-            size="xs"
-           mb={theme.footer.mbWidgetLink}
-            url={Utils.phoneUrl(phone)}
-          >
-            {Utils.formatPhone(phone)}
-          </IconLink>
-        ))
-      }
+      {voice.phone.map((phone, i) => (
+        // TODO: \AT_Lib\trackCallLink($title)
+        <IconLink
+          key={i}
+          icon={i === 0 ? icon : ''}
+          size="xs"
+          mb={theme.footer.mbWidgetLink}
+          to={Utils.phoneUrl(phone)}
+        >
+          {Utils.formatPhone(phone)}
+        </IconLink>
+      ))}
     </>
   );
 };

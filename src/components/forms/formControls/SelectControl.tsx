@@ -14,7 +14,9 @@ const SelectControl = ({ items, customRegister, name, label = '', icon = false }
           {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
           {icon ? (
             <InputGroup>
-              <InputLeftElement children={<FontAwesomeIcon icon={icon} />} />
+              <InputLeftElement>
+                <FontAwesomeIcon icon={icon} />
+              </InputLeftElement>
               <Select
                 ref={customRegister ? (e) => customRegister(e, selectRules) : context.register(selectRules)}
                 name={name}

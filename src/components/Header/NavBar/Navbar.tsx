@@ -22,7 +22,8 @@ const Navbar: React.FC = () => {
   return (
     <Flex
       as="nav"
-      role="navigation" aria-label="main navigation"
+      role="navigation"
+      aria-label="main navigation"
       flexWrap="wrap"
       justifyContent="space-between"
       alignItems="center"

@@ -37,4 +37,3 @@ const Banner: React.FC<IProps> = ({ img, title }) => (
 );
 
 export default Banner;
-

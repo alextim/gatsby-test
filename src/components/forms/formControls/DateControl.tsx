@@ -1,11 +1,6 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
-import {
-  FormErrorMessage,
-  FormLabel,
-  FormControl,
-  InputGroup, InputLeftElement,
-} from '@chakra-ui/core';
+import { FormErrorMessage, FormLabel, FormControl, InputGroup, InputLeftElement } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactDatePicker from 'react-date-picker';
 
@@ -30,21 +25,24 @@ const DatePickerController = ({ control }) => (
 
 const DateControl = ({ label = 'Дата', icon = false }) => (
   <BaseformContext.Consumer>
-    {context => context && (
-      <FormControl isInvalid={context.errors.date} mb="1rem">
-        { label && <FormLabel htmlFor="date">{label}</FormLabel> }
-        { icon ?
-          <InputGroup>
-            <InputLeftElement children={<FontAwesomeIcon icon="calendar" />} />
+    {(context) =>
+      context && (
+        <FormControl isInvalid={context.errors.date} mb="1rem">
+          {label && <FormLabel htmlFor="date">{label}</FormLabel>}
+          {icon ? (
+            <InputGroup>
+              <InputLeftElement>
+                <FontAwesomeIcon icon="calendar" />
+              </InputLeftElement>
+              <DatePickerController control={context.control} />
+            </InputGroup>
+          ) : (
             <DatePickerController control={context.control} />
-          </InputGroup> :
-          <DatePickerController control={context.control} />
-        }
-        <FormErrorMessage>
-          {context.errors.date && context.errors.date.message}
-        </FormErrorMessage>
-      </FormControl>
-    )}
+          )}
+          <FormErrorMessage>{context.errors.date && context.errors.date.message}</FormErrorMessage>
+        </FormControl>
+      )
+    }
   </BaseformContext.Consumer>
 );
 

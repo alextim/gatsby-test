@@ -10,8 +10,8 @@ const placeholder = 'Ваше имя';
 
 const FirstNameControl = () => (
   <BaseformContext.Consumer>
-    {
-      context => context && (
+    {(context) =>
+      context && (
         <NameControl
           customRegister={(e, o) => {
             context.register(e, o);

@@ -41,18 +41,9 @@ const Burger: React.FC<IBurger> = ({ handleToggleCallback, isActive }) => (
     display={{ sm: 'block', md: 'none' }}
     onClick={handleToggleCallback}
   >
-    <BurgerSpan as="span"
-      top="calc(50% - 6px)"
-      transform={isActive ? 'translateY(5px) rotate(45deg)' : ''}
-    />
-    <BurgerSpan as="span"
-      top="calc(50% - 1px)"
-      opacity={isActive ? 0 : ''}
-    />
-    <BurgerSpan as="span"
-      top="calc(50% + 4px)"
-      transform={isActive ? 'translateY(-5px) rotate(-45deg)' : ''}
-    />
+    <BurgerSpan as="span" top="calc(50% - 6px)" transform={isActive ? 'translateY(5px) rotate(45deg)' : ''} />
+    <BurgerSpan as="span" top="calc(50% - 1px)" opacity={isActive ? 0 : ''} />
+    <BurgerSpan as="span" top="calc(50% + 4px)" transform={isActive ? 'translateY(-5px) rotate(-45deg)' : ''} />
   </BurgerPseudoBox>
 );
 

@@ -15,7 +15,7 @@ import { IBaseformContext, BaseformContext } from './BaseformContext';
 import FormStatusEnum from './FormStatusEnum';
 import { getTitle, MODAL_CLOSE_DELAY } from './formUtils';
 
-const PopupForm = ({ children, title, successMsg, sendData, isOpen, onClose, formSize="96%" }) => {
+const PopupForm = ({ children, title, successMsg, sendData, isOpen, onClose, formSize = '96%' }) => {
   const {
     handleSubmit,
     // setError,
@@ -49,12 +49,12 @@ const PopupForm = ({ children, title, successMsg, sendData, isOpen, onClose, for
 
   sendData.onCancel = () => {
     setStatus(FormStatusEnum.Cancelled);
-    setMessage('Отменено пользователем'); 
+    setMessage('Отменено пользователем');
     waitAndClose();
   };
 
   sendData.onError = (error) => {
-    setStatus(FormStatusEnum.Error); 
+    setStatus(FormStatusEnum.Error);
     setMessage(`Данные не сохранены. Повторите вашу попытку позже. ${error.message}`);
     waitAndClose();
   };
@@ -69,7 +69,10 @@ const PopupForm = ({ children, title, successMsg, sendData, isOpen, onClose, for
   title = getTitle(status, title);
 
   const context: IBaseformContext = {
-    errors, register, control, focusRef,
+    errors,
+    register,
+    control,
+    focusRef,
   };
 
   return (
@@ -86,9 +89,7 @@ const PopupForm = ({ children, title, successMsg, sendData, isOpen, onClose, for
         <ModalBody>
           {status === FormStatusEnum.Form && (
             <form onSubmit={handleSubmit(onSubmit)} method="post">
-              <BaseformContext.Provider value={context}>
-                {children}
-              </BaseformContext.Provider>
+              <BaseformContext.Provider value={context}>{children}</BaseformContext.Provider>
             </form>
           )}
 
@@ -96,13 +97,13 @@ const PopupForm = ({ children, title, successMsg, sendData, isOpen, onClose, for
 
           {status !== FormStatusEnum.Form && <div>{message}</div>}
         </ModalBody>
-        {status !== FormStatusEnum.Form &&
+        {status !== FormStatusEnum.Form && (
           <ModalFooter>
             <Button onClick={status === FormStatusEnum.Sending ? cancel : onClose}>
               {status === FormStatusEnum.Sending ? 'Отменить' : 'Закрыть'}
             </Button>
           </ModalFooter>
-        }
+        )}
       </ModalContent>
     </Modal>
   );

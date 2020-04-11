@@ -32,13 +32,7 @@ const Footer: React.FC = () => {
   const theme = useTheme();
 
   return (
-    <Box
-      color={theme.footer.colors.text}
-      bg={theme.footer.colors.bg}
-      as="footer"
-      width="100%"
-      className="footer-link"
-    >
+    <Box color={theme.footer.colors.text} bg={theme.footer.colors.bg} as="footer" width="100%" className="footer-link">
       <Global
         styles={css`
           .footer-link a {

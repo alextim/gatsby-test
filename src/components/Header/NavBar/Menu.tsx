@@ -41,7 +41,7 @@ const StyledLi = styled.li`
     background-color: #ff7550;
   }
   ${(props) => props.theme.mediaQueries.md} {
-    &:hover > input[type="checkbox"] + ul {
+    &:hover > input[type='checkbox'] + ul {
       display: block;
     }
     li {
@@ -84,14 +84,14 @@ const StyledUl = styled.ul`
 
     ul {
       top: 0;
-      left: 100%; 
+      left: 100%;
     }
     li {
       float: none;
       border-width: 0 0 1px;
     }
     label::after {
-      content: ">";
+      content: '>';
       position: absolute;
       top: 0;
       right: 0;
@@ -134,15 +134,14 @@ const MenuItem: React.FC<IMenuItem> = ({ title, url }) => (
   </StyledLi>
 );
 
-const MenuItems: React.FC<Array<IMenuItem>> = ({ items }) => (
+const MenuItems: React.FC<Array<IMenuItem>> = ({ items }) =>
   items.map((item, i) => {
     if (item.hasOwnProperty('children')) {
-      return (<MenuDropdown key={i} title={item.title} id={getId()} items={item.children} />);
+      return <MenuDropdown key={i} title={item.title} id={getId()} items={item.children} />;
     }
 
-    return (<MenuItem key={i} title={item.title} url={item.url} />);
-  })
-);
+    return <MenuItem key={i} title={item.title} url={item.url} />;
+  });
 
 interface IMenuDropdown {
   title: string;
@@ -152,9 +151,7 @@ interface IMenuDropdown {
 
 const MenuDropdown: React.FC<IMenuDropdown> = ({ title, id, items }) => (
   <StyledLi>
-    <StyledLabel htmlFor={id}>
-      {title}
-    </StyledLabel>
+    <StyledLabel htmlFor={id}>{title}</StyledLabel>
     <StyledCheckbox type="checkbox" id={id} />
     <StyledUl>
       <MenuItems items={items} />

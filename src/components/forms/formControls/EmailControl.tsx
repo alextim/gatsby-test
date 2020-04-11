@@ -1,12 +1,11 @@
 import React from 'react';
-import { FormErrorMessage, FormLabel, FormControl, Input, InputGroup, InputLeftElement,
-} from '@chakra-ui/core';
+import { FormErrorMessage, FormLabel, FormControl, Input, InputGroup, InputLeftElement } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { BaseformContext } from '../baseForms/BaseformContext';
 
 const EMAIL_MAX_LENGTH = 20;
-const emailRules = { 
+const emailRules = {
   // validate: validateEmail,
   required: 'Адрес почты является обязательным',
   maxLength: {
@@ -22,33 +21,35 @@ const emailRules = {
 
 const EmailControl = ({ customRegister, label = 'E-mail', icon = false }) => (
   <BaseformContext.Consumer>
-    {context => context && (
-      <FormControl isInvalid={context.errors.email} mb="1rem">
-        { label && <FormLabel htmlFor="email">{label}</FormLabel> }
-        { icon ?
-          <InputGroup>
-            <InputLeftElement children={<FontAwesomeIcon icon={['far', 'envelope']} />} />
+    {(context) =>
+      context && (
+        <FormControl isInvalid={context.errors.email} mb="1rem">
+          {label && <FormLabel htmlFor="email">{label}</FormLabel>}
+          {icon ? (
+            <InputGroup>
+              <InputLeftElement>
+                <FontAwesomeIcon icon={['far', 'envelope']} />
+              </InputLeftElement>
+              <Input
+                ref={customRegister ? (e) => customRegister(e, emailRules) : context.register(emailRules)}
+                name="email"
+                type="email"
+                placeholder="Ваш E-mail"
+              />
+            </InputGroup>
+          ) : (
             <Input
-              ref={customRegister ? e => customRegister(e, emailRules) : context.register(emailRules)}
+              ref={customRegister ? (e) => customRegister(e, emailRules) : context.register(emailRules)}
               name="email"
               type="email"
               placeholder="Ваш E-mail"
             />
-          </InputGroup> :
+          )}
 
-          <Input
-            ref={customRegister ? e => customRegister(e, emailRules) : context.register(emailRules)}
-            name="email"
-            type="email"
-            placeholder="Ваш E-mail"
-          />
-        }
-
-        <FormErrorMessage>
-          {context.errors.email && context.errors.email.message}
-        </FormErrorMessage>
-      </FormControl>
-    )}
+          <FormErrorMessage>{context.errors.email && context.errors.email.message}</FormErrorMessage>
+        </FormControl>
+      )
+    }
   </BaseformContext.Consumer>
 );
 
