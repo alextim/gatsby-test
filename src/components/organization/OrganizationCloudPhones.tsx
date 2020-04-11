@@ -22,7 +22,7 @@ const OrganizationCloudPhones: React.FC = () => {
           color={whatsappColor}
           size="sm"
           mb={theme.footer.mbWidgetLink}
-          url={Utils.whatsappUrl(voice.whatsapp)}
+          to={Utils.whatsappUrl(voice.whatsapp)}
           title="WhatsApp"
           target="_blank" rel="noindex noopener noreferrer"
         >
@@ -36,7 +36,7 @@ const OrganizationCloudPhones: React.FC = () => {
           color={telegramColor}
           size="sm"
           mb={theme.footer.mbWidgetLink}
-          url={Utils.telegramUrl(voice.telegram)}
+          to={Utils.telegramUrl(voice.telegram)}
           title="Telegram"
           target="_blank" rel="noindex noopener noreferrer"
         >
@@ -50,9 +50,10 @@ const OrganizationCloudPhones: React.FC = () => {
           color={viberColor}
           size="sm"
           mb={theme.footer.mbWidgetLink}
-          url={Utils.viberUrl(voice.viber)}
+          to={Utils.viberUrl(voice.viber)}
           title="Viber"
-          target="_blank" rel="noindex noopener noreferrer"
+          target="_blank"
+          rel="noindex noopener noreferrer"
         >
           {Utils.formatPhone(voice.viber)}
         </IconLink>

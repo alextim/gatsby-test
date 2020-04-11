@@ -8,7 +8,7 @@ const maxLength = 40;
 const label = 'Имя';
 const placeholder = 'Ваше имя';
 
-export default () => (
+const FirstNameControl = () => (
   <BaseformContext.Consumer>
     {
       context => context && (
@@ -26,3 +26,5 @@ export default () => (
     }
   </BaseformContext.Consumer>
 );
+
+export default FirstNameControl;

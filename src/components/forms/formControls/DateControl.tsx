@@ -28,7 +28,7 @@ const DatePickerController = ({ control }) => (
   />
 );
 
-export default ({ label = 'Дата', icon = false }) => (
+const DateControl = ({ label = 'Дата', icon = false }) => (
   <BaseformContext.Consumer>
     {context => context && (
       <FormControl isInvalid={context.errors.date} mb="1rem">
@@ -47,3 +47,5 @@ export default ({ label = 'Дата', icon = false }) => (
     )}
   </BaseformContext.Consumer>
 );
+
+export default DateControl;

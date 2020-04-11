@@ -1,10 +1,5 @@
-import * as React from 'react';
-import {
-  FormErrorMessage,
-  FormLabel,
-  FormControl,
-  Input,
-} from '@chakra-ui/core';
+import React from 'react';
+import { FormErrorMessage, FormLabel, FormControl, Input } from '@chakra-ui/core';
 
 import { BaseformContext } from '../baseForms/BaseformContext';
 

@@ -2,7 +2,6 @@ import React from 'react';
 import { Flex } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const A = styled.a`
   padding-left: 0.3em;

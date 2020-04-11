@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  FormErrorMessage,
-  FormLabel,
-  FormControl,
-  Input,
-  InputGroup, InputLeftElement,
+import { FormErrorMessage, FormLabel, FormControl, Input, InputGroup, InputLeftElement,
 } from '@chakra-ui/core';
 //https://final-form.org/docs/react-final-form/getting-started
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -30,7 +25,7 @@ const phoneRules = {
   }
 };
 
-export default ({ customRegister, label = 'Телефон', icon = false }) => (
+const PhoneControl = ({ customRegister, label = 'Телефон', icon = false }) => (
   <BaseformContext.Consumer>
     {context => context && (
       <FormControl isInvalid={context.errors.phone} mb="1rem">
@@ -59,3 +54,5 @@ export default ({ customRegister, label = 'Телефон', icon = false }) => (
     )}
   </BaseformContext.Consumer>
 );
+
+export default PhoneControl;

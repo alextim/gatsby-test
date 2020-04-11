@@ -7,7 +7,7 @@ import { FirstNameControl, EmailControl, NoteControl, Submit } from './formContr
 
 const msgSuccess = 'Спасибо! Ваше сообщение доставлено! Мы обязательно ответим вам в ближайшее время.';
 
-export default () => (
+const ContactForm = () => (
   <InlineForm sendData={new SendContact()} msgSuccess={msgSuccess}>
     <InnerWrapper>
       <LeftWrapper>
@@ -21,3 +21,5 @@ export default () => (
     <Submit>Отправить</Submit>
   </InlineForm>
 );
+
+export default ContactForm;

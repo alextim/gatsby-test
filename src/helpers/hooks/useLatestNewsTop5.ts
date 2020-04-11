@@ -8,14 +8,14 @@ interface IEdge {
     fields: {
       slug: string;
     };
-  }
+  };
 }
 
 const useLatestNewsTop5 = (): Array<{ title: StorageManager; path: string }> => {
   const data = useStaticQuery(graphql`
     query LatestNewsQueryTop5 {
       allMdx(
-        filter: { frontmatter: {published: { eq: true }} }
+        filter: { frontmatter: { published: { eq: true } } }
         limit: 5
         sort: { order: DESC, fields: [frontmatter___date] }
       ) {
@@ -29,8 +29,8 @@ const useLatestNewsTop5 = (): Array<{ title: StorageManager; path: string }> => 
             }
           }
         }
-        }
       }
+    }
   `);
 
   return data.allMdx.edges.map(({ node }: IEdge) => ({

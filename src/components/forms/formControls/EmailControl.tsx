@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  FormErrorMessage,
-  FormLabel,
-  FormControl,  
-  Input,
-  InputGroup, InputLeftElement,
+import { FormErrorMessage, FormLabel, FormControl, Input, InputGroup, InputLeftElement,
 } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -25,7 +20,7 @@ const emailRules = {
   },
 };
 
-export default ({ customRegister, label = 'E-mail', icon = false }) => (
+const EmailControl = ({ customRegister, label = 'E-mail', icon = false }) => (
   <BaseformContext.Consumer>
     {context => context && (
       <FormControl isInvalid={context.errors.email} mb="1rem">
@@ -56,3 +51,5 @@ export default ({ customRegister, label = 'E-mail', icon = false }) => (
     )}
   </BaseformContext.Consumer>
 );
+
+export default EmailControl;

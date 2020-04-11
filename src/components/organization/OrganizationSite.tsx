@@ -11,7 +11,7 @@ const OrganizationSite: React.FC = () => {
   const hostName = Utils.extractHostname(siteUrl);
 
   return (
-    <IconLink icon="link" url={siteUrl} mb={theme.footer.mbWidgetLink}>
+    <IconLink icon="link" to={siteUrl} mb={theme.footer.mbWidgetLink}>
       {hostName}
     </IconLink>
   );

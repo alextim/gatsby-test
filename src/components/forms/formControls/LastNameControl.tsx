@@ -7,7 +7,7 @@ const maxLength = 20;
 const label = 'Фамилия';
 const placeholder = 'Ваша фамилия';
 
-export default () => (
+const LastNameControl = () => (
   <NameControl
     controlName={controlName}
     label={label}
@@ -15,3 +15,5 @@ export default () => (
     maxLength={maxLength}
   />
 );
+
+export default LastNameControl;

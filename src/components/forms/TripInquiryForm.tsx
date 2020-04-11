@@ -5,7 +5,7 @@ import { PopupForm } from './baseForms';
 import { InnerWrapper, LeftWrapper, RightWrapper } from './wrappers';
 import { FirstNameControl, LastNameControl, EmailControl, DateControl, NoteControl, TripDatesControl, Submit } from './formControls';
 
-export default ({ isOpen, onClose }) => {
+const TripInquiryForm = ({ isOpen, onClose }) => {
   const sendData = new SendTripInquiry();
   const items = [
     { value: 1, name: '01.01.2020 - 01.12.2020' },
@@ -41,3 +41,5 @@ export default ({ isOpen, onClose }) => {
     </PopupForm>
   );
 };
+
+export default TripInquiryForm;

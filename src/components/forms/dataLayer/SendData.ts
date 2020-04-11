@@ -6,7 +6,13 @@ https://dev.to/vinodchauhan7/react-hooks-with-async-await-1n9g
 https://medium.com/capbase-engineering/asynchronous-functional-programming-using-react-hooks-e51a748e6869
 */
 
-class SendData {
+export interface ISendData {
+  onSend: () => void;
+  onSuccess: () => void;
+  onCancel: () => void;
+  onError: (error: any) => void;
+}
+class SendData implements ISendData {
   #abortController = null;
   onSend;
   onSuccess;
@@ -14,13 +20,13 @@ class SendData {
   onError;
   #url;
 
-  constructor(url) {
+  constructor(url: string) {
     this.#abortController = null;
     this.#url = url;
   }
 
-  send (data) {
-    console.log('SendData: send(data)', this.url, data);
+  send(data) {
+    console.log('SendData: send(data)', this.#url, data);
     this.onSend();
     this.#abortController = new window.AbortController();
 

@@ -16,31 +16,29 @@ const OrganizationEmail: React.FC = () => {
 
   return (
     <>
-      {
-        email.map((email, i) => {
-          const onClick = (e: MouseEvent) => {
-            e.preventDefault();
-            // const x = window.open('mailto:' + atob(`${btoa(email)}`));
-            // x.close();
-            // TODO: check in real
-            window.location.href = 'mailto:' + atob(`${btoa(email)}`);
-          };
-          const reversed = Utils.reverseString(email);
+      {email.map((email, i) => {
+        const onClick = (e: MouseEvent) => {
+          e.preventDefault();
+          // const x = window.open('mailto:' + atob(`${btoa(email)}`));
+          // x.close();
+          // TODO: check in real
+          window.location.href = 'mailto:' + atob(`${btoa(email)}`);
+        };
+        const reversed = Utils.reverseString(email);
 
-          return (
-            <IconLink
-              key={i}
-              icon={['far', 'envelope']}
-              url=""
-              style={emailStyle}
-              mb={theme.footer.mbWidgetLink}
-              onClick={onClick}
-            >
-              {reversed}
-            </IconLink>
-          );
-        })
-      }
+        return (
+          <IconLink
+            key={i}
+            icon={['far', 'envelope']}
+            to=""
+            style={emailStyle}
+            mb={theme.footer.mbWidgetLink}
+            onClick={onClick}
+          >
+            {reversed}
+          </IconLink>
+        );
+      })}
     </>
   );
 };
