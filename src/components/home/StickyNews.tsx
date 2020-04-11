@@ -24,10 +24,10 @@ const StyledBtnLink = styled(BtnLink)`
 const StickyNews: React.FC = () => {
   const posts = useLatestNewsFeatured1();
   if (!posts.length) {
-    return;
+    return null;
   }
 
-  const stickyNews = useHomePageSettings();
+  const { stickyNews } = useHomePageSettings();
   const { title, subTitle, text } = stickyNews;
   // , trip
   const theme = useTheme();

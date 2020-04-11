@@ -59,20 +59,20 @@ const Burst12 = styled(Flex)`
   margin: 0 auto;
   &:before,
   &:after {
-    content: ''';
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     height: ${(props) => props.size};
     width: ${(props) => props.size};
     background: ${(props) => props.bg};
-  } 
+  }
   &:before {
     transform: rotate(30deg);
   }
   &:after {
     transform: rotate(60deg);
-  }  
+  }
 `;
 
 const StyledLink = styled(Link)`
