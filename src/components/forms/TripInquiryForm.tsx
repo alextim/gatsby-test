@@ -3,7 +3,14 @@ import React from 'react';
 import { SendTripInquiry } from './dataLayer';
 import { PopupForm } from './baseForms';
 import { InnerWrapper, LeftWrapper, RightWrapper } from './wrappers';
-import { FirstNameControl, LastNameControl, EmailControl, DateControl, NoteControl, TripDatesControl, Submit
+import {
+  FirstNameControl,
+  LastNameControl,
+  EmailControl,
+  DateControl,
+  NoteControl,
+  TripDatesControl,
+  Submit,
 } from './formControls';
 
 const TripInquiryForm = ({ isOpen, onClose }) => {

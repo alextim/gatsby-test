@@ -125,7 +125,7 @@ const StyledLabel = styled.label`
 interface IMenuItem {
   title: string;
   url: string;
-  children?: Array<IMenuItem>;
+  submenu?: IMenuItem[];
 }
 
 const MenuItem: React.FC<IMenuItem> = ({ title, url }) => (
@@ -134,10 +134,18 @@ const MenuItem: React.FC<IMenuItem> = ({ title, url }) => (
   </StyledLi>
 );
 
-const MenuItems: React.FC<Array<IMenuItem>> = ({ items }) =>
+interface IMenuItems {
+  items: IMenuItem[];
+}
+
+const MenuItems = ({ items }: IMenuItems) =>
   items.map((item, i) => {
-    if (item.hasOwnProperty('children')) {
-      return <MenuDropdown key={i} title={item.title} id={getId()} items={item.children} />;
+    /**
+     *  https://eslint.org/docs/rules/no-prototype-builtins
+     */
+    // if (item.hasOwnProperty('submenu')) {
+    if (Object.prototype.hasOwnProperty.call(item, 'submenu')) {
+      return <MenuDropdown key={i} title={item.title} id={getId()} items={item.submenu} />;
     }
 
     return <MenuItem key={i} title={item.title} url={item.url} />;

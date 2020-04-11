@@ -7,7 +7,7 @@ const mainMenuItems = [
   {
     title: 'Направления',
     url: '/destination',
-    children: [
+    submenu: [
       {
         title: 'Кавказ',
         url: '/destination/caucasus',
@@ -15,7 +15,7 @@ const mainMenuItems = [
       {
         title: 'Альпы',
         url: '/destination/alps',
-        children: [
+        submenu: [
           {
             title: 'Италия',
             url: '/italy',
@@ -39,7 +39,7 @@ const mainMenuItems = [
   {
     title: 'Туристу',
     url: '',
-    children: [
+    submenu: [
       {
         title: 'ЧаВо',
         url: '/faq',

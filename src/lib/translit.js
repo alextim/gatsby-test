@@ -1,3 +1,4 @@
+/* eslint-disable */
 // /* #!/usr/bin/env node; */
 /* jshint -W100 */
 /* eslint dot-location: ["error", "object"] */
