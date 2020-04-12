@@ -1,3 +1,5 @@
+import { num2form } from './num2form';
+
 const Utils = {
   upperFirst: (s: string): string => s[0].toUpperCase() + s.substring(1),
 
@@ -82,6 +84,9 @@ const Utils = {
     const da = new Intl.DateTimeFormat(locale, { day: '2-digit' }).format(d);
     return `${da}${sep}${mo}${sep}${ye}`;
   },
+
+  formatDays: (days: number): string => (days > 0 ? num2form(days, 'день', 'дня', 'дней') : ''),
+  formatNights: (nights: number): string => (nights > 0 ? num2form(nights, 'ночь', 'ночи', 'ночей') : ''),
 };
 
 export default Utils;

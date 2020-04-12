@@ -7,9 +7,15 @@ import { IPageProps } from '../types/types';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import TripInquiryForm from '../components/forms/TripInquiryForm';
+import { FitnessLevel, TechLevel } from '../components/trip/levels';
+
+import Utils from '../lib/utils';
 
 const Trip: React.FC<IPageProps> = ({ location }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  let s = '';
+  for(let i = 0; i < 30; i++) 
+    s += ' ' + Utils.formatDays(i);
 
   return (
     <Layout>
@@ -17,7 +23,17 @@ const Trip: React.FC<IPageProps> = ({ location }) => {
       <HeadWrapper>
         <LeftWrapper />
         <RightWrapper>
+          <TechLevel level={1} />
+          <TechLevel level={2} />
+          <TechLevel level={3} />
+          <TechLevel level={4} />
+          <FitnessLevel level={1} />
+          <FitnessLevel level={2} />
+          <FitnessLevel level={3} />
+          <FitnessLevel level={4} />
+          {s}
           <Button onClick={onOpen}>Записаться</Button>
+          
           <TripInquiryForm isOpen={isOpen} onClose={onClose} />
         </RightWrapper>
       </HeadWrapper>
