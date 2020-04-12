@@ -5,7 +5,6 @@ import { Box } from '@chakra-ui/core';
 const BtnBox = styled(Box)`
   display: inline-block;
   height: auto;
-  width: auto;
   min-width: 8.4375em;
   color: #fff;
   background-color: #ff7550;
@@ -40,8 +39,8 @@ interface IBtnLinkProps {
   children: React.ReactNode;
 }
 
-const BtnLink: React.FC<IBtnLinkProps> = ({ to, children }) => (
-  <BtnBox as="a" href={to}>
+const BtnLink: React.FC<IBtnLinkProps> = ({ to, children, ...props }) => (
+  <BtnBox as="a" href={to} {...props}>
     {children}
   </BtnBox>
 );

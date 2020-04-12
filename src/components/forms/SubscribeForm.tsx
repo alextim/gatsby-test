@@ -9,7 +9,7 @@ const msgSuccess = 'Спасибо! Ваша подписка оформлена
 const SubscribeForm = () => (
   <InlineForm sendData={new SendSubscribe()} msgSuccess={msgSuccess}>
     <EmailControl label="" icon={true} />
-    <Submit>Подписаться</Submit>
+    <Submit mt="0.5rem">Подписаться</Submit>
   </InlineForm>
 );
 

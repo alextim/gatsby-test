@@ -1,4 +1,6 @@
 import React from 'react';
+import styled from '@emotion/styled';
+import { Box } from '@chakra-ui/core';
 
 import { SendCallbackInquiry } from './data-layer';
 import { PopupForm } from './base-forms';
@@ -8,6 +10,12 @@ const FORM_TITLE = 'Обратный звонок';
 const FORM_SUBTITLE = 'Оставьте свои данные, и мы сразу свяжемся с вами.';
 const MSG_SUCCESS = 'Спасибо! Ваша заявка принята. Мы обязательно свяжемся с вами в ближайшее время.';
 const SUBMIT_TITLE = 'ОТПРАВИТЬ ЗАЯВКУ';
+
+const InnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 
 interface IProps {
   isOpen: boolean;
@@ -26,9 +34,11 @@ const CallbackInquiryForm: React.FC<IProps> = ({ isOpen, onClose }) => {
       onClose={onClose}
       formSize="md"
     >
-      <div>{FORM_SUBTITLE}</div>
-      <PhoneControl label="" icon={true} />
-      <Submit>{SUBMIT_TITLE}</Submit>
+      <InnerWrapper>
+        <Box mb="1rem">{FORM_SUBTITLE}</Box>
+        <PhoneControl label="" icon={true} />
+        <Submit w="85%" m="1rem auto 2rem">{SUBMIT_TITLE}</Submit>
+      </InnerWrapper>
     </PopupForm>
   );
 };

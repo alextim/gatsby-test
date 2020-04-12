@@ -16,11 +16,6 @@ const Wrapper = styled(Box)`
   }
 `;
 
-const StyledBtnLink = styled(BtnLink)`
-  margin: 2em;
-  width: 90%;
-`;
-
 const StickyNews: React.FC = () => {
   const posts = useLatestNewsFeatured1();
   if (!posts.length) {
@@ -56,7 +51,7 @@ const StickyNews: React.FC = () => {
               {currency} {price}
             </Box>
           )}
-          <StyledBtnLink to={path}>Подробнее</StyledBtnLink>
+          <BtnLink w="85%" m="2rem auto" to={path}>Подробнее</BtnLink>
         </Wrapper>
       </Flex>
     </Section>
