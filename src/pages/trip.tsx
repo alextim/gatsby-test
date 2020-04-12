@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Button, useDisclosure } from '@chakra-ui/core';
+import { useDisclosure } from '@chakra-ui/core';
 
+import { Button } from '../components/Button';
 import { IPageProps } from '../types/types';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
