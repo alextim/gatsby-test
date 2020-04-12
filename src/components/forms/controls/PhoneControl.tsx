@@ -3,7 +3,7 @@ import { FormErrorMessage, FormLabel, FormControl, Input, InputGroup, InputLeftE
 //https://final-form.org/docs/react-final-form/getting-started
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { BaseformContext } from '../baseForms/BaseformContext';
+import { BaseformContext } from '../base-forms/BaseformContext';
 
 const PHONE_MIN_LENGTH = 6;
 const PHONE_MAX_LENGTH = 15;
@@ -24,7 +24,13 @@ const phoneRules = {
   },
 };
 
-const PhoneControl = ({ customRegister, label = 'Телефон', icon = false }) => (
+interface IProps {
+  customRegister?: any;
+  label?: string;
+  icon?: boolean;
+}
+
+const PhoneControl: React.FC<IProps> = ({ customRegister, label = 'Телефон', icon = false }) => (
   <BaseformContext.Consumer>
     {(context) =>
       context && (

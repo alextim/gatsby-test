@@ -11,11 +11,35 @@ import {
 } from '@chakra-ui/core';
 import { Spinner, Button } from '@chakra-ui/core';
 
+import { ISendData } from '../data-layer/ISendData';
 import { IBaseformContext, BaseformContext } from './BaseformContext';
 import FormStatusEnum from './FormStatusEnum';
-import { getTitle, MODAL_CLOSE_DELAY } from './formUtils';
+import { getTitle } from './utils';
+import * as FORM from './consts';
 
-const PopupForm = ({ children, title, successMsg, sendData, isOpen, onClose, formSize = '96%' }) => {
+interface IProps {
+  sendData: ISendData;
+  msgSending?: string;
+  msgSuccess?: string;
+  msgError?: string;
+  children: React.ReactNode;
+  title: string;
+  isOpen: boolean;
+  onClose: () => void;
+  formSize?: string;
+}
+
+const PopupForm: React.FC<IProps> = ({
+  sendData,
+  msgSending = FORM.MESSAGE_SENDING,
+  msgSuccess = FORM.MESSAGE_SUCCESS,
+  msgError = FORM.MESSAGE_ERROR,
+  children,
+  title,
+  isOpen,
+  onClose,
+  formSize = '96%',
+}) => {
   const {
     handleSubmit,
     // setError,
@@ -33,17 +57,17 @@ const PopupForm = ({ children, title, successMsg, sendData, isOpen, onClose, for
     setTimeout(() => {
       onClose();
       setStatus(FormStatusEnum.Form);
-    }, MODAL_CLOSE_DELAY);
+    }, FORM.MODAL_CLOSE_DELAY);
   };
 
   sendData.onSend = () => {
     setStatus(FormStatusEnum.Sending);
-    setMessage('Пожалуйста, подождите.');
+    setMessage(msgSending);
   };
 
   sendData.onSuccess = () => {
     setStatus(FormStatusEnum.Success);
-    setMessage(successMsg);
+    setMessage(msgSuccess);
     waitAndClose();
   };
 
@@ -55,7 +79,7 @@ const PopupForm = ({ children, title, successMsg, sendData, isOpen, onClose, for
 
   sendData.onError = (error) => {
     setStatus(FormStatusEnum.Error);
-    setMessage(`Данные не сохранены. Повторите вашу попытку позже. ${error.message}`);
+    setMessage(`${msgError} ${error.message}`);
     waitAndClose();
   };
 

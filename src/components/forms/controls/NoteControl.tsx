@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormErrorMessage, FormLabel, FormControl, Textarea } from '@chakra-ui/core';
 
-import { BaseformContext } from '../baseForms/BaseformContext';
+import { BaseformContext } from '../base-forms/BaseformContext';
 
 const noteRules = {
   required: true,

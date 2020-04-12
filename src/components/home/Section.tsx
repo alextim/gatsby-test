@@ -2,13 +2,13 @@ import React from 'react';
 import { Flex, Box, Heading } from '@chakra-ui/core';
 
 import { Container } from '../Container';
-import BtnLink from './BtnLink';
+import { BtnLink } from '../Button';
 import { IActions } from '../../types/homePageTypes';
 
 const Actions: React.FC<IActions> = ({ items }) => (
   <Flex flex="wrap" alignItems="center" justifyContent="center">
-    <BtnLink href={items.primary.url}>{items.primary.title}</BtnLink>
-    {items.secondary && <BtnLink href={items.secondary.url}>{items.secondary.title}</BtnLink>}
+    <BtnLink to={items.primary.url}>{items.primary.title}</BtnLink>
+    {items.secondary && <BtnLink to={items.secondary.url}>{items.secondary.title}</BtnLink>}
   </Flex>
 );
 

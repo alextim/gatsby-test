@@ -1,4 +1,6 @@
-class SendDataMoc {
+import { ISendData } from './ISendData';
+
+class SendDataMoc implements ISendData {
   #timer;
   onSend;
   onSuccess;
@@ -11,7 +13,7 @@ class SendDataMoc {
     this.#timer = null;
   }
 
-  send(data) {
+  send(data: any) {
     console.log('SendData: send(data)');
     console.log(this.#url);
     console.log(data);

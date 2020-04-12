@@ -1,6 +1,6 @@
 import FormStatusEnum from './FormStatusEnum';
 
-const getTitle = (status, title): string => {
+export const getTitle = (status: number, title: string): string => {
   switch (status) {
     case FormStatusEnum.Error:
       return 'Ошибка';
@@ -16,7 +16,3 @@ const getTitle = (status, title): string => {
       return title;
   }
 };
-
-const MODAL_CLOSE_DELAY = 5000;
-
-export { getTitle, MODAL_CLOSE_DELAY };

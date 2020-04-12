@@ -2,16 +2,27 @@ import React, { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDisclosure } from '@chakra-ui/core';
 
+import { ISendData } from '../data-layer/ISendData';
 import SendFormDataModal from './SendFormDataModal';
 import { IBaseformContext, BaseformContext } from './BaseformContext';
 import FormStatusEnum from './FormStatusEnum';
-import { MODAL_CLOSE_DELAY } from './formUtils';
+import * as FORM from './consts';
 
-const MESSAGE_SENDING = 'Пожалуйста подождите';
-const MESSAGE_SUCCESS = 'Данные сохранены.';
-const MESSAGE_ERROR = 'Данные не сохранены. Пожалуйста повторите вашу попытку позже';
+interface IProps {
+  sendData: ISendData;
+  msgSending?: string;
+  msgSuccess?: string;
+  msgError?: string;
+  children: React.ReactNode;
+}
 
-const InlineForm = ({ sendData, msgSending, msgSuccess, msgError, children }) => {
+const InlineForm: React.FC<IProps> = ({
+  sendData,
+  msgSending = FORM.MESSAGE_SENDING,
+  msgSuccess = FORM.MESSAGE_SUCCESS,
+  msgError = FORM.MESSAGE_ERROR,
+  children,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
@@ -32,17 +43,17 @@ const InlineForm = ({ sendData, msgSending, msgSuccess, msgError, children }) =>
     focusRef.current && focusRef.current.focus();
   };
 
-  const waitAndClose = () => setTimeout(() => close(), MODAL_CLOSE_DELAY);
+  const waitAndClose = () => setTimeout(() => close(), FORM.MODAL_CLOSE_DELAY);
 
   sendData.onSend = () => {
     setStatus(FormStatusEnum.Sending);
-    setMessage(msgSending || MESSAGE_SENDING);
+    setMessage(msgSending);
     onOpen();
   };
 
   sendData.onSuccess = () => {
     setStatus(FormStatusEnum.Success);
-    setMessage(msgSuccess || MESSAGE_SUCCESS);
+    setMessage(msgSuccess);
     waitAndClose();
     reset();
   };
@@ -56,7 +67,7 @@ const InlineForm = ({ sendData, msgSending, msgSuccess, msgError, children }) =>
   sendData.onError = (error) => {
     setStatus(FormStatusEnum.Error);
     // setError('submit', 'submitError', msg );
-    const msg = `${msgError || MESSAGE_ERROR}\n${error.message}`;
+    const msg = `${msgError}\n${error.message}`;
     setMessage(msg);
     waitAndClose();
   };

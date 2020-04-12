@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { SendTripInquiry } from './dataLayer';
-import { PopupForm } from './baseForms';
+import { SendTripInquiry } from './data-layer';
+import { PopupForm } from './base-forms';
 import { InnerWrapper, LeftWrapper, RightWrapper } from './wrappers';
 import {
   FirstNameControl,
@@ -11,9 +11,19 @@ import {
   NoteControl,
   TripDatesControl,
   Submit,
-} from './formControls';
+} from './controls';
 
-const TripInquiryForm = ({ isOpen, onClose }) => {
+const FORM_TITLE = 'Записаться в поездку';
+const FORM_SUBTITLE = 'Получив эту заявку, мы сможем связаться с вами и обсудить детали путешествия.';
+const MSG_SUCCESS = 'Спасибо! Ваша заявка принята. Мы обязательно свяжемся с вами в ближайшее время.';
+const SUBMIT_TITLE = 'Отправить';
+
+interface IProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const TripInquiryForm: React.FC<IProps> = ({ isOpen, onClose }) => {
   const sendData = new SendTripInquiry();
   const items = [
     { value: 1, name: '01.01.2020 - 01.12.2020' },
@@ -26,14 +36,8 @@ const TripInquiryForm = ({ isOpen, onClose }) => {
   ];
 
   return (
-    <PopupForm
-      title="Записаться в поездку"
-      successMsg="Спасибо! Ваша заявка принята. Мы обязательно свяжемся с вами в ближайшее время."
-      sendData={sendData}
-      isOpen={isOpen}
-      onClose={onClose}
-    >
-      <div>Получив эту заявку, мы сможем связаться с вами и обсудить детали путешествия.</div>
+    <PopupForm title={FORM_TITLE} msgSuccess={MSG_SUCCESS} sendData={sendData} isOpen={isOpen} onClose={onClose}>
+      <div>{FORM_SUBTITLE}</div>
       <InnerWrapper>
         <LeftWrapper>
           <FirstNameControl />
@@ -46,7 +50,7 @@ const TripInquiryForm = ({ isOpen, onClose }) => {
           <NoteControl />
         </RightWrapper>
       </InnerWrapper>
-      <Submit>Отправить</Submit>
+      <Submit>{SUBMIT_TITLE}</Submit>
     </PopupForm>
   );
 };

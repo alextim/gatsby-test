@@ -11,9 +11,18 @@ import {
 } from '@chakra-ui/core';
 
 import FormStatusEnum from './FormStatusEnum';
-import { getTitle } from './formUtils';
+import { getTitle } from './utils';
 
-const SendFormDataModal = ({ status, message, isOpen, onAbort, onClose, finalFocusRef }) => {
+interface IProps {
+  status: number;
+  message: string;
+  isOpen: boolean;
+  onAbort: () => void;
+  onClose: () => void;
+  finalFocusRef:  any;
+}
+
+const SendFormDataModal: React.FC<IProps> = ({ status, message, isOpen, onAbort, onClose, finalFocusRef }) => {
   const title = getTitle(status, '');
 
   return (

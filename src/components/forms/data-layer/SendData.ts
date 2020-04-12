@@ -5,13 +5,8 @@ https://medium.com/@theflyingmantis/async-await-react-promise-testing-a0d454b546
 https://dev.to/vinodchauhan7/react-hooks-with-async-await-1n9g
 https://medium.com/capbase-engineering/asynchronous-functional-programming-using-react-hooks-e51a748e6869
 */
+import { ISendData } from './ISendData';
 
-export interface ISendData {
-  onSend: () => void;
-  onSuccess: () => void;
-  onCancel: () => void;
-  onError: (error: any) => void;
-}
 class SendData implements ISendData {
   #abortController;
   onSend;
@@ -25,7 +20,7 @@ class SendData implements ISendData {
     this.#url = url;
   }
 
-  send(data) {
+  send(data: any) {
     console.log('SendData: send(data)', this.#url, data);
     this.onSend();
     this.#abortController = new window.AbortController();

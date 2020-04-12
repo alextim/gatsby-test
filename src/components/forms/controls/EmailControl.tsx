@@ -2,7 +2,7 @@ import React from 'react';
 import { FormErrorMessage, FormLabel, FormControl, Input, InputGroup, InputLeftElement } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { BaseformContext } from '../baseForms/BaseformContext';
+import { BaseformContext } from '../base-forms/BaseformContext';
 
 const EMAIL_MAX_LENGTH = 20;
 const emailRules = {
@@ -19,7 +19,13 @@ const emailRules = {
   },
 };
 
-const EmailControl = ({ customRegister, label = 'E-mail', icon = false }) => (
+interface IProps {
+  customRegister?: any;
+  label?: string;
+  icon?: boolean;
+}
+
+const EmailControl: React.FC<IProps> = ({ customRegister, label = 'E-mail', icon = false }) => (
   <BaseformContext.Consumer>
     {(context) =>
       context && (

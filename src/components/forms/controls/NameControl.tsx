@@ -1,10 +1,10 @@
 import React from 'react';
 import { FormErrorMessage, FormLabel, FormControl, Input } from '@chakra-ui/core';
 
-import { BaseformContext } from '../baseForms/BaseformContext';
+import { BaseformContext } from '../base-forms/BaseformContext';
 
 export interface INameControlProps {
-  readonly customRegister: any;
+  readonly customRegister?: any;
   readonly controlName: string;
   readonly label: string;
   readonly placeholder: string;

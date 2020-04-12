@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { SendContact } from './dataLayer';
-import { InlineForm } from './baseForms';
+import { SendContact } from './data-layer';
+import { InlineForm } from './base-forms';
 import { InnerWrapper, LeftWrapper, RightWrapper } from './wrappers';
-import { FirstNameControl, EmailControl, NoteControl, Submit } from './formControls';
+import { FirstNameControl, EmailControl, NoteControl, Submit } from './controls';
 
 const msgSuccess = 'Спасибо! Ваше сообщение доставлено! Мы обязательно ответим вам в ближайшее время.';
 

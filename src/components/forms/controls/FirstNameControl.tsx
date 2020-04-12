@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BaseformContext } from '../baseForms/BaseformContext';
+import { BaseformContext } from '../base-forms/BaseformContext';
 import NameControl from './NameControl';
 
 const controlName = 'firstname';

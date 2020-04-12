@@ -1,7 +1,8 @@
+import React from 'react';
 import styled from '@emotion/styled';
-import { Link } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/core';
 
-const BtnLink = styled(Link)`
+const BtnBox = styled(Box)`
   display: inline-block;
   height: auto;
   width: auto;
@@ -28,4 +29,21 @@ const BtnLink = styled(Link)`
   }
 `;
 
-export default BtnLink;
+const Button: React.FC = ({ children, ...props }) => (
+  <BtnBox as="button" {...props}>
+    {children}
+  </BtnBox>
+);
+
+interface IBtnLinkProps {
+  to: string;
+  children: React.ReactNode;
+}
+
+const BtnLink: React.FC<IBtnLinkProps> = ({ to, children }) => (
+  <BtnBox as="a" href={to}>
+    {children}
+  </BtnBox>
+);
+
+export { Button, BtnLink };

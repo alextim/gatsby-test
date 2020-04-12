@@ -4,7 +4,7 @@ import { FormErrorMessage, FormLabel, FormControl, InputGroup, InputLeftElement 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactDatePicker from 'react-date-picker';
 
-import { BaseformContext } from '../baseForms/BaseformContext';
+import { BaseformContext } from '../base-forms/BaseformContext';
 
 const dateRules = {
   required: 'Дата обязательна',

@@ -6,10 +6,10 @@ import styled from '@emotion/styled';
 
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
 import Section from './Section';
-import BtnLink from './BtnLink';
+import { BtnLink } from '../Button';
 import useLatestNewsFeatured1 from '../../helpers/hooks/useLatestNewsFeatured1';
 
-const Wrap = styled(Box)`
+const Wrapper = styled(Box)`
   width: 100%;
   ${(props) => props.theme.mediaQueries.md} {
     width: 50%;
@@ -40,14 +40,14 @@ const StickyNews: React.FC = () => {
   return (
     <Section title={title} subTitle={subTitle} bg={theme.home.stickyNews.colors.bg}>
       <Flex flexWrap="wrap" shadow="lg" mx="1em" mb={['2em', '2em', '0']}>
-        <Wrap>
+        <Wrapper>
           {featuredImage && (
             <Link href={path} mb="1em">
               <Img fluid={featuredImage} alt={title} width="100%" height="auto" />
             </Link>
           )}
-        </Wrap>
-        <Wrap p="1em">
+        </Wrapper>
+        <Wrapper p="1em">
           <Text align="justify" mt={6} mb={6}>
             {text}
           </Text>
@@ -56,8 +56,8 @@ const StickyNews: React.FC = () => {
               {currency} {price}
             </Box>
           )}
-          <StyledBtnLink href={path}>Подробнее</StyledBtnLink>
-        </Wrap>
+          <StyledBtnLink to={path}>Подробнее</StyledBtnLink>
+        </Wrapper>
       </Flex>
     </Section>
   );

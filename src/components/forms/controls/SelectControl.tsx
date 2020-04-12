@@ -2,7 +2,7 @@ import React from 'react';
 import { FormErrorMessage, FormLabel, FormControl, Select, InputGroup, InputLeftElement } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { BaseformContext } from '../baseForms/BaseformContext';
+import { BaseformContext } from '../base-forms/BaseformContext';
 
 const selectRules = {};
 
