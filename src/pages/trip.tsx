@@ -7,15 +7,11 @@ import { IPageProps } from '../types/types';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import TripInquiryForm from '../components/forms/TripInquiryForm';
-import { FitnessLevel, TechLevel } from '../components/trip/levels';
-
-import Utils from '../lib/utils';
+import { FitnessLevel, TechLevel } from '../components/trip/ico-levels';
+import { Altitude, Accomodation, GroupSize, Duration } from '../components/trip/ico-info';
 
 const Trip: React.FC<IPageProps> = ({ location }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  let s = '';
-  for(let i = 0; i < 30; i++) 
-    s += ' ' + Utils.formatDays(i);
 
   return (
     <Layout>
@@ -31,9 +27,11 @@ const Trip: React.FC<IPageProps> = ({ location }) => {
           <FitnessLevel level={2} />
           <FitnessLevel level={3} />
           <FitnessLevel level={4} />
-          {s}
+          <Altitude value={10111} />
+          <Accomodation value="paatka" />
+          <GroupSize value={4} />
+          <Duration days={33} nights={44} />
           <Button onClick={onOpen}>Записаться</Button>
-          
           <TripInquiryForm isOpen={isOpen} onClose={onClose} />
         </RightWrapper>
       </HeadWrapper>

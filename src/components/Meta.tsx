@@ -1,17 +1,10 @@
 import React from 'react';
 import { Box, Link } from '@chakra-ui/core';
-import styled from '@emotion/styled';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import kebabCase from 'lodash/kebabCase';
 
 import Utils from './../lib/utils';
+import { IconLink } from '../components/IconLink';
 import { getCategoryUrlAndNames } from '../helpers/categoryHelper';
-
-const CenterWrap = styled.span`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
 
 interface IItem {
   name: string;
@@ -20,21 +13,22 @@ interface IItem {
 
 interface IProps {
   icon: string | [string, string];
-  items: Array<IItem>;
+  items: Array<IItem> | string;
 }
 
 const Meta: React.FC<IProps> = ({ icon, items }) => (
-  <Box mr="0.75em">
-    <CenterWrap>
-      <FontAwesomeIcon icon={icon} size="sm" />
-      <Box ml="0.4em">
-        {items.map((item, i) => (
-          <Box key={i} as="span" mr="0.4em">
-            {item.url ? <Link href={item.url}>{item.name}</Link> : <Box as="span">{item.name}</Box>}
+  <Box mr="0.75rem">
+    <IconLink icon={icon}>
+      {Array.isArray(items) ? (
+        items.map((item, i) => (
+          <Box key={i} as="span" mr="0.3rem">
+            {item.url ? <Link href={item.url}>{item.name}</Link> : <span>{item.name}</span>}
           </Box>
-        ))}
-      </Box>
-    </CenterWrap>
+        ))
+      ) : (
+        <span>{items}</span>
+      )}
+    </IconLink>
   </Box>
 );
 
@@ -43,7 +37,7 @@ interface IDateMetaProps {
 }
 
 const DateMeta: React.FC<IDateMetaProps> = ({ date }) => (
-  <Meta icon={['far', 'calendar-check']} items={[{ name: Utils.formatDate(date) }]} />
+  <Meta icon={['far', 'calendar-check']} items={Utils.formatDate(date)} />
 );
 
 interface ICategoryMetaProps {
