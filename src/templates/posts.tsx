@@ -13,7 +13,7 @@ const posts = ({
 export const pageQuery = graphql`
   query BlogListQuery($skip: Int!, $limit: Int!) {
     allMdx(
-      filter: { frontmatter: { published: { eq: true } } }
+      filter: { frontmatter: { published: { eq: true } }, fields: { type: { eq: "post" } } }
       sort: { order: DESC, fields: [frontmatter___date] }
       limit: $limit
       skip: $skip

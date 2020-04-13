@@ -11,6 +11,7 @@ import _ from 'lodash';
 import postArchiveHelper from '../postArchiveHelper';
 import siteConfig from '../../data/siteConfig';
 
+const pageTemplate = resolve('./src/templates/page.tsx');
 const postTemplate = resolve('./src/templates/post.tsx');
 const postsTemplate = resolve('./src/templates/posts.tsx');
 const categoryTemplate = resolve('./src/templates/categoryPosts.tsx');
@@ -28,6 +29,7 @@ interface IEdge {
     id: string;
     fields: {
       slug: string;
+      type: string;
     };
     frontmatter: {
       title: string;
@@ -45,7 +47,7 @@ interface IQueryResult {
   allCategories: {
     group: IGroup[];
   };
-  allPosts: {
+  allMarkdown: {
     edges: IEdge[];
   };
 }
@@ -73,12 +75,13 @@ const allPostsQuery = `
         totalCount
       }
     }
-    allPosts: allMdx {
+    allMarkdown: allMdx {
       edges {
         node {
           id
           fields {
             slug
+            type
           }
           frontmatter {
             title
@@ -152,8 +155,26 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     return null;
   }
 
+  // PAGES
+  const pages = result.data.allMarkdown.edges.filter((item) => item.node.fields.type === 'page');
+  pages.map((edge: IEdge) => {
+    const { node } = edge;
+    console.log('========================');
+    console.log('createPages: ' + node.fields.slug);
+
+    createPage({
+      path: node.fields.slug,
+      component: pageTemplate,
+      context: {
+        id: node.id,
+      },
+    });
+  });
+
+  //
   // INDIVIDUAL POST PAGE
-  result.data.allPosts.edges.map((edge: IEdge, index: number, arr: IEdge[]) => {
+  const posts = result.data.allMarkdown.edges.filter((item) => item.node.fields.type === 'post');
+  posts.map((edge: IEdge, index: number, arr: IEdge[]) => {
     const { node } = edge;
     console.log('========================');
     console.log('createPostPages: ' + node.fields.slug);
@@ -191,7 +212,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   });
 
   // POSTS INDEX
-  createPaginationPages(postsTemplate, result.data.allPosts.edges.length, siteConfig.blogUrlBase, {}, createPage);
+  createPaginationPages(postsTemplate, posts.length, siteConfig.blogUrlBase, {}, createPage);
 
   // CATEGORIES INDEX
   result.data.allCategories.group.map((group: IGroup) =>

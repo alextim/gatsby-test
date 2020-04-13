@@ -1,9 +1,10 @@
 import { GatsbyNode } from 'gatsby';
 import { parse as pathParse } from 'path';
 import { parseISO, formatISO } from 'date-fns';
+import siteConfig from './../../data/siteConfig';
+
 /**
 //const moment = require('moment');
-//const siteConfig = require('./../../data/siteConfig');
  *
  * TODO: moment
  * https://github.com/you-dont-need/You-Dont-Need-Momentjs
@@ -18,6 +19,7 @@ import slugify from '../../lib/slugify';
 interface INode {
   fields: {
     slug: string;
+    type: string;
   };
   frontmatter: {
     title: string;
@@ -30,6 +32,7 @@ const safeSlug = (s: string): string => slugify(translit(s, 1));
 
 export const createSlug: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
+
   if (node.internal.type === 'Mdx') {
     /*
     if (node.fileAbsolutePath != null) {
@@ -45,7 +48,6 @@ export const createSlug: GatsbyNode['onCreateNode'] = ({ node, actions, getNode 
     }
     */
     let slug;
-
     const fileNode = getNode(node.parent);
     const parsedFilePath = pathParse(fileNode.relativePath);
 
@@ -92,11 +94,27 @@ export const createSlug: GatsbyNode['onCreateNode'] = ({ node, actions, getNode 
       }
     }
 
+    let type;
+    if (fileNode.sourceInstanceName === 'pages') {
+      type = 'page';
+      slug = `/${slug}`;
+    } else if (fileNode.sourceInstanceName === 'blog') {
+      type = 'post';
+      slug = `${siteConfig.blogUrlBase}/${slug}`;
+    } else {
+      type = '';
+      throw new Error('Unkonwn type: ' + fileNode.sourceInstanceName);
+    }
+    createNodeField({
+      node,
+      name: 'type',
+      value: type,
+    });
+
     createNodeField({
       node,
       name: 'slug',
-      // value: `${siteConfig.blogUrlBase}/${slug}`
-      value: `/${slug}`,
+      value: slug,
     });
   }
 };

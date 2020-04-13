@@ -17,6 +17,61 @@ export default {
   },
   plugins: [
     {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/content/blog`,
+        name: 'blog',
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/content/pages`,
+        name: 'pages',
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'images',
+        path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        extensions: ['.mdx', '.md'],
+        /*
+        defaultLayouts: {
+          default: require.resolve('./src/templates/page.js'),
+        },
+        */
+        // a workaround to solve mdx-remark plugin compat issue
+        // https://github.com/gatsbyjs/gatsby/issues/15486
+        plugins: ['gatsby-remark-images'],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 590,
+            },
+          },
+          {
+            resolve: 'gatsby-remark-relative-images',
+          },
+          {
+            resolve: 'gatsby-remark-responsive-iframe',
+            options: {
+              wrapperStyle: 'margin-bottom: 1.0725rem',
+            },
+          },
+          {
+            resolve: 'gatsby-remark-copy-linked-files',
+          },
+        ],
+      },
+    },
+    {
       resolve: 'gatsby-plugin-chakra-ui',
       options: {
         /**
@@ -58,29 +113,6 @@ export default {
       },
     },
     'gatsby-plugin-emotion',
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/content/blog`,
-        name: 'blog',
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'images',
-        path: `${__dirname}/src/images`,
-      },
-    },
-    /*
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'pages',
-        path: `${__dirname}/src/pages`
-      }
-    },
-    */
     /*
     {
       resolve: 'gatsby-plugin-page-creator',
@@ -89,35 +121,6 @@ export default {
       },
     },
     */
-    {
-      resolve: 'gatsby-plugin-mdx',
-      options: {
-        extensions: ['.mdx', '.md'],
-        // a workaround to solve mdx-remark plugin compat issue
-        // https://github.com/gatsbyjs/gatsby/issues/15486
-        plugins: ['gatsby-remark-images'],
-        gatsbyRemarkPlugins: [
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              maxWidth: 590,
-            },
-          },
-          {
-            resolve: 'gatsby-remark-relative-images',
-          },
-          {
-            resolve: 'gatsby-remark-responsive-iframe',
-            options: {
-              wrapperStyle: 'margin-bottom: 1.0725rem',
-            },
-          },
-          {
-            resolve: 'gatsby-remark-copy-linked-files',
-          },
-        ],
-      },
-    },
     'gatsby-plugin-typescript',
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

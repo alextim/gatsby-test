@@ -9,9 +9,14 @@ import SEO from '../components/SEO';
 import TripInquiryForm from '../components/forms/TripInquiryForm';
 import { FitnessLevel, TechLevel } from '../components/trip/ico-levels';
 import { Altitude, Accomodation, GroupSize, Duration } from '../components/trip/ico-info';
+import TripInfoItem from '../components/trip/TripInfoItem';
 
 const Trip: React.FC<IPageProps> = ({ location }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const a = [
+    { name: 'aa', url: '/' },
+    { name: 'bbbb', url: '/' },
+  ];
 
   return (
     <Layout>
@@ -31,6 +36,10 @@ const Trip: React.FC<IPageProps> = ({ location }) => {
           <Accomodation value="paatka" />
           <GroupSize value={4} />
           <Duration days={33} nights={44} />
+          <div>
+          <TripInfoItem title="Hello" value={a} />
+          <TripInfoItem title="Hello2" value="hello2" />
+          </div>
           <Button onClick={onOpen}>Записаться</Button>
           <TripInquiryForm isOpen={isOpen} onClose={onClose} />
         </RightWrapper>

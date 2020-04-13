@@ -17,7 +17,10 @@ export const pageQuery = graphql`
       skip: $skip
       limit: $limit
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { published: { eq: true }, categories: { in: [$category] } } }
+      filter: {
+        frontmatter: { published: { eq: true }, categories: { in: [$category] } }
+        fields: { type: { eq: "post" } }
+      }
     ) {
       totalCount
       edges {
