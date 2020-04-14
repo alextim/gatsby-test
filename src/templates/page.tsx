@@ -7,7 +7,7 @@ import { MDXProvider } from '@mdx-js/react';
 import SEO from '../components/SEO';
 import { IconLink } from '../components/IconLink';
 import { PageLayout } from '../components/Layout';
-import useDefaultImage from '../helpers/hooks/useDefaultImage';
+import useDefaultImage from '../helpers/hooks/useDefaultBannerImage';
 
 //import HelloWorld from '../components/HelloWorld';
 

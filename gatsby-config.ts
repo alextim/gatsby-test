@@ -37,6 +37,20 @@ export default {
         path: `${__dirname}/src/images`,
       },
     },
+    /*
+    {
+      resolve: 'gatsby-plugin-page-creator',
+      options: {
+        path: `${__dirname}/content/blog`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-page-creator',
+      options: {
+        path: `${__dirname}/content/pages`,
+      },
+    },
+    */
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
