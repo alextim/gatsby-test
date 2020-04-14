@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import BlogLayout from './BlogLayout';
+import { BlogLayout } from '../../components/Layout';
 import SEO from '../../components/SEO';
 import PostListing from '../../components/PostListing';
 import Pagination from '../../components/Pagination';

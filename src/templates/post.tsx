@@ -10,13 +10,13 @@ import { DateMeta, CategoryMeta, TagMeta } from '../components/Meta';
 import SEO from '../components/SEO';
 import { IconLink } from '../components/IconLink';
 import PrevNext from '../components/PrevNext';
-import BlogLayout from './common/BlogLayout';
+import { BlogLayout } from '../components/Layout';
 
 //import HelloWorld from '../components/HelloWorld';
 
 const shortcodes = { IconLink };
 
-const post = ({ data, pageContext }) => {
+const PostTemplate = ({ data, pageContext }) => {
   const { next, prev, pathname } = pageContext;
   const { frontmatter, body, excerpt } = data.mdx; // , fields
   const { title, description, date, featuredImage, tags, categories } = frontmatter;
@@ -80,4 +80,4 @@ export const pageQuery = graphql`
   }
 `;
 
-export default post;
+export default PostTemplate;

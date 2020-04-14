@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import ListTemplate from './common/ListTemplate';
 import postArchiveHelper from '../helpers/postArchiveHelper';
 
-const archivePosts = ({
+const ArchivePostsTemplate = ({
   data: {
     allMdx: { edges },
   },
@@ -52,4 +52,4 @@ export const pageQuery = graphql`
   }
 `;
 
-export default archivePosts;
+export default ArchivePostsTemplate;

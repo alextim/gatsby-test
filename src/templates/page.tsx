@@ -8,14 +8,13 @@ import { MDXProvider } from '@mdx-js/react';
 
 import SEO from '../components/SEO';
 import { IconLink } from '../components/IconLink';
-
-import BlogLayout from './common/BlogLayout';
+import { PageLayout } from '../components/Layout';
 
 //import HelloWorld from '../components/HelloWorld';
 
 const shortcodes = { IconLink };
 
-const page = ({ data }) => {
+const PageTemplate = ({ data }) => {
   const { frontmatter, body, excerpt, fields } = data.mdx;
   const { slug } = fields;
   const { title, description, featuredImage } = frontmatter;
@@ -23,7 +22,7 @@ const page = ({ data }) => {
   const imgSrc = featuredImgFluid ? featuredImgFluid.src : null;
 
   return (
-    <BlogLayout>
+    <PageLayout>
       <SEO title={title} description={description || excerpt} pathname={slug} image={imgSrc} type="article" />
 
       <article>
@@ -33,7 +32,7 @@ const page = ({ data }) => {
           <MDXRenderer>{body}</MDXRenderer>
         </MDXProvider>
       </article>
-    </BlogLayout>
+    </PageLayout>
   );
 };
 
@@ -60,4 +59,4 @@ export const pageQuery = graphql`
   }
 `;
 
-export default page;
+export default PageTemplate;

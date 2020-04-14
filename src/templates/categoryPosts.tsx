@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 
 import ListTemplate from './common/ListTemplate';
 
-const categoryPosts = ({
+const CategoryPostsTemplate = ({
   data: {
     allMdx: { edges },
   },
@@ -48,4 +48,4 @@ export const pageQuery = graphql`
   }
 `;
 
-export default categoryPosts;
+export default CategoryPostsTemplate;

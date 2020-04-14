@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 
 import ListTemplate from './common/ListTemplate';
 
-const tagPosts = ({
+const TagPostsTemplate = ({
   data: {
     allMdx: { edges },
   },
@@ -45,4 +45,4 @@ export const pageQuery = graphql`
   }
 `;
 
-export default tagPosts;
+export default TagPostsTemplate;
