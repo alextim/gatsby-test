@@ -1,11 +1,19 @@
 import React from 'react';
 
+import Banner from '../Banner';
 import AsideLayout from './AsideLayout';
 
-const PageLayout: React.FC<React.ReactNode> = ({ children }) => (
-  <AsideLayout widgets="hello">
-    {children}
-  </AsideLayout>
-);
+interface IProps {
+  title: string;
+  img: any;
+}
+
+const PageLayout: React.FC<IProps> = ({ title, img, children }) => {
+  return (
+    <AsideLayout widgets="hello" header={<Banner img={img} title={title} />}>
+      {children}
+    </AsideLayout>
+  );
+};
 
 export default PageLayout;

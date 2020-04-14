@@ -35,9 +35,10 @@ const WidgetsWrap = styled(Wrapper)`
 
 interface IProps {
   widgets: React.ReactNode;
+  header: React.ReactNode;
 }
-const AsideLayout: React.FC<IProps> = ({ children, widgets }) => (
-  <Layout>
+const AsideLayout: React.FC<IProps> = ({ children, header, widgets }) => (
+  <Layout header={header}>
     <InnerWrapper>
       <ContentWrap>{children}</ContentWrap>
       <WidgetsWrap as="aside">{widgets}</WidgetsWrap>

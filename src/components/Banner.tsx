@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import Img from 'gatsby-image';
 
-import { ContainerFullWidth } from './Container';
 import PageHeaing from './PageHeading';
 
-const Wrapper = styled(ContainerFullWidth)`
+const Wrapper = styled.div`
+  width: 100%;
   position: relative;
   text-align: center;
-  color: white;
+  color: grey;
 `;
 
 const CenteredWrap = styled.div`
@@ -17,19 +18,19 @@ const CenteredWrap = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const SImg = styled.img`
+const SImg = styled(Img)`
   width: 100%;
   height: auto;
 `;
 
 interface IProps {
-  img: string;
+  img?: any;
   title: string;
 }
 
 const Banner: React.FC<IProps> = ({ img, title }) => (
   <Wrapper>
-    <SImg src={img} />
+    {img && <SImg fluid={img} alt={title} />}
     <CenteredWrap>
       <PageHeaing>{title}</PageHeaing>
     </CenteredWrap>

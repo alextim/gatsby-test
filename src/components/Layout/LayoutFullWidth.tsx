@@ -20,7 +20,7 @@ const loadScript = src => {
 }
 */
 
-const LayoutFullWidth: React.FC<React.ReactNode> = ({ children }) => {
+const LayoutFullWidth: React.FC = ({ children }) => {
   /*
   useEffect(() => {
     loadScript('https://use.fontawesome.com/fd58d214b9.js');
