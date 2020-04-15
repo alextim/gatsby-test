@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import { Flex, Box, useTheme } from '@chakra-ui/core';
 
-import useOrganization from '../../helpers/hooks/useOrganization';
+import useOrganization from '../../../helpers/hooks/useOrganization';
 import SwitchColorMode from './SwitchColorMode';
 
 const LegalInfo: React.FC = () => {

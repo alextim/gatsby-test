@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, useTheme } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 
-import { Container } from '../Container';
+import { Container } from '../../Container';
 import TopHead from './TopHead';
 import NavBar2 from './NavBar';
 

@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 import { Flex, Box, Link } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Utils from '../../../lib/utils';
-import useOrganization from '../../../helpers/hooks/useOrganization';
+import Utils from '../../../../lib/utils';
+import useOrganization from '../../../../helpers/hooks/useOrganization';
 
 const StyledLink = styled(Link)`
   display: inline-flex;

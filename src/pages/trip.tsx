@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useDisclosure } from '@chakra-ui/core';
 
 import { Button } from '../components/Button';
-import { IPageProps } from '../types/types';
+import { IPageProps } from '../types/page-types';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import TripInquiryForm from '../components/forms/TripInquiryForm';

@@ -3,7 +3,7 @@ import { Flex, Box, Heading } from '@chakra-ui/core';
 
 import { Container } from '../Container';
 import { BtnLink } from '../Button';
-import { IActions } from '../../types/homePageTypes';
+import { IActions } from '../../types/home-page-types';
 
 const Actions: React.FC<IActions> = ({ items }) => (
   <Flex flex="wrap" alignItems="center" justifyContent="center">

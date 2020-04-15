@@ -6,7 +6,7 @@ import { Flex, Box, useTheme } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
-import { IFeatureItem } from '../../types/homePageTypes';
+import { IFeatureItem } from '../../types/home-page-types';
 import ItemHeading from './ItemHeading';
 import Section from './Section';
 

@@ -1,26 +1,17 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import { Flex } from '@chakra-ui/core';
 
 import SocialLink from './SocialLink';
 import Utils from '../../../lib/utils';
 import useSocialLinks from '../../../helpers/hooks/useSocialLinks';
 
 const SocialLinks: React.FC = () => {
-  const socialLinks = useSocialLinks();
-
-  const StyledFlex = styled.div`
-    display: none;
-    ${(props) => props.theme.mediaQueries.md} {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-right: auto;
-    }
-  `;
+  // const type = "circle"
+  const items = useSocialLinks();
 
   return (
-    <StyledFlex>
-      {socialLinks.map((item, i) => (
+    <Flex py={1} alignItems="center" justifyContent="center" flexWrap="wrap">
+      {items.map((item, i) => (
         <SocialLink
           key={i}
           icon={item.icon}
@@ -30,7 +21,7 @@ const SocialLinks: React.FC = () => {
           text={item.text}
         />
       ))}
-    </StyledFlex>
+    </Flex>
   );
 };
 

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { Global, css } from '@emotion/core';
 import { Flex, Box, useTheme } from '@chakra-ui/core';
 
-import { Container } from '../Container';
+import { Container } from '../../Container';
 
 import FooterWidget from './FooterWidget';
 

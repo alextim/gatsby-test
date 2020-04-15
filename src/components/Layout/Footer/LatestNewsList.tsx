@@ -1,8 +1,8 @@
 import React from 'react';
 import { Flex, useTheme } from '@chakra-ui/core';
 
-import AnimatedLink from '../AnimatedLink';
-import useLatestNewsTop5 from '../../helpers/hooks/useLatestNewsTop5';
+import AnimatedLink from '../../AnimatedLink';
+import useLatestNewsTop5 from '../../../helpers/hooks/useLatestNewsTop5';
 
 const LatestNewsList: React.FC = () => {
   const theme = useTheme();

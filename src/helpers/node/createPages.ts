@@ -14,9 +14,9 @@ import siteConfig from '../../data/siteConfig';
 const pageTemplate = resolve('./src/templates/page.tsx');
 const postTemplate = resolve('./src/templates/post.tsx');
 const postsTemplate = resolve('./src/templates/posts.tsx');
-const categoryTemplate = resolve('./src/templates/categoryPosts.tsx');
-const tagTemplate = resolve('./src/templates/tagPosts.tsx');
-const archiveTemplate = resolve('./src/templates/archivePosts.tsx');
+const categoryTemplate = resolve('./src/templates/category-posts.tsx');
+const tagTemplate = resolve('./src/templates/tag-posts.tsx');
+const archiveTemplate = resolve('./src/templates/archive-posts.tsx');
 
 interface IGroup {
   field: string;
