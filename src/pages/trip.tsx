@@ -5,6 +5,9 @@ import { Box } from '@chakra-ui/core';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import * as Trip from '../types/trip-types';
+import { singleTrip } from '../data/trips';
+
 import { Button } from '../components/Button';
 import { IPageProps } from '../types/page-types';
 import Layout from '../components/Layout';
@@ -14,8 +17,9 @@ import { FitnessLevel, TechLevel } from '../components/trip/ico-levels';
 import { Altitude, Accomodation, GroupSize, Duration } from '../components/trip/ico-info';
 import TripInfoItem from '../components/trip/TripInfoItem';
 
-const Trip: React.FC<IPageProps> = ({ location }) => {
+const TripPage: React.FC<IPageProps> = ({ location }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const trip: Trip.ITrip = singleTrip;
   const a = [
     { name: 'aa', url: '/' },
     { name: 'bbbb', url: '/' },
@@ -23,21 +27,15 @@ const Trip: React.FC<IPageProps> = ({ location }) => {
 
   return (
     <Layout>
-      <SEO title="Page two" pathname={location.pathname} />
+      <SEO title={trip.title} pathname={location.pathname} />
       <HeadWrapper>
         <LeftWrapper />
         <RightWrapper>
-          <TechLevel level={1} />
-          <TechLevel level={2} />
-          <TechLevel level={3} />
-          <TechLevel level={4} />
-          <FitnessLevel level={1} />
-          <FitnessLevel level={2} />
-          <FitnessLevel level={3} />
-          <FitnessLevel level={4} />
-          <Altitude value={10111} />
-          <Accomodation value="paatka" />
-          <GroupSize value={4} />
+          {trip.difficultyLevel && <TechLevel level={trip.difficultyLevel} />}
+          {trip.fitnessLevell && <FitnessLevel level={trip.fitnessLevell} />}
+          {trip.altitude && <Altitude value={trip.altitude} />}
+          {trip.accomodation && <Accomodation value={trip.accomodation} />}
+          {trip.groupSize && <GroupSize value={trip.groupSize} />}
           <Duration days={33} nights={44} />
           <div>
             <TripInfoItem title="Hello" value={a} />
@@ -116,4 +114,4 @@ const TabHeading: React.FC<ITabHeadingProps> = ({ children, icon }) => (
   </>
 );
 
-export default Trip;
+export default TripPage;
