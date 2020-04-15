@@ -2,6 +2,10 @@ export type CurrencyNameType = {
   string: 'RUR' | 'UAH' | 'USD' | 'EUR';
 };
 
+export type LevelType = {
+  number: 1 | 2 | 3 | 4;
+}
+
 export interface ITax {
   name: string;
   url: string;
@@ -23,8 +27,8 @@ export interface IGearItem {
 }
 
 export interface IItineraryDay {
-  title: string;
-  description?: string;
+  title?: string;
+  description: string;
   images?: Array<any>;
 }
 
@@ -32,6 +36,25 @@ export interface IPriceListItem {
   qty: number;
   price: number;
   salePrice?: number;
+}
+
+export interface IOffer {
+  currency: CurrencyNameType;
+  priceList?: Array<IPriceListItem>;
+  showPriceList: boolean;
+  isSale: boolean;
+  service?: {
+    included: Array<string>;
+    excluded: Array<string>;
+  };
+  note?: string;
+}
+
+export interface IItinerary {
+  subTitle?: string;
+  description: string;
+  days?: Array<IItineraryDay>;
+  note?: string;
 }
 
 export interface ITrip {
@@ -52,19 +75,9 @@ export interface ITrip {
   season?: Array<string>;
   activity?: Array<string>;
   destination: Array<string>;
-  offer?: {
-    currency: CurrencyNameType;
-    priceList?: Array<IPriceListItem>;
-    showPriceList: boolean;
-    isSale: boolean;
-    service?: {
-      included: Array<string>;
-      excluded: Array<string>;
-    };
-    note?: string;
-  };
-  fitnessLevel?: number;
-  difficultyLevel?: number;
+  offer?: IOffer;
+  fitnessLevel?: LevelType;
+  difficultyLevel?: LevelType;
   altitude?: number;
   accomodation?: string;
   groupSize?: number;
@@ -73,12 +86,7 @@ export interface ITrip {
     nights?: number;
   };
   dates?: Array<Date>;
-  itinerary?: {
-    subTitle?: string;
-    description: string;
-    days?: Array<IItineraryDay>;
-    note?: string;
-  };
+  itinerary?: IItinerary;
   equipment?: {
     list: Array<IGearItem>;
     note: string;

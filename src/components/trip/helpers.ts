@@ -1,17 +1,19 @@
-export function getFitnessLevelTitle(level: number): string {
+import { LevelType } from '../../types/trip-types';
+
+export function getFitnessLevelTitle(level: LevelType): string {
   return [
     'Минимальная физическая подготовка',
     'Обычный уровень физической подготовки',
     'Высокий уровень физической подготовки',
     'Очень высокий уровень уровень физической подготовки',
-  ][level - 1];
+  ][Number(level) - 1];
 }
 
-export function getTechLevelTitle(level: number): string {
+export function getTechLevelTitle(level: LevelType): string {
   return [
     'Легкий уровень сложности',
     'Средний уровень сложности',
     'Высокий уровень сложности',
     'Очень высокий уровень сложности',
-  ][level - 1];
+  ][Number(level) - 1];
 }

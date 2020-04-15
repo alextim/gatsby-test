@@ -3,21 +3,19 @@ import { Link } from 'gatsby';
 import { Flex, Box } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { LevelType } from '../../types/trip-types';
 import { getFitnessLevelTitle, getTechLevelTitle } from './helpers';
 
 interface ILevelProps {
   icon: string;
-  level: number;
+  level: LevelType;
   to: string;
   caption: string;
   title: string;
 }
 
 const Level: React.FC<ILevelProps> = ({ icon, level, to, caption, title }) => {
-  if (level < 1 || level > 4) {
-    throw new Error(`Level (level < 1 || level > 4) level=${level}`);
-  }
-
+  const MAX_LEVEL = 4;
   const Icon = ({ color }) => (
     <Box as="span" mr="0.1rem">
       <FontAwesomeIcon icon={icon} color={color} />
@@ -25,10 +23,11 @@ const Level: React.FC<ILevelProps> = ({ icon, level, to, caption, title }) => {
   );
 
   const elements = [];
-  for (let i = 0; i < level; i++) {
+  const numLevel = Number(level);
+  for (let i = 0; i < numLevel; i++) {
     elements.push(<Icon color="red" />);
   }
-  for (let i = level; i <= 4; i++) {
+  for (let i = numLevel; i <= MAX_LEVEL; i++) {
     elements.push(<Icon />);
   }
 
@@ -43,7 +42,7 @@ const Level: React.FC<ILevelProps> = ({ icon, level, to, caption, title }) => {
 };
 
 interface IProps {
-  level: number;
+  level: LevelType;
 }
 
 const FitnessLevel: React.FC<IProps> = ({ level }) => (
