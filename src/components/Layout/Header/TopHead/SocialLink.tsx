@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
 const StyledLink = styled(Link)`
   display: flex;
@@ -27,7 +28,7 @@ const StyledLink = styled(Link)`
 `;
 
 export interface IScocialLink {
-  icon: string | [string, string];
+  icon: IconName | [IconPrefix, IconName];
   name: string;
   text: string;
   url: string;

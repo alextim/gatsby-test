@@ -2,6 +2,7 @@ import React from 'react';
 import { Flex, Box } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
 /*
 const A = styled.a`
@@ -20,7 +21,7 @@ const Spacer = styled.div`
 interface IProps {
   children: React.ReactNode;
   to?: string;
-  icon: string | [string, string];
+  icon: IconName | [IconPrefix, IconName];
   title?: string;
   size?: FontAwesomeIconProps['size'];
   color?: string;

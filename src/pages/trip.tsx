@@ -4,6 +4,7 @@ import { useDisclosure } from '@chakra-ui/core';
 import { Box } from '@chakra-ui/core';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
 import * as Trip from '../types/trip-types';
 import { singleTrip } from '../data/trips';
@@ -67,7 +68,10 @@ const TripPage: React.FC<IPageProps> = ({ location }) => {
 
           {duration && <Duration days={duration.days} nights={duration.nights} />}
           {duration && (
-            <TripInfoItem title="Продолжительность" value={formatDuration(duration.days, duration.nights)} />
+            <TripInfoItem
+              title="Продолжительность"
+              value={formatDuration(duration.days, duration.nights ? duration.nights : 0)}
+            />
           )}
           <div>
             <TripInfoItem title="Hello" value={a} />
@@ -158,7 +162,7 @@ const BodyWrapper = styled.div`
 `;
 
 interface ITabHeadingProps {
-  icon?: string | [string, string];
+  icon?: IconName | [IconPrefix, IconName];
 }
 const TabHeading: React.FC<ITabHeadingProps> = ({ children, icon }) => (
   <h2>

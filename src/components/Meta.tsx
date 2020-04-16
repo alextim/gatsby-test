@@ -1,9 +1,11 @@
 import React from 'react';
 import { Box, Link } from '@chakra-ui/core';
 import kebabCase from 'lodash/kebabCase';
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
 import Utils from './../lib/utils';
 import { IconLink } from '../components/IconLink';
+
 import { getCategoryUrlAndNames } from '../helpers/categoryHelper';
 
 interface IItem {
@@ -12,7 +14,7 @@ interface IItem {
 }
 
 interface IProps {
-  icon: string | [string, string];
+  icon: IconName | [IconPrefix, IconName];
   items: Array<IItem> | string;
 }
 

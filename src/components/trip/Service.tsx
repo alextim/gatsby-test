@@ -2,14 +2,27 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Flex, Box } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
 import { IService } from '../../types/trip-types';
 // import { IconLink } from '../IconLink';
 
+interface IIconTextProps {
+  icon: IconName | [IconPrefix, IconName];
+  color: string;
+}
+const IconText: React.FC<IIconTextProps> = ({ icon, color, children }) => (
+  <Flex flexDirection="row" flexWrap="nowrap">
+    <Box as="span" mr="0.4rem">
+      <FontAwesomeIcon icon={icon} size="sm" color={color} />
+    </Box>
+    <span>{children}</span>
+  </Flex>
+);
+
 interface IProps {
   service: IService;
 }
-
 const Service: React.FC<IProps> = ({ service }) => {
   const { included, excluded, note } = service;
 
@@ -59,18 +72,5 @@ const RightWrapper = styled.div`
     width: 50%;
   }
 `;
-
-interface IIconTextProps {
-  icon: string | [string, string];
-  color: string;
-}
-const IconText: React.FC<IIconTextProps> = ({ icon, color, children }) => (
-  <Flex flexDirection="row" flexWrap="nowrap">
-    <Box as="span" mr="0.4rem">
-      <FontAwesomeIcon icon={icon} size="sm" color={color} />
-    </Box>
-    <span>{children}</span>
-  </Flex>
-);
 
 export default Service;

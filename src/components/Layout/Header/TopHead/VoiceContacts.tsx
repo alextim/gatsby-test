@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Flex, Box, Link } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
 import Utils from '../../../../lib/utils';
 import useOrganization from '../../../../helpers/hooks/useOrganization';
@@ -28,7 +29,7 @@ const StyledPhoneLink = styled(StyledLink)`
 `;
 
 interface IIconOnlyLink {
-  icon: string | [string, string];
+  icon: IconName | [IconPrefix, IconName];
   color?: string;
   url: string;
   name: string;

@@ -73,6 +73,8 @@ const singleTrip: Trip.ITrip = {
     days: 8,
     nights: 7,
   },
+
+  isDatesOnRequest: true,
   dates: [new Date('2020-12-01'), new Date('2020-12-02')],
 
   itinerary: {

@@ -2,33 +2,38 @@ import React from 'react';
 import { Link } from 'gatsby';
 import { Flex, Box } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
 import { LevelType } from '../../types/trip-types';
 import { getFitnessLevelTitle, getTechLevelTitle } from './helpers';
 
 interface ILevelProps {
-  icon: string;
+  icon: IconName | [IconPrefix, IconName];
   level: LevelType;
   to: string;
   caption: string;
   title: string;
 }
 
+interface IIconProps {
+  icon: IconName | [IconPrefix, IconName];
+  color?: string;
+}
+const Icon: React.FC<IIconProps> = ({ icon, color }) => (
+  <Box as="span" mr="0.1rem">
+    <FontAwesomeIcon icon={icon} color={color} />
+  </Box>
+);
+
 const Level: React.FC<ILevelProps> = ({ icon, level, to, caption, title }) => {
   const MAX_LEVEL = 4;
-  const Icon = ({ color }) => (
-    <Box as="span" mr="0.1rem">
-      <FontAwesomeIcon icon={icon} color={color} />
-    </Box>
-  );
-
   const elements = [];
   const numLevel = Number(level);
   for (let i = 1; i <= numLevel; i++) {
-    elements.push(<Icon color="red" />);
+    elements.push(<Icon icon={icon} color="red" />);
   }
   for (let i = numLevel; i < MAX_LEVEL; i++) {
-    elements.push(<Icon />);
+    elements.push(<Icon icon={icon} />);
   }
 
   return (

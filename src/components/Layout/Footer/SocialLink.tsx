@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconName, IconPrefix } from '@fortawesome/fontawesome-common-types';
 
 const StyledLink = styled(Link)`
   display: flex;
@@ -27,14 +28,14 @@ const StyledLink = styled(Link)`
 `;
 
 export interface ISocialLink {
-  icon: string | [string, string];
+  icon: IconName | [IconPrefix, IconName];
   name: string;
   text: string;
   url: string;
   color?: string;
 }
 
-const SocialLink: Rect.FC<ISocialLink> = ({ icon, name, text, url, color }) => (
+const SocialLink: React.FC<ISocialLink> = ({ icon, name, text, url, color }) => (
   <StyledLink href={url} target="_blank" rel="noreferrer" color={color} aria-label={name} title={text}>
     <FontAwesomeIcon icon={icon} />
   </StyledLink>
