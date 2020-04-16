@@ -62,15 +62,11 @@ export interface IService {
   excluded: Array<string>;
   note?: string;
 }
-export interface IDuration {
-  days: number;
-  nights?: number;
-}
 
 export interface IItinerary {
   subTitle?: string;
   description: string;
-  days?: Array<IItineraryDay>;
+  dayItems?: Array<IItineraryDay>;
   note?: string;
 }
 
@@ -102,7 +98,9 @@ export interface ITrip {
   altitude?: number;
   accomodation?: string;
   groupSize?: number;
-  duration?: IDuration;
+
+  isShowNights: boolean;
+  duration?: number;
 
   isDatesOnRequest: boolean;
   dates?: Array<Date>;

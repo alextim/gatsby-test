@@ -11,13 +11,13 @@ const DayWrap = styled.div`
   margin-bottom: 1rem;
 `;
 const Itinerary: React.FC<IProps> = ({ itinerary }) => {
-  const { subTitle, description, days, note } = itinerary;
+  const { subTitle, description, dayItems, note } = itinerary;
   return (
     <>
       {subTitle && <div>{subTitle}</div>}
       {<div dangerouslySetInnerHTML={{ __html: description }} />}
-      {days &&
-        days.map((day, i) => (
+      {dayItems &&
+        dayItems.map((day, i) => (
           <DayWrap key={i}>
             <h3>
               День {i + 1}

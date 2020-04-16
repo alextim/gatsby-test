@@ -1,5 +1,6 @@
 import React from 'react';
 import { Global, css } from '@emotion/core';
+import { useTheme } from '@chakra-ui/core';
 
 import { IOffer } from '../../types/trip-types';
 import Price from './Price';
@@ -13,16 +14,17 @@ const PriceList: React.FC<IProps> = ({ offer }) => {
   if (!priceList || !priceList.isVisible) {
     return null;
   }
+  const theme = useTheme();
 
   return (
     <>
       <Global
         styles={css`
           .price-list-table {
-            width: auto;
+            width: 100%;
             &.table {
               th {
-                padding: 10px 40px;
+                padding: 10px;
               }
 
               td {
@@ -31,47 +33,10 @@ const PriceList: React.FC<IProps> = ({ offer }) => {
                 padding-bottom: 8px;
               }
             }
-
-            .new-price {
-              color: red;
-            }
-          }
-
-          .table {
-            border-collapse: collapse;
-            border-spacing: 0;
-            border-top: 1px solid #ddd;
-            th,
-            td {
-              border-left: 0;
-              border-right: 0;
-              border-bottom: 0;
-            }
-            th {
-              padding: 10px;
-              text-align: center;
-              background: rgba(33, 58, 76, 0.85);
-              color: #fff;
-            }
-            tbody > tr:last-child {
-              border-bottom: 1px solid #ddd;
-            }
-          }
-
-          .table-striped tbody > tr:nth-child(even) {
-            background-color: #f9f9f9;
-          }
-
-          .table-hover tbody > tr:hover {
-            background-color: lightgray;
-          }
-
-          @media only screen and (max-width: 479px) {
-            .price-list-table {
-              width: 100%;
-
+            ${theme.mediaQueries.md} {
+              width: auto;
               &.table th {
-                padding: 10px;
+                padding: 10px 40px;
               }
             }
           }

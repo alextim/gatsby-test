@@ -24,6 +24,18 @@ const Wrapper = styled.div`
 const Title = styled.div`
   font-weight: 700;
 `;
+
+interface IProps {
+  title: string;
+  value: React.ReactNode;
+}
+const TripInfoItem: React.FC<IProps> = ({ title, value }) => (
+  <Wrapper>
+    <Title>{title}</Title>
+    <Box>{value}</Box>
+  </Wrapper>
+);
+
 const LinkWrap = styled.span`
   :after {
     content: ',';
@@ -37,24 +49,17 @@ const LinkWrap = styled.span`
   }
 `;
 
-interface IProps {
-  title: string;
-  value: string | Array<{ name: string; url: string }>;
+interface ILinkListProps {
+  list: Array<{ name: string; url: string }>;
 }
-
-const TripInfoItem: React.FC<IProps> = ({ title, value }) => (
-  <Wrapper>
-    <Title>{title}</Title>
-    <Box>
-      {Array.isArray(value)
-        ? value.map((item, i) => (
-            <LinkWrap key={i}>
-              <Link to={item.url}>{item.name}</Link>
-            </LinkWrap>
-          ))
-        : value}
-    </Box>
-  </Wrapper>
+const LinkList: React.FC<ILinkListProps> = ({ list }) => (
+  <>
+    {list.map((item, i) => (
+      <LinkWrap key={i}>
+        <Link to={item.url}>{item.name}</Link>
+      </LinkWrap>
+    ))}
+  </>
 );
 
-export default TripInfoItem;
+export { TripInfoItem as default, LinkList };

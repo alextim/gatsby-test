@@ -24,9 +24,9 @@ const singleTrip: Trip.ITrip = {
   isPriceOnRequest: false,
   offer: {
     currency: ('EUR' as unknown) as Trip.CurrencyNameType,
-    isSale: false,
+    isSale: true,
     priceList: {
-      isVisible: false,
+      isVisible: true,
       rows: [
         { qty: 5, price: 790, salePrice: 500 },
         { qty: 4, price: 950, salePrice: 800 },
@@ -69,18 +69,17 @@ const singleTrip: Trip.ITrip = {
   altitude: 8848,
   accomodation: 'гостиница, апартаменты',
   groupSize: 5,
-  duration: {
-    days: 8,
-    nights: 7,
-  },
 
-  isDatesOnRequest: true,
+  isShowNights: true,
+  duration: 8,
+
+  isDatesOnRequest: false,
   dates: [new Date('2020-12-01'), new Date('2020-12-02')],
 
   itinerary: {
     subTitle: '',
     description: '',
-    days: [
+    dayItems: [
       {
         title: 'Приезд на курорт',
         description:
