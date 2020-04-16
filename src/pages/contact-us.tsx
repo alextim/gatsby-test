@@ -2,11 +2,10 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { IPageProps } from '../types/page-types';
-import { LayoutFullWidth } from '../components/Layout';
 import SEO from '../components/SEO';
 
 import ContactForm from '../components/forms/ContactForm';
-import { Container, ContainerFullWidth } from '../components/Container';
+import Layout from '../components/Layout';
 import PageHeading from '../components/PageHeading';
 import OrganizationPostalAddress from '../components/organization/OrganizationPostalAddress';
 import OrganizationPhones from '../components/organization/OrganizationPhones';
@@ -77,47 +76,38 @@ const ContactFormWrapper = styled.div`
   }
 `;
 
-const heading = 'Контакты';
+const title = 'Контакты';
 
 const ContactUs: React.FC<IPageProps> = ({ location }) => (
-  <LayoutFullWidth>
-    <SEO title={heading} pathname={location.pathname} />
+  <Layout header={<GoogleMap />} title={title}>
+    <SEO title={title} pathname={location.pathname} />
+    <CardsWrapper>
+      <Card key={0} title="Ждем Вас по адресу">
+        <OrganizationPostalAddress />
+      </Card>
 
-    <ContainerFullWidth>
-      <GoogleMap />
-    </ContainerFullWidth>
+      <Card key={1} title="Рабочее время">
+        <OrganizationOpeningHours />
+      </Card>
 
-    <Container>
-      <PageHeading>{heading}</PageHeading>
+      <Card key={2} title="Обращайтесь к нам">
+        <OrganizationPhones />
+        <OrganizationEmail />
+        <OrganizationSite />
+      </Card>
 
-      <CardsWrapper>
-        <Card key={0} title="Ждем Вас по адресу">
-          <OrganizationPostalAddress />
-        </Card>
+      <Card key={3} title={' '}>
+        <OrganizationCloudPhones />
+      </Card>
+    </CardsWrapper>
 
-        <Card key={1} title="Рабочее время">
-          <OrganizationOpeningHours />
-        </Card>
-
-        <Card key={2} title="Обращайтесь к нам">
-          <OrganizationPhones />
-          <OrganizationEmail />
-          <OrganizationSite />
-        </Card>
-
-        <Card key={3} title={' '}>
-          <OrganizationCloudPhones />
-        </Card>
-      </CardsWrapper>
-
-      <Wrapper>
-        <CardHeading>Напишите нам</CardHeading>
-        <ContactFormWrapper className="shadow">
-          <ContactForm />
-        </ContactFormWrapper>
-      </Wrapper>
-    </Container>
-  </LayoutFullWidth>
+    <Wrapper>
+      <CardHeading>Напишите нам</CardHeading>
+      <ContactFormWrapper className="shadow">
+        <ContactForm />
+      </ContactFormWrapper>
+    </Wrapper>
+  </Layout>
 );
 
 export default ContactUs;

@@ -5,9 +5,8 @@ import Layout from '../components/Layout';
 import Seo from '../components/SEO';
 
 const NotFoundPage: React.FC<IPageProps> = ({ location }) => (
-  <Layout>
+  <Layout title="404: NOT FOUND">
     <Seo title="404: Not found" pathname={location.pathname} />
-    <h1>NOT FOUND</h1>
     <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
   </Layout>
 );

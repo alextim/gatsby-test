@@ -2,7 +2,12 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Img from 'gatsby-image';
 
-import PageHeaing from './PageHeading';
+import DefaultPageHeading from './PageHeading';
+
+const PageHeading = styled(DefaultPageHeading)`
+  text-align: center;
+  color: #fff;
+`;
 
 const Wrapper = styled.div`
   width: 100%;
@@ -32,7 +37,7 @@ const Banner: React.FC<IProps> = ({ img, title }) => (
   <Wrapper>
     {img && <SImg fluid={img} alt={title} />}
     <CenteredWrap>
-      <PageHeaing>{title}</PageHeaing>
+      <PageHeading>{title}</PageHeading>
     </CenteredWrap>
   </Wrapper>
 );

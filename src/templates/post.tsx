@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 
-import { Flex, Heading } from '@chakra-ui/core';
+import { Flex } from '@chakra-ui/core';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 
@@ -25,7 +25,7 @@ const PostTemplate = ({ data, pageContext }) => {
   //const url = fields.slug;
 
   return (
-    <BlogLayout>
+    <BlogLayout title={title}>
       <SEO
         title={title}
         description={description || excerpt}
@@ -36,7 +36,6 @@ const PostTemplate = ({ data, pageContext }) => {
       />
 
       <article>
-        <Heading as="h1">{title}</Heading>
         <Flex direction="row" fontWeight={100} fontSize="0.9em">
           {date && <DateMeta date={date} />}
           {categories && <CategoryMeta icon={['far', 'folder-open']} categories={categories} />}

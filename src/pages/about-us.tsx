@@ -3,17 +3,17 @@ import Img from 'gatsby-image';
 
 import { IPageProps } from '../types/page-types';
 
-import { LayoutFullWidth } from '../components/Layout';
+import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import useDefaultImage from '../helpers/hooks/useDefaultBannerImage';
 
 const AboutUs: React.FC<IPageProps> = ({ location }) => {
   const img = useDefaultImage();
   return (
-    <LayoutFullWidth>
+    <Layout title="О нас">
       <SEO title="О нас" pathname={location.pathname} />
       <Img fluid={img} />
-    </LayoutFullWidth>
+    </Layout>
   );
 };
 

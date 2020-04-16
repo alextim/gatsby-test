@@ -2,9 +2,14 @@ export type CurrencyNameType = {
   string: 'RUR' | 'UAH' | 'USD' | 'EUR';
 };
 
+export interface ICurrencySymbol {
+  name: CurrencyNameType;
+  symbol: string;
+}
+
 export type LevelType = {
   number: 1 | 2 | 3 | 4;
-}
+};
 
 export interface ITax {
   name: string;
@@ -26,6 +31,11 @@ export interface IGearItem {
   order: number;
 }
 
+export interface IEquipment {
+  list: Array<IGearItem>;
+  note: string;
+}
+
 export interface IItineraryDay {
   title?: string;
   description: string;
@@ -40,14 +50,21 @@ export interface IPriceListItem {
 
 export interface IOffer {
   currency: CurrencyNameType;
-  priceList?: Array<IPriceListItem>;
-  showPriceList: boolean;
-  isSale: boolean;
-  service?: {
-    included: Array<string>;
-    excluded: Array<string>;
+  priceList: {
+    isVisible: boolean;
+    rows: Array<IPriceListItem>;
   };
+  isSale: boolean;
+}
+
+export interface IService {
+  included: Array<string>;
+  excluded: Array<string>;
   note?: string;
+}
+export interface IDuration {
+  days: number;
+  nights?: number;
 }
 
 export interface IItinerary {
@@ -75,21 +92,22 @@ export interface ITrip {
   season?: Array<string>;
   activity?: Array<string>;
   destination: Array<string>;
+
+  isPriceOnRequest: boolean;
   offer?: IOffer;
-  fitnessLevel?: LevelType;
+
+  service?: IService;
   difficultyLevel?: LevelType;
+  fitnessLevel?: LevelType;
   altitude?: number;
   accomodation?: string;
   groupSize?: number;
-  duration?: {
-    days: number;
-    nights?: number;
-  };
+  duration?: IDuration;
+
+  isDatesOnRequest: boolean;
   dates?: Array<Date>;
+
   itinerary?: IItinerary;
-  equipment?: {
-    list: Array<IGearItem>;
-    note: string;
-  };
+  equipment?: IEquipment;
   supplementInfo?: string;
 }

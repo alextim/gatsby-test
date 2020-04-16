@@ -5,8 +5,12 @@ import LatestPosts from '../../components/widgets/LatestPosts';
 import PostArchive from '../../components/widgets/PostArchive';
 import PostCategories from '../../components/widgets/PostCategories';
 
-const BlogLayout: React.FC = ({ children }) => (
+interface IProps {
+  title: React.ReactNode;
+}
+const BlogLayout: React.FC<IProps> = ({ title, children }) => (
   <AsideLayout
+    title={title}
     widgets={
       <>
         <LatestPosts />

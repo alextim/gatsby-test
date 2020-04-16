@@ -8,17 +8,12 @@ import Pagination from '../../components/Pagination';
 
 import toPosts from './toPosts';
 
-const Heading = styled.h1`
-  text-align: center;
-`;
-
 const ListTemplate = ({ edges, pageContext, title }) => {
   const posts = toPosts(edges);
 
   return (
-    <BlogLayout>
+    <BlogLayout title={title}>
       <SEO title={title} pathname={pageContext.pathname} />
-      <Heading>{title}</Heading>
       <PostListing posts={posts} />
       <Pagination pageCount={pageContext.pageCount} currentPage={pageContext.currentPage} base={pageContext.base} />
     </BlogLayout>

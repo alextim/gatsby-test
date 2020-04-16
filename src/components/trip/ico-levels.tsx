@@ -24,10 +24,10 @@ const Level: React.FC<ILevelProps> = ({ icon, level, to, caption, title }) => {
 
   const elements = [];
   const numLevel = Number(level);
-  for (let i = 0; i < numLevel; i++) {
+  for (let i = 1; i <= numLevel; i++) {
     elements.push(<Icon color="red" />);
   }
-  for (let i = numLevel; i <= MAX_LEVEL; i++) {
+  for (let i = numLevel; i < MAX_LEVEL; i++) {
     elements.push(<Icon />);
   }
 
