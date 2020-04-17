@@ -91,6 +91,29 @@ const GlobalStyles: React.FC = () => {
           background-color: lightgray;
         }
 
+        .trip-dates-table,
+        .price-list-table {
+          width: 100%;
+          &.table {
+            th {
+              padding: 10px;
+            }
+
+            td {
+              text-align: center;
+              padding-top: 8px;
+              padding-bottom: 8px;
+            }
+          }
+        }
+        .price-list-table {
+          ${theme.mediaQueries.md} {
+            width: auto;
+            &.table th {
+              padding: 10px 40px;
+            }
+          }
+        }
       }
     `}
     />

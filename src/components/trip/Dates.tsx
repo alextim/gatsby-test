@@ -30,7 +30,7 @@ const Dates: React.FC<IProps> = ({
 }) => {
   const fmt = new Intl.DateTimeFormat('ru');
   return (
-    <table className="table table-striped table-hover">
+    <table className="trip-dates-table table table-striped table-hover">
       <thead>
         <tr>
           <th>Дата начала</th>
@@ -64,7 +64,6 @@ const Dates: React.FC<IProps> = ({
                     as="button"
                     padding="0.3125rem"
                     lineHeight="1.5"
-                    m="0.4rem"
                     w="6rem"
                     data-i={i}
                     onClick={openFormHandler}

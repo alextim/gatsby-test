@@ -7,7 +7,10 @@ const noteRules = {
   required: true,
 };
 
-const NoteControl = ({ customRegister, ...props }) => (
+interface IProps {
+  customRegister?: any;
+}
+const NoteControl: React.FC<IProps> = ({ customRegister, ...props }) => (
   <BaseformContext.Consumer>
     {(context) =>
       context && (

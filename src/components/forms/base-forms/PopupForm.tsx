@@ -106,11 +106,10 @@ const PopupForm: React.FC<IProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       size={status === FormStatusEnum.Form ? formSize : 'sm'}
+      isCentered
     >
       <ModalOverlay />
-      <Container>
       <ModalContent>
-
         <ModalHeader>{title}</ModalHeader>
         {status !== FormStatusEnum.Sending && <ModalCloseButton />}
         <ModalBody>
@@ -132,7 +131,6 @@ const PopupForm: React.FC<IProps> = ({
           </ModalFooter>
         )}
       </ModalContent>
-      </Container>
     </Modal>
   );
 };

@@ -23,7 +23,11 @@ const DatePickerController = ({ control }) => (
   />
 );
 
-const DateControl = ({ label = 'Дата', icon = false }) => (
+interface IProps {
+  label?: string;
+  icon?: boolean;
+}
+const DateControl: React.FC<IProps> = ({ label = 'Дата', icon = false }) => (
   <BaseformContext.Consumer>
     {(context) =>
       context && (

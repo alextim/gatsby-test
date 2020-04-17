@@ -21,7 +21,7 @@ const singleTrip: Trip.ITrip = {
   activity: ['Горные лыжи', 'Фрирайд'],
   destination: ['Франция'],
 
-  priceMode: (2 as unknown) as Trip.PriceModeType,
+  priceMode: (0 as unknown) as Trip.PriceModeType,
   currency: ('EUR' as unknown) as Trip.CurrencyNameType,
   isSale: true,
   priceList: [

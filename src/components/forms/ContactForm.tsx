@@ -15,7 +15,7 @@ const ContactForm = () => (
         <EmailControl />
       </LeftWrapper>
       <RightWrapper>
-        <NoteControl rows="5" />
+        <NoteControl size="md" />
       </RightWrapper>
     </InnerWrapper>
     <Submit>Отправить</Submit>

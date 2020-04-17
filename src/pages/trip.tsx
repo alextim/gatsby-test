@@ -159,7 +159,6 @@ const TripPage: React.FC<IPageProps> = ({ location }) => {
                 <div
                   ref={(el: any) => {
                     focusRef.current = el;
-                    console.log(el);
                   }}
                 >
                   <TabHeading icon={['far', 'calendar']}>Даты поездок</TabHeading>
@@ -200,6 +199,7 @@ const TripPage: React.FC<IPageProps> = ({ location }) => {
                   isSale={isSale}
                   openFormHandler={openFormHandler}
                 />
+                <div><em>Вы можете заказать путешествие и в другие даты</em></div>
               </TabPanel>
             )}
             {trip.equipment && (

@@ -37,7 +37,9 @@ const CallbackInquiryForm: React.FC<IProps> = ({ isOpen, onClose }) => {
       <InnerWrapper>
         <Box mb="1rem">{FORM_SUBTITLE}</Box>
         <PhoneControl label="" icon={true} />
-        <Submit w="85%" m="1rem auto 1.5rem">{SUBMIT_TITLE}</Submit>
+        <Submit width="85%" m="1rem auto 1.5rem">
+          {SUBMIT_TITLE}
+        </Submit>
       </InnerWrapper>
     </PopupForm>
   );
