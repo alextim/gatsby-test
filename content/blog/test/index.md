@@ -9,7 +9,6 @@ featured: true
 categories:
   - News
   - Events
-  - Study
 tags:
   - Portugal
   - Porto
@@ -29,5 +28,4 @@ Oh, and here's a great quote from this Wikipedia on
 > salted duck eggs have a briny aroma, a gelatin-like egg white and a
 > firm-textured, round yolk that is bright orange-red in color.
 
-![Chinese Salty Egg](./salty_egg.jpg)
-<iframe style="border:0;" class="lozad" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2747.4527823660237!2d30.73750701522612!3d46.47934612912612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c631835da02399%3A0x88a9fe53889f8e39!2sAdrenalin!5e0!3m2!1sen!2sua!4v1548063765736" width="1920" height="450" allowfullscreen="" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2747.4527823660237!2d30.73750701522612!3d46.47934612912612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c631835da02399%3A0x88a9fe53889f8e39!2sAdrenalin!5e0!3m2!1sen!2sua!4v1548063765736" data-loaded="true"></iframe>
+

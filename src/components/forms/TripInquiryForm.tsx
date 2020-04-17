@@ -21,19 +21,11 @@ const SUBMIT_TITLE = 'Отправить';
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
+  mode: string;
 }
 
-const TripInquiryForm: React.FC<IProps> = ({ isOpen, onClose }) => {
+const TripInquiryForm: React.FC<IProps> = ({ isOpen, onClose, mode, dates, selected }) => {
   const sendData = new SendTripInquiry();
-  const items = [
-    { value: 1, name: '01.01.2020 - 01.12.2020' },
-    { value: 2, name: '01.02.2020 - 02.12.2020' },
-    { value: 3, name: '01.03.2020 - 03.12.2020' },
-    { value: 4, name: '01.04.2020 - 04.12.2020' },
-    { value: 5, name: '01.05.2020 - 05.12.2020' },
-    { value: 6, name: '01.06.2020 - 06.12.2020' },
-    { value: 7, name: '01.07.2020 - 07.12.2020' },
-  ];
 
   return (
     <PopupForm title={FORM_TITLE} msgSuccess={MSG_SUCCESS} sendData={sendData} isOpen={isOpen} onClose={onClose}>
@@ -43,8 +35,7 @@ const TripInquiryForm: React.FC<IProps> = ({ isOpen, onClose }) => {
           <FirstNameControl />
           <LastNameControl />
           <EmailControl />
-          <DateControl />
-          <TripDatesControl items={items} />
+          {mode === 'on-request' ? <DateControl /> : <TripDatesControl dates={dates} selected={selected} />}
         </LeftWrapper>
         <RightWrapper>
           <NoteControl />

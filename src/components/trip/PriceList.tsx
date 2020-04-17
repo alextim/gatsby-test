@@ -2,18 +2,16 @@ import React from 'react';
 import { Global, css } from '@emotion/core';
 import { useTheme } from '@chakra-ui/core';
 
-import { IOffer } from '../../types/trip-types';
+import { IPriceListItem, CurrencyNameType } from '../../types/trip-types';
 import Price from './Price';
 
 interface IProps {
-  offer: IOffer;
+  priceList: Array<IPriceListItem>;
+  currency: CurrencyNameType;
+  isSale: boolean;
 }
 
-const PriceList: React.FC<IProps> = ({ offer }) => {
-  const { currency, priceList, isSale } = offer;
-  if (!priceList || !priceList.isVisible) {
-    return null;
-  }
+const PriceList: React.FC<IProps> = ({ priceList, currency, isSale }) => {
   const theme = useTheme();
 
   return (
@@ -50,11 +48,11 @@ const PriceList: React.FC<IProps> = ({ offer }) => {
           </tr>
         </thead>
         <tbody>
-          {priceList.rows.map((row, i) => (
+          {priceList.map((row, i) => (
             <tr key={i}>
               <td>{row.qty}</td>
               <td>
-                <Price price={row.price} currency={currency} isSale={isSale} salePrice={row.salePrice} />
+                <Price price={row.price} currency={currency} isSale={isSale && row.isSale} salePrice={row.salePrice} />
               </td>
             </tr>
           ))}

@@ -1,15 +1,22 @@
 import React from 'react';
 import { css, Global } from '@emotion/core';
 import styled from '@emotion/styled';
-import { DefaultDeserializer } from 'v8';
+
+import Price from './Price';
+import { getFinishDate } from './helpers';
+import { IDateItem, IPriceListItem, CurrencyNameType } from '../../types/trip-types';
 
 interface IProps {
-  dates: Array<Date>;
+  dates: Array<IDateItem>;
   duration: number;
+  showPrice: boolean;
+  lowest?: IPriceListItem;
+  currency: CurrencyNameType;
+  isSale: boolean;
   isTextOnly?: boolean;
 }
 
-const Dates: React.FC<IProps> = ({ dates, duration, isTextOnly = false }) => {
+const Dates: React.FC<IProps> = ({ dates, duration, showPrice, lowest, currency, isSale, isTextOnly = false }) => {
   const fmt = new Intl.DateTimeFormat('ru');
   return (
     <table className="table table-striped table-hover">
@@ -22,14 +29,24 @@ const Dates: React.FC<IProps> = ({ dates, duration, isTextOnly = false }) => {
         </tr>
       </thead>
       <tbody>
-        {dates.map((d, i) => {
-          const finish = new Date(d);
-          finish.setDate(finish.getDate() + duration);
+        {dates.map((start, i) => {
+          const finish = getFinishDate(start.date, duration);
           return (
             <tr key={i}>
-              <td>{fmt.format(d)}</td>
+              <td>{fmt.format(start.date)}</td>
               <td>{fmt.format(finish)}</td>
-              <td>hh</td>
+              <td>
+                {showPrice && lowest ? (
+                  <Price
+                    price={lowest.price}
+                    currency={currency}
+                    isSale={isSale && start.isSale}
+                    salePrice={lowest.salePrice}
+                  />
+                ) : (
+                  'По запросу'
+                )}
+              </td>
               {!isTextOnly && <td>btn </td>}
             </tr>
           );
@@ -39,15 +56,4 @@ const Dates: React.FC<IProps> = ({ dates, duration, isTextOnly = false }) => {
   );
 };
 
-interface IDatesSimpleProps {
-  date: Date;
-  duration: number;
-}
-const DatesSimple: React.FC<IDatesSimpleProps> = ({ date, duration }) => {
-  const finish = new Date(date);
-  const fmt = new Intl.DateTimeFormat('ru');
-  finish.setDate(finish.getDate() + duration);
-  return <div>{fmt.format(date) + ' - ' + fmt.format(finish)}</div>;
-};
-
-export { Dates, DatesSimple };
+export { Dates };

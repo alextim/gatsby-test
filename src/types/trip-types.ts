@@ -2,6 +2,10 @@ export type CurrencyNameType = {
   string: 'RUR' | 'UAH' | 'USD' | 'EUR';
 };
 
+export type PriceModeType = {
+  number: 0 | 1 | 2;
+};
+
 export interface ICurrencySymbol {
   name: CurrencyNameType;
   symbol: string;
@@ -14,6 +18,11 @@ export type LevelType = {
 export interface ITax {
   name: string;
   url: string;
+}
+
+export interface IDateItem {
+  date: Date;
+  isSale: boolean;
 }
 
 export interface IGearType {
@@ -46,14 +55,6 @@ export interface IPriceListItem {
   qty: number;
   price: number;
   salePrice?: number;
-}
-
-export interface IOffer {
-  currency: CurrencyNameType;
-  priceList: {
-    isVisible: boolean;
-    rows: Array<IPriceListItem>;
-  };
   isSale: boolean;
 }
 
@@ -89,8 +90,10 @@ export interface ITrip {
   activity?: Array<string>;
   destination: Array<string>;
 
-  isPriceOnRequest: boolean;
-  offer?: IOffer;
+  priceMode: PriceModeType;
+  currency: CurrencyNameType;
+  isSale: boolean;
+  priceList?: Array<IPriceListItem>;
 
   service?: IService;
   difficultyLevel?: LevelType;
@@ -103,7 +106,7 @@ export interface ITrip {
   duration?: number;
 
   isDatesOnRequest: boolean;
-  dates?: Array<Date>;
+  dates?: Array<IDateItem>;
 
   itinerary?: IItinerary;
   equipment?: IEquipment;

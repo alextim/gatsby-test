@@ -21,19 +21,15 @@ const singleTrip: Trip.ITrip = {
   activity: ['Горные лыжи', 'Фрирайд'],
   destination: ['Франция'],
 
-  isPriceOnRequest: false,
-  offer: {
-    currency: ('EUR' as unknown) as Trip.CurrencyNameType,
-    isSale: true,
-    priceList: {
-      isVisible: true,
-      rows: [
-        { qty: 5, price: 790, salePrice: 500 },
-        { qty: 4, price: 950, salePrice: 800 },
-        { qty: 3, price: 1200, salePrice: 1000 },
-      ],
-    },
-  },
+  priceMode: (2 as unknown) as Trip.PriceModeType,
+  currency: ('EUR' as unknown) as Trip.CurrencyNameType,
+  isSale: true,
+  priceList: [
+    { qty: 6, price: 700, salePrice: 400, isSale: true },
+    { qty: 5, price: 790, salePrice: 500, isSale: true },
+    { qty: 4, price: 950, salePrice: 800, isSale: false },
+    { qty: 3, price: 1200, salePrice: 1000, isSale: true },
+  ],
 
   service: {
     included: [
@@ -74,7 +70,16 @@ const singleTrip: Trip.ITrip = {
   duration: 8,
 
   isDatesOnRequest: false,
-  dates: [new Date('2020-12-01'), new Date('2020-12-02')],
+  dates: [
+    {
+      date: new Date('2020-12-01'),
+      isSale: true,
+    },
+    {
+      date: new Date('2020-12-30'),
+      isSale: false,
+    },
+  ],
 
   itinerary: {
     subTitle: '',

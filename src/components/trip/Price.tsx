@@ -12,8 +12,9 @@ interface IProps {
   salePrice?: number;
 }
 
-const Price: React.FC<IProps> = ({ price, currency, isSale = false, salePrice }) => {
+const Price: React.FC<IProps> = ({ price, currency, isSale = false, salePrice = 0 }) => {
   const currencySymbol = getCurrencySymbol(currency);
+  const showSale = isSale && salePrice > 0;
   return (
     <>
       <Global
@@ -34,11 +35,11 @@ const Price: React.FC<IProps> = ({ price, currency, isSale = false, salePrice })
           }
         `}
       />
-      <span className={`price price-regular${isSale ? ' is-sale' : ''}`}>
-        {!isSale && <Currency>{currencySymbol}</Currency>}
+      <span className={`price price-regular${showSale ? ' is-sale' : ''}`}>
+        {!showSale && <Currency>{currencySymbol}</Currency>}
         {price}
       </span>
-      {isSale && (
+      {showSale && (
         <span className="price price-sale">
           <Currency>{currencySymbol}</Currency>
           {salePrice}

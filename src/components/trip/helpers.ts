@@ -52,3 +52,15 @@ export const formatDuration = (days: number, nights: number): string => {
   }
   return s;
 };
+
+export const getFinishDate = (date: Date, duration: number): Date => {
+  const finish = new Date(date);
+  finish.setDate(finish.getDate() + duration);
+  return finish;
+};
+
+export const formatStartFinish = (date: Date, duration: number): string => {
+  const finish = getFinishDate(date, duration);
+  const fmt = new Intl.DateTimeFormat('ru');
+  return fmt.format(date) + ' - ' + fmt.format(finish);
+};

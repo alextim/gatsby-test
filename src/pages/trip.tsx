@@ -23,8 +23,10 @@ import Service from '../components/trip/Service';
 import Itinerary from '../components/trip/Itinerary';
 import Equipment from '../components/trip/Equipment';
 import PriceMeta from '../components/trip/PriceMeta';
-import { Dates, DatesSimple } from '../components/trip/Dates';
+import { Dates } from '../components/trip/Dates';
 import { IconLink } from '../components/IconLink';
+import { formatStartFinish } from '../components/trip/helpers';
+import { getLowestPrice } from '../components/trip/helpers';
 
 //import PrevNext from '../components/PrevNext';
 
@@ -38,15 +40,25 @@ const TripPage: React.FC<IPageProps> = ({ location }) => {
     metaTitle,
     metaDescription,
     excerpt,
-    isPriceOnRequest,
+
+    priceMode,
+    currency,
+    isSale,
+    priceList,
+
     itinerary,
-    offer,
     service,
     isShowNights,
     duration,
     isDatesOnRequest,
     dates,
   } = trip;
+
+  const showPrice = Number(priceMode) !== 0 && priceList;
+  const showPriceList = Number(priceMode) === 2 && priceList;
+  const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
+
+  const inquiryMode = isDatesOnRequest || !dates ? 'on-request' : 'list';
 
   let days = 0;
   if (itinerary && itinerary.dayItems) {
@@ -72,7 +84,9 @@ const TripPage: React.FC<IPageProps> = ({ location }) => {
         <LeftWrapper />
         <RightWrapper>
           <Box fontSize="1.375rem" fontWeight={700}>
-            {isPriceOnRequest || !offer ? 'Цена по запросу' : offer && <PriceMeta offer={offer} />}
+            {showPrice
+              ? lowestPrice && <PriceMeta lowest={lowestPrice} isSale={isSale} currency={currency} />
+              : 'Цена по запросу'}
           </Box>
           {trip.difficultyLevel && <TechLevel level={trip.difficultyLevel} />}
           {trip.fitnessLevel && <FitnessLevel level={trip.fitnessLevel} />}
@@ -88,7 +102,7 @@ const TripPage: React.FC<IPageProps> = ({ location }) => {
                 <TripInfoItem title="Даты поездок:" value="по запросу" />
               ) : (
                 <>
-                  <TripInfoItem title="Ближайшая поездка:" value={<DatesSimple date={dates[0]} duration={days} />} />
+                  <TripInfoItem title="Ближайшая поездка:" value={formatStartFinish(dates[0].date, days)} />
                   {dates.length > 1 && (
                     <IconLink icon={['far', 'eye']} to="#" onClick={handleGoToDatesTab}>
                       другие даты
@@ -101,19 +115,19 @@ const TripPage: React.FC<IPageProps> = ({ location }) => {
               Записаться
             </Button>
           </Flex>
-          <TripInquiryForm isOpen={isOpen} onClose={onClose} />
+          <TripInquiryForm isOpen={isOpen} onClose={onClose} mode={inquiryMode} dates={dates} selected={0} />
         </RightWrapper>
       </HeadWrapper>
 
       <BodyWrapper>
-        <Tabs variant="soft-rounded" variantColor="green">
-          <TabList>
+        <Tabs variant="soft-rounded" variantColor="green" mb="1rem">
+          <TabList mb="1rem">
             {itinerary && (
               <Tab>
                 <TabHeading icon="list-ol">Программа по дням</TabHeading>
               </Tab>
             )}
-            {((offer && !isPriceOnRequest) || service) && (
+            {(showPriceList || service) && (
               <Tab>
                 <TabHeading icon="money-bill-alt">Цена</TabHeading>
               </Tab>
@@ -141,21 +155,28 @@ const TripPage: React.FC<IPageProps> = ({ location }) => {
               </Tab>
             )}
           </TabList>
-          <TabPanels pt="1rem">
+          <TabPanels>
             {itinerary && (
               <TabPanel>
                 <Itinerary itinerary={itinerary} />
               </TabPanel>
             )}
-            {((offer && !isPriceOnRequest) || service) && (
+            {(showPriceList || service) && (
               <TabPanel>
-                {offer && !isPriceOnRequest && <PriceList offer={offer} />}
+                {showPriceList && priceList && <PriceList priceList={priceList} isSale={isSale} currency={currency} />}
                 {service && <Service service={service} />}
               </TabPanel>
             )}
             {!isDatesOnRequest && dates && (
               <TabPanel>
-                <Dates dates={dates} duration={days} />
+                <Dates
+                  dates={dates}
+                  duration={days}
+                  showPrice={showPrice}
+                  lowest={lowestPrice}
+                  currency={currency}
+                  isSale={isSale}
+                />
               </TabPanel>
             )}
             {trip.equipment && (
