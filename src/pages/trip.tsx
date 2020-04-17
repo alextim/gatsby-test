@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import { useDisclosure } from '@chakra-ui/core';
 import { Flex, Box } from '@chakra-ui/core';
@@ -27,6 +27,7 @@ import { Dates } from '../components/trip/Dates';
 import { IconLink } from '../components/IconLink';
 import { formatStartFinish } from '../components/trip/helpers';
 import { getLowestPrice } from '../components/trip/helpers';
+import { ISelectControlItem } from '../types/types';
 
 //import PrevNext from '../components/PrevNext';
 
@@ -54,11 +55,12 @@ const TripPage: React.FC<IPageProps> = ({ location }) => {
     dates,
   } = trip;
 
-  const showPrice = Number(priceMode) !== 0 && priceList;
-  const showPriceList = Number(priceMode) === 2 && priceList;
-  const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
-
-  const inquiryMode = isDatesOnRequest || !dates ? 'on-request' : 'list';
+  const [selected, setSelected] = useState(0);
+  const openFormHandler = (e: MouseEvent) => {
+    e.preventDefault();
+    setSelected(Number(e.currentTarget.attributes['data-i'].value));
+    onOpen();
+  };
 
   let days = 0;
   if (itinerary && itinerary.dayItems) {
@@ -67,6 +69,26 @@ const TripPage: React.FC<IPageProps> = ({ location }) => {
     days = duration;
   }
   const nights = isShowNights ? days - 1 : 0;
+
+  let inquiryMode: string;
+  let dateItems: Array<ISelectControlItem> | undefined;
+  if (isDatesOnRequest || !dates) {
+    inquiryMode = 'on-request';
+    dateItems = undefined;
+  } else {
+    const fmt = new Intl.DateTimeFormat('ru');
+    inquiryMode = 'list';
+    dateItems = dates.map(
+      (start) =>
+        ({
+          value: fmt.format(start.date),
+          name: formatStartFinish(start.date, days),
+        } as ISelectControlItem),
+    );
+  }
+  const showPrice = Number(priceMode) !== 0 && priceList;
+  const showPriceList = Number(priceMode) === 2 && priceList;
+  const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
 
   const handleGoToDatesTab = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -111,11 +133,11 @@ const TripPage: React.FC<IPageProps> = ({ location }) => {
                 </>
               )}
             </Box>
-            <Button flex="1" width="auto" onClick={onOpen}>
+            <Button flex="1" width="auto" data-i="0" onClick={openFormHandler}>
               Записаться
             </Button>
           </Flex>
-          <TripInquiryForm isOpen={isOpen} onClose={onClose} mode={inquiryMode} dates={dates} selected={0} />
+          <TripInquiryForm isOpen={isOpen} onClose={onClose} mode={inquiryMode} dates={dateItems} selected={selected} />
         </RightWrapper>
       </HeadWrapper>
 
@@ -176,6 +198,7 @@ const TripPage: React.FC<IPageProps> = ({ location }) => {
                   lowest={lowestPrice}
                   currency={currency}
                   isSale={isSale}
+                  openFormHandler={openFormHandler}
                 />
               </TabPanel>
             )}

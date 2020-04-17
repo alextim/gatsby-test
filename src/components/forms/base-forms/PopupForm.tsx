@@ -16,6 +16,7 @@ import { IBaseformContext, BaseformContext } from './BaseformContext';
 import FormStatusEnum from './FormStatusEnum';
 import { getTitle } from './utils';
 import * as FORM from './consts';
+import { Container } from '../../Container';
 
 interface IProps {
   sendData: ISendData;
@@ -38,7 +39,7 @@ const PopupForm: React.FC<IProps> = ({
   title,
   isOpen,
   onClose,
-  formSize = '96%',
+  formSize = 'xl',
 }) => {
   const {
     handleSubmit,
@@ -107,7 +108,9 @@ const PopupForm: React.FC<IProps> = ({
       size={status === FormStatusEnum.Form ? formSize : 'sm'}
     >
       <ModalOverlay />
+      <Container>
       <ModalContent>
+
         <ModalHeader>{title}</ModalHeader>
         {status !== FormStatusEnum.Sending && <ModalCloseButton />}
         <ModalBody>
@@ -129,6 +132,7 @@ const PopupForm: React.FC<IProps> = ({
           </ModalFooter>
         )}
       </ModalContent>
+      </Container>
     </Modal>
   );
 };

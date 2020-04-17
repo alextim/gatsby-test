@@ -3,6 +3,7 @@ import { css, Global } from '@emotion/core';
 import styled from '@emotion/styled';
 
 import Price from './Price';
+import { BtnBox } from '../Button';
 import { getFinishDate } from './helpers';
 import { IDateItem, IPriceListItem, CurrencyNameType } from '../../types/trip-types';
 
@@ -14,9 +15,19 @@ interface IProps {
   currency: CurrencyNameType;
   isSale: boolean;
   isTextOnly?: boolean;
+  openFormHandler: (e: MouseEvent) => void;
 }
 
-const Dates: React.FC<IProps> = ({ dates, duration, showPrice, lowest, currency, isSale, isTextOnly = false }) => {
+const Dates: React.FC<IProps> = ({
+  dates,
+  duration,
+  showPrice,
+  lowest,
+  currency,
+  isSale,
+  openFormHandler,
+  isTextOnly = false,
+}) => {
   const fmt = new Intl.DateTimeFormat('ru');
   return (
     <table className="table table-striped table-hover">
@@ -47,7 +58,21 @@ const Dates: React.FC<IProps> = ({ dates, duration, showPrice, lowest, currency,
                   'По запросу'
                 )}
               </td>
-              {!isTextOnly && <td>btn </td>}
+              {!isTextOnly && (
+                <td>
+                  <BtnBox
+                    as="button"
+                    padding="0.3125rem"
+                    lineHeight="1.5"
+                    m="0.4rem"
+                    w="6rem"
+                    data-i={i}
+                    onClick={openFormHandler}
+                  >
+                    Заказать
+                  </BtnBox>
+                </td>
+              )}
             </tr>
           );
         })}

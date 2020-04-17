@@ -5,14 +5,12 @@ import { Box } from '@chakra-ui/core';
 const BtnBox = styled(Box)`
   display: inline-block;
   height: auto;
-  min-width: 8.4375em;
+  min-width: 8.4375rem;
   color: #fff;
   background-color: #ff7550;
-  padding: 0.625em 1.25em;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 500;
   text-align: center;
-  line-height: 1.8;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease 0s;
@@ -22,27 +20,30 @@ const BtnBox = styled(Box)`
     text-decoration: none;
     box-shadow: 0 2px 7px 0 rgba(162, 160, 160, 0.54);
   }
+`;
 
+const BtnBoxResponsive = styled(BtnBox)`
+  line-height: 1.8;
+  padding: 0.625em 1.25rem;
   ${(props) => props.theme.mediaQueries.md} {
-    padding: 0.625em 2.1875em;
+    padding: 0.625rem 2.1875rem;
   }
 `;
 
 const Button: React.FC = ({ children, ...props }) => (
-  <BtnBox as="button" {...props}>
+  <BtnBoxResponsive as="button" {...props}>
     {children}
-  </BtnBox>
+  </BtnBoxResponsive>
 );
 
 interface IBtnLinkProps {
   to: string;
-  children: React.ReactNode;
 }
 
 const BtnLink: React.FC<IBtnLinkProps> = ({ to, children, ...props }) => (
-  <BtnBox as="a" href={to} {...props}>
+  <BtnBoxResponsive as="a" href={to} {...props}>
     {children}
-  </BtnBox>
+  </BtnBoxResponsive>
 );
 
-export { Button, BtnLink };
+export { BtnBox, Button, BtnLink };
