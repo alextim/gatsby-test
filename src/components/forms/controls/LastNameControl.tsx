@@ -7,8 +7,17 @@ const maxLength = 20;
 const label = 'Фамилия';
 const placeholder = 'Ваша фамилия';
 
-const LastNameControl = () => (
-  <NameControl controlName={controlName} label={label} placeholder={placeholder} maxLength={maxLength} />
+interface IProps {
+  required?: boolean;
+}
+const LastNameControl: React.FC<IProps> = ({ required = true }) => (
+  <NameControl
+    controlName={controlName}
+    label={label}
+    placeholder={placeholder}
+    maxLength={maxLength}
+    required={required}
+  />
 );
 
 export default LastNameControl;

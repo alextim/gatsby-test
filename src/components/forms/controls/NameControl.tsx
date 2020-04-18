@@ -9,12 +9,20 @@ export interface INameControlProps {
   readonly label: string;
   readonly placeholder: string;
   readonly maxLength: number;
+  readonly required: boolean;
 }
 
-const NameControl: React.FC<INameControlProps> = ({ customRegister, controlName, label, placeholder, maxLength }) => {
+const NameControl: React.FC<INameControlProps> = ({
+  customRegister,
+  controlName,
+  label,
+  placeholder,
+  maxLength,
+  required = true,
+}) => {
   const nameRules = {
     // validate: validateName,
-    required: `Поле "${label}" является обязательным`,
+    required: required ? `Поле "${label}" является обязательным` : false,
     maxLength: {
       value: maxLength,
       message: `Максимальная длина ${maxLength} символов`,

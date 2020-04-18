@@ -1,4 +1,6 @@
-const season = [
+import { IKeyValuePair } from '../types/types';
+
+const season: Array<IKeyValuePair> = [
   {
     key: 'winter',
     name: 'Зима',

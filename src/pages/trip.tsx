@@ -27,7 +27,7 @@ import { Dates } from '../components/trip/Dates';
 import { IconLink } from '../components/IconLink';
 import { formatStartFinish } from '../components/trip/helpers';
 import { getLowestPrice } from '../components/trip/helpers';
-import { ISelectControlItem } from '../types/types';
+import { IKeyValuePair } from '../types/types';
 
 //import PrevNext from '../components/PrevNext';
 
@@ -71,7 +71,7 @@ const TripPage: React.FC<IPageProps> = ({ location }) => {
   const nights = isShowNights ? days - 1 : 0;
 
   let inquiryMode: string;
-  let dateItems: Array<ISelectControlItem> | undefined;
+  let dateItems: Array<IKeyValuePair> | undefined;
   if (isDatesOnRequest || !dates) {
     inquiryMode = 'on-request';
     dateItems = undefined;
@@ -81,9 +81,9 @@ const TripPage: React.FC<IPageProps> = ({ location }) => {
     dateItems = dates.map(
       (start) =>
         ({
-          value: fmt.format(start.date),
-          name: formatStartFinish(start.date, days),
-        } as ISelectControlItem),
+          key: fmt.format(start.date),
+          value: formatStartFinish(start.date, days),
+        } as IKeyValuePair),
     );
   }
   const showPrice = Number(priceMode) !== 0 && priceList;

@@ -1,23 +1,25 @@
-const activity = [
+import { IKeyValuePair } from '../types/types';
+
+const activity: Array<IKeyValuePair> = [
   {
     key: 'alpinism',
-    name: 'alpinism',
+    value: 'alpinism',
   },
   {
     key: 'kayaking',
-    name: 'Каякинг',
+    value: 'Каякинг',
   },
   {
     key: 'trekking',
-    name: 'Поход',
+    value: 'Поход',
   },
   {
     key: 'rock-climbing',
-    name: 'Скалолазание',
+    value: 'Скалолазание',
   },
   {
     key: 'ski',
-    name: 'Ски-тур/Фрирайд',
+    value: 'Ски-тур/Фрирайд',
   },
 ];
 

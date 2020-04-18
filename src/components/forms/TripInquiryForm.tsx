@@ -12,7 +12,7 @@ import {
   TripDatesControl,
   Submit,
 } from './controls';
-import { ISelectControlItem } from '../../types/types';
+import { IKeyValuePair } from '../../types/types';
 
 const FORM_TITLE = 'Записаться в поездку';
 // const FORM_SUBTITLE = 'Получив эту заявку, мы сможем связаться с вами и обсудить детали путешествия.';
@@ -23,7 +23,7 @@ interface IProps {
   isOpen: boolean;
   onClose: () => void;
   mode: string;
-  dates?: Array<ISelectControlItem>;
+  dates?: Array<IKeyValuePair>;
   selected: number;
 }
 
@@ -35,13 +35,13 @@ const TripInquiryForm: React.FC<IProps> = ({ isOpen, onClose, mode, dates, selec
 
       <div>
         <FirstNameControl />
-        <LastNameControl />
+        <LastNameControl required={false} />
         <EmailControl />
         <PhoneControl />
         {mode === 'on-request' ? <DateControl /> : dates && <TripDatesControl items={dates} selected={selected} />}
-        <NoteControl />
+        <NoteControl required={false} label="Комментарий" />
         {mode === 'list' && dates && (
-          <div>* Если не нашли подходящих дат в списке, то можете написать свой вариант дат в Сообщении</div>
+          <div>* Если не нашли подходящих дат в списке, то можете написать свой вариант в комментарии</div>
         )}
       </div>
       <Submit mt="1rem" mb="1.5rem">

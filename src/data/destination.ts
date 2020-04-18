@@ -1,19 +1,21 @@
-const destination = [
+import { IKeyValuePair } from '../types/types';
+
+const destination: Array<IKeyValuePair> = [
   {
     key: 'france',
-    name: 'Франция',
+    value: 'Франция',
   },
   {
     key: 'italy',
-    name: 'Италия',
+    value: 'Италия',
   },
   {
     key: 'switzerland',
-    name: 'Швейцария',
+    value: 'Швейцария',
   },
   {
     key: 'ukraine',
-    name: 'Украина',
+    value: 'Украина',
   },
 ];
 

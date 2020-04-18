@@ -6,19 +6,9 @@ export type PriceModeType = {
   number: 0 | 1 | 2;
 };
 
-export interface ICurrencySymbol {
-  key: CurrencyNameType;
-  name: string;
-}
-
 export type LevelType = {
   number: 1 | 2 | 3 | 4;
 };
-
-export interface ITax {
-  name: string;
-  url: string;
-}
 
 export interface IDateItem {
   date: Date;

@@ -37,7 +37,6 @@ const Meta: React.FC<IProps> = ({ icon, items }) => (
 interface IDateMetaProps {
   date: string;
 }
-
 const DateMeta: React.FC<IDateMetaProps> = ({ date }) => (
   <Meta icon={['far', 'calendar-check']} items={Utils.formatDate(date)} />
 );

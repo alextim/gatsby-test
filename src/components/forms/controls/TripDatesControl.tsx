@@ -1,10 +1,10 @@
 import React from 'react';
 
 import SelectControl from './SelectControl';
-import { ISelectControlItem } from '../../../types/types';
+import { IKeyValuePair } from '../../../types/types';
 
 interface IProps {
-  items: Array<ISelectControlItem>;
+  items: Array<IKeyValuePair>;
   selected: number;
 }
 const TripDatesControl: React.FC<IProps> = ({ items, selected }) => (

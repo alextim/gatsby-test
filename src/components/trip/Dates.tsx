@@ -1,6 +1,4 @@
 import React from 'react';
-import { css, Global } from '@emotion/core';
-import styled from '@emotion/styled';
 
 import Price from './Price';
 import { BtnBox } from '../Button';

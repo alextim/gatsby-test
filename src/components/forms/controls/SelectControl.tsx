@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
 import { BaseformContext } from '../base-forms/BaseformContext';
-import { ISelectControlItem } from '../../../types/types';
+import { IKeyValuePair } from '../../../types/types';
 
 const selectRules = {};
 
 interface IProps {
-  items: Array<ISelectControlItem>;
+  items: Array<IKeyValuePair>;
   customRegister?: any;
   name: string;
   label?: React.ReactNode;
@@ -31,12 +31,12 @@ const SelectControl: React.FC<IProps> = ({ items, customRegister, name, label, i
               <Select
                 ref={customRegister ? (e) => customRegister(e, selectRules) : context.register(selectRules)}
                 name={name}
-                value={items[selected].value}
+                defaultValue={items[selected].key}
               >
                 {items.map((item, i) => {
                   return (
-                    <option key={i} value={item.value}>
-                      {item.name}
+                    <option key={i} value={item.key}>
+                      {item.value}
                     </option>
                   );
                 })}
@@ -46,11 +46,11 @@ const SelectControl: React.FC<IProps> = ({ items, customRegister, name, label, i
             <Select
               ref={customRegister ? (e) => customRegister(e, selectRules) : context.register(selectRules)}
               name={name}
-              value={items[selected].value}
+              defaultValue={items[selected].key}
             >
               {items.map((item, i) => (
-                <option key={i} value={item.value}>
-                  {item.name}
+                <option key={i} value={item.key}>
+                  {item.value}
                 </option>
               ))}
             </Select>

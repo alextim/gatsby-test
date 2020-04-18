@@ -6,7 +6,7 @@ import slugify from './../lib/slugify';
 const getSafeCategorySlug = (s: string): string => {
   let path;
   for (const cat of categories) {
-    if (cat.name.toLowerCase() === s.toLowerCase()) {
+    if (cat.value.toLowerCase() === s.toLowerCase()) {
       path = cat.key;
     }
   }

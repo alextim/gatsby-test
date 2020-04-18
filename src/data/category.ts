@@ -1,11 +1,13 @@
-const category = [
+import { IKeyValuePair } from '../types/types';
+
+const category: Array<IKeyValuePair> = [
   {
     key: 'news',
-    name: 'Новости',
+    value: 'Новости',
   },
   {
     key: 'tutorials',
-    name: 'Учебные материалы',
+    value: 'Учебные материалы',
   },
 ];
 

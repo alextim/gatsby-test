@@ -1,10 +1,10 @@
-import { CurrencyNameType, ICurrencySymbol } from '../types/trip-types';
+import { IKeyValuePair } from '../types/types';
 
-const currency: Array<ICurrencySymbol> = [
-  { key: ('EUR' as unknown) as CurrencyNameType, name: '€' },
-  { key: ('USD' as unknown) as CurrencyNameType, name: '$' },
-  { key: ('RUR' as unknown) as CurrencyNameType, name: 'руб' },
-  { key: ('UAH' as unknown) as CurrencyNameType, name: 'грн' },
+const currency: Array<IKeyValuePair> = [
+  { key: 'EUR', value: '€' },
+  { key: 'USD', value: '$' },
+  { key: 'RUR', value: 'руб' },
+  { key: 'UAH', value: 'грн' },
 ];
 
 export default currency;
