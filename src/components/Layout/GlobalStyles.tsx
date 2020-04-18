@@ -83,7 +83,7 @@ const GlobalStyles: React.FC = () => {
           }
         }
 
-        .table-striped tbody > tr:nth-child(even) {
+        .table-striped tbody > tr:nth-of-type(even) {
           background-color: #f9f9f9;
         }
 

@@ -70,11 +70,17 @@ export const formatStartFinish = (date: Date, duration: number): string => {
 
 export const mapKeysToTaxList = (name: string, keys: string[]) => {
   const tax = taxonomy[name];
-  const a = keys.map((key) => key.toLowerCase());
-  const b = a.filter((key) => tax.find((item: IKeyValuePair) => item.key === key));
-  const c = b.map((key) => ({
-    url: `/${key}`,
-    name: tax.find((item: IKeyValuePair) => item.key === key).value,
-  }));
-  return c;
+
+  return keys.reduce(function (acc, cur) {
+    const key = cur.toLowerCase();
+    let t = tax.find((item: IKeyValuePair) => item.key === key);
+    if (t) {
+      acc.push({ url: `/${name}/${t.key}`, name: t.value });
+    }
+    t = tax.find((item: IKeyValuePair) => item.value.toLocaleLowerCase() === key);
+    if (t) {
+      acc.push({ url: `/${name}/${t.key}`, name: t.value });
+    }
+    return acc;
+  }, new Array<{ url: string; name: string }>());
 };

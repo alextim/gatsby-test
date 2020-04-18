@@ -57,7 +57,9 @@ const SingleTrip: React.FC<IProps> = ({ trip, pathname }) => {
   const [selected, setSelected] = useState(0);
   const openFormHandler = (e: MouseEvent) => {
     e.preventDefault();
-    setSelected(Number(e.currentTarget.attributes['data-i'].value));
+    if (e.currentTarget !== null) {
+      setSelected(Number(e.currentTarget.attributes['data-i'].value));
+    }
     onOpen();
   };
 
@@ -85,13 +87,19 @@ const SingleTrip: React.FC<IProps> = ({ trip, pathname }) => {
         } as IKeyValuePair),
     );
   }
-  const showPrice = Number(priceMode) !== 0 && priceList;
-  const showPriceList = Number(priceMode) === 2 && priceList;
+  const showPrice = Number(priceMode) !== 0 && priceList ? true : false;
+  const showPriceList = Number(priceMode) === 2 && priceList ? true : false;
   const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
 
   const handleGoToDatesTab = (e: React.MouseEvent) => {
     e.preventDefault();
-    focusRef.current.parentNode.click();
+    const current = focusRef.current;
+    if (current !== undefined) {
+      const parent = (current as HTMLElement).parentNode;
+      if (parent !== null) {
+        parent.click();
+      }
+    }
   };
 
   return (
@@ -142,7 +150,7 @@ const SingleTrip: React.FC<IProps> = ({ trip, pathname }) => {
                 </>
               )}
             </Box>
-            <Button flex="1" width="auto" data-i="0" onClick={openFormHandler}>
+            <Button display="flex:1;" width="auto" data-i="0" onClick={openFormHandler}>
               Записаться
             </Button>
           </Flex>
