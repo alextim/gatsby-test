@@ -1,5 +1,5 @@
 import { LevelType, IPriceListItem, CurrencyNameType } from '../../types/trip-types';
-import currencies from '../../data/currencies';
+import currencies from '../../data/currency';
 import Utils from '../../lib/utils';
 
 export function getFitnessLevelTitle(level: LevelType): string {
@@ -29,11 +29,11 @@ export const getLowestPrice = (rows: Array<IPriceListItem>): IPriceListItem =>
   }, rows[0]);
 
 export const getCurrencySymbol = (name: CurrencyNameType): string => {
-  const item = currencies.find((item) => item.name === name);
+  const item = currencies.find((item) => item.key === name);
   if (!item) {
     throw new Error(`getCurrencySymbol: Unknown currency name "${name}"`);
   }
-  return item.symbol;
+  return item.name;
 };
 
 export const formatDuration = (days: number, nights: number): string => {

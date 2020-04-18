@@ -1,0 +1,20 @@
+const season = [
+  {
+    key: 'winter',
+    name: 'Зима',
+  },
+  {
+    key: 'spring',
+    name: 'Весна',
+  },
+  {
+    key: 'summer',
+    name: 'Лето',
+  },
+  {
+    key: 'autumn',
+    name: 'Осень',
+  },
+];
+
+export default season;

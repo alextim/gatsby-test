@@ -7,8 +7,8 @@ export type PriceModeType = {
 };
 
 export interface ICurrencySymbol {
-  name: CurrencyNameType;
-  symbol: string;
+  key: CurrencyNameType;
+  name: string;
 }
 
 export type LevelType = {
