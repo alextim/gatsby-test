@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Box } from '@chakra-ui/core';
-
-const Wrapper = styled.div`
+/*
   margin-bottom: 0.75rem;
   &:after {
     display: block;
@@ -18,6 +17,9 @@ const Wrapper = styled.div`
       display: none;
     }
   }
+*/
+const Wrapper = styled.div`
+  display: inline-block;
 `;
 
 const Label = styled.div`

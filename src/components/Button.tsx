@@ -18,13 +18,13 @@ const BtnBox = styled(Box)`
     color: #222;
     background-color: #fff;
     text-decoration: none;
-    box-shadow: 0 2px 7px 0 rgba(162, 160, 160, 0.54);
+    box-shadow: 0 0.125rem 0.4375rem 0 rgba(162, 160, 160, 0.54);
   }
 `;
 
 const BtnBoxResponsive = styled(BtnBox)`
   line-height: 1.8;
-  padding: 0.625em 1.25rem;
+  padding: 0.625rem 1.25rem;
   ${(props) => props.theme.mediaQueries.md} {
     padding: 0.625rem 2.1875rem;
   }

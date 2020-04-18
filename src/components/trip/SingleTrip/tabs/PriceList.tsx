@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { IPriceListItem, CurrencyNameType } from '../../types/trip-types';
-import Price from './Price';
+import { IPriceListItem, CurrencyNameType } from '../../../../types/trip-types';
+import Price from '../../Price';
 
 interface IProps {
   priceList: Array<IPriceListItem>;

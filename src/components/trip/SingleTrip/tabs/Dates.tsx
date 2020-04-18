@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Price from './Price';
-import { BtnBox } from '../Button';
-import { getFinishDate } from './helpers';
-import { IDateItem, IPriceListItem, CurrencyNameType } from '../../types/trip-types';
+import Price from '../../Price';
+import { BtnBox } from '../../../Button';
+import { getFinishDate } from '../../helpers';
+import { IDateItem, IPriceListItem, CurrencyNameType } from '../../../../types/trip-types';
 
 interface IProps {
   dates: Array<IDateItem>;

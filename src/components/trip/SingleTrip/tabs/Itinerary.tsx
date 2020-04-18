@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import { IItinerary } from '../../types/trip-types';
+import { IItinerary } from '../../../../types/trip-types';
 
 interface IProps {
   itinerary: IItinerary;

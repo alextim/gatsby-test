@@ -1,30 +1,40 @@
 import React, { useRef, useState } from 'react';
 import { useDisclosure } from '@chakra-ui/core';
-import { Flex, Box } from '@chakra-ui/core';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/core';
 
-import Layout from '../Layout';
-import SEO from '../SEO';
-import * as Trip from '../../types/trip-types';
-import { IKeyValuePair } from '../../types/types';
-import { num2form } from '../../lib/num2form';
-import { Button } from '../Button';
-import { IconLink } from '../IconLink';
+import Layout from '../../Layout';
+import SEO from '../../SEO';
+import * as Trip from '../../../types/trip-types';
+import { IKeyValuePair } from '../../../types/types';
+import { num2form } from '../../../lib/num2form';
+import BookButton from './BookButton';
+import { IconLink } from '../../IconLink';
 
-import { formatDuration, formatStartFinish, getLowestPrice } from './helpers';
-import TripInquiryForm from '../forms/TripInquiryForm';
-import { HeadWrapper, LeftWrapper, RightWrapper, BodyWrapper } from './wrappers';
+import { formatDuration, formatStartFinish, getLowestPrice } from '../helpers';
+import TripInquiryForm from '../../forms/TripInquiryForm';
+import {
+  HeadWrapper,
+  LeftWrapper,
+  RightWrapper,
+  PriceWrapper,
+  MetaWrapper,
+  MetaItem,
+  BookWrapper,
+  DatesBookWrapper,
+  BodyWrapper,
+} from './wrappers';
 import TabHeading from './TabHeading';
-import { FitnessLevel, TechLevel } from './ico-levels';
-import { Altitude, Accomodation, GroupSize, Duration } from './ico-info';
+import { FitnessLevel, TechLevel } from '../ico-levels';
+import { Altitude, Accomodation } from '../ico-info';
 import TripInfoItem from './TripInfoItem';
-import PriceList from './PriceList';
-import Service from './Service';
-import Itinerary from './Itinerary';
-import Equipment from './Equipment';
-import PriceMeta from './PriceMeta';
-import { Dates } from './Dates';
-import TaxonomyList from './TaxonomyList';
+import PriceList from './tabs/PriceList';
+import Service from './tabs/Service';
+import Itinerary from './tabs/Itinerary';
+import Equipment from './tabs/Equipment';
+// import PriceMeta from './PriceMeta';
+import { Dates } from './tabs/Dates';
+import TaxonomyList from '../TaxonomyList';
+import Price from '../Price';
 
 //import PrevNext from '../PrevNext';
 interface IProps {
@@ -112,31 +122,60 @@ const SingleTrip: React.FC<IProps> = ({ trip, pathname }) => {
       <HeadWrapper>
         <LeftWrapper />
         <RightWrapper>
-          <Box fontSize="1.375rem" fontWeight={700}>
+          <PriceWrapper>
             {showPrice
-              ? lowestPrice && <PriceMeta lowest={lowestPrice} isSale={isSale} currency={currency} />
+              ? lowestPrice && (
+                  <TripInfoItem
+                    label="Стоимость:"
+                    value={
+                      <Price
+                        price={lowestPrice.price}
+                        currency={currency}
+                        isSale={isSale}
+                        salePrice={lowestPrice.salePrice}
+                      />
+                    }
+                  />
+                )
               : 'Цена по запросу'}
-          </Box>
-          {trip.season && <TripInfoItem label="Сезон" value={<TaxonomyList name="season" keys={trip.season} />} />}
-          {trip.activity && (
-            <TripInfoItem label="Активность" value={<TaxonomyList name="activity" keys={trip.activity} />} />
-          )}
-          <TripInfoItem label="Направление" value={<TaxonomyList name="destination" keys={trip.destination} />} />
-          {trip.difficultyLevel && <TechLevel level={trip.difficultyLevel} />}
-          {trip.fitnessLevel && <FitnessLevel level={trip.fitnessLevel} />}
-          {trip.altitude && <Altitude value={trip.altitude} />}
-          {trip.accomodation && <Accomodation value={trip.accomodation} />}
-          {trip.groupSize && <GroupSize value={trip.groupSize} />}
-          {trip.groupSize && (
-            <TripInfoItem
-              label="Размер группы"
-              value={num2form(trip.groupSize, 'участник', 'участника', 'участников')}
-            />
-          )}
-          {days && <Duration days={days} nights={nights} />}
-          {days && <TripInfoItem label="Продолжительность" value={formatDuration(days, nights)} />}
-          <Flex flexDirection="row" flexWrap="wrap" justifyContent="center" alignItems="center">
-            <Box flex="1">
+          </PriceWrapper>
+          <MetaWrapper>
+            {days && (
+              <MetaItem>
+                <TripInfoItem label="Продолжительность" value={formatDuration(days, nights)} />
+              </MetaItem>
+            )}
+            {trip.groupSize && (
+              <MetaItem>
+                <TripInfoItem
+                  label="Размер группы"
+                  value={num2form(trip.groupSize, 'участник', 'участника', 'участников')}
+                />
+              </MetaItem>
+            )}
+            <MetaItem>
+              <TripInfoItem label="Направление" value={<TaxonomyList name="destination" keys={trip.destination} />} />
+            </MetaItem>
+            {trip.activity && (
+              <MetaItem>
+                <TripInfoItem label="Активность" value={<TaxonomyList name="activity" keys={trip.activity} />} />
+              </MetaItem>
+            )}
+            {trip.difficultyLevel && trip.altitude && (
+              <MetaItem>
+                {trip.difficultyLevel && <TechLevel level={trip.difficultyLevel} />}
+                {trip.altitude && <Altitude value={trip.altitude} />}
+              </MetaItem>
+            )}
+            {trip.fitnessLevel && trip.accomodation && (
+              <MetaItem>
+                {trip.fitnessLevel && <FitnessLevel level={trip.fitnessLevel} />}
+                {trip.accomodation && <Accomodation value={trip.accomodation} />}
+              </MetaItem>
+            )}
+          </MetaWrapper>
+          <BookWrapper>
+            <DatesBookWrapper>
               {isDatesOnRequest || !dates ? (
                 <TripInfoItem label="Даты поездок" value="по запросу" />
               ) : (
@@ -149,11 +188,11 @@ const SingleTrip: React.FC<IProps> = ({ trip, pathname }) => {
                   )}
                 </>
               )}
-            </Box>
-            <Button display="flex:1;" width="auto" data-i="0" onClick={openFormHandler}>
+            </DatesBookWrapper>
+            <BookButton as="button" data-i="0" onClick={openFormHandler}>
               Записаться
-            </Button>
-          </Flex>
+            </BookButton>
+          </BookWrapper>
           <TripInquiryForm isOpen={isOpen} onClose={onClose} mode={inquiryMode} dates={dateItems} selected={selected} />
         </RightWrapper>
       </HeadWrapper>

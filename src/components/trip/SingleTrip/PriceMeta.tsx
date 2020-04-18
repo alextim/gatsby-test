@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box } from '@chakra-ui/core';
 
-import { IPriceListItem, CurrencyNameType } from '../../types/trip-types';
-import Price from './Price';
+import { IPriceListItem, CurrencyNameType } from '../../../types/trip-types';
+import Price from '../Price';
 
 interface IProps {
   lowest: IPriceListItem;
