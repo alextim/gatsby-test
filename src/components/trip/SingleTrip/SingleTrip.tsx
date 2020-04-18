@@ -272,6 +272,7 @@ const SingleTrip: React.FC<IProps> = ({ trip, pathname }) => {
             )}
           </TabPanels>
         </Tabs>
+        <IconLink icon="print" to={`${pathname}/print`} target="_blank">Версия для печати</IconLink>
       </BodyWrapper>
     </Layout>
   );
