@@ -1,6 +1,9 @@
 import { LevelType, IPriceListItem, CurrencyNameType } from '../../types/trip-types';
-import currencies from '../../data/currency';
+import currencies from '../../data/taxonomy/currency';
 import Utils from '../../lib/utils';
+
+import { IKeyValuePair } from '../../types/types';
+import taxonomy from '../../data/taxonomy';
 
 export function getFitnessLevelTitle(level: LevelType): string {
   return [
@@ -28,12 +31,12 @@ export const getLowestPrice = (rows: Array<IPriceListItem>): IPriceListItem =>
     return prev;
   }, rows[0]);
 
-export const getCurrencySymbol = (name: CurrencyNameType): string => {
-  const item = currencies.find((item) => item.key === name);
+export const getCurrencySymbol = (currency: CurrencyNameType): string => {
+  const item = currencies.find((item) => item.key === ((currency as unknown) as string));
   if (!item) {
     throw new Error(`getCurrencySymbol: Unknown currency name "${name}"`);
   }
-  return item.name;
+  return item.value;
 };
 
 export const formatDuration = (days: number, nights: number): string => {
@@ -63,4 +66,15 @@ export const formatStartFinish = (date: Date, duration: number): string => {
   const finish = getFinishDate(date, duration);
   const fmt = new Intl.DateTimeFormat('ru');
   return fmt.format(date) + ' - ' + fmt.format(finish);
+};
+
+export const mapKeysToTaxList = (name: string, keys: string[]) => {
+  const tax = taxonomy[name];
+  const a = keys.map((key) => key.toLowerCase());
+  const b = a.filter((key) => tax.find((item: IKeyValuePair) => item.key === key));
+  const c = b.map((key) => ({
+    url: `/${key}`,
+    name: tax.find((item: IKeyValuePair) => item.key === key).value,
+  }));
+  return c;
 };

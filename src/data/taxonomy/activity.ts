@@ -1,4 +1,4 @@
-import { IKeyValuePair } from '../types/types';
+import { IKeyValuePair } from '../../types/types';
 
 const activity: Array<IKeyValuePair> = [
   {

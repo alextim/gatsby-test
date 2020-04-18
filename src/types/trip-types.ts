@@ -76,6 +76,7 @@ export interface ITrip {
   metaDescription?: string; // 160
   description: string;
   excerpt?: string;
+
   season?: Array<string>;
   activity?: Array<string>;
   destination: Array<string>;

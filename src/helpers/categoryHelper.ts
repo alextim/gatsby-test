@@ -1,4 +1,4 @@
-import categories from '../data/category';
+import categories from '../data/taxonomy/category';
 
 import translit from './../lib/translit';
 import slugify from './../lib/slugify';
