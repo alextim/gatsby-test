@@ -1,3 +1,4 @@
+import siteConfig from './siteConfig';
 const footerNavigationItems = [
   {
     title: 'Домой',
@@ -13,7 +14,7 @@ const footerNavigationItems = [
   },
   {
     title: 'Новости',
-    url: '/blog',
+    url: siteConfig.blogUrlBase,
   },
   {
     title: 'Контакты',

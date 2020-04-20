@@ -6,8 +6,8 @@ import { ITheme } from '../theme.d';
 
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
 import Section from './Section';
-import NewsCard from '../post/PostCard';
-import useLatestNewsTop3 from '../../helpers/hooks/useLatestNewsTop3';
+import PostCard from '../post/PostCard';
+import useLatestPostsTop3 from '../../helpers/hooks/useLatestPostsTop3';
 
 const InnerWrap = styled(Flex)`
   flex-direction: column;
@@ -17,21 +17,21 @@ const InnerWrap = styled(Flex)`
   }
 `;
 
-const LatestNewsCards: React.FC = () => {
-  const { latestNews } = useHomePageSettings();
-  const { title, actions } = latestNews;
-  const theme = useTheme();
-  const posts = useLatestNewsTop3();
+const LatestPosts: React.FC = () => {
+  const { latestPosts } = useHomePageSettings();
+  const { title, actions } = latestPosts;
+  const theme = (useTheme() as unknown) as ITheme;
+  const posts = useLatestPostsTop3();
 
   return (
-    <Section title={title} bg={theme.home.latestNews.colors.bg} actions={actions}>
+    <Section title={title} bg={theme.home.latestPosts.colors.bg} actions={actions}>
       <InnerWrap>
         {posts.map((post, i) => (
-          <NewsCard key={i} post={post} />
+          <PostCard key={i} post={post} />
         ))}
       </InnerWrap>
     </Section>
   );
 };
 
-export default LatestNewsCards;
+export default LatestPosts;

@@ -3,12 +3,12 @@ import { useTheme } from '@chakra-ui/core';
 
 import Utils from '../../lib/utils';
 import useOrganization from '../../helpers/hooks/useOrganization';
-import { IconLink } from '../IconLink';
+import IconLink from '../IconLink';
+import { ITheme } from '../theme.d';
 
 const OrganizationPhones: React.FC = () => {
   const { voice } = useOrganization();
-  const theme = useTheme();
-  const icon = 'phone';
+  const theme = (useTheme() as unknown) as ITheme;
 
   return (
     <>
@@ -16,7 +16,7 @@ const OrganizationPhones: React.FC = () => {
         // TODO: \AT_Lib\trackCallLink($title)
         <IconLink
           key={i}
-          icon={i === 0 ? icon : ''}
+          icon={i === 0 ? 'phone' : ''}
           size="xs"
           mb={theme.footer.mbWidgetLink}
           to={Utils.phoneUrl(phone)}

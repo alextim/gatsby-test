@@ -1,14 +1,15 @@
 import React from 'react';
 import { useTheme } from '@chakra-ui/core';
 
+import { ITheme } from '../theme.d';
 import Utils from '../../lib/utils';
 import useOrganization from '../../helpers/hooks/useOrganization';
-import { IconLink } from '../IconLink';
+import IconLink from '../IconLink';
 
 const OrganizationCloudPhones: React.FC = () => {
   const { voice } = useOrganization();
 
-  const theme = useTheme();
+  const theme = (useTheme() as unknown) as ITheme;
 
   const whatsappColor = theme.colors.brands.whatsapp;
   const viberColor = theme.colors.brands.viber;

@@ -106,10 +106,10 @@ const FeatureItem: React.FC<IFeatureItem> = ({ title, text, url, icon, color }) 
 const Features: React.FC = () => {
   const { features } = useHomePageSettings();
   const { title, subTitle, text, items } = features;
-  const theme = useTheme();
+  const theme = (useTheme() as unknown) as ITheme;
 
   return (
-    <Section title={title} ubTitle={subTitle} text={text} bg={theme.home.features.colors.bg}>
+    <Section title={title} subTitle={subTitle} text={text} bg={theme.home.features.colors.bg}>
       <StyledFlex>
         {items.map((item, i) => (
           <FeatureItem

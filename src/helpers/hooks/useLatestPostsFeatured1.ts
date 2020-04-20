@@ -15,12 +15,12 @@ interface IEdge {
   };
 }
 
-const useLatestNewsFeatured1 = (): Array<{
+const useLatestPostsFeatured1 = (): Array<{
   path: string;
   featuredImage: any;
 }> => {
   const data = useStaticQuery(graphql`
-    query LatestNewsQueryFeatured1 {
+    query LatestPostsQueryFeatured1 {
       allMdx(
         filter: { frontmatter: { published: { eq: true }, featured: { eq: true } } }
         limit: 1
@@ -52,4 +52,4 @@ const useLatestNewsFeatured1 = (): Array<{
   }));
 };
 
-export default useLatestNewsFeatured1;
+export default useLatestPostsFeatured1;

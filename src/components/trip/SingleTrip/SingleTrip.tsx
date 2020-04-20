@@ -8,7 +8,7 @@ import * as Trip from '../trip';
 import { IKeyValuePair } from '../../../types/types';
 
 import BookButton from './BookButton';
-import { IconLink } from '../../IconLink';
+import IconLink from '../../IconLink';
 
 import { TripTabs, TripPrintableDetails } from './tabs';
 import { formatStartFinish, getLowestPrice } from '../helpers';
@@ -47,7 +47,7 @@ const SingleTrip: React.FC<IProps> = ({ trip, pathname, isPrint }) => {
     metaTitle,
     metaDescription,
     excerpt,
-    featureImage,
+    featuredImage,
 
     priceMode,
     currency,
@@ -64,7 +64,7 @@ const SingleTrip: React.FC<IProps> = ({ trip, pathname, isPrint }) => {
   const openFormHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (e.currentTarget !== null) {
-      setSelected(Number(e.currentTarget.attributes['data-i'].value));
+      setSelected(Number(e.currentTarget.dataset.i));
     }
     onOpen();
   };
@@ -93,8 +93,8 @@ const SingleTrip: React.FC<IProps> = ({ trip, pathname, isPrint }) => {
     );
   }
   const showPrice = Number(priceMode) !== 0 && priceList ? true : false;
-  const showPriceList = Number(priceMode) === 2 && priceList ? true : false;
   const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
+  const showPriceList = Number(priceMode) === 2 && priceList ? true : false;
 
   const handleGoToDatesTab = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -116,7 +116,7 @@ const SingleTrip: React.FC<IProps> = ({ trip, pathname, isPrint }) => {
         noindex={isPrint}
       />
       <HeadWrapper>
-        <LeftWrapper>{featureImage && <Img fluid={useDefaultBannerImage()} />}</LeftWrapper>
+        <LeftWrapper>{featuredImage && <Img fluid={useDefaultBannerImage()} />}</LeftWrapper>
         <RightWrapper>
           <PriceWrapper>
             {showPrice

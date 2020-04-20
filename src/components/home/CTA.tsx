@@ -1,13 +1,14 @@
 import React from 'react';
 import { useTheme } from '@chakra-ui/core';
 
+import { ITheme } from '../theme.d';
 import Section from './Section';
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
 
 const CTA: React.FC = () => {
   const { CTA } = useHomePageSettings();
   const { title, subTitle, text, actions } = CTA;
-  const theme = useTheme();
+  const theme = (useTheme() as unknown) as ITheme;
 
   return (
     <Section

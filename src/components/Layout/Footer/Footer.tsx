@@ -13,7 +13,7 @@ import FooterWidget from './FooterWidget';
 
 import ContactInfo from './ContactInfo';
 import Voice from './Voice';
-import LatestNewsList from './LatestNewsList';
+import LatestPostsList from './LatestPostsList';
 import Subscribe from './Subscribe';
 
 import SocialLinks from './SocialLinks';
@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
                 <>
                   <WidgetWrapper>
                     <FooterWidget title="Последние новости">
-                      <LatestNewsList />
+                      <LatestPostsList />
                     </FooterWidget>
                   </WidgetWrapper>
                   <WidgetWrapper>

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import { ITheme } from '../../../theme.d';
 
 const MetaItem = styled.div`

@@ -19,7 +19,7 @@ interface IEdge {
   };
 }
 
-const useLatestNewsTop3 = (): Array<{
+const useLatestPostsTop3 = (): Array<{
   title: string;
   path: string;
   date: any;
@@ -28,7 +28,7 @@ const useLatestNewsTop3 = (): Array<{
   featuredImage: any;
 }> => {
   const data = useStaticQuery(graphql`
-    query LatestNewsQueryTop3 {
+    query LatestPostsQueryTop3 {
       allMdx(
         filter: { frontmatter: { published: { eq: true }, featured: { ne: true } } }
         limit: 3
@@ -72,4 +72,4 @@ const useLatestNewsTop3 = (): Array<{
   });
 };
 
-export default useLatestNewsTop3;
+export default useLatestPostsTop3;

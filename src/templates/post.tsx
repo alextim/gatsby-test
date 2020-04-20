@@ -6,9 +6,9 @@ import { Flex } from '@chakra-ui/core';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 
-import { DateMeta, CategoryMeta, TagMeta } from '../components/post/Meta';
+import { DateMeta, CategoryMeta, TagMeta } from '../components/post/metas';
 import SEO from '../components/SEO';
-import { IconLink } from '../components/IconLink';
+import IconLink from '../components/IconLink';
 import PrevNext from '../components/PrevNext';
 import { BlogLayout } from '../components/Layout';
 

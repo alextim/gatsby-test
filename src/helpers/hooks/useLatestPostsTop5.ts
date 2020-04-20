@@ -11,9 +11,9 @@ interface IEdge {
   };
 }
 
-const useLatestNewsTop5 = (): Array<{ title: StorageManager; path: string }> => {
+const useLatestPostsTop5 = (): Array<{ title: string; path: string }> => {
   const data = useStaticQuery(graphql`
-    query LatestNewsQueryTop5 {
+    query LatestPostsQueryTop5 {
       allMdx(
         filter: { frontmatter: { published: { eq: true } } }
         limit: 5
@@ -39,4 +39,4 @@ const useLatestNewsTop5 = (): Array<{ title: StorageManager; path: string }> => 
   }));
 };
 
-export default useLatestNewsTop5;
+export default useLatestPostsTop5;

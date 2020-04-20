@@ -2,13 +2,13 @@ import React from 'react';
 import { Flex, useTheme } from '@chakra-ui/core';
 
 import AnimatedLink from '../../AnimatedLink';
-import useLatestNewsTop5 from '../../../helpers/hooks/useLatestNewsTop5';
+import useLatestPostsTop5 from '../../../helpers/hooks/useLatestPostsTop5';
 
-const LatestNewsList: React.FC = () => {
+const LatestPostsList: React.FC = () => {
   const theme = useTheme();
   const mb = theme.footer.mbWidgetLink;
 
-  const posts = useLatestNewsTop5();
+  const posts = useLatestPostsTop5();
 
   return (
     <Flex direction="column" align="start">
@@ -21,4 +21,4 @@ const LatestNewsList: React.FC = () => {
   );
 };
 
-export default LatestNewsList;
+export default LatestPostsList;

@@ -1,14 +1,13 @@
 import React from 'react';
 
 import SidebarWidget from '../../SidebarWidget';
-import { IconLink } from '../../IconLink';
+import IconLink from '../../IconLink';
 import useAllYYYYMM from '../../../helpers/hooks/useAllYYYYMM';
 import postArchiveHelper from '../../../helpers/postArchiveHelper';
+import siteConfig from '../../../data/siteConfig';
 
 const PostArchive = () => {
   const dates = useAllYYYYMM();
-  const base = 'blog';
-  const icon = 'paperclip';
 
   return dates ? (
     <SidebarWidget title="Ахивы">
@@ -17,7 +16,7 @@ const PostArchive = () => {
         const path = postArchiveHelper.getPath(yyyymm);
 
         return (
-          <IconLink key={i} to={`/${base}/${path}`} icon={icon}>
+          <IconLink key={i} to={`${siteConfig.blogUrlBase}/${path}`} icon="paperclip">
             {title}
           </IconLink>
         );

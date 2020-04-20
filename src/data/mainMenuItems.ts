@@ -1,3 +1,4 @@
+import siteConfig from './siteConfig';
 // https://gist.github.com/fson/a14f5edf2ae3fb5294dd
 const mainMenuItems = [
   {
@@ -76,7 +77,7 @@ const mainMenuItems = [
   },
   {
     title: 'Статьи и новости',
-    url: '/blog',
+    url: siteConfig.blogUrlBase,
   },
   {
     title: 'Контакты',

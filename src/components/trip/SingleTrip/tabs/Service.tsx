@@ -7,7 +7,7 @@ import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 import { ITheme } from '../../../theme.d';
 
 import { IService } from '../../trip';
-// import { IconLink } from '../IconLink';
+// import IconLink  from '../IconLink';
 
 interface IIconTextProps {
   icon: IconName | [IconPrefix, IconName];

@@ -3,7 +3,7 @@ import React from 'react';
 import { formatDuration } from './helpers';
 // import { num2form } from '../../lib/num2form';
 // const s = num2form(value, 'участник', 'участника', 'участников');
-import { IconLink } from '../IconLink';
+import IconLink from '../IconLink';
 
 interface INumberProps {
   value: number;

@@ -84,7 +84,7 @@ export interface ITrip {
   season?: Array<string>;
   activity?: Array<string>;
   destination: Array<string>;
-  featureImage?: string;
+  featuredImage?: string;
 
   priceMode: PriceModeType;
   currency: CurrencyNameType;

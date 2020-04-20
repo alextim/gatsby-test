@@ -208,7 +208,12 @@ const theme: ITheme = {
         bg: '#3d3d3d',
       },
     },
-    stickyNews: {
+    stickyTrip: {
+      colors: {
+        bg: '#fff',
+      },
+    },
+    latestTrips: {
       colors: {
         bg: '#fff',
       },
@@ -220,7 +225,7 @@ const theme: ITheme = {
         itemBg: '#fff',
       },
     },
-    latestNews: {
+    latestPosts: {
       colors: {
         bg: '#fff',
       },

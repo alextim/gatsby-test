@@ -26,7 +26,7 @@ export interface ICTASettings {
   buttons: IActions;
 }
 
-export interface IStickyNews {
+export interface IStickyTrip {
   title: string;
   subTitle?: string;
   text: string;
@@ -41,7 +41,7 @@ export interface IFeaturesSettings {
   items: IFeatureItem[];
 }
 
-export interface ILatestNewsCards {
+export interface ILatestPostsCards {
   title: string;
   actions: IActions;
 }

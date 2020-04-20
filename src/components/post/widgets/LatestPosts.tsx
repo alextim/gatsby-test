@@ -1,17 +1,16 @@
 import React from 'react';
 
 import SidebarWidget from '../../SidebarWidget';
-import { IconLink } from '../../IconLink';
-import useLatestNewsTop5 from '../../../helpers/hooks/useLatestNewsTop5';
+import IconLink from '../../IconLink';
+import useLatestPostsTop5 from '../../../helpers/hooks/useLatestPostsTop5';
 
 const LatestPosts = () => {
-  const posts = useLatestNewsTop5();
-  const icon = 'tag';
+  const posts = useLatestPostsTop5();
 
   return posts ? (
     <SidebarWidget title="Последние публикации">
       {posts.map((post, i) => (
-        <IconLink key={i} to={post.path} icon={icon}>
+        <IconLink key={i} to={post.path} icon="tag">
           {post.title}
         </IconLink>
       ))}

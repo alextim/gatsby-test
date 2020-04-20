@@ -5,7 +5,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 
 import SEO from '../components/SEO';
-import { IconLink } from '../components/IconLink';
+import IconLink from '../components/IconLink';
 import { PageLayout } from '../components/Layout';
 import useDefaultImage from '../helpers/hooks/useDefaultBannerImage';
 

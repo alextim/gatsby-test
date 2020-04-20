@@ -9,7 +9,7 @@ import { ITheme } from '../theme.d';
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
 import Section from './Section';
 import { BtnLink } from '../Button';
-import useLatestNewsFeatured1 from '../../helpers/hooks/useLatestNewsFeatured1';
+import useLatestPostsFeatured1 from '../../helpers/hooks/useLatestPostsFeatured1';
 
 const Wrapper = styled(Box)`
   width: 100%;
@@ -18,16 +18,16 @@ const Wrapper = styled(Box)`
   }
 `;
 
-const StickyNews: React.FC = () => {
-  const posts = useLatestNewsFeatured1();
+const StickyTrip: React.FC = () => {
+  const posts = useLatestPostsFeatured1();
   if (!posts.length) {
     return null;
   }
 
-  const { stickyNews } = useHomePageSettings();
-  const { title, subTitle, text } = stickyNews;
+  const { stickyTrip } = useHomePageSettings();
+  const { title, subTitle, text } = stickyTrip;
   // , trip
-  const theme = useTheme();
+  const theme = (useTheme() as unknown) as ITheme;
 
   const { path, featuredImage } = posts[0];
 
@@ -35,7 +35,7 @@ const StickyNews: React.FC = () => {
   const currency = 'EUR';
 
   return (
-    <Section title={title} subTitle={subTitle} bg={theme.home.stickyNews.colors.bg}>
+    <Section title={title} subTitle={subTitle} bg={theme.home.stickyTrip.colors.bg}>
       <Flex flexWrap="wrap" shadow="lg" mx="1em" mb={['2em', '2em', '0']}>
         <Wrapper>
           {featuredImage && (
@@ -53,11 +53,13 @@ const StickyNews: React.FC = () => {
               {currency} {price}
             </Box>
           )}
-          <BtnLink w="85%" m="2rem auto" to={path}>Подробнее</BtnLink>
+          <BtnLink w="85%" m="2rem auto" to={path}>
+            Подробнее
+          </BtnLink>
         </Wrapper>
       </Flex>
     </Section>
   );
 };
 
-export default StickyNews;
+export default StickyTrip;

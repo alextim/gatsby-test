@@ -26,6 +26,7 @@ interface IProps {
   title?: string;
   size?: FontAwesomeIconProps['size'];
   color?: string;
+  mr?: string;
   mb?: string;
 }
 /*
@@ -36,23 +37,23 @@ const StyledSpan = styled.span`
   padding-left: 0.4rem;
 `;
 */
-const IconLink: React.FC<IProps> = ({ children, to, icon, title, size = 'xs', color, mb, ...props }) => (
-  <Flex flexDirection="row" alignItems="center" mb={mb} title={title}>
+const IconLink: React.FC<IProps> = ({ children, to, icon, title, size = 'xs', color, mr, mb, ...props }) => (
+  <Flex flexDirection="row" alignItems="center" mr={mr} mb={mb} title={title}>
     {icon && <FontAwesomeIcon icon={icon} size={size} color={color} />}
     {!icon && <Spacer />}
-    <Box pl="0.4rem" as={to ? 'a' : 'span'} href={to} {...props}>
+    <Box pl="0.4em" as={to ? 'a' : 'span'} href={to} {...props}>
       {children}
     </Box>
   </Flex>
 );
 
-const IconLinkR: React.FC<IProps> = ({ children, to, icon, title, size = 'xs', color, mb, ...props }) => (
-  <Flex flexDirection="row" alignItems="center" mb={mb} title={title}>
-    <Box pr="0.4rem" as={to ? 'a' : 'span'} href={to} {...props}>
+const IconLinkR: React.FC<IProps> = ({ children, to, icon, title, size = 'xs', color, mr, mb, ...props }) => (
+  <Flex flexDirection="row" alignItems="center" mr={mr} mb={mb} title={title}>
+    <Box pr="0.4em" as={to ? 'a' : 'span'} href={to} {...props}>
       {children}
     </Box>
     {icon && <FontAwesomeIcon icon={icon} size={size} color={color} />}
   </Flex>
 );
 
-export { IconLink, IconLinkR };
+export { IconLink as default, IconLinkR };

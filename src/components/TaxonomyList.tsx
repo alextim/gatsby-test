@@ -18,11 +18,11 @@ const LinkWrap = styled.span`
 `;
 
 interface IProps {
-  name: string;
+  taxonomyName: string;
   keys: string[];
 }
-const TaxonomyList: React.FC<IProps> = ({ name, keys }) => {
-  const list = mapKeysToTaxList(name, keys);
+const TaxonomyList: React.FC<IProps> = ({ taxonomyName, keys }) => {
+  const list = mapKeysToTaxList(taxonomyName, keys);
   return (
     <>
       {list.map((item, i) => (

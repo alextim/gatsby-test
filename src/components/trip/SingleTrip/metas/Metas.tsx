@@ -39,11 +39,11 @@ const Metas: React.FC<IProps> = ({ trip, days }) => {
         </MetaItem>
       )}
       <MetaItem>
-        <TripInfoItem label="Направление" value={<TaxonomyList name="destination" keys={destination} />} />
+        <TripInfoItem label="Направление" value={<TaxonomyList taxonomyName="destination" keys={destination} />} />
       </MetaItem>
       {activity && (
         <MetaItem>
-          <TripInfoItem label="Активность" value={<TaxonomyList name="activity" keys={activity} />} />
+          <TripInfoItem label="Активность" value={<TaxonomyList taxonomyName="activity" keys={activity} />} />
         </MetaItem>
       )}
       {difficultyLevel && altitude && (

@@ -4,7 +4,7 @@ import { Flex, Box, Link, Text, Heading } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 
 import AnimatedLink from '../AnimatedLink';
-import { DateMeta, CategoryMeta } from './Meta';
+import { DateMeta, CategoryMeta } from './metas';
 
 const Wrapper = styled(Box)`
   display: flex;
@@ -24,7 +24,7 @@ interface IProps {
   };
 }
 
-const NewsCard: React.FC<IProps> = ({ post }) => (
+const PostCard: React.FC<IProps> = ({ post }) => (
   <Wrapper as="article" shadow="lg">
     {post.featuredImage && (
       <Link href={post.path} mb="1em">
@@ -50,4 +50,4 @@ const NewsCard: React.FC<IProps> = ({ post }) => (
   </Wrapper>
 );
 
-export default NewsCard;
+export default PostCard;
