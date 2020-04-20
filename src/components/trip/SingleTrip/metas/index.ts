@@ -1,3 +1,3 @@
-import TripMetas from './TripMetas';
+import TripMetas from './Metas';
 
 export default TripMetas;

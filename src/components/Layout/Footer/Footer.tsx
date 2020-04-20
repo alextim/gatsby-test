@@ -4,6 +4,8 @@ import { Global, css } from '@emotion/core';
 import { Link } from 'gatsby';
 import { Flex, Box, useTheme } from '@chakra-ui/core';
 
+import { ITheme } from '../theme.d';
+
 import ViewModeContext from '../ViewModeContext';
 import { Container } from '../../Container';
 
@@ -22,10 +24,10 @@ import SwitchColorMode from './SwitchColorMode';
 const WidgetWrapper = styled.div`
   width: 100%;
   margin-bottom: 1.5em;
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     width: 50%;
   }
-  ${(props) => props.theme.mediaQueries.lg} {
+  ${(props) => (props.theme as ITheme).mediaQueries.lg} {
     width: 25%;
     margin-bottom: 0;
   }

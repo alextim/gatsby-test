@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 
-import { mapKeysToTaxList } from './helpers';
+import { mapKeysToTaxList } from './trip/helpers';
 
 const LinkWrap = styled.span`
   :after {
     content: ',';
-    margin-right: 0.4rem;
+    margin-right: 0.4em;
   }
   :last-child {
     &:after {
@@ -17,11 +17,11 @@ const LinkWrap = styled.span`
   }
 `;
 
-interface ITaxonomyListProps {
+interface IProps {
   name: string;
   keys: string[];
 }
-const TaxonomyList: React.FC<ITaxonomyListProps> = ({ name, keys }) => {
+const TaxonomyList: React.FC<IProps> = ({ name, keys }) => {
   const list = mapKeysToTaxList(name, keys);
   return (
     <>

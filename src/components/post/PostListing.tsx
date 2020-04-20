@@ -1,19 +1,21 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import NewsCard from './post/NewsCard';
+import { ITheme } from '../theme.d';
+
+import PostCard from './PostCard';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  ${(props) => props.theme.mediaQueries.lg} {
+  ${(props) => (props.theme as ITheme).mediaQueries.lg} {
     flex-direction: row;
   }
 `;
 
 const ItemWrap = styled.div`
   width: 100%;
-  ${(props) => props.theme.mediaQueries.lg} {
+  ${(props) => (props.theme as ITheme).mediaQueries.lg} {
     width: 50%;
   }
 `;
@@ -22,11 +24,11 @@ interface IProps {
   posts: Array<any>;
 }
 
-const PostListing: React.Fc<IProps> = ({ posts }) => (
+const PostListing: React.FC<IProps> = ({ posts }) => (
   <Wrapper>
     {posts.map((post, i) => (
       <ItemWrap key={i}>
-        <NewsCard post={post} />
+        <PostCard post={post} />
       </ItemWrap>
     ))}
   </Wrapper>

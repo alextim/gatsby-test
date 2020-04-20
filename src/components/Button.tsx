@@ -2,6 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Box } from '@chakra-ui/core';
 
+import { ITheme } from './theme.d';
+
 const BtnBox = styled(Box)`
   display: inline-block;
   height: auto;
@@ -25,7 +27,7 @@ const BtnBox = styled(Box)`
 const BtnBoxResponsive = styled(BtnBox)`
   line-height: 1.8;
   padding: 0.625rem 1.25rem;
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     padding: 0.625rem 2.1875rem;
   }
 `;

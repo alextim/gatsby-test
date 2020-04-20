@@ -5,12 +5,14 @@ import SocialLink from './SocialLink';
 import Utils from '../../../../lib/utils';
 import useSocialLinks from '../../../../helpers/hooks/useSocialLinks';
 
+import { ITheme } from '../theme.d';
+
 const SocialLinks: React.FC = () => {
   const socialLinks = useSocialLinks();
 
   const StyledFlex = styled.div`
     display: none;
-    ${(props) => props.theme.mediaQueries.md} {
+    ${(props) => (props.theme as ITheme).mediaQueries.md} {
       display: flex;
       flex-direction: row;
       align-items: center;

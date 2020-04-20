@@ -4,9 +4,10 @@ import styled from '@emotion/styled';
 import { IPageProps } from '../types/page-types';
 import SEO from '../components/SEO';
 
+import { ITheme } from '../components/theme.d';
+
 import ContactForm from '../components/forms/ContactForm';
 import Layout from '../components/Layout';
-import PageHeading from '../components/PageHeading';
 import OrganizationPostalAddress from '../components/organization/OrganizationPostalAddress';
 import OrganizationPhones from '../components/organization/OrganizationPhones';
 import OrganizationEmail from '../components/organization/OrganizationEmail';
@@ -48,10 +49,10 @@ interface IProps {
 }
 
 const CardWrapper = styled(Wrapper)`
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     width: 50%;
   }
-  ${(props) => props.theme.mediaQueries.lg} {
+  ${(props) => (props.theme as ITheme).mediaQueries.lg} {
     width: 25%;
   }
 `;

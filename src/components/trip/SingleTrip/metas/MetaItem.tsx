@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { ITheme } from '../../../theme.d';
 
 const MetaItem = styled.div`
   display: block;
@@ -19,7 +20,7 @@ const MetaItem = styled.div`
     height: 1px;
     background: hsla(0, 0%, 87.1%, 0.32);
   }
-  ${(props) => props.theme.mediaQueries.lg} {
+  ${(props) => (props.theme as ITheme).mediaQueries.lg} {
     display: inline-block;
     width: 50%;
   }

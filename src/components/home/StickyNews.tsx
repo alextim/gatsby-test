@@ -4,6 +4,8 @@ import { Flex, Box, Link, Text } from '@chakra-ui/core';
 import Img from 'gatsby-image';
 import styled from '@emotion/styled';
 
+import { ITheme } from '../theme.d';
+
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
 import Section from './Section';
 import { BtnLink } from '../Button';
@@ -11,7 +13,7 @@ import useLatestNewsFeatured1 from '../../helpers/hooks/useLatestNewsFeatured1';
 
 const Wrapper = styled(Box)`
   width: 100%;
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     width: 50%;
   }
 `;

@@ -4,13 +4,15 @@ import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
+import { ITheme } from '../theme.d';
+
 const StyledLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
 
   text-align: center;
-  color: ${(props) => props.theme.header.colors.topHead.text};
+  color: ${(props) => (props.theme as ITheme).header.colors.topHead.text};
   text-decoration: none;
 
   height: 2.75em;
@@ -20,7 +22,7 @@ const StyledLink = styled(Link)`
   border: none;
 
   &:hover {
-    color: ${(props) => props.theme.footer.colors.highlited};
+    color: ${(props) => (props.theme as ITheme).footer.colors.highlited};
     background-color: #517fa4;
     border: 0.625em solid transparent;
     transition: all 0.4s ease-out 0s;

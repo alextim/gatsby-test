@@ -1,6 +1,7 @@
 // example theme.js
 //https://theme-ui.com/theme-spec
 import { theme as chakraDefaultTheme } from '@chakra-ui/core';
+import { ITheme } from './theme.d';
 
 /*************
 * Prefix	Description
@@ -31,7 +32,8 @@ $fullhd	computed	1344px + (2 * $gap)
 *
 *
 */
-const theme = {
+
+const theme: ITheme = {
   ...chakraDefaultTheme,
   // breakpoints: ['40em', '48em', '64em', '76em'],
 
@@ -224,12 +226,12 @@ const theme = {
       },
     },
   },
-  mediaQueries: chakraDefaultTheme.breakpoints.map((bp: string) => `@media screen and (min-width: ${bp})`),
+  mediaQueries: {
+    sm: `@media screen and (min-width: ${(chakraDefaultTheme.breakpoints as string[])[0]})`,
+    md: `@media screen and (min-width: ${(chakraDefaultTheme.breakpoints as string[])[1]})`,
+    lg: `@media screen and (min-width: ${(chakraDefaultTheme.breakpoints as string[])[2]})`,
+    xl: `@media screen and (min-width: ${(chakraDefaultTheme.breakpoints as string[])[3]})`,
+  },
 };
-
-theme.mediaQueries.sm = theme.mediaQueries[0];
-theme.mediaQueries.md = theme.mediaQueries[1];
-theme.mediaQueries.lg = theme.mediaQueries[2];
-theme.mediaQueries.xl = theme.mediaQueries[3];
 
 export default theme;

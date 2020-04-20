@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import Img from 'gatsby-image';
 import { graphql, useStaticQuery } from 'gatsby';
 
+import { ITheme } from '../theme.d';
+
 import { IItinerary } from '../../trip';
 
 interface IProps {
@@ -28,7 +30,7 @@ const SingleImgWrap = styled.div`
 const DoubleImgWrap = styled.div`
   width: 100%;
   padding-bottom: 1rem;
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     width: 50%;
     padding-right: 1rem;
     :last-child {

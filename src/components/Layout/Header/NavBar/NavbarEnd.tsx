@@ -2,12 +2,14 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Box, Button, useDisclosure } from '@chakra-ui/core';
 
+import { ITheme } from '../theme.d';
+
 import CallbackInquiryForm from '../../../forms/CallbackInquiryForm';
 
 const NavbarEndWrap = styled.div`
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     padding-left: 1em;
     padding-right: 1em;
     width: auto;

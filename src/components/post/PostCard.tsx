@@ -39,7 +39,7 @@ const NewsCard: React.FC<IProps> = ({ post }) => (
 
       <Flex direction="row" fontWeight={100} fontSize="0.9em">
         {post.date && <DateMeta date={post.date} />}
-        {post.categories && <CategoryMeta icon={['far', 'folder-open']} categories={post.categories} />}
+        {post.categories && <CategoryMeta categories={post.categories} />}
       </Flex>
 
       <Text mt={4}>{post.excerpt}</Text>

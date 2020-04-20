@@ -18,7 +18,7 @@ import {
   LeftWrapper,
   RightWrapper,
   PriceWrapper,
-  MetaWrapper,
+  MetasWrapper,
   BookWrapper,
   DatesBookWrapper,
   BodyWrapper,
@@ -27,7 +27,7 @@ import {
 import TripInfoItem from './TripInfoItem';
 
 // import PriceMeta from './PriceMeta';
-import TripMetas from './metas';
+import Metas from './metas';
 
 import Price from '../Price';
 import useDefaultBannerImage from '../../../helpers/hooks/useDefaultBannerImage';
@@ -135,9 +135,9 @@ const SingleTrip: React.FC<IProps> = ({ trip, pathname, isPrint }) => {
                 )
               : 'Цена по запросу'}
           </PriceWrapper>
-          <MetaWrapper>
-            <TripMetas trip={trip} days={days} />
-          </MetaWrapper>
+          <MetasWrapper>
+            <Metas trip={trip} days={days} />
+          </MetasWrapper>
           <BookWrapper>
             <DatesBookWrapper>
               {isDatesOnRequest || !dates ? (

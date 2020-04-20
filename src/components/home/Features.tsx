@@ -5,6 +5,7 @@ import { Link } from 'gatsby';
 import { Flex, Box, useTheme } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { ITheme } from '../theme.d';
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
 import { IFeatureItem } from './home';
 import ItemHeading from './ItemHeading';
@@ -22,7 +23,7 @@ const shadowed = css`
 
 const StyledFlex = styled(Flex)`
   flex-direction: column;
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     flex-direction: row;
   }
 `;
@@ -31,11 +32,11 @@ const FeatureItemWrap = styled.div`
   flex: 1;
   padding: 0 1.25rem 1.25rem 1.25rem;
   margin: 0 1.25rem 2rem 1.25rem;
-  background-color: ${(props) => props.theme.home.features.colors.itemBg};
+  background-color: ${(props) => (props.theme as ITheme).home.features.colors.itemBg};
 
   ${shadowed};
 
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     margin-bottom: 0;
   }
 `;

@@ -4,6 +4,8 @@ import { Flex, Box, Link } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
+import { ITheme } from '../theme.d';
+
 import Utils from '../../../../lib/utils';
 import useOrganization from '../../../../helpers/hooks/useOrganization';
 
@@ -16,7 +18,7 @@ const StyledLink = styled(Link)`
   width: 2.75em;
   margin: 0;
   &:hover {
-    color: ${(props) => props.theme.footer.colors.highlited};
+    color: ${(props) => (props.theme as ITheme).footer.colors.highlited};
     background-color: #517fa4;
     transition: all 0.4s ease-out 0s;
     text-decoration: none;

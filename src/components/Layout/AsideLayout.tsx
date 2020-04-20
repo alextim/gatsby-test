@@ -2,12 +2,13 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Box } from '@chakra-ui/core';
 
+import { ITheme } from '../theme.d';
 import Layout from './Layout';
 
 const InnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  ${(props) => props.theme.mediaQueries.lg} {
+  ${(props) => (props.theme as ITheme).mediaQueries.lg} {
     flex-direction: row;
   }
 `;
@@ -16,19 +17,19 @@ const Wrapper = styled(Box)`
   padding: 0 1em;
   margin-top: 2em;
   width: 100%;
-  ${(props) => props.theme.mediaQueries.lg} {
+  ${(props) => (props.theme as ITheme).mediaQueries.lg} {
     padding: 0 1.5em;
   }
 `;
 
 const ContentWrap = styled(Wrapper)`
-  ${(props) => props.theme.mediaQueries.lg} {
+  ${(props) => (props.theme as ITheme).mediaQueries.lg} {
     width: 70%;
   }
 `;
 
 const WidgetsWrap = styled(Wrapper)`
-  ${(props) => props.theme.mediaQueries.lg} {
+  ${(props) => (props.theme as ITheme).mediaQueries.lg} {
     width: 30%;
   }
 `;

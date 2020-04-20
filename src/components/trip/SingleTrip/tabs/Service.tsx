@@ -4,6 +4,8 @@ import { Flex, Box } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
+import { ITheme } from '../../../theme.d';
+
 import { IService } from '../../trip';
 // import { IconLink } from '../IconLink';
 
@@ -60,7 +62,7 @@ const Wrapper = styled.div`
 const LeftWrapper = styled.div`
   width: 100%;
   margin-bottom: 1rem;
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     width: 50%;
   }
 `;
@@ -68,7 +70,7 @@ const LeftWrapper = styled.div`
 const RightWrapper = styled.div`
   width: 100%;
   margin-bottom: 1rem;
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     width: 50%;
   }
 `;

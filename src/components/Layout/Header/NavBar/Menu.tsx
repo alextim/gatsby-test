@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 
+import { ITheme } from '../theme.d';
+
 import mainMenuItems from '../../../../data/mainMenuItems';
 
 let id = 0;
@@ -16,7 +18,7 @@ const StyledCheckbox = styled.input`
   &:checked + ul {
     display: block;
   }
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     &:checked + ul {
       display: none;
     }
@@ -40,7 +42,7 @@ const StyledLi = styled.li`
     color: white;
     background-color: #ff7550;
   }
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     &:hover > input[type='checkbox'] + ul {
       display: block;
     }
@@ -72,7 +74,7 @@ const StyledUl = styled.ul`
     }
   }
 
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     position: absolute;
     top: 100%;
     left: 0;
@@ -114,7 +116,7 @@ const StyledLabel = styled.label`
     background-color: rgba(0, 0, 0, 0.125);
     text-shadow: 0 0 0 transparent;
   }
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     position: relative;
     padding-right: 0;
     padding-left: 0.25em;
@@ -176,7 +178,7 @@ const Menu: React.FC<IMenu> = ({ isActive }) => {
     display: ${isActive ? 'none' : 'block'};
     width: 100%;
 
-    ${(props) => props.theme.mediaQueries.md} {
+    ${(props) => (props.theme as ITheme).mediaQueries.md} {
       display: flex;
       align-items: center;
       margin-left: auto;

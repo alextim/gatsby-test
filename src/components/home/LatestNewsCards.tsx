@@ -2,15 +2,17 @@ import React from 'react';
 import { Flex, useTheme } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 
+import { ITheme } from '../theme.d';
+
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
 import Section from './Section';
-import NewsCard from '../post/NewsCard';
+import NewsCard from '../post/PostCard';
 import useLatestNewsTop3 from '../../helpers/hooks/useLatestNewsTop3';
 
 const InnerWrap = styled(Flex)`
   flex-direction: column;
   margin-bottom: 3em;
-  ${(props) => props.theme.mediaQueries.lg} {
+  ${(props) => (props.theme as ITheme).mediaQueries.lg} {
     flex-direction: row;
   }
 `;

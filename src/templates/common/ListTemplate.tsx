@@ -1,9 +1,8 @@
 import React from 'react';
-import styled from '@emotion/styled';
 
 import { BlogLayout } from '../../components/Layout';
 import SEO from '../../components/SEO';
-import PostListing from '../../components/PostListing';
+import PostListing from '../../components/post/PostListing';
 import Pagination from '../../components/Pagination';
 
 import toPosts from './toPosts';

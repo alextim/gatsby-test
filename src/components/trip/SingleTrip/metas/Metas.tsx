@@ -5,7 +5,7 @@ import { num2form } from '../../../../lib/num2form';
 import { formatDuration } from '../../helpers';
 import { FitnessLevel, TechLevel } from '../../ico-levels';
 import { Altitude, Accomodation } from '../../ico-info';
-import TaxonomyList from '../../TaxonomyList';
+import TaxonomyList from '../../../TaxonomyList';
 import TripInfoItem from '../TripInfoItem';
 import MetaItem from './MetaItem';
 
@@ -13,7 +13,7 @@ interface IProps {
   trip: ITrip;
   days: number;
 }
-const TripMetas: React.FC<IProps> = ({ trip, days }) => {
+const Metas: React.FC<IProps> = ({ trip, days }) => {
   const {
     isShowNights,
     groupSize,
@@ -62,4 +62,4 @@ const TripMetas: React.FC<IProps> = ({ trip, days }) => {
   );
 };
 
-export default TripMetas;
+export default Metas;

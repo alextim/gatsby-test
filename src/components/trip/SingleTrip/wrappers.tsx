@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { ITheme } from '../../theme.d';
+
 const HeadWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -9,7 +11,7 @@ const HeadWrapper = styled.div`
 const LeftWrapper = styled.div`
   width: 100%;
   margin-bottom: 1rem;
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     width: 50%;
   }
 `;
@@ -17,16 +19,18 @@ const LeftWrapper = styled.div`
 const RightWrapper = styled.div`
   width: 100%;
   margin-bottom: 1rem;
-  ${(props) => props.theme.mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.md} {
     width: 50%;
   }
 `;
+
 const PriceWrapper = styled.div`
   margin: 0 1.875rem 1.25rem;
   font-size: 1.375rem;
   font-weight: 700;
 `;
-const MetaWrapper = styled.div`
+
+const MetasWrapper = styled.div`
   padding: 0.625rem;
   border: 1px solid hsla(0, 0%, 87.1%, 0.49);
   border-radius: 0.3125rem;
@@ -53,7 +57,7 @@ export {
   LeftWrapper,
   RightWrapper,
   PriceWrapper,
-  MetaWrapper,
+  MetasWrapper,
   BookWrapper,
   DatesBookWrapper,
   BodyWrapper,

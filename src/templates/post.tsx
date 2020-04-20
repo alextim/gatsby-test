@@ -38,7 +38,7 @@ const PostTemplate = ({ data, pageContext }) => {
       <article>
         <Flex direction="row" fontWeight={100} fontSize="0.9em">
           {date && <DateMeta date={date} />}
-          {categories && <CategoryMeta icon={['far', 'folder-open']} categories={categories} />}
+          {categories && <CategoryMeta categories={categories} />}
         </Flex>
         {tags && <TagMeta tags={tags} />}
         {featuredImgFluid && <Img fluid={featuredImgFluid} alt={title} />}
