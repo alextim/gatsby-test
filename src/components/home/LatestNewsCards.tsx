@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
 import Section from './Section';
-import NewsCard from '../NewsCard';
+import NewsCard from '../post/NewsCard';
 import useLatestNewsTop3 from '../../helpers/hooks/useLatestNewsTop3';
 
 const InnerWrap = styled(Flex)`

@@ -3,7 +3,7 @@ import Img from 'gatsby-image';
 import { Flex, Box, Link, Text, Heading } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 
-import AnimatedLink from './AnimatedLink';
+import AnimatedLink from '../AnimatedLink';
 import { DateMeta, CategoryMeta } from './Meta';
 
 const Wrapper = styled(Box)`

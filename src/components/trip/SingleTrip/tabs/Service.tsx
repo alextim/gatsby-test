@@ -4,7 +4,7 @@ import { Flex, Box } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
-import { IService } from '../../../../types/trip-types';
+import { IService } from '../../trip';
 // import { IconLink } from '../IconLink';
 
 interface IIconTextProps {

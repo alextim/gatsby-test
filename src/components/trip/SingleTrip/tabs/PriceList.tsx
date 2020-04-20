@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IPriceListItem, CurrencyNameType } from '../../../../types/trip-types';
+import { IPriceListItem, CurrencyNameType } from '../../trip';
 import Price from '../../Price';
 
 interface IProps {

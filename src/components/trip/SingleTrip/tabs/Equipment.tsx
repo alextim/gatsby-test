@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IEquipment } from '../../../../types/trip-types';
+import { IEquipment } from '../../trip';
 
 interface IEquipmentProps {
   equipment: IEquipment;

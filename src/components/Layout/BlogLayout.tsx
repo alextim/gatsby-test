@@ -1,9 +1,9 @@
 import React from 'react';
 
 import AsideLayout from './AsideLayout';
-import LatestPosts from '../../components/widgets/LatestPosts';
-import PostArchive from '../../components/widgets/PostArchive';
-import PostCategories from '../../components/widgets/PostCategories';
+import LatestPosts from '../post/widgets/LatestPosts';
+import PostArchive from '../post/widgets/PostArchive';
+import PostCategories from '../post/widgets/PostCategories';
 
 interface IProps {
   title: React.ReactNode;

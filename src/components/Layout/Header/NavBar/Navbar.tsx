@@ -15,7 +15,10 @@ import NavbarEnd from './NavbarEnd';
  * https://reactjs.org/docs/lifting-state-up.html
  *
  * */
-const Navbar: React.FC = () => {
+interface IProps {
+  isPrint: boolean;
+}
+const Navbar: React.FC<IProps> = ({ isPrint }) => {
   const [isActive, setisActive] = React.useState(false);
   const handleToggle = () => setisActive(!isActive);
 
@@ -30,9 +33,13 @@ const Navbar: React.FC = () => {
       bg="white"
     >
       <Brand />
-      <Burger handleToggleCallback={handleToggle} isActive={isActive} />
-      <Menu isActive={isActive} />
-      <NavbarEnd />
+      {!isPrint && (
+        <>
+          <Burger handleToggleCallback={handleToggle} isActive={isActive} />
+          <Menu isActive={isActive} />
+          <NavbarEnd />
+        </>
+      )}
     </Flex>
   );
 };

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import SidebarWidget from '../SidebarWidget';
-import { IconLink } from '../IconLink';
-import useLatestNewsTop5 from '../../helpers/hooks/useLatestNewsTop5';
+import SidebarWidget from '../../SidebarWidget';
+import { IconLink } from '../../IconLink';
+import useLatestNewsTop5 from '../../../helpers/hooks/useLatestNewsTop5';
 
 const LatestPosts = () => {
   const posts = useLatestNewsTop5();

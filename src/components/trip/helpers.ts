@@ -1,4 +1,4 @@
-import { LevelType, IPriceListItem, CurrencyNameType } from '../../types/trip-types';
+import { LevelType, IPriceListItem, CurrencyNameType } from './trip';
 import currencies from '../../data/taxonomy/currency';
 import Utils from '../../lib/utils';
 

@@ -1,3 +1,5 @@
+import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
+
 export interface IAction {
   title: string;
   url: string;
@@ -12,7 +14,7 @@ export interface IFeatureItem {
   title: string;
   text: string;
   url: string;
-  icon: string | [string, string];
+  icon: IconName | [IconPrefix, IconName];
   color?: string;
 }
 

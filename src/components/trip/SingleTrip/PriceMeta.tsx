@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@chakra-ui/core';
 
-import { IPriceListItem, CurrencyNameType } from '../../../types/trip-types';
+import { IPriceListItem, CurrencyNameType } from '../trip';
 import Price from '../Price';
 
 interface IProps {

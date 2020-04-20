@@ -1,9 +1,9 @@
 import React from 'react';
 import kebabCase from 'lodash/kebabCase';
 
-import SidebarWidget from '../SidebarWidget';
-import { IconLink } from '../IconLink';
-import useAllCategories from '../../helpers/hooks/useAllCategories';
+import SidebarWidget from '../../SidebarWidget';
+import { IconLink } from '../../IconLink';
+import useAllCategories from '../../../helpers/hooks/useAllCategories';
 
 const PostCategories = () => {
   const cats = useAllCategories();

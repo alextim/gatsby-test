@@ -2,7 +2,7 @@ import React from 'react';
 import { css, Global } from '@emotion/core';
 import styled from '@emotion/styled';
 
-import { CurrencyNameType } from '../../types/trip-types';
+import { CurrencyNameType } from './trip';
 import { getCurrencySymbol } from './helpers';
 
 interface IProps {

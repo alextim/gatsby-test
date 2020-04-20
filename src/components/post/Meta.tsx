@@ -3,10 +3,10 @@ import { Box, Link } from '@chakra-ui/core';
 import kebabCase from 'lodash/kebabCase';
 import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
-import Utils from './../lib/utils';
-import { IconLink } from '../components/IconLink';
+import Utils from '../../lib/utils';
+import { IconLink } from '../IconLink';
 
-import { getCategoryUrlAndNames } from '../helpers/categoryHelper';
+import { getCategoryUrlAndNames } from '../../helpers/categoryHelper';
 
 interface IItem {
   name: string;

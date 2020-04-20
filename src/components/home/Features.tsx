@@ -6,16 +6,16 @@ import { Flex, Box, useTheme } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
-import { IFeatureItem } from '../../types/home-page-types';
+import { IFeatureItem } from './home';
 import ItemHeading from './ItemHeading';
 import Section from './Section';
 
 const shadowed = css`
-  box-shadow: 0 0 30px hsla(0, 0%, 94.5%, 0.87);
+  box-shadow: 0 0 0.9375rem hsla(0, 0%, 94.5%, 0.87);
   transition: all 0.4s;
   &:hover {
-    top: -3px;
-    box-shadow: 0 0 32px 0 hsla(0, 0%, 47.8%, 0.4);
+    top: -0.1875rem;
+    box-shadow: 0 0 2rem 0 hsla(0, 0%, 47.8%, 0.4);
     position: relative;
   }
 `;
@@ -29,8 +29,8 @@ const StyledFlex = styled(Flex)`
 
 const FeatureItemWrap = styled.div`
   flex: 1;
-  padding: 0 1.25em 1.25em 1.25em;
-  margin: 0 1.25em 2em 1.25em;
+  padding: 0 1.25rem 1.25rem 1.25rem;
+  margin: 0 1.25rem 2rem 1.25rem;
   background-color: ${(props) => props.theme.home.features.colors.itemBg};
 
   ${shadowed};
@@ -86,8 +86,8 @@ const StyledLink = styled(Link)`
 
 const FeatureItem: React.FC<IFeatureItem> = ({ title, text, url, icon, color }) => (
   <FeatureItemWrap>
-    <Box mt="3em" mb="3em">
-      <Burst12 bg={color} size="5em">
+    <Box my="3rem">
+      <Burst12 bg={color} size="5rem">
         <StyledLink to={url}>
           <FontAwesomeIcon icon={icon} size="3x" />
         </StyledLink>
@@ -98,7 +98,7 @@ const FeatureItem: React.FC<IFeatureItem> = ({ title, text, url, icon, color }) 
       <Link to={url}>{title}</Link>
     </ItemHeading>
 
-    <Box mb="1em">{text}</Box>
+    <Box mb="1rem">{text}</Box>
   </FeatureItemWrap>
 );
 

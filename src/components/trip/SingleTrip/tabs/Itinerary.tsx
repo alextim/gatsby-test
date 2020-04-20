@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import Img from 'gatsby-image';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import { IItinerary } from '../../../../types/trip-types';
+import { IItinerary } from '../../trip';
 
 interface IProps {
   itinerary: IItinerary;

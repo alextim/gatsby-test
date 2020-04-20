@@ -2,9 +2,10 @@ import React from 'react';
 import { Box, useTheme } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 
+import ViewModeContext from '../ViewModeContext';
 import { Container } from '../../Container';
 import TopHead from './TopHead';
-import NavBar2 from './NavBar';
+import NavBar from './NavBar';
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -16,19 +17,28 @@ const Header: React.FC = () => {
   const theme = useTheme();
 
   return (
-    <HeaderWrapper>
-      <Box color={theme.header.colors.topHead.text} bg={theme.header.colors.topHead.bg} fontSize={theme.fontSizes.sm}>
-        <Container>
-          <TopHead />
-        </Container>
-      </Box>
-
-      <Box bg={theme.header.colors.navbar.bg}>
-        <Container>
-          <NavBar2 />
-        </Container>
-      </Box>
-    </HeaderWrapper>
+    <ViewModeContext.Consumer>
+      {(context) => (
+        <HeaderWrapper>
+          {!context.isPrint && (
+            <Box
+              color={theme.header.colors.topHead.text}
+              bg={theme.header.colors.topHead.bg}
+              fontSize={theme.fontSizes.sm}
+            >
+              <Container>
+                <TopHead />
+              </Container>
+            </Box>
+          )}
+          <Box bg={theme.header.colors.navbar.bg}>
+            <Container>
+              <NavBar isPrint={context.isPrint} />
+            </Container>
+          </Box>
+        </HeaderWrapper>
+      )}
+    </ViewModeContext.Consumer>
   );
 };
 

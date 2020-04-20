@@ -4,7 +4,7 @@ import { Flex, Box } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
-import { LevelType } from '../../types/trip-types';
+import { LevelType } from './trip';
 import { getFitnessLevelTitle, getTechLevelTitle } from './helpers';
 
 interface ILevelProps {

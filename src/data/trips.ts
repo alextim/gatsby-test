@@ -1,4 +1,4 @@
-import * as Trip from '../types/trip-types';
+import * as Trip from '../components/trip/trip';
 
 const singleTrip: Trip.ITrip = {
   slug: 'courchevel-couloirs-les-3-vallees-freeride',
@@ -20,6 +20,8 @@ const singleTrip: Trip.ITrip = {
   season: ['winter', 'Spring', 'Осень'],
   activity: ['ski'],
   destination: ['france', 'italy'],
+
+  featureImage: './a',
 
   priceMode: (0 as unknown) as Trip.PriceModeType,
   currency: ('EUR' as unknown) as Trip.CurrencyNameType,

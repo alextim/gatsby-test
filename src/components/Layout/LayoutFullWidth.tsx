@@ -19,8 +19,10 @@ const loadScript = src => {
   document.getElementsByTagName('body')[0].appendChild(tag);
 }
 */
-
-const LayoutFullWidth: React.FC = ({ children }) => {
+interface IProps {
+  isPrint?: boolean;
+}
+const LayoutFullWidth: React.FC<IProps> = ({ children }) => {
   /*
   useEffect(() => {
     loadScript('https://use.fontawesome.com/fd58d214b9.js');

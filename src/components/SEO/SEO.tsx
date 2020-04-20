@@ -20,9 +20,10 @@ interface ISEOProps {
   readonly type?: string;
   readonly date?: string;
   readonly locale?: string;
+  noindex?: boolean;
 }
 
-const SEO: React.FC<ISEOProps> = ({ title, description, pathname, image, type, date, locale }) => {
+const SEO: React.FC<ISEOProps> = ({ title, description, pathname, image, type, date, locale, noindex = false }) => {
   const meta = useSiteMetadata();
   const org = useOrganization();
 
@@ -44,6 +45,7 @@ const SEO: React.FC<ISEOProps> = ({ title, description, pathname, image, type, d
         {/* General tags */}
         <title>{metaTitle}</title>
         <link rel="canonical" href={url} />
+        {noindex && <meta name="robots" content="noindex" />}
         <meta name="description" content={metaDescription} />
         {metaImage && <meta name="image" content={metaImage} />}
 
