@@ -99,13 +99,16 @@ const singleTrip: Trip.ITrip = {
         title: 'Катание в долине Валь Торан',
         description:
           'На космическом подъемнике в стиле "Звездный десант" подымемся на склоны вершины Эгюй де Пекле (Aiguille de Peclet), 3652 м. Проедем по леднику Торан (Glacier de Thorens) и спустимся с вершины Сим Каро (Cime Caron), 3200 м. На склоне проведем занятие по лавинной безопасности. Вечером лекция 1 час.',
-        images: ['images/gnifetti-alps-italy.jpg'],
+        images: [{ path: 'images/gnifetti-alps-italy.jpg', alt: 'heelo' }],
       },
       {
         title: 'Катание в долинах Менуир и Мерибель',
         description:
           'На каждом значимом франзузском курорте есть своя черная трасса Фейс (Face). Три Долины не исключение, и Вы попробуете себя на крутом склоне. Также нас ждет несколько внетрассовых спусков в обе долины. Занятие по поиску пострадавшего в лавине.',
-        images: ['images/gnifetti-alps-italy.jpg', 'images/gnifetti-alps-italy.jpg'],
+        images: [
+          { path: 'images/gnifetti-alps-italy.jpg', alt: 'heelo2', width: 30 },
+          { path: 'images/gnifetti-alps-italy.jpg', width: 70 },
+        ],
       },
       {
         title: 'Катание в долине Куршевель / Мерибель',

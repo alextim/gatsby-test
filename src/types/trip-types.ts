@@ -35,12 +35,6 @@ export interface IEquipment {
   note: string;
 }
 
-export interface IItineraryDay {
-  title?: string;
-  description: string;
-  images?: Array<any>;
-}
-
 export interface IPriceListItem {
   qty: number;
   price: number;
@@ -54,6 +48,16 @@ export interface IService {
   note?: string;
 }
 
+export interface IItineraryImage {
+  path: string;
+  alt?: string;
+  width?: number;
+}
+export interface IItineraryDay {
+  title?: string;
+  description: string;
+  images?: Array<IItineraryImage>;
+}
 export interface IItinerary {
   subTitle?: string;
   description: string;
