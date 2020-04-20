@@ -5,7 +5,10 @@ import { Container } from '../Container';
 import { BtnLink } from '../Button';
 import { IActions } from './home';
 
-const Actions: React.FC<IActions> = ({ items }) => (
+interface IProps {
+  items: IActions;
+}
+const Actions: React.FC<IProps> = ({ items }) => (
   <Flex flex="wrap" alignItems="center" justifyContent="center">
     <BtnLink to={items.primary.url}>{items.primary.title}</BtnLink>
     {items.secondary && <BtnLink to={items.secondary.url}>{items.secondary.title}</BtnLink>}

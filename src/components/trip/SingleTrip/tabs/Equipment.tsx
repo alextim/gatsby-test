@@ -7,7 +7,10 @@ interface IEquipmentProps {
 }
 
 const Equipment: React.FC<IEquipmentProps> = ({ equipment }) => {
-  const { list, note } = equipment;
+  const {
+    // list,
+    note,
+  } = equipment;
   return (
     <>
       <div dangerouslySetInnerHTML={{ __html: note }} />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ITrip, IPriceListItem } from '../../trip';
+import { ITrip } from '../../trip';
 import { num2form } from '../../../../lib/num2form';
 import { formatDuration } from '../../helpers';
 import { FitnessLevel, TechLevel } from '../../ico-levels';
