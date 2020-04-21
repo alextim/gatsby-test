@@ -5,13 +5,12 @@ import { useDisclosure } from '@chakra-ui/core';
 import Layout from '../../Layout';
 import SEO from '../../SEO';
 import * as Trip from '../trip';
-import { IKeyValuePair } from '../../../types/types';
 
 import BookButton from './BookButton';
 import IconLink from '../../IconLink';
 
 import { TripTabs, TripPrintableDetails } from './tabs';
-import { formatStartFinish, getLowestPrice } from '../helpers';
+import { formatStartFinish, getLowestPrice, getDaysAndDateItems } from '../helpers';
 import TripInquiryForm from '../../forms/TripInquiryForm';
 import {
   HeadWrapper,
@@ -24,7 +23,7 @@ import {
   BodyWrapper,
 } from './wrappers';
 
-import TripInfoItem from './TripInfoItem';
+import TripInfoItem from '../TripInfoItem';
 
 // import PriceMeta from './PriceMeta';
 import Metas from './metas';
@@ -54,8 +53,6 @@ const SingleTrip = ({ trip, pathname, isPrint }: Props) => {
     isSale,
     priceList,
 
-    itinerary,
-    duration,
     isDatesOnRequest,
     dates,
   } = trip;
@@ -69,29 +66,8 @@ const SingleTrip = ({ trip, pathname, isPrint }: Props) => {
     onOpen();
   };
 
-  let days = 0;
-  if (itinerary && itinerary.dayItems) {
-    days = itinerary.dayItems.length;
-  } else if (duration) {
-    days = duration;
-  }
+  const { days, dateItems } = getDaysAndDateItems(trip);
 
-  let inquiryMode: string;
-  let dateItems: Array<IKeyValuePair> | undefined;
-  if (isDatesOnRequest || !dates) {
-    inquiryMode = 'on-request';
-    dateItems = undefined;
-  } else {
-    const fmt = new Intl.DateTimeFormat('ru');
-    inquiryMode = 'list';
-    dateItems = dates.map(
-      (start) =>
-        ({
-          key: fmt.format(start.date),
-          value: formatStartFinish(start.date, days),
-        } as IKeyValuePair),
-    );
-  }
   const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
   const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
   const showPriceList = ((priceMode as unknown) as number) === 2 && priceList ? true : false;
@@ -161,7 +137,7 @@ const SingleTrip = ({ trip, pathname, isPrint }: Props) => {
                 <TripInquiryForm
                   isOpen={isOpen}
                   onClose={onClose}
-                  mode={inquiryMode}
+                  mode={dateItems ? 'list' : 'on-request'}
                   dates={dateItems}
                   selected={selected}
                 />

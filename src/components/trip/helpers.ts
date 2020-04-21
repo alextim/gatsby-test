@@ -1,8 +1,9 @@
 import { LevelType, IPriceListItem, CurrencyNameType } from './trip';
 import currencies from '../../data/taxonomy/currency';
 import Utils from '../../lib/utils';
-
+import { ITrip } from './trip';
 import { IKeyValuePair } from '../../types/types';
+import { num2form } from '../../lib/num2form';
 import taxonomy from '../../data/taxonomy';
 
 export function getFitnessLevelTitle(level: LevelType): string {
@@ -84,3 +85,36 @@ export const mapKeysToTaxList = (name: string, keys: string[]) => {
     return acc;
   }, new Array<{ url: string; name: string }>());
 };
+
+export const getDays = (trip: ITrip) => {
+  const { itinerary, duration } = trip;
+  if (itinerary && itinerary.dayItems) {
+    return itinerary.dayItems.length;
+  }
+  if (duration) {
+    return duration;
+  }
+  return 0;
+};
+
+export const getDaysAndDateItems = (trip: ITrip) => {
+  const { isDatesOnRequest, dates } = trip;
+
+  const days = getDays(trip);
+
+  let dateItems: Array<IKeyValuePair> | undefined;
+  if (!isDatesOnRequest && dates) {
+    const fmt = new Intl.DateTimeFormat('ru');
+    dateItems = dates.map(
+      (start) =>
+        ({
+          key: fmt.format(start.date),
+          value: formatStartFinish(start.date, days),
+        } as IKeyValuePair),
+    );
+  }
+  return { days, dateItems };
+};
+
+export const formatGroupSize = (groupSize: number): string =>
+  num2form(groupSize, 'участник', 'участника', 'участников');

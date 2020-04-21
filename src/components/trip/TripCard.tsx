@@ -10,7 +10,10 @@ import IconLink from '../IconLink';
 import TripOffer from './TripOffer';
 import TaxonomyList from '../TaxonomyList';
 import Price from './Price';
-import { getLowestPrice, mapKeysToTaxList } from './helpers';
+import {
+  getLowestPrice,
+  // mapKeysToTaxList
+} from './helpers';
 import useDefaultBannerImage from '../../helpers/hooks/useDefaultBannerImage';
 import usePlaceholderImage from '../../helpers/hooks/usePlaceholderImage';
 /**

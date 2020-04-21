@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { ITrip } from '../../trip';
-import { num2form } from '../../../../lib/num2form';
-import { formatDuration } from '../../helpers';
+
+import { formatDuration, formatGroupSize } from '../../helpers';
 import { FitnessLevel, TechLevel } from '../../ico-levels';
 import { Altitude, Accomodation } from '../../ico-info';
 import TaxonomyList from '../../../TaxonomyList';
-import TripInfoItem from '../TripInfoItem';
+import TripInfoItem from '../../TripInfoItem';
 import MetaItem from './MetaItem';
 
 type Props = {
@@ -35,7 +35,7 @@ const Metas = ({ trip, days }: Props) => {
       )}
       {groupSize && (
         <MetaItem>
-          <TripInfoItem label="Размер группы" value={num2form(groupSize, 'участник', 'участника', 'участников')} />
+          <TripInfoItem label="Размер группы" value={formatGroupSize(groupSize)} />
         </MetaItem>
       )}
       <MetaItem>
