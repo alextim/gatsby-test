@@ -2,12 +2,13 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { IPageProps } from '../types/page-types';
+import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 
 import { ITheme } from '../components/theme.d';
 
 import ContactForm from '../components/forms/ContactForm';
-import Layout from '../components/Layout';
+
 import OrganizationPostalAddress from '../components/organization/OrganizationPostalAddress';
 import OrganizationPhones from '../components/organization/OrganizationPhones';
 import OrganizationEmail from '../components/organization/OrganizationEmail';
@@ -77,11 +78,11 @@ const ContactFormWrapper = styled.div`
   }
 `;
 
-const title = 'Контакты';
+const PAGE_TITLE = 'Контакты';
 
-const ContactUs: React.FC<IPageProps> = ({ location }) => (
-  <Layout header={<GoogleMap />} title={title}>
-    <SEO title={title} pathname={location.pathname} />
+const ContactUs = ({ location }: IPageProps) => (
+  <Layout header={<GoogleMap />} title={PAGE_TITLE}>
+    <SEO title={PAGE_TITLE} pathname={location.pathname} />
     <CardsWrapper>
       <Card key={0} title="Ждем Вас по адресу">
         <OrganizationPostalAddress />

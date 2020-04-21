@@ -27,6 +27,7 @@ interface IProps {
   color?: string;
   mr?: string;
   mb?: string;
+  className?: string;
   children: React.ReactNode;
 }
 /*

@@ -52,16 +52,35 @@ const RightWrapper = styled.div`
   padding: 0 25px;
   border-left: 1px solid #eee;
 `;
+const HeadWrap = styled.div`
+  margin: 0;
+  &:before,
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+`;
 
 const ImageWrap = styled.div`
   position: relative;
+  float: left;
+  margin-right: 25px;
+  width: 50%;
+`;
+
+const TextWrap = styled.div`
+  padding: 0 25px 0 0;
+`;
+
+const TextBodyWrap = styled.div`
+  text-align: justify;
 `;
 
 const TaxonomiesWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  font-size: 0.9rem;
   font-weight: 100;
 `;
 
@@ -105,33 +124,39 @@ const TripWideCard = ({ trip }: Props) => {
   const placeholder = usePlaceholderImage();
   const text = excerpt ? excerpt : description ? description.substr(0, 160) : undefined;
 
+  const mr = '1rem';
+
   return (
     <Wrapper as="article">
       <InnerWrapper shadow="lg">
         <LeftWrapper>
-          <ImageWrap>
-            <Link href={path}>
-              {!featuredImage ? <Img fluid={dummy} alt={title} /> : <Img fluid={placeholder} alt={title} />}
-            </Link>
-            {isSale && <TripOffer />}
-          </ImageWrap>
-          <Heading as="h2" mb="0.25rem" fontSize={['1.25rem', '1.5rem']}>
-            <Link href={path}>{title}</Link>
-          </Heading>
-          {text && <div>{text}</div>}
+          <HeadWrap>
+            <ImageWrap>
+              <Link href={path}>
+                {!featuredImage ? <Img fluid={dummy} alt={title} /> : <Img fluid={placeholder} alt={title} />}
+              </Link>
+              {isSale && <TripOffer />}
+            </ImageWrap>
+            <TextWrap>
+              <Heading as="h2" mb="0.25rem" fontSize={['1.25rem', '1.5rem']}>
+                <Link href={path}>{title}</Link>
+              </Heading>
+              {text && <TextBodyWrap>{text}</TextBodyWrap>}
+            </TextWrap>
+          </HeadWrap>
 
           <TaxonomiesWrapper>
-            {difficultyLevel && <TechLevel level={difficultyLevel} />}
-            <IconLink icon="map-marker-alt">
+            {difficultyLevel && <TechLevel level={difficultyLevel} mr={mr} />}
+            <IconLink icon="map-marker-alt" mr={mr}>
               <TaxonomyList taxonomyName="destination" keys={destination} />
             </IconLink>
             {activity && (
-              <IconLink icon={['far', 'folder-open']}>
+              <IconLink icon={['far', 'folder-open']} mr={mr}>
                 <TaxonomyList taxonomyName="activity" keys={activity} />
               </IconLink>
             )}
             {groupSize && (
-              <IconLink icon="child" title="Размер группы">
+              <IconLink icon="child" title="Размер группы" mr={mr}>
                 {groupSize}
               </IconLink>
             )}

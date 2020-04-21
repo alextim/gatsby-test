@@ -10,7 +10,7 @@ import LatestTrips from '../components/home/LatestTrips';
 import Features from '../components/home/Features';
 import LatestPosts from '../components/home/LatestPosts';
 
-const HomePage: React.FC<IPageProps> = ({ location }) => (
+const HomePage = ({ location }: IPageProps) => (
   <LayoutFullWidth>
     <SEO title="Home" pathname={location.pathname} />
     <CTA />
