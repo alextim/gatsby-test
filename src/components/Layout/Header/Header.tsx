@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, useTheme } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 
+import { ITheme } from '../../theme.d';
 import ViewModeContext from '../ViewModeContext';
 import { Container } from '../../Container';
 import TopHead from './TopHead';
@@ -13,8 +14,8 @@ const HeaderWrapper = styled.div`
   width: 100%;
 `;
 
-const Header: React.FC = () => {
-  const theme = useTheme();
+const Header = () => {
+  const theme = (useTheme() as unknown) as ITheme;
 
   return (
     <ViewModeContext.Consumer>

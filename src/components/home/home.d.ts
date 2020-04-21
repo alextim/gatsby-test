@@ -10,13 +10,13 @@ export interface IActions {
   secondary?: IAction;
 }
 
-export interface IFeatureItem {
+export type FeatureItemType = {
   title: string;
   text: string;
   url: string;
   icon: IconName | [IconPrefix, IconName];
   color?: string;
-}
+};
 
 /*
 export interface ICTASettings {
@@ -38,7 +38,7 @@ export interface IFeaturesSettings {
   title: string;
   subTitle?: string;
   text?: string;
-  items: IFeatureItem[];
+  items: Array<FeatureItemType>;
 }
 
 export interface ILatestPostsCards {

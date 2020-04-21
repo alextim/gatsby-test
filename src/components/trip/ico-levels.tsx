@@ -7,28 +7,28 @@ import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 import { LevelType } from './trip';
 import { getFitnessLevelTitle, getTechLevelTitle } from './helpers';
 
-interface ILevelProps {
+type LevelProps = {
   icon: IconName | [IconPrefix, IconName];
   level: LevelType;
   to: string;
   caption: string;
   title: string;
-}
+};
 
-interface IIconProps {
+type IconProps = {
   icon: IconName | [IconPrefix, IconName];
   color?: string;
-}
-const Icon: React.FC<IIconProps> = ({ icon, color }) => (
+};
+const Icon = ({ icon, color }: IconProps) => (
   <Box as="span" mr="0.1rem">
     <FontAwesomeIcon icon={icon} color={color} />
   </Box>
 );
 
-const Level: React.FC<ILevelProps> = ({ icon, level, to, caption, title }) => {
+const Level = ({ icon, level, to, caption, title }: LevelProps) => {
   const MAX_LEVEL = 4;
   const elements = [];
-  const numLevel = Number(level);
+  const numLevel = (level as unknown) as number;
   let j = 0;
   for (let i = 1; i <= numLevel; i++) {
     elements.push(<Icon key={j++} icon={icon} color="red" />);
@@ -47,15 +47,15 @@ const Level: React.FC<ILevelProps> = ({ icon, level, to, caption, title }) => {
   );
 };
 
-interface IProps {
+type Props = {
   level: LevelType;
-}
+};
 
-const FitnessLevel: React.FC<IProps> = ({ level }) => (
+const FitnessLevel = ({ level }: Props) => (
   <Level icon="heartbeat" level={level} to="/fitness-level" caption="Фитнес" title={getFitnessLevelTitle(level)} />
 );
 
-const TechLevel: React.FC<IProps> = ({ level }) => (
+const TechLevel = ({ level }: Props) => (
   <Level
     icon="mountain"
     level={level}

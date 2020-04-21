@@ -19,13 +19,13 @@ const emailRules = {
   },
 };
 
-interface IProps {
+type Props = {
   customRegister?: any;
   label?: string;
   icon?: boolean;
-}
+};
 
-const EmailControl: React.FC<IProps> = ({ customRegister, label = 'E-mail', icon = false }) => (
+const EmailControl = ({ customRegister, label = 'E-mail', icon = false }: Props) => (
   <BaseformContext.Consumer>
     {(context) =>
       context && (

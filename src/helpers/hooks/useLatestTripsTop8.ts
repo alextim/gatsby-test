@@ -3,7 +3,9 @@ import singleTrip from '../../data/singleTrip';
 
 const useLatestTripsTop8 = (): Array<ITrip> => {
   const data = new Array<ITrip>();
-  data.fill(singleTrip, 0, 8);
+  for (let i = 0; i < 8; i++) {
+    data.push(singleTrip);
+  }
 
   return data;
 };

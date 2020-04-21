@@ -7,7 +7,7 @@ import { Flex, Box } from '@chakra-ui/core';
 
 import footerNavigationItems from '../../../data/footerNavigationItems';
 
-const FooterNavigation: React.FC = () => (
+const FooterNavigation = () => (
   <Flex py={1} mt={3} alignItems="center" justifyContent="center" flexWrap="wrap">
     {footerNavigationItems.map((item, i) => (
       <Box key={i} mx={2}>

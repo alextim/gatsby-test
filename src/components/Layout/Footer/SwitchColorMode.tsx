@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, useColorMode } from '@chakra-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const SwitchColorMode: React.FC = () => {
+const SwitchColorMode = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Box ml="1em" role="switch" aria-checked={colorMode === 'dark' ? 'true' : 'false'} onClick={toggleColorMode}>

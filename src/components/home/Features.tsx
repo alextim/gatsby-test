@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { ITheme } from '../theme.d';
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
-import { IFeatureItem } from './home';
+import { FeatureItemType } from './home';
 import ItemHeading from './ItemHeading';
 import Section from './Section';
 
@@ -85,7 +85,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const FeatureItem: React.FC<IFeatureItem> = ({ title, text, url, icon, color }) => (
+const FeatureItem = ({ title, text, url, icon, color }: FeatureItemType) => (
   <FeatureItemWrap>
     <Box my="3rem">
       <Burst12 bg={color} size="5rem">
@@ -103,7 +103,7 @@ const FeatureItem: React.FC<IFeatureItem> = ({ title, text, url, icon, color }) 
   </FeatureItemWrap>
 );
 
-const Features: React.FC = () => {
+const Features = () => {
   const { features } = useHomePageSettings();
   const { title, subTitle, text, items } = features;
   const theme = (useTheme() as unknown) as ITheme;

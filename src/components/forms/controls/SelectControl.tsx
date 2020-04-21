@@ -8,16 +8,16 @@ import { IKeyValuePair } from '../../../types/types';
 
 const selectRules = {};
 
-interface IProps {
+type Props = {
   items: Array<IKeyValuePair>;
   customRegister?: any;
   name: string;
   label?: React.ReactNode;
   icon?: IconName | [IconPrefix, IconName];
   selected: number;
-}
+};
 
-const SelectControl: React.FC<IProps> = ({ items, customRegister, name, label, icon, selected }) => (
+const SelectControl = ({ items, customRegister, name, label, icon, selected }: Props) => (
   <BaseformContext.Consumer>
     {(context) =>
       context && (

@@ -3,13 +3,13 @@ import styled from '@emotion/styled';
 import Img from 'gatsby-image';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import { ITheme } from '../theme.d';
+import { ITheme } from '../../../theme.d';
 
 import { IItinerary } from '../../trip';
 
-interface IProps {
+type Props = {
   itinerary: IItinerary;
-}
+};
 
 const DayWrap = styled.div`
   margin-bottom: 1rem;
@@ -39,7 +39,7 @@ const DoubleImgWrap = styled.div`
   }
 `;
 
-const Itinerary: React.FC<IProps> = ({ itinerary }) => {
+const Itinerary = ({ itinerary }: Props) => {
   const { subTitle, description, dayItems, note } = itinerary;
   const q = graphql`
     query {

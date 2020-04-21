@@ -33,12 +33,12 @@ import Price from '../Price';
 import useDefaultBannerImage from '../../../helpers/hooks/useDefaultBannerImage';
 
 //import PrevNext from '../PrevNext';
-interface IProps {
+type Props = {
   trip: Trip.ITrip;
   pathname: string;
   isPrint: boolean;
-}
-const SingleTrip: React.FC<IProps> = ({ trip, pathname, isPrint }) => {
+};
+const SingleTrip = ({ trip, pathname, isPrint }: Props) => {
   const focusRef = useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -64,7 +64,7 @@ const SingleTrip: React.FC<IProps> = ({ trip, pathname, isPrint }) => {
   const openFormHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (e.currentTarget !== null) {
-      setSelected(Number(e.currentTarget.dataset.i));
+      setSelected((e.currentTarget.dataset.i as unknown) as number);
     }
     onOpen();
   };
@@ -92,9 +92,9 @@ const SingleTrip: React.FC<IProps> = ({ trip, pathname, isPrint }) => {
         } as IKeyValuePair),
     );
   }
-  const showPrice = Number(priceMode) !== 0 && priceList ? true : false;
+  const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
   const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
-  const showPriceList = Number(priceMode) === 2 && priceList ? true : false;
+  const showPriceList = ((priceMode as unknown) as number) === 2 && priceList ? true : false;
 
   const handleGoToDatesTab = (e: React.MouseEvent) => {
     e.preventDefault();

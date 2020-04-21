@@ -6,7 +6,7 @@ import Utils from '../../lib/utils';
 import useOrganization from '../../helpers/hooks/useOrganization';
 import IconLink from '../IconLink';
 
-const OrganizationCloudPhones: React.FC = () => {
+const OrganizationCloudPhones = () => {
   const { voice } = useOrganization();
 
   const theme = (useTheme() as unknown) as ITheme;

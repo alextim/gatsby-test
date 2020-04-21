@@ -16,18 +16,17 @@ import { IBaseformContext, BaseformContext } from './BaseformContext';
 import FormStatusEnum from './FormStatusEnum';
 import { getTitle } from './utils';
 import * as FORM from './consts';
-import { Container } from '../../Container';
 
 interface IProps {
   sendData: ISendData;
   msgSending?: string;
   msgSuccess?: string;
   msgError?: string;
-  children: React.ReactNode;
   title: string;
   isOpen: boolean;
   onClose: () => void;
   formSize?: string;
+  children: React.ReactNode;
 }
 
 const PopupForm: React.FC<IProps> = ({

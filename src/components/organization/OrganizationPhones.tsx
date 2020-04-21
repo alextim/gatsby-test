@@ -6,7 +6,7 @@ import useOrganization from '../../helpers/hooks/useOrganization';
 import IconLink from '../IconLink';
 import { ITheme } from '../theme.d';
 
-const OrganizationPhones: React.FC = () => {
+const OrganizationPhones = () => {
   const { voice } = useOrganization();
   const theme = (useTheme() as unknown) as ITheme;
 

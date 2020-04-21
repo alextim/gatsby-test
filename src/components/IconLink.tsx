@@ -20,7 +20,6 @@ const Spacer = styled.div`
 `;
 
 interface IProps {
-  children: React.ReactNode;
   to?: string;
   icon: IconName | [IconPrefix, IconName];
   title?: string;
@@ -28,6 +27,7 @@ interface IProps {
   color?: string;
   mr?: string;
   mb?: string;
+  children: React.ReactNode;
 }
 /*
 const StyledLink = styled(Link)`

@@ -3,13 +3,13 @@ import React from 'react';
 import { IPriceListItem, CurrencyNameType } from '../../trip';
 import Price from '../../Price';
 
-interface IProps {
+type Props = {
   priceList: Array<IPriceListItem>;
   currency: CurrencyNameType;
   isSale: boolean;
-}
+};
 
-const PriceList: React.FC<IProps> = ({ priceList, currency, isSale }) => {
+const PriceList = ({ priceList, currency, isSale }: Props) => {
   return (
     <>
       <table className="price-list-table table table-striped table-hover">

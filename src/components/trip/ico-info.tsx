@@ -5,35 +5,35 @@ import { formatDuration } from './helpers';
 // const s = num2form(value, 'участник', 'участника', 'участников');
 import IconLink from '../IconLink';
 
-interface INumberProps {
+type NumberProps = {
   value: number;
-}
-interface IStringProps {
+};
+type StringProps = {
   value: string;
-}
+};
 
-const Altitude: React.FC<INumberProps> = ({ value }) =>
+const Altitude = ({ value }: NumberProps) =>
   value > 0 ? <IconLink icon="chart-area" title="Высшая точка маршрута">{`${value} м`}</IconLink> : null;
 
-const Accomodation: React.FC<IStringProps> = ({ value }) =>
+const Accomodation = ({ value }: StringProps) =>
   value !== '' ? (
     <IconLink icon="bed" title="Проживание">
       {value}
     </IconLink>
   ) : null;
 
-const GroupSize: React.FC<INumberProps> = ({ value }) =>
+const GroupSize = ({ value }: NumberProps) =>
   value > 0 ? (
     <IconLink icon="child" title="Размер группы">
       {value}
     </IconLink>
   ) : null;
 
-interface IDurationProps {
+type DurationProps = {
   days: number;
   nights?: number;
-}
-const Duration: React.FC<IDurationProps> = ({ days, nights = 0 }) => {
+};
+const Duration = ({ days, nights = 0 }: DurationProps) => {
   const s = formatDuration(days, nights);
   return s ? (
     <IconLink icon={['far', 'clock']} title="Продолжительность">

@@ -27,6 +27,6 @@ const StyledLink = styled(Link)`
   background: url("data:image/svg+xml,${logoSVG}") center center no-repeat;
 `;
 
-const Brand: React.FC = () => <StyledLink rel="home" to="/" />;
+const Brand = () => <StyledLink rel="home" to="/" />;
 
 export default Brand;

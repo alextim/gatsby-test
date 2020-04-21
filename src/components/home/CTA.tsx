@@ -5,7 +5,7 @@ import { ITheme } from '../theme.d';
 import Section from './Section';
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
 
-const CTA: React.FC = () => {
+const CTA = () => {
   const { CTA } = useHomePageSettings();
   const { title, subTitle, text, actions } = CTA;
   const theme = (useTheme() as unknown) as ITheme;

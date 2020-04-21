@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { IconLink, IconLinkR } from '../components/IconLink';
+import IconLink, { IconLinkR } from '../components/IconLink';
 
 const PrevNextWrap = styled.div`
   display: flex;

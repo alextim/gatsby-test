@@ -29,15 +29,15 @@ const StyledLink = styled(Link)`
   }
 `;
 
-export interface IScocialLink {
+type Props = {
   icon: IconName | [IconPrefix, IconName];
   name: string;
   text: string;
   url: string;
   color?: string;
-}
+};
 
-const SocialLink: React.FC<IScocialLink> = ({ icon, name, text, url, color }) => (
+const SocialLink = ({ icon, name, text, url, color }: Props) => (
   <StyledLink href={url} target="_blank" color={color} rel="noreferrer" aria-label={name} title={text}>
     <FontAwesomeIcon icon={icon} />
   </StyledLink>

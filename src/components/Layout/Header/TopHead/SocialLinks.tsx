@@ -5,9 +5,9 @@ import SocialLink from './SocialLink';
 import Utils from '../../../../lib/utils';
 import useSocialLinks from '../../../../helpers/hooks/useSocialLinks';
 
-import { ITheme } from '../theme.d';
+import { ITheme } from '../../../theme.d';
 
-const SocialLinks: React.FC = () => {
+const SocialLinks = () => {
   const socialLinks = useSocialLinks();
 
   const StyledFlex = styled.div`

@@ -2,8 +2,10 @@ import React from 'react';
 import { Global, css } from '@emotion/core';
 import { useTheme } from '@chakra-ui/core';
 
-const GlobalStyles: React.FC = () => {
-  const theme = useTheme();
+import { ITheme } from '../theme.d';
+
+const GlobalStyles = () => {
+  const theme = (useTheme() as unknown) as ITheme;
 
   return (
     <Global

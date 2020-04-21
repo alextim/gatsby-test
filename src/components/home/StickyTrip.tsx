@@ -18,7 +18,7 @@ const Wrapper = styled(Box)`
   }
 `;
 
-const StickyTrip: React.FC = () => {
+const StickyTrip = () => {
   const posts = useLatestPostsFeatured1();
   if (!posts.length) {
     return null;

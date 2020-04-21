@@ -8,13 +8,13 @@ const Wrapper = styled(Grid)`
   grid-template-columns: 2em 3em 1em auto;
 `;
 
-interface ITimeRowProps {
+type Props = {
   dow: string;
   timeStart: string;
   timeFinish: string;
-}
+};
 
-const TimeRow: React.FC<ITimeRowProps> = ({ dow, timeStart, timeFinish }) => (
+const TimeRow = ({ dow, timeStart, timeFinish }: Props) => (
   <>
     <div>{dow}:</div>
     <div>{timeStart}</div>
@@ -23,7 +23,7 @@ const TimeRow: React.FC<ITimeRowProps> = ({ dow, timeStart, timeFinish }) => (
   </>
 );
 
-const OrganizationOpeningHours: React.FC = () => {
+const OrganizationOpeningHours = () => {
   const { openingHours } = useOrganization();
   const dow = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 

@@ -5,7 +5,7 @@ import SocialLinks from './SocialLinks';
 import VoiceContacts from './VoiceContacts';
 import PostalAddress from './PostalAddress';
 
-import { ITheme } from '../theme.d';
+import { ITheme } from '../../../theme.d';
 
 const TopHeadWrapper = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ const TopHeadWrapper = styled.div`
   }
 `;
 
-const TopHead: React.FC = () => (
+const TopHead = () => (
   <TopHeadWrapper>
     <SocialLinks />
     <VoiceContacts />

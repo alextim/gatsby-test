@@ -3,23 +3,16 @@ import { FormErrorMessage, FormLabel, FormControl, Input } from '@chakra-ui/core
 
 import { BaseformContext } from '../base-forms/BaseformContext';
 
-export interface INameControlProps {
-  readonly customRegister?: any;
-  readonly controlName: string;
-  readonly label: string;
-  readonly placeholder: string;
-  readonly maxLength: number;
-  readonly required: boolean;
-}
+type Props = {
+  customRegister?: any;
+  controlName: string;
+  label: string;
+  placeholder: string;
+  maxLength: number;
+  required: boolean;
+};
 
-const NameControl: React.FC<INameControlProps> = ({
-  customRegister,
-  controlName,
-  label,
-  placeholder,
-  maxLength,
-  required = true,
-}) => {
+const NameControl = ({ customRegister, controlName, label, placeholder, maxLength, required = true }: Props) => {
   const nameRules = {
     // validate: validateName,
     required: required ? `Поле "${label}" является обязательным` : false,

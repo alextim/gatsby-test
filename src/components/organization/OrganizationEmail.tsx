@@ -6,7 +6,7 @@ import useOrganization from '../../helpers/hooks/useOrganization';
 import IconLink from '../IconLink';
 import { ITheme } from '../theme.d';
 
-const OrganizationEmail: React.FC = () => {
+const OrganizationEmail = () => {
   const theme = (useTheme() as unknown) as ITheme;
   const { email } = useOrganization();
 

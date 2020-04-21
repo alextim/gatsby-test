@@ -28,12 +28,12 @@ const BurgerPseudoBox = styled(Box)`
   }
 `;
 
-export interface IBurger {
+type Props = {
   handleToggleCallback: (event: React.MouseEvent<HTMLElement>) => void;
   isActive: boolean;
-}
+};
 
-const Burger: React.FC<IBurger> = ({ handleToggleCallback, isActive }) => (
+const Burger = ({ handleToggleCallback, isActive }: Props) => (
   <BurgerPseudoBox
     aria-label="Menu"
     aria-controls="navigation"
@@ -42,7 +42,7 @@ const Burger: React.FC<IBurger> = ({ handleToggleCallback, isActive }) => (
     onClick={handleToggleCallback}
   >
     <BurgerSpan as="span" top="calc(50% - 6px)" transform={isActive ? 'translateY(5px) rotate(45deg)' : ''} />
-    <BurgerSpan as="span" top="calc(50% - 1px)" opacity={isActive ? 0 : ''} />
+    <BurgerSpan as="span" top="calc(50% - 1px)" opacity={isActive ? 0 : undefined} />
     <BurgerSpan as="span" top="calc(50% + 4px)" transform={isActive ? 'translateY(-5px) rotate(-45deg)' : ''} />
   </BurgerPseudoBox>
 );

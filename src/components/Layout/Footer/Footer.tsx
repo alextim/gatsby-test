@@ -4,7 +4,7 @@ import { Global, css } from '@emotion/core';
 import { Link } from 'gatsby';
 import { Flex, Box, useTheme } from '@chakra-ui/core';
 
-import { ITheme } from '../theme.d';
+import { ITheme } from '../../theme.d';
 
 import ViewModeContext from '../ViewModeContext';
 import { Container } from '../../Container';
@@ -33,8 +33,8 @@ const WidgetWrapper = styled.div`
   }
 `;
 
-const Footer: React.FC = () => {
-  const theme = useTheme();
+const Footer = () => {
+  const theme = (useTheme() as unknown) as ITheme;
 
   return (
     <ViewModeContext.Consumer>

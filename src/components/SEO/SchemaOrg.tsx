@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-interface ISchemaOrgProps {
+type SchemaOrgProps = {
   author: {
     name: string;
   };
@@ -17,7 +17,7 @@ interface ISchemaOrgProps {
   };
   title: string;
   url: string;
-}
+};
 
 export default React.memo(
   ({
@@ -31,7 +31,7 @@ export default React.memo(
     organization,
     title,
     url,
-  }: ISchemaOrgProps) => {
+  }: SchemaOrgProps) => {
     const baseSchema = [
       {
         '@context': 'http://schema.org',

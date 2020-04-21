@@ -15,10 +15,10 @@ import NavbarEnd from './NavbarEnd';
  * https://reactjs.org/docs/lifting-state-up.html
  *
  * */
-interface IProps {
+type Props = {
   isPrint: boolean;
-}
-const Navbar: React.FC<IProps> = ({ isPrint }) => {
+};
+const Navbar = ({ isPrint }: Props) => {
   const [isActive, setisActive] = React.useState(false);
   const handleToggle = () => setisActive(!isActive);
 

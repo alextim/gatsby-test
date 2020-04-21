@@ -1,20 +1,41 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Img from 'gatsby-image';
 import { Box, Link, Heading } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 
-import * as Trip from './trip.d';
+import { ITheme } from '../theme.d';
+import { ITrip } from './trip.d';
 import siteConfig from '../../data/siteConfig';
 import IconLink from '../IconLink';
+import TripOffer from './TripOffer';
 import TaxonomyList from '../TaxonomyList';
 import Price from './Price';
 import { getLowestPrice, mapKeysToTaxList } from './helpers';
-
+import useDefaultBannerImage from '../../helpers/hooks/useDefaultBannerImage';
+import usePlaceholderImage from '../../helpers/hooks/usePlaceholderImage';
+/**
+ * TODO: https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680
+ * https://github.com/facebook/create-react-app/pull/8177
+ */
 const Wrapper = styled(Box)`
   display: flex;
   flex-direction: column;
   align-content: flex-start;
-  margin: 0 1em 2em 1em;
+  width: 100%;
+  ${(props) => (props.theme as ITheme).mediaQueries.lg} {
+    width: 50%;
+  }
+  ${(props) => (props.theme as ITheme).mediaQueries.xl} {
+    width: 25%;
+  }
+`;
+
+const InnerWrapper = styled(Box)`
+  margin: 1em;
+`;
+
+const ImageWrap = styled.div`
+  position: relative;
 `;
 
 const TaxonomiesWrapper = styled.div`
@@ -26,47 +47,57 @@ const TaxonomiesWrapper = styled.div`
   font-weight: 100;
 `;
 
-interface IProps {
-  trip: Trip.ITrip;
-}
+type Props = {
+  trip: ITrip;
+};
 
-const TripCard: React.FC<IProps> = ({ trip }) => {
+const TripCard = ({ trip }: Props) => {
   const { slug, featuredImage, title, destination, activity, currency, isSale, priceMode, priceList } = trip;
   const path = `/${siteConfig.tripsUrlBase}/${slug}`;
 
-  const showPrice = Number(priceMode) !== 0 && priceList ? true : false;
+  const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
   const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
+  const dummy = useDefaultBannerImage();
+  const placeholder = usePlaceholderImage();
 
   return (
-    <Wrapper as="article" shadow="lg">
-      {featuredImage && (
-        <Link href={path} mb="1em">
-          <Img fluid={featuredImage} alt={title} width="100%" height="auto" />
-        </Link>
-      )}
+    <Wrapper as="article">
+      <InnerWrapper shadow="lg">
+        <ImageWrap>
+          <Link href={path}>
+            {!featuredImage ? <Img fluid={dummy} alt={title} /> : <Img fluid={placeholder} alt={title} />}
+          </Link>
+          {isSale && <TripOffer />}
+        </ImageWrap>
 
-      <Box p="1.5em" textAlign="left">
-        <Heading as="h3" mt="1.5rem" mb="0.25rem" fontSize={['1.25rem', '1.5rem']}>
-          <Link href={path}>{title}</Link>
-        </Heading>
-        {showPrice
-          ? lowestPrice && (
-              <Price price={lowestPrice.price} currency={currency} isSale={isSale} salePrice={lowestPrice.salePrice} />
-            )
-          : 'Цена по запросу'}
-        <TaxonomiesWrapper>
-          <IconLink icon="map-marker-alt">
-            <TaxonomyList taxonomyName="destination" keys={destination} />
-          </IconLink>
-          {activity && (
-            <IconLink icon={['far', 'folder-open']}>
-              <TaxonomyList taxonomyName="activity" keys={activity} />
+        <Box p="1rem" textAlign="left">
+          <Heading as="h3" mb="0.25rem" fontSize={['1.25rem', '1.5rem']}>
+            <Link href={path}>{title}</Link>
+          </Heading>
+          {showPrice
+            ? lowestPrice && (
+                <Price
+                  price={lowestPrice.price}
+                  currency={currency}
+                  isSale={isSale}
+                  salePrice={lowestPrice.salePrice}
+                />
+              )
+            : 'Цена по запросу'}
+          <TaxonomiesWrapper>
+            <IconLink icon="map-marker-alt">
+              <TaxonomyList taxonomyName="destination" keys={destination} />
             </IconLink>
-          )}
-        </TaxonomiesWrapper>
-      </Box>
+            {activity && (
+              <IconLink icon={['far', 'folder-open']}>
+                <TaxonomyList taxonomyName="activity" keys={activity} />
+              </IconLink>
+            )}
+          </TaxonomiesWrapper>
+        </Box>
+      </InnerWrapper>
     </Wrapper>
   );
 };
 
-export default TripCard;
+export default memo(TripCard);

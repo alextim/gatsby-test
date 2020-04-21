@@ -19,15 +19,15 @@ const FORM_TITLE = 'Записаться в поездку';
 const MSG_SUCCESS = 'Спасибо! Ваша заявка принята. Мы обязательно свяжемся с вами в ближайшее время.';
 const SUBMIT_TITLE = 'Отправить';
 
-interface IProps {
+type Props = {
   isOpen: boolean;
   onClose: () => void;
   mode: string;
   dates?: Array<IKeyValuePair>;
   selected: number;
-}
+};
 
-const TripInquiryForm: React.FC<IProps> = ({ isOpen, onClose, mode, dates, selected }) => {
+const TripInquiryForm = ({ isOpen, onClose, mode, dates, selected }: Props) => {
   const sendData = new SendTripInquiry();
   // <div>{FORM_SUBTITLE}</div>
   return (

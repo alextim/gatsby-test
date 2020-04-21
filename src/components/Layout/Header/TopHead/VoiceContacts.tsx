@@ -43,7 +43,7 @@ const IconOnlyLink: React.FC<IIconOnlyLink> = ({ icon, color, url, name }) => (
   </StyledLink>
 );
 
-const VoiceContacts: React.FC = () => {
+const VoiceContacts = () => {
   const { voice } = useOrganization();
 
   // const whatsappColor = theme.colors.brands.whatsapp;

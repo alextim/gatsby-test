@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/core';
 
 import useOrganization from '../../../helpers/hooks/useOrganization';
 
-const LegalInfo: React.FC = () => {
+const LegalInfo = () => {
   const { name } = useOrganization();
 
   return (

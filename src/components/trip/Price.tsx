@@ -5,14 +5,14 @@ import styled from '@emotion/styled';
 import { CurrencyNameType } from './trip';
 import { getCurrencySymbol } from './helpers';
 
-interface IProps {
+type Props = {
   price: number;
   currency: CurrencyNameType;
   isSale?: boolean;
   salePrice?: number;
-}
+};
 
-const Price: React.FC<IProps> = ({ price, currency, isSale = false, salePrice = 0 }) => {
+const Price = ({ price, currency, isSale = false, salePrice = 0 }: Props) => {
   const currencySymbol = getCurrencySymbol(currency);
   const showSale = isSale && salePrice > 0;
   return (

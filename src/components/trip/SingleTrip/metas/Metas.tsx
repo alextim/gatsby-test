@@ -9,11 +9,11 @@ import TaxonomyList from '../../../TaxonomyList';
 import TripInfoItem from '../TripInfoItem';
 import MetaItem from './MetaItem';
 
-interface IProps {
+type Props = {
   trip: ITrip;
   days: number;
-}
-const Metas: React.FC<IProps> = ({ trip, days }) => {
+};
+const Metas = ({ trip, days }: Props) => {
   const {
     isShowNights,
     groupSize,
@@ -62,4 +62,4 @@ const Metas: React.FC<IProps> = ({ trip, days }) => {
   );
 };
 
-export default Metas;
+export default React.memo(Metas);

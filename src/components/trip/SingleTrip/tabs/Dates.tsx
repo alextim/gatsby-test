@@ -6,7 +6,7 @@ import { getFinishDate } from '../../helpers';
 import { IDateItem, IPriceListItem, CurrencyNameType } from '../../trip';
 import ViewModeContext from '../../../Layout/ViewModeContext';
 
-interface IProps {
+type Props = {
   dates: Array<IDateItem>;
   duration: number;
   showPrice: boolean;
@@ -14,9 +14,9 @@ interface IProps {
   currency: CurrencyNameType;
   isSale: boolean;
   openFormHandler?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
+};
 
-const Dates: React.FC<IProps> = ({ dates, duration, showPrice, lowest, currency, isSale, openFormHandler }) => {
+const Dates = ({ dates, duration, showPrice, lowest, currency, isSale, openFormHandler }: Props) => {
   const fmt = new Intl.DateTimeFormat('ru');
   return (
     <ViewModeContext.Consumer>

@@ -17,12 +17,12 @@ const InnerWrapper = styled.div`
   justify-content: center;
 `;
 
-interface IProps {
+type Props = {
   isOpen: boolean;
   onClose: () => void;
-}
+};
 
-const CallbackInquiryForm: React.FC<IProps> = ({ isOpen, onClose }) => {
+const CallbackInquiryForm = ({ isOpen, onClose }: Props) => {
   const sendData = new SendCallbackInquiry();
 
   return (

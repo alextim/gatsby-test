@@ -2,11 +2,11 @@ import React from 'react';
 
 import { IEquipment } from '../../trip';
 
-interface IEquipmentProps {
+type Props = {
   equipment: IEquipment;
-}
+};
 
-const Equipment: React.FC<IEquipmentProps> = ({ equipment }) => {
+const Equipment = ({ equipment }: Props) => {
   const {
     // list,
     note,

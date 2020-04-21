@@ -20,11 +20,11 @@ const ItemWrap = styled.div`
   }
 `;
 
-interface IProps {
+type Props = {
   posts: Array<any>;
-}
+};
 
-const PostListing: React.FC<IProps> = ({ posts }) => (
+const PostListing = ({ posts }: Props) => (
   <Wrapper>
     {posts.map((post, i) => (
       <ItemWrap key={i}>

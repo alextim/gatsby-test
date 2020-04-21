@@ -26,11 +26,11 @@ const Label = styled.div`
   font-weight: 700;
 `;
 
-interface IProps {
+type Props = {
   label: string;
   value: React.ReactNode;
-}
-const TripInfoItem: React.FC<IProps> = ({ label, value }) => (
+};
+const TripInfoItem = ({ label, value }: Props) => (
   <Wrapper>
     <Label>{label}</Label>
     <Box>{value}</Box>

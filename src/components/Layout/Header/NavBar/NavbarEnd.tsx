@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Box, Button, useDisclosure } from '@chakra-ui/core';
 
-import { ITheme } from '../theme.d';
+import { ITheme } from '../../../theme.d';
 
 import CallbackInquiryForm from '../../../forms/CallbackInquiryForm';
 
@@ -18,7 +18,7 @@ const NavbarEndWrap = styled.div`
   }
 `;
 
-const NavbarEnd: React.FC = () => {
+const NavbarEnd = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (

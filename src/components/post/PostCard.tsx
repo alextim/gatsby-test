@@ -13,7 +13,7 @@ const Wrapper = styled(Box)`
   margin: 0 1em 2em 1em;
 `;
 
-interface IProps {
+type Props = {
   post: {
     title: string;
     path: string;
@@ -22,9 +22,9 @@ interface IProps {
     categories?: any;
     excerpt?: string;
   };
-}
+};
 
-const PostCard: React.FC<IProps> = ({ post }) => (
+const PostCard = ({ post }: Props) => (
   <Wrapper as="article" shadow="lg">
     {post.featuredImage && (
       <Link href={post.path} mb="1em">

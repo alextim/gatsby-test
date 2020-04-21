@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 
-import { ITheme } from '../theme.d';
+import { ITheme } from '../../../theme.d';
 
 import mainMenuItems from '../../../../data/mainMenuItems';
 
@@ -127,39 +127,40 @@ const StyledLabel = styled.label`
 interface IMenuItem {
   title: string;
   url: string;
-  submenu?: IMenuItem[];
+  submenu?: Array<IMenuItem>;
 }
+type MenuDropdownProps = {
+  title: string;
+  id: string;
+  items: Array<IMenuItem>;
+};
 
-const MenuItem: React.FC<IMenuItem> = ({ title, url }) => (
+type MenuItemsProps = {
+  items: Array<IMenuItem>;
+};
+
+const MenuItem = ({ title, url }: IMenuItem) => (
   <StyledLi>
     <Link to={url}>{title}</Link>
   </StyledLi>
 );
 
-interface IMenuItems {
-  items: IMenuItem[];
-}
+/**
+ *  https://eslint.org/docs/rules/no-prototype-builtins
+ */
+// if (item.hasOwnProperty('submenu')) {
+// if (item.submenu) {
+// if (Object.prototype.hasOwnProperty.call(item, 'submenu')) {
+const MenuItems = ({ items }: MenuItemsProps) =>
+  items.map((item, i) =>
+    item.submenu ? (
+      <MenuDropdown key={i} title={item.title} id={getId()} items={item.submenu} />
+    ) : (
+      <MenuItem key={i} title={item.title} url={item.url} />
+    ),
+  );
 
-const MenuItems = ({ items }: IMenuItems) =>
-  items.map((item, i) => {
-    /**
-     *  https://eslint.org/docs/rules/no-prototype-builtins
-     */
-    // if (item.hasOwnProperty('submenu')) {
-    if (Object.prototype.hasOwnProperty.call(item, 'submenu')) {
-      return <MenuDropdown key={i} title={item.title} id={getId()} items={item.submenu} />;
-    }
-
-    return <MenuItem key={i} title={item.title} url={item.url} />;
-  });
-
-interface IMenuDropdown {
-  title: string;
-  id: string;
-  items: Array<IMenuItem>;
-}
-
-const MenuDropdown: React.FC<IMenuDropdown> = ({ title, id, items }) => (
+const MenuDropdown = ({ title, id, items }: MenuDropdownProps) => (
   <StyledLi>
     <StyledLabel htmlFor={id}>{title}</StyledLabel>
     <StyledCheckbox type="checkbox" id={id} />
@@ -169,11 +170,10 @@ const MenuDropdown: React.FC<IMenuDropdown> = ({ title, id, items }) => (
   </StyledLi>
 );
 
-export interface IMenu {
+type Props = {
   isActive: boolean;
-}
-
-const Menu: React.FC<IMenu> = ({ isActive }) => {
+};
+const Menu = ({ isActive }: Props) => {
   const StyledMenuWrap = styled.ul`
     display: ${isActive ? 'none' : 'block'};
     width: 100%;

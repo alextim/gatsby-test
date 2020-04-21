@@ -12,18 +12,18 @@ import useSiteMetadata from '../../helpers/hooks/useSiteMetadata';
 import useOrganization from '../../helpers/hooks/useOrganization';
 import SchemaOrg from './SchemaOrg';
 
-interface ISEOProps {
-  readonly title?: string;
-  readonly description?: string;
-  readonly pathname: string;
-  readonly image?: string;
-  readonly type?: string;
-  readonly date?: string;
-  readonly locale?: string;
+type Props = {
+  title?: string;
+  description?: string;
+  pathname: string;
+  image?: string;
+  type?: string;
+  date?: string;
+  locale?: string;
   noindex?: boolean;
 }
 
-const SEO: React.FC<ISEOProps> = ({ title, description, pathname, image, type, date, locale, noindex = false }) => {
+const SEO = ({ title, description, pathname, image, type, date, locale, noindex = false }: Props) => {
   const meta = useSiteMetadata();
   const org = useOrganization();
 

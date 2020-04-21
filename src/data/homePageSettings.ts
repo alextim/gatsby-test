@@ -30,6 +30,7 @@ const homePageSettings = {
     actions: {
       primary: { title: 'Посмотреть больше', url: siteConfig.tripsUrlBase },
     },
+  },
 
   features: {
     title: 'Почему выбирают нас?',

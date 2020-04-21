@@ -13,16 +13,16 @@ import {
 import FormStatusEnum from './FormStatusEnum';
 import { getTitle } from './utils';
 
-interface IProps {
+type Props = {
   status: number;
   message: string;
   isOpen: boolean;
   onAbort: () => void;
   onClose: () => void;
   finalFocusRef:  any;
-}
+};
 
-const SendFormDataModal: React.FC<IProps> = ({ status, message, isOpen, onAbort, onClose, finalFocusRef }) => {
+const SendFormDataModal = ({ status, message, isOpen, onAbort, onClose, finalFocusRef }: Props) => {
   const title = getTitle(status, '');
 
   return (

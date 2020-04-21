@@ -2,10 +2,11 @@ import React from 'react';
 import { Box } from '@chakra-ui/core';
 import { useTheme } from 'emotion-theming';
 
+import { ITheme } from '../theme.d';
 import useOrganization from '../../helpers/hooks/useOrganization';
 
-const OrganizationPostalAddress: React.FC = () => {
-  const theme = useTheme();
+const OrganizationPostalAddress = () => {
+  const theme = (useTheme() as unknown) as ITheme;
   const { name, address } = useOrganization();
 
   return (

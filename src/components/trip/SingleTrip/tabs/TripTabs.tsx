@@ -10,7 +10,7 @@ import { Dates } from './Dates';
 
 import TabHeading from './TabHeading';
 
-interface IProps {
+type Props = {
   trip: ITrip;
   days: number;
   showPrice: boolean;
@@ -18,16 +18,8 @@ interface IProps {
   lowestPrice?: IPriceListItem;
   focusRef: any;
   openFormHandler: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
-const TripTabs: React.FC<IProps> = ({
-  trip,
-  days,
-  showPrice,
-  showPriceList,
-  lowestPrice,
-  focusRef,
-  openFormHandler,
-}) => {
+};
+const TripTabs = ({ trip, days, showPrice, showPriceList, lowestPrice, focusRef, openFormHandler }: Props) => {
   const {
     currency,
     isSale,

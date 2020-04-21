@@ -22,10 +22,10 @@ const IconText: React.FC<IIconTextProps> = ({ icon, color, children }) => (
   </Flex>
 );
 
-interface IProps {
+type Props = {
   service: IService;
-}
-const Service: React.FC<IProps> = ({ service }) => {
+};
+const Service = ({ service }: Props) => {
   const { included, excluded, note } = service;
 
   return (

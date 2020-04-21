@@ -17,7 +17,7 @@ const InnerWrap = styled(Flex)`
   }
 `;
 
-const LatestPosts: React.FC = () => {
+const LatestPosts = () => {
   const { latestPosts } = useHomePageSettings();
   const { title, actions } = latestPosts;
   const theme = (useTheme() as unknown) as ITheme;

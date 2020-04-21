@@ -24,13 +24,13 @@ const phoneRules = {
   },
 };
 
-interface IProps {
+type Props = {
   customRegister?: any;
   label?: string;
   icon?: boolean;
-}
+};
 
-const PhoneControl: React.FC<IProps> = ({ customRegister, label = 'Телефон', icon = false }) => (
+const PhoneControl = ({ customRegister, label = 'Телефон', icon = false }: Props) => (
   <BaseformContext.Consumer>
     {(context) =>
       context && (

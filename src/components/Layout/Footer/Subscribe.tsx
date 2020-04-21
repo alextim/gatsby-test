@@ -7,7 +7,7 @@ const StyledDiv = styled.div`
   margin-bottom: 1rem;
 `;
 
-const Subscribe: React.FC = () => (
+const Subscribe = () => (
   <>
     <StyledDiv>Будьте в курсе наших последних новостей и актуальных предложений!</StyledDiv>
     <SubscribeForm />

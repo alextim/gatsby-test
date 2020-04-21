@@ -1,11 +1,12 @@
 import React from 'react';
 import { Flex, useTheme } from '@chakra-ui/core';
 
+import { ITheme } from '../../theme.d';
 import AnimatedLink from '../../AnimatedLink';
 import useLatestPostsTop5 from '../../../helpers/hooks/useLatestPostsTop5';
 
-const LatestPostsList: React.FC = () => {
-  const theme = useTheme();
+const LatestPostsList = () => {
+  const theme = (useTheme() as unknown) as ITheme;
   const mb = theme.footer.mbWidgetLink;
 
   const posts = useLatestPostsTop5();

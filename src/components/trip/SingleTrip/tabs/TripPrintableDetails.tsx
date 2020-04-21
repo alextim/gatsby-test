@@ -14,14 +14,14 @@ const ItemWrapper = styled.div`
   margin-bottom: 2rem;
 `;
 
-interface IProps {
+type Props = {
   trip: ITrip;
   days: number;
   showPrice: boolean;
   showPriceList: boolean;
   lowestPrice?: IPriceListItem;
-}
-const TripPrintableDetails: React.FC<IProps> = ({ trip, days, showPrice, showPriceList, lowestPrice }) => {
+};
+const TripPrintableDetails = ({ trip, days, showPrice, showPriceList, lowestPrice }: Props) => {
   const {
     currency,
     isSale,

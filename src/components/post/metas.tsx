@@ -5,25 +5,25 @@ import IconMeta from '../IconMeta';
 import Utils from '../../lib/utils';
 import { getCategoryUrlAndNames } from '../../helpers/categoryHelper';
 
-interface IDateMetaProps {
+type DateMetaProps = {
   date: string;
-}
-const DateMeta: React.FC<IDateMetaProps> = ({ date }) => (
+};
+const DateMeta = ({ date }: DateMetaProps) => (
   <IconMeta icon={['far', 'calendar-check']} items={Utils.formatDate(date)} />
 );
 
-interface ICategoryMetaProps {
+type CategoryMetaProps = {
   categories: string[];
-}
-const CategoryMeta: React.FC<ICategoryMetaProps> = ({ categories }) => {
+};
+const CategoryMeta = ({ categories }: CategoryMetaProps) => {
   const categoryItems = getCategoryUrlAndNames(categories, 'category');
   return <IconMeta icon={['far', 'folder-open']} items={categoryItems} />;
 };
 
-interface ITagMetaProps {
+type TagMetaProps = {
   tags: string[];
-}
-const TagMeta: React.FC<ITagMetaProps> = ({ tags }) => {
+};
+const TagMeta = ({ tags }: TagMetaProps) => {
   const base = 'tag';
   const tagItems = tags.map((item) => ({
     url: `/${base}/${kebabCase(item)}`,
