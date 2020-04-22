@@ -1,10 +1,12 @@
-import { LevelType, IPriceListItem, CurrencyNameType } from './trip';
-import currencies from '../../data/taxonomy/currency';
+import { IKeyValuePair } from '../../lib/types';
+import getKeyByValue from '../../lib/getKeyByValue';
 import Utils from '../../lib/utils';
-import { ITrip } from './trip';
-import { IKeyValuePair } from '../../types/types';
 import { num2form } from '../../lib/num2form';
+
 import taxonomy from '../../data/taxonomy';
+
+import { ITrip } from './trip';
+import { LevelType, IPriceListItem, CurrencyNameType } from './trip';
 
 export function getFitnessLevelTitle(level: LevelType): string {
   return [
@@ -16,12 +18,9 @@ export function getFitnessLevelTitle(level: LevelType): string {
 }
 
 export function getTechLevelTitle(level: LevelType): string {
-  return [
-    'Легкий уровень сложности',
-    'Средний уровень сложности',
-    'Высокий уровень сложности',
-    'Очень высокий уровень сложности',
-  ][Number(level) - 1];
+  return ['Легкий уровень сложности', 'Средний уровень сложности', 'Весьма сложно', 'Высокий уровень сложности'][
+    Number(level) - 1
+  ];
 }
 
 export const getLowestPrice = (rows: Array<IPriceListItem>): IPriceListItem =>
@@ -33,11 +32,11 @@ export const getLowestPrice = (rows: Array<IPriceListItem>): IPriceListItem =>
   }, rows[0]);
 
 export const getCurrencySymbol = (currency: CurrencyNameType): string => {
-  const item = currencies.find((item) => item.key === ((currency as unknown) as string));
-  if (!item) {
-    throw new Error(`getCurrencySymbol: Unknown currency name "${name}"`);
+  const value = taxonomy.currency[(currency as unknown) as string];
+  if (!value) {
+    throw new Error(`getCurrencySymbol: "${currency}" not found`);
   }
-  return item.value;
+  return value;
 };
 
 export const formatDuration = (days: number, nights: number): string => {
@@ -71,19 +70,22 @@ export const formatStartFinish = (date: Date, duration: number): string => {
 
 export const mapKeysToTaxList = (name: string, keys: string[]) => {
   const tax = taxonomy[name];
+  const unique = new Set(keys.map((key) => key.toLowerCase()));
+  const result = new Array<{ url: string; name: string }>();
 
-  return keys.reduce(function (acc, cur) {
-    const key = cur.toLowerCase();
-    let t = tax.find((item: IKeyValuePair) => item.key === key);
-    if (t) {
-      acc.push({ url: `/${name}/${t.key}`, name: t.value });
+  unique.forEach((item) => {
+    const value = tax[item];
+    if (value) {
+      result.push({ url: `/${name}/${item}`, name: value });
+    } else {
+      const key = getKeyByValue(tax, item);
+      if (key && !unique.has(key)) {
+        result.push({ url: `/${name}/${key}`, name: tax[key] });
+      }
     }
-    t = tax.find((item: IKeyValuePair) => item.value.toLocaleLowerCase() === key);
-    if (t) {
-      acc.push({ url: `/${name}/${t.key}`, name: t.value });
-    }
-    return acc;
-  }, new Array<{ url: string; name: string }>());
+  });
+
+  return result;
 };
 
 export const getDays = (trip: ITrip) => {

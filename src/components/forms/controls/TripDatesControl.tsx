@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SelectControl from './SelectControl';
-import { IKeyValuePair } from '../../../types/types';
+import { IKeyValuePair } from '../../../lib/types';
 
 type Props = {
   items: Array<IKeyValuePair>;

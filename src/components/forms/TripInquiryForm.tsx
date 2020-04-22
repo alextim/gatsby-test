@@ -12,7 +12,7 @@ import {
   TripDatesControl,
   Submit,
 } from './controls';
-import { IKeyValuePair } from '../../types/types';
+import { IKeyValuePair } from '../../lib/types';
 
 const FORM_TITLE = 'Записаться в поездку';
 // const FORM_SUBTITLE = 'Получив эту заявку, мы сможем связаться с вами и обсудить детали путешествия.';
@@ -32,7 +32,6 @@ const TripInquiryForm = ({ isOpen, onClose, mode, dates, selected }: Props) => {
   // <div>{FORM_SUBTITLE}</div>
   return (
     <PopupForm title={FORM_TITLE} msgSuccess={MSG_SUCCESS} sendData={sendData} isOpen={isOpen} onClose={onClose}>
-
       <div>
         <FirstNameControl />
         <LastNameControl required={false} />

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
 import { BaseformContext } from '../base-forms/BaseformContext';
-import { IKeyValuePair } from '../../../types/types';
+import { IKeyValuePair } from '../../../lib/types';
 
 const selectRules = {};
 

@@ -151,14 +151,17 @@ const MenuItem = ({ title, url }: IMenuItem) => (
 // if (item.hasOwnProperty('submenu')) {
 // if (item.submenu) {
 // if (Object.prototype.hasOwnProperty.call(item, 'submenu')) {
-const MenuItems = ({ items }: MenuItemsProps) =>
-  items.map((item, i) =>
-    item.submenu ? (
-      <MenuDropdown key={i} title={item.title} id={getId()} items={item.submenu} />
-    ) : (
-      <MenuItem key={i} title={item.title} url={item.url} />
-    ),
-  );
+const MenuItems = ({ items }: MenuItemsProps) => (
+  <>
+    {items.map((item, i) =>
+      item.submenu ? (
+        <MenuDropdown key={i} title={item.title} id={getId()} items={item.submenu} />
+      ) : (
+        <MenuItem key={i} title={item.title} url={item.url} />
+      ),
+    )}
+  </>
+);
 
 const MenuDropdown = ({ title, id, items }: MenuDropdownProps) => (
   <StyledLi>

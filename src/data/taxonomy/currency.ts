@@ -1,10 +1,8 @@
-import { IKeyValuePair } from '../../types/types';
-
-const currency: Array<IKeyValuePair> = [
-  { key: 'EUR', value: '€' },
-  { key: 'USD', value: '$' },
-  { key: 'RUR', value: 'руб' },
-  { key: 'UAH', value: 'грн' },
-];
+const currency = {
+  EUR: '€',
+  USD: '$',
+  RUR: 'руб',
+  UAH: 'грн',
+};
 
 export default currency;

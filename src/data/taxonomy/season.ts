@@ -1,22 +1,8 @@
-import { IKeyValuePair } from '../../types/types';
-
-const season: Array<IKeyValuePair> = [
-  {
-    key: 'winter',
-    value: 'Зима',
-  },
-  {
-    key: 'spring',
-    value: 'Весна',
-  },
-  {
-    key: 'summer',
-    value: 'Лето',
-  },
-  {
-    key: 'autumn',
-    value: 'Осень',
-  },
-];
+const season = {
+  winter: 'Зима',
+  spring: 'Весна',
+  summer: 'Лето',
+  autumn: 'Осень',
+};
 
 export default season;

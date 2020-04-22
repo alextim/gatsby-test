@@ -1,8 +1,3 @@
-export interface IData {
-  [key: string]: any;
-}
+import { IDictionary, StringMap } from '../lib/types';
 
-export interface IKeyValuePair {
-  key: string;
-  value: string;
-}
+export type Taxonomy = IDictionary<StringMap>;
