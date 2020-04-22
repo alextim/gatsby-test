@@ -9,7 +9,7 @@ import { resolve } from 'path';
 import _ from 'lodash';
 // const catHelper = require('./../categoryHelper');
 import postArchiveHelper from '../postArchiveHelper';
-import siteConfig from '../../data/siteConfig';
+import siteConfig from '../../data/site-config';
 
 const pageTemplate = resolve('./src/templates/page.tsx');
 const postTemplate = resolve('./src/templates/post.tsx');

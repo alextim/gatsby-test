@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 import { ITheme } from '../../../theme.d';
 
-import mainMenuItems from '../../../../data/mainMenuItems';
+import mainMenuItems from '../../../../data/main-menu-items';
 
 let id = 0;
 

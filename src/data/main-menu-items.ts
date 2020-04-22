@@ -1,4 +1,4 @@
-import siteConfig from './siteConfig';
+import siteConfig from './site-config';
 // https://gist.github.com/fson/a14f5edf2ae3fb5294dd
 const mainMenuItems = [
   {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import singleTrip from '../data/singleTrip';
+import singleTrip from '../data/single-trip';
 import { IPageProps } from '../types/page-types';
 import SingleTrip from '../components/trip/SingleTrip/SingleTrip';
 

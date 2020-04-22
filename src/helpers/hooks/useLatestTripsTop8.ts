@@ -1,5 +1,5 @@
 import { ITrip } from '../../components/trip/trip.d';
-import singleTrip from '../../data/singleTrip';
+import singleTrip from '../../data/single-trip';
 
 const useLatestTripsTop8 = (): Array<ITrip> => {
   const data = new Array<ITrip>();

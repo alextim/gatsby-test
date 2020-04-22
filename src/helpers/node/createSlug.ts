@@ -1,7 +1,7 @@
 import { GatsbyNode } from 'gatsby';
 import { parse as pathParse } from 'path';
 import { parseISO, formatISO } from 'date-fns';
-import siteConfig from './../../data/siteConfig';
+import siteConfig from '../../data/site-config';
 
 /**
 //const moment = require('moment');

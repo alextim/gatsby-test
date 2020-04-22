@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 
 import { ITheme } from '../theme.d';
 import { ITrip } from './trip.d';
-import siteConfig from '../../data/siteConfig';
+import siteConfig from '../../data/site-config';
 import IconLink from '../IconLink';
 import TripOffer from './TripOffer';
 import TaxonomyList from '../TaxonomyList';
