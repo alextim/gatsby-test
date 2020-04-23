@@ -86,6 +86,20 @@ export default {
       },
     },
     {
+      resolve: 'gatsby-transformer-yaml-full',
+      options: {
+        plugins: [
+          'gatsby-yaml-full-markdown', // Enable !markdown tags
+          {
+            resolve: 'gatsby-yaml-full-file',
+            options: {
+              path: `${__dirname}/content/trips`, // If not set, the base path will be the current directory of the YAML file being
+            },
+          },
+        ],
+      },
+    },
+    {
       resolve: 'gatsby-plugin-chakra-ui',
       options: {
         /**
