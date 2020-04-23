@@ -1,19 +1,20 @@
 import React from 'react';
-import kebabCase from 'lodash/kebabCase';
 
 import SidebarWidget from '../../SidebarWidget';
 import IconLink from '../../IconLink';
 import useAllCategories from '../../../helpers/hooks/useAllCategories';
+import { getTaxonomyByName } from '../../../helpers/taxonomy-helpers';
 
 const PostCategories = () => {
   const cats = useAllCategories();
-  const base = 'category';
+  const name = 'category';
+  const tax = getTaxonomyByName(name);
 
   return cats ? (
     <SidebarWidget title="Рубрики">
-      {cats.map((cat, i) => (
-        <IconLink key={i} to={`/${base}/${kebabCase(cat)}`} icon={['far', 'folder-open']}>
-          {cat}
+      {cats.map((key, i) => (
+        <IconLink key={i} to={`/${name}/${key}`} icon={['far', 'folder-open']}>
+          {tax[key]}
         </IconLink>
       ))}
     </SidebarWidget>

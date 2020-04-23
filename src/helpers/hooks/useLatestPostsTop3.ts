@@ -6,7 +6,6 @@ interface IEdge {
     frontmatter: {
       title: string;
       date: string;
-      category: any;
       featuredImage: {
         childImageSharp: {
           fluid: any;
@@ -15,6 +14,7 @@ interface IEdge {
     };
     fields: {
       slug: string;
+      category?: Array<string>;
     };
   };
 }
@@ -22,15 +22,15 @@ interface IEdge {
 const useLatestPostsTop3 = (): Array<{
   title: string;
   path: string;
-  date: any;
-  category: any;
-  excerpt: any;
+  date: string;
+  category?: Array<string>;
+  excerpt?: string;
   featuredImage: any;
 }> => {
   const data = useStaticQuery(graphql`
     query LatestPostsQueryTop3 {
       allMdx(
-        filter: { frontmatter: { published: { eq: true }, featured: { ne: true } } }
+        filter: { frontmatter: { published: { eq: true }, featured: { ne: true } }, fields: { type: { eq: "post" } } }
         limit: 3
         sort: { order: DESC, fields: [frontmatter___date] }
       ) {
@@ -39,12 +39,12 @@ const useLatestPostsTop3 = (): Array<{
             excerpt
             fields {
               slug
+              category
             }
             frontmatter {
               path
               title
               date
-              category
               featuredImage {
                 childImageSharp {
                   fluid(maxWidth: 800) {
@@ -60,14 +60,15 @@ const useLatestPostsTop3 = (): Array<{
   `);
 
   return data.allMdx.edges.map(({ node }: IEdge) => {
-    const { title, date, category, featuredImage } = node.frontmatter;
+    const { title, date, featuredImage } = node.frontmatter;
+    const { slug, category } = node.fields;
     return {
       title,
-      path: node.fields.slug,
+      path: slug,
       date,
       category,
       excerpt: node.excerpt,
-      featuredImage: featuredImage ? featuredImage.childImageSharp.fluid : null,
+      featuredImage: featuredImage ? featuredImage.childImageSharp.fluid : undefined,
     };
   });
 };

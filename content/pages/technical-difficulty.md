@@ -1,6 +1,7 @@
 ---
 slug: technical-difficulty
 title: Техническая сложность путешествия
+published: true
 ---
 <h4>Про требования к технической подготовке</h4>
 <table class="table-tech">

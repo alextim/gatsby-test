@@ -1,9 +1,8 @@
 import React from 'react';
-import kebabCase from 'lodash/kebabCase';
 
-import IconMeta from '../IconMeta';
 import Utils from '../../lib/utils';
-import { getCategoryUrlAndNames } from '../../helpers/taxonomy-helpers';
+import { getTaxUrlAndNames } from '../../helpers/taxonomy-helpers';
+import IconMeta from '../IconMeta';
 
 type DateMetaProps = {
   date: string;
@@ -16,20 +15,16 @@ type CategoryMetaProps = {
   category: string[];
 };
 const CategoryMeta = ({ category }: CategoryMetaProps) => {
-  const categoryItems = getCategoryUrlAndNames(category, 'category');
-  return <IconMeta icon={['far', 'folder-open']} items={categoryItems} />;
+  const items = getTaxUrlAndNames('category', category);
+  return <IconMeta icon={['far', 'folder-open']} items={items} />;
 };
 
 type TagMetaProps = {
   tag: string[];
 };
 const TagMeta = ({ tag }: TagMetaProps) => {
-  const base = 'tag';
-  const tagItems = tag.map((item) => ({
-    url: `/${base}/${kebabCase(item)}`,
-    name: item,
-  }));
-  return <IconMeta icon={['far', 'folder-open']} items={tagItems} />;
+  const items = getTaxUrlAndNames('tag', tag);
+  return <IconMeta icon="tag" items={items} />;
 };
 
 export { DateMeta, CategoryMeta, TagMeta };

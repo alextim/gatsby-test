@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconName, IconPrefix } from '@fortawesome/fontawesome-common-types';
 
-import { ITheme } from '../theme.d';
+import { ITheme } from '../../theme.d';
 
 const StyledLink = styled(Link)`
   display: flex;
@@ -14,17 +14,17 @@ const StyledLink = styled(Link)`
   color: ${(props) => (props.theme as ITheme).footer.colors.text};
   text-decoration: none;
 
-  height: 2em;
-  width: 2em;
-  margin: 0 0.625em;
+  height: 2rem;
+  width: 2rem;
+  margin: 0 0.625rem;
 
-  border: 0.125em solid ${(props) => (props.theme as ITheme).footer.colors.text};
+  border: 0.125rem solid ${(props) => (props.theme as ITheme).footer.colors.text};
   border-radius: 100%;
 
   &:hover {
     color: ${(props) => (props.theme as ITheme).footer.colors.highlited};
     background-color: #517fa4;
-    border: 0.125em solid transparent;
+    border: 0.125rem solid transparent;
     transition: all 0.4s ease-out 0s;
   }
 `;

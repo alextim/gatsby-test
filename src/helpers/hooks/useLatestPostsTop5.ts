@@ -15,7 +15,7 @@ const useLatestPostsTop5 = (): Array<{ title: string; path: string }> => {
   const data = useStaticQuery(graphql`
     query LatestPostsQueryTop5 {
       allMdx(
-        filter: { frontmatter: { published: { eq: true } } }
+        filter: { frontmatter: { published: { eq: true } }, fields: { type: { eq: "post" } } }
         limit: 5
         sort: { order: DESC, fields: [frontmatter___date] }
       ) {

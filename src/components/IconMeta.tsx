@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Link } from '@chakra-ui/core';
+import { Link } from 'gatsby';
+import { Box } from '@chakra-ui/core';
 import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
 import IconLink from './IconLink';
@@ -19,7 +20,7 @@ const IconMeta: React.FC<IProps> = ({ icon, items }) => (
     {Array.isArray(items) ? (
       items.map((item, i) => (
         <Box key={i} as="span" mr="0.3em">
-          <Link href={item.url}>{item.name}</Link>
+          <Link to={item.url}>{item.name}</Link>
         </Box>
       ))
     ) : (

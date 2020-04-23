@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Banner from '../Banner';
+import LatestTrips from '../trip/widgets/LatestTrips';
 import AsideLayout from './AsideLayout';
 
 interface IProps {
@@ -10,7 +11,7 @@ interface IProps {
 
 const PageLayout: React.FC<IProps> = ({ title, img, children }) => {
   return (
-    <AsideLayout widgets="hello" header={<Banner img={img} title={title} />}>
+    <AsideLayout widgets={<LatestTrips />} header={<Banner img={img} title={title} />}>
       {children}
     </AsideLayout>
   );

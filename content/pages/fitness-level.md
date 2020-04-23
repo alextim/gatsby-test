@@ -1,6 +1,7 @@
 ---
 slug: fitness-level
 title: Уровень физической подготовки
+published: true
 ---
 <h4>Про требования к физической подготовке</h4>
 <table class="table-tech">

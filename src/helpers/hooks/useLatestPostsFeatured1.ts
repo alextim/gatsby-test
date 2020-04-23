@@ -22,7 +22,7 @@ const useLatestPostsFeatured1 = (): Array<{
   const data = useStaticQuery(graphql`
     query LatestPostsQueryFeatured1 {
       allMdx(
-        filter: { frontmatter: { published: { eq: true }, featured: { eq: true } } }
+        filter: { frontmatter: { published: { eq: true }, featured: { eq: true } }, fields: { type: { eq: "post" } } }
         limit: 1
         sort: { order: DESC, fields: [frontmatter___date] }
       ) {
@@ -48,7 +48,7 @@ const useLatestPostsFeatured1 = (): Array<{
 
   return data.allMdx.edges.map(({ node }: IEdge) => ({
     path: node.fields.slug,
-    featuredImage: node.frontmatter.featuredImage ? node.frontmatter.featuredImage.childImageSharp.fluid : null,
+    featuredImage: node.frontmatter.featuredImage ? node.frontmatter.featuredImage.childImageSharp.fluid : undefined,
   }));
 };
 

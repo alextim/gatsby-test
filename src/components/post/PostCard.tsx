@@ -1,6 +1,7 @@
 import React from 'react';
 import Img from 'gatsby-image';
-import { Flex, Box, Link, Text, Heading } from '@chakra-ui/core';
+import { Link } from 'gatsby';
+import { Flex, Box, Text, Heading } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 
 import AnimatedLink from '../AnimatedLink';
@@ -27,14 +28,16 @@ type Props = {
 const PostCard = ({ post }: Props) => (
   <Wrapper as="article" shadow="lg">
     {post.featuredImage && (
-      <Link href={post.path} mb="1em">
-        <Img fluid={post.featuredImage} alt={post.title} width="100%" height="auto" />
-      </Link>
+      <Box mb="1rem">
+        <Link to={post.path}>
+          <Img fluid={post.featuredImage} alt={post.title} width="100%" height="auto" />
+        </Link>
+      </Box>
     )}
 
     <Box p="1.5em" textAlign="left">
       <Heading as="h3" mt="1.5em" mb="0.25em" fontSize={['1.25em', '1.5em']}>
-        <Link href={post.path}>{post.title}</Link>
+        <Link to={post.path}>{post.title}</Link>
       </Heading>
 
       <Flex direction="row" fontWeight={100} fontSize="0.9em">

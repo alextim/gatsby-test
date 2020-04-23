@@ -11,9 +11,15 @@ import useLatestPostsTop3 from '../../helpers/hooks/useLatestPostsTop3';
 
 const InnerWrap = styled(Flex)`
   flex-direction: column;
-  margin-bottom: 3em;
+  margin-bottom: rem;
   ${(props) => (props.theme as ITheme).mediaQueries.lg} {
     flex-direction: row;
+  }
+`;
+const ItemWrap = styled.div`
+  width: 100%;
+  ${(props) => (props.theme as ITheme).mediaQueries.lg} {
+    width: 33.33%;
   }
 `;
 
@@ -27,7 +33,9 @@ const LatestPosts = () => {
     <Section title={title} bg={theme.home.latestPosts.colors.bg} actions={actions}>
       <InnerWrap>
         {posts.map((post, i) => (
-          <PostCard key={i} post={post} />
+          <ItemWrap key={i}>
+            <PostCard post={post} />
+          </ItemWrap>
         ))}
       </InnerWrap>
     </Section>

@@ -10,17 +10,18 @@ const getSafeCategorySlug = (s: string): string => {
   return slugify(translit(path, 1));
 };
 
-function getCategoryUrlAndNames(
-  cats: string[],
-  base: string,
+const getTaxonomyByName = (name: string) => taxonomy[name];
+
+function getTaxUrlAndNames(
+  name: string,
+  keys: string[],
 ): Array<{
   name: string;
   url: string;
 }> {
-  return cats.map((cat) => ({ name: cat, url: `/${base}/${getSafeCategorySlug(cat)}` }));
+  const tax = getTaxonomyByName(name);
+  return keys.map((key) => ({ name: tax[key], url: `/${name}/${key}` }));
 }
-
-const getTaxonomyByName = (name: string) => taxonomy[name];
 
 const sanitizeKeys = (name: string, keys: Array<string>): Array<string> => {
   const tax = getTaxonomyByName(name);
@@ -41,4 +42,4 @@ const sanitizeKeys = (name: string, keys: Array<string>): Array<string> => {
 
   return result;
 };
-export { getSafeCategorySlug, getCategoryUrlAndNames, getTaxonomyByName, sanitizeKeys };
+export { getSafeCategorySlug, getTaxUrlAndNames, getTaxonomyByName, sanitizeKeys };

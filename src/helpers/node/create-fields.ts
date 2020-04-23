@@ -3,7 +3,7 @@ import { parse as pathParse } from 'path';
 import { parseISO, formatISO } from 'date-fns';
 
 import siteConfig from '../../data/site-config';
-import { sanitizeKeys } from '../../helpers/taxonomy-helpers';
+import { sanitizeKeys } from '../taxonomy-helpers';
 /**
 //const moment = require('moment');
  *
@@ -29,7 +29,7 @@ interface INode {
 
 const safeSlug = (s: string): string => slugify(translit(s, 1));
 
-export const createSlug: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
+export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
 
   if (node.internal.type === 'Mdx') {

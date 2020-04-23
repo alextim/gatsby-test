@@ -2,6 +2,7 @@
 slug: privacy
 title: Политика конфиденциальности
 featuredImage: ./gnifetti-alps-italy.jpg
+published: true
 ---
 Этот сайт сохраняет некоторые cookies.
 

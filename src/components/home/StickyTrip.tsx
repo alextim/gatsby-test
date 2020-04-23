@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTheme } from '@chakra-ui/core';
-import { Flex, Box, Link, Text } from '@chakra-ui/core';
+import { Flex, Box, Text } from '@chakra-ui/core';
 import Img from 'gatsby-image';
+import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 
 import { ITheme } from '../theme.d';
@@ -13,6 +14,7 @@ import useLatestPostsFeatured1 from '../../helpers/hooks/useLatestPostsFeatured1
 
 const Wrapper = styled(Box)`
   width: 100%;
+  margin-bottom: 1rem;
   ${(props) => (props.theme as ITheme).mediaQueries.md} {
     width: 50%;
   }
@@ -39,7 +41,7 @@ const StickyTrip = () => {
       <Flex flexWrap="wrap" shadow="lg" mx="1em" mb={['2em', '2em', '0']}>
         <Wrapper>
           {featuredImage && (
-            <Link href={path} mb="1em">
+            <Link to={path}>
               <Img fluid={featuredImage} alt={title} width="100%" height="auto" />
             </Link>
           )}

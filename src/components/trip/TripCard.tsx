@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import Img from 'gatsby-image';
-import { Box, Link, Heading } from '@chakra-ui/core';
+import { Link } from 'gatsby';
+import { Box, Heading } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 
 import { ITheme } from '../theme.d';
@@ -66,7 +67,7 @@ const TripCard = ({ trip }: Props) => {
     <Wrapper as="article">
       <InnerWrapper shadow="lg">
         <ImageWrap>
-          <Link href={path}>
+          <Link to={path}>
             {!featuredImage ? <Img fluid={dummy} alt={title} /> : <Img fluid={placeholder} alt={title} />}
           </Link>
           {isSale && <TripOffer />}
@@ -74,7 +75,7 @@ const TripCard = ({ trip }: Props) => {
 
         <Box p="1rem" textAlign="left">
           <Heading as="h3" mb="0.25rem" fontSize={['1.25rem', '1.5rem']}>
-            <Link href={path}>{title}</Link>
+            <Link to={path}>{title}</Link>
           </Heading>
           {showPrice
             ? lowestPrice && (

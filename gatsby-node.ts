@@ -15,5 +15,6 @@
 // https://www.extensive.one/converting-gatsby-config-and-node-api-to-typescript/
 // https://github.com/assainov/gatsby-extensive-starter-typescript
 
-export { createPages } from './src/helpers/node/createPages';
-export { createSlug as onCreateNode } from './src/helpers/node/createSlug';
+export { createPages } from './src/helpers/node/create-pages';
+export { createFields as onCreateNode } from './src/helpers/node/create-fields';
+export { createSearchIndex as onPostBootstrap } from './src/helpers/node/create-search-index';

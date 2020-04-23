@@ -56,28 +56,28 @@ interface IQueryResult {
 
 const allPostsQuery = `
   query {
-    allYYYYMM: allMdx {
+    allYYYYMM: allMdx(filter: { frontmatter: { published: { eq: true } } } ) {
       group(field: fields___yyyymm) {
         field
         fieldValue
         totalCount
       }
     }    
-    allCategories: allMdx {
+    allCategories: allMdx(filter: { frontmatter: { published: { eq: true } } } ) {
       group(field: fields___category) {
         field
         fieldValue
         totalCount
       }
     }
-    allTags: allMdx {
+    allTags: allMdx(filter: { frontmatter: { published: { eq: true } } } ) {
       group(field: fields___tag) {
         field
         fieldValue
         totalCount
       }
     }
-    allMarkdown: allMdx {
+    allMarkdown: allMdx(filter: { frontmatter: { published: { eq: true } } } ) {
       edges {
         node {
           id
