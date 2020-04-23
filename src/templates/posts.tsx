@@ -24,12 +24,13 @@ export const pageQuery = graphql`
           excerpt(pruneLength: 160)
           fields {
             slug
+            category
+            tag
           }
           frontmatter {
             date(formatString: "YYYY-MM-DD")
             path
             title
-            categories
             featuredImage {
               childImageSharp {
                 fluid(maxWidth: 800) {

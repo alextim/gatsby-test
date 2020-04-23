@@ -6,10 +6,10 @@ title: My first blog post
 description: ""
 featuredImage: ./test.jpg
 featured: true
-categories:
-  - News
+category:
+  - новости
   - Events
-tags:
+tag:
   - Portugal
   - Porto
 ---

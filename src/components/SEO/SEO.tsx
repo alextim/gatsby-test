@@ -42,14 +42,14 @@ const SEO = ({ title, description, pathname, image, type, date, locale, noindex 
     <>
       <Helmet>
         <html lang={locale} />
-        {/* General tags */}
+        {/* General */}
         <title>{metaTitle}</title>
         <link rel="canonical" href={url} />
         {noindex && <meta name="robots" content="noindex" />}
         <meta name="description" content={metaDescription} />
         {metaImage && <meta name="image" content={metaImage} />}
 
-        {/* OpenGraph tags */}
+        {/* OpenGraph */}
         <meta property="og:url" content={url} />
         <meta property="og:type" content={metaType} />
         <meta property="og:locale" content={locale} />
@@ -58,7 +58,7 @@ const SEO = ({ title, description, pathname, image, type, date, locale, noindex 
         {metaImage && <meta property="og:image" content={metaImage} />}
         {meta.social.fbAppID && <meta property="fb:app_id" content={meta.social.fbAppID} />}
 
-        {/* Twitter Card tags */}
+        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_metaImage" />
         {/* TODO: AUTHOR */}
         {meta.author && <meta name="twitter:creator" content={meta.author} />}

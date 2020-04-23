@@ -18,8 +18,9 @@ const shortcodes = { IconLink };
 
 const PostTemplate = ({ data, pageContext }) => {
   const { next, prev, pathname } = pageContext;
-  const { frontmatter, body, excerpt } = data.mdx; // , fields
-  const { title, description, date, featuredImage, tags, categories } = frontmatter;
+  const { fields, frontmatter, body, excerpt } = data.mdx; // , fields
+  const { tag, category } = fields;
+  const { title, description, date, featuredImage } = frontmatter;
   const featuredImgFluid = featuredImage ? featuredImage.childImageSharp.fluid : null;
   const imgSrc = featuredImgFluid ? featuredImgFluid.src : null;
   //const url = fields.slug;
@@ -38,9 +39,9 @@ const PostTemplate = ({ data, pageContext }) => {
       <article>
         <Flex direction="row" fontWeight={100} fontSize="0.9em">
           {date && <DateMeta date={date} />}
-          {categories && <CategoryMeta categories={categories} />}
+          {category && <CategoryMeta category={category} />}
         </Flex>
-        {tags && <TagMeta tags={tags} />}
+        {tag && <TagMeta tag={tag} />}
         {featuredImgFluid && <Img fluid={featuredImgFluid} alt={title} />}
         <MDXProvider components={shortcodes}>
           <MDXRenderer>{body}</MDXRenderer>
@@ -59,13 +60,14 @@ export const pageQuery = graphql`
       excerpt(pruneLength: 160)
       fields {
         slug
+        category
+        tag
       }
       frontmatter {
         date(formatString: "YYYY-MM-DD")
         path
         title
         description
-        categories
         featured
         featuredImage {
           childImageSharp {

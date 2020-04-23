@@ -6,7 +6,7 @@ interface IEdge {
     frontmatter: {
       title: string;
       date: string;
-      categories: any;
+      category: any;
       featuredImage: {
         childImageSharp: {
           fluid: any;
@@ -23,7 +23,7 @@ const useLatestPostsTop3 = (): Array<{
   title: string;
   path: string;
   date: any;
-  categories: any;
+  category: any;
   excerpt: any;
   featuredImage: any;
 }> => {
@@ -44,7 +44,7 @@ const useLatestPostsTop3 = (): Array<{
               path
               title
               date
-              categories
+              category
               featuredImage {
                 childImageSharp {
                   fluid(maxWidth: 800) {
@@ -60,12 +60,12 @@ const useLatestPostsTop3 = (): Array<{
   `);
 
   return data.allMdx.edges.map(({ node }: IEdge) => {
-    const { title, date, categories, featuredImage } = node.frontmatter;
+    const { title, date, category, featuredImage } = node.frontmatter;
     return {
       title,
       path: node.fields.slug,
       date,
-      categories,
+      category,
       excerpt: node.excerpt,
       featuredImage: featuredImage ? featuredImage.childImageSharp.fluid : null,
     };

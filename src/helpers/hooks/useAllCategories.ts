@@ -4,7 +4,7 @@ const useAllCategories = (): string[] => {
   const data = useStaticQuery(graphql`
     query AllCategoriesQuery {
       allMdx {
-        group(field: frontmatter___categories) {
+        group(field: frontmatter___category) {
           field
           fieldValue
           totalCount

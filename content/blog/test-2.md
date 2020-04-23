@@ -6,8 +6,14 @@ title: My second blog post
 description: ""
 featuredImage: 
 featured: false
-categories:
+category:
  - News
+ - news
+ - новости
+ - xxx
+tag:
+ - aa
+ - bb
 ---
 
 Has anyone heard about GatsbyJS yet?

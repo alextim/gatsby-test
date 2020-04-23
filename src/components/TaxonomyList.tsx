@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 
-import { mapKeysToTaxList } from './trip/helpers';
+import { getTaxonomyByName, sanitizeKeys } from '../helpers/taxonomy-helpers';
 
 const LinkWrap = styled.span`
   :after {
@@ -17,17 +17,18 @@ const LinkWrap = styled.span`
   }
 `;
 
-interface IProps {
-  taxonomyName: string;
+type Props = {
+  name: string;
   keys: string[];
-}
-const TaxonomyList: React.FC<IProps> = ({ taxonomyName, keys }) => {
-  const list = mapKeysToTaxList(taxonomyName, keys);
+};
+const TaxonomyList = ({ name, keys }: Props) => {
+  const tax = getTaxonomyByName(name);
+  const sanitized = sanitizeKeys(name, keys);
   return (
     <>
-      {list.map((item, i) => (
+      {sanitized.map((key, i) => (
         <LinkWrap key={i}>
-          <Link to={item.url}>{item.name}</Link>
+          <Link to={`/${name}/${key}`}>{tax[key]}</Link>
         </LinkWrap>
       ))}
     </>

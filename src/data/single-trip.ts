@@ -19,7 +19,7 @@ const singleTrip: Trip.ITrip = {
     'Фрирайд на лучшем горнолыжном курорте в мире, катание по подготовленным трассам для начинающих и опытных лыжников и сноубордистов.',
   season: ['winter', 'Spring', 'Осень'],
   activity: ['ski'],
-  destination: ['france', 'italy', 'Италия', 'Italy'],
+  destination: ['france', 'italy', 'Италия', 'Italy', 'xxx'],
 
   featuredImage: './a',
 

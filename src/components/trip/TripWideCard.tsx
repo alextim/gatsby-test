@@ -13,7 +13,7 @@ import TaxonomyList from '../TaxonomyList';
 import { TechLevel } from './ico-levels';
 import Price from './Price';
 import TripInfoItem from './TripInfoItem';
-import { getLowestPrice, /* mapKeysToTaxList, */ getDays, formatDuration, formatStartFinish } from './helpers';
+import { getLowestPrice, getDays, formatDuration, formatStartFinish } from './helpers';
 import useDefaultBannerImage from '../../helpers/hooks/useDefaultBannerImage';
 import usePlaceholderImage from '../../helpers/hooks/usePlaceholderImage';
 /**
@@ -198,11 +198,11 @@ const TripWideCard = ({ trip }: Props) => {
           <TaxonomiesWrapper>
             {difficultyLevel && <TechLevel level={difficultyLevel} mr={mr} />}
             <IconLink icon="map-marker-alt" mr={mr}>
-              <TaxonomyList taxonomyName="destination" keys={destination} />
+              <TaxonomyList name="destination" keys={destination} />
             </IconLink>
             {activity && (
               <IconLink icon={['far', 'folder-open']} mr={mr}>
-                <TaxonomyList taxonomyName="activity" keys={activity} />
+                <TaxonomyList name="activity" keys={activity} />
               </IconLink>
             )}
             {groupSize && (

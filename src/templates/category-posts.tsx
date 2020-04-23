@@ -18,8 +18,8 @@ export const pageQuery = graphql`
       limit: $limit
       sort: { fields: [frontmatter___date], order: DESC }
       filter: {
-        frontmatter: { published: { eq: true }, categories: { in: [$category] } }
-        fields: { type: { eq: "post" } }
+        frontmatter: { published: { eq: true } }
+        fields: { type: { eq: "post" }, category: { in: [$category] } }
       }
     ) {
       totalCount
@@ -27,6 +27,8 @@ export const pageQuery = graphql`
         node {
           fields {
             slug
+            category
+            tag
           }
           excerpt
           frontmatter {
@@ -39,8 +41,6 @@ export const pageQuery = graphql`
                 }
               }
             }
-            categories
-            tags
           }
         }
       }

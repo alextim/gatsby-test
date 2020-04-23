@@ -1,8 +1,9 @@
 import { GatsbyNode } from 'gatsby';
 import { parse as pathParse } from 'path';
 import { parseISO, formatISO } from 'date-fns';
-import siteConfig from '../../data/site-config';
 
+import siteConfig from '../../data/site-config';
+import { sanitizeKeys } from '../../helpers/taxonomy-helpers';
 /**
 //const moment = require('moment');
  *
@@ -17,14 +18,12 @@ import translit from '../../lib/translit';
 import slugify from '../../lib/slugify';
 
 interface INode {
-  fields: {
-    slug: string;
-    type: string;
-  };
   frontmatter: {
     title: string;
     slug: string;
     date: string;
+    category?: string[];
+    tag?: string[];
   };
 }
 
@@ -95,12 +94,24 @@ export const createSlug: GatsbyNode['onCreateNode'] = ({ node, actions, getNode 
     }
 
     let type;
+    let sanitizedCategory = new Array<string>();
+    let sanitizedTag = new Array<string>();
+
     if (fileNode.sourceInstanceName === 'pages') {
       type = 'page';
       slug = `/${slug}`;
     } else if (fileNode.sourceInstanceName === 'blog') {
       type = 'post';
       slug = `${siteConfig.blogUrlBase}/${slug}`;
+      const { category, tag } = (node as INode).frontmatter;
+
+      if (category) {
+        sanitizedCategory = sanitizeKeys('category', category);
+      }
+
+      if (tag) {
+        sanitizedTag = sanitizeKeys('tag', tag);
+      }
     } else {
       type = '';
       throw new Error('Unkonwn type: ' + fileNode.sourceInstanceName);
@@ -115,6 +126,18 @@ export const createSlug: GatsbyNode['onCreateNode'] = ({ node, actions, getNode 
       node,
       name: 'slug',
       value: slug,
+    });
+
+    createNodeField({
+      node,
+      name: 'category',
+      value: sanitizedCategory,
+    });
+
+    createNodeField({
+      node,
+      name: 'tag',
+      value: sanitizedTag,
     });
   }
 };

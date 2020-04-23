@@ -30,6 +30,8 @@ interface IEdge {
     fields: {
       slug: string;
       type: string;
+      category?: string[];
+      tag?: string[];
     };
     frontmatter: {
       title: string;
@@ -61,15 +63,15 @@ const allPostsQuery = `
         totalCount
       }
     }    
-    allTags: allMdx {
-      group(field: frontmatter___tags) {
+    allCategories: allMdx {
+      group(field: fields___category) {
         field
         fieldValue
         totalCount
       }
     }
-    allCategories: allMdx {
-      group(field: frontmatter___categories) {
+    allTags: allMdx {
+      group(field: fields___tag) {
         field
         fieldValue
         totalCount
@@ -234,7 +236,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
       group.totalCount,
       `/tag/${_.kebabCase(group.fieldValue)}`,
       {
-        group,
+        tag: group.fieldValue,
       },
       createPage,
     ),

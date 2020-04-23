@@ -3,7 +3,7 @@ import kebabCase from 'lodash/kebabCase';
 
 import IconMeta from '../IconMeta';
 import Utils from '../../lib/utils';
-import { getCategoryUrlAndNames } from '../../helpers/categoryHelper';
+import { getCategoryUrlAndNames } from '../../helpers/taxonomy-helpers';
 
 type DateMetaProps = {
   date: string;
@@ -13,19 +13,19 @@ const DateMeta = ({ date }: DateMetaProps) => (
 );
 
 type CategoryMetaProps = {
-  categories: string[];
+  category: string[];
 };
-const CategoryMeta = ({ categories }: CategoryMetaProps) => {
-  const categoryItems = getCategoryUrlAndNames(categories, 'category');
+const CategoryMeta = ({ category }: CategoryMetaProps) => {
+  const categoryItems = getCategoryUrlAndNames(category, 'category');
   return <IconMeta icon={['far', 'folder-open']} items={categoryItems} />;
 };
 
 type TagMetaProps = {
-  tags: string[];
+  tag: string[];
 };
-const TagMeta = ({ tags }: TagMetaProps) => {
+const TagMeta = ({ tag }: TagMetaProps) => {
   const base = 'tag';
-  const tagItems = tags.map((item) => ({
+  const tagItems = tag.map((item) => ({
     url: `/${base}/${kebabCase(item)}`,
     name: item,
   }));

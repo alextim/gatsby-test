@@ -19,7 +19,7 @@ type Props = {
     path: string;
     featuredImage?: any;
     date?: string;
-    categories?: any;
+    category?: any;
     excerpt?: string;
   };
 };
@@ -39,7 +39,7 @@ const PostCard = ({ post }: Props) => (
 
       <Flex direction="row" fontWeight={100} fontSize="0.9em">
         {post.date && <DateMeta date={post.date} />}
-        {post.categories && <CategoryMeta categories={post.categories} />}
+        {post.category && <CategoryMeta category={post.category} />}
       </Flex>
 
       <Text mt={4}>{post.excerpt}</Text>

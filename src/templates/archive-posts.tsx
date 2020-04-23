@@ -32,6 +32,8 @@ export const pageQuery = graphql`
           excerpt
           fields {
             slug
+            category
+            tag
           }
           frontmatter {
             title
@@ -43,8 +45,6 @@ export const pageQuery = graphql`
                 }
               }
             }
-            categories
-            tags
           }
         }
       }

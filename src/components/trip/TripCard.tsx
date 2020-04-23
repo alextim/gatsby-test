@@ -6,14 +6,13 @@ import styled from '@emotion/styled';
 import { ITheme } from '../theme.d';
 import { ITrip } from './trip.d';
 import siteConfig from '../../data/site-config';
+import { getLowestPrice } from './helpers';
+
 import IconLink from '../IconLink';
-import TripOffer from './TripOffer';
 import TaxonomyList from '../TaxonomyList';
+import TripOffer from './TripOffer';
 import Price from './Price';
-import {
-  getLowestPrice,
-  // mapKeysToTaxList
-} from './helpers';
+
 import useDefaultBannerImage from '../../helpers/hooks/useDefaultBannerImage';
 import usePlaceholderImage from '../../helpers/hooks/usePlaceholderImage';
 /**
@@ -89,11 +88,11 @@ const TripCard = ({ trip }: Props) => {
             : 'Цена по запросу'}
           <TaxonomiesWrapper>
             <IconLink icon="map-marker-alt">
-              <TaxonomyList taxonomyName="destination" keys={destination} />
+              <TaxonomyList name="destination" keys={destination} />
             </IconLink>
             {activity && (
               <IconLink icon={['far', 'folder-open']}>
-                <TaxonomyList taxonomyName="activity" keys={activity} />
+                <TaxonomyList name="activity" keys={activity} />
               </IconLink>
             )}
           </TaxonomiesWrapper>

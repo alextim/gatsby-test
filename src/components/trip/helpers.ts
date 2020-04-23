@@ -1,9 +1,8 @@
 import { IKeyValuePair } from '../../lib/types';
-import getKeyByValue from '../../lib/getKeyByValue';
 import Utils from '../../lib/utils';
 import { num2form } from '../../lib/num2form';
 
-import taxonomy from '../../data/taxonomy';
+import { getTaxonomyByName } from '../../helpers/taxonomy-helpers';
 
 import { ITrip } from './trip';
 import { LevelType, IPriceListItem, CurrencyNameType } from './trip';
@@ -14,12 +13,12 @@ export function getFitnessLevelTitle(level: LevelType): string {
     'Обычный уровень физической подготовки',
     'Высокий уровень физической подготовки',
     'Очень высокий уровень уровень физической подготовки',
-  ][Number(level) - 1];
+  ][((level as unknown) as number) - 1];
 }
 
 export function getTechLevelTitle(level: LevelType): string {
   return ['Легкий уровень сложности', 'Средний уровень сложности', 'Весьма сложно', 'Высокий уровень сложности'][
-    Number(level) - 1
+    ((level as unknown) as number) - 1
   ];
 }
 
@@ -32,7 +31,8 @@ export const getLowestPrice = (rows: Array<IPriceListItem>): IPriceListItem =>
   }, rows[0]);
 
 export const getCurrencySymbol = (currency: CurrencyNameType): string => {
-  const value = taxonomy.currency[(currency as unknown) as string];
+  const tax = getTaxonomyByName('currency');
+  const value = tax[(currency as unknown) as string];
   if (!value) {
     throw new Error(`getCurrencySymbol: "${currency}" not found`);
   }
@@ -68,27 +68,7 @@ export const formatStartFinish = (date: Date, duration: number): string => {
   return fmt.format(date) + ' - ' + fmt.format(finish);
 };
 
-export const mapKeysToTaxList = (name: string, keys: string[]) => {
-  const tax = taxonomy[name];
-  const unique = new Set(keys.map((key) => key.toLowerCase()));
-  const result = new Array<{ url: string; name: string }>();
-
-  unique.forEach((item) => {
-    const value = tax[item];
-    if (value) {
-      result.push({ url: `/${name}/${item}`, name: value });
-    } else {
-      const key = getKeyByValue(tax, item);
-      if (key && !unique.has(key)) {
-        result.push({ url: `/${name}/${key}`, name: tax[key] });
-      }
-    }
-  });
-
-  return result;
-};
-
-export const getDays = (trip: ITrip) => {
+export const getDays = (trip: ITrip): number => {
   const { itinerary, duration } = trip;
   if (itinerary && itinerary.dayItems) {
     return itinerary.dayItems.length;
