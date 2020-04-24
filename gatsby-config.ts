@@ -32,12 +32,6 @@ export default {
       },
     },
     {
-      resolve: 'gatsby-transformer-yaml',
-      options: {
-        typeName: 'Yaml', // a fixed string
-      },
-    },
-    {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/content/trips`,
@@ -99,12 +93,18 @@ export default {
         ],
       },
     },
+    {
+      resolve: 'gatsby-transformer-yaml',
+      options: {
+        typeName: 'Yaml', // a fixed string
+      },
+    },
     /*
     {
       resolve: 'gatsby-transformer-yaml-plus',
       options: {
         enableRemark: true,
-        markdownPreface: '!markdown |',
+        markdownPreface: 'md//',
       },
     },
     */
