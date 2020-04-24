@@ -3,7 +3,7 @@ import Img from 'gatsby-image';
 import { useDisclosure } from '@chakra-ui/core';
 
 import { ILink } from '../../../lib/types';
-import useDefaultBannerImage from '../../../helpers/hooks/useDefaultBannerImage';
+import usePlaceholderImage from '../../../helpers/hooks/usePlaceholderImage';
 import Layout from '../../Layout';
 import SEO from '../../SEO';
 import PrevNext from '../../PrevNext';
@@ -88,6 +88,8 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
     }
   };
 
+  const image = featuredImage ? featuredImage.childImageSharp.fluid : usePlaceholderImage();
+
   return (
     <Layout title={title} isPrint={isPrint}>
       <SEO
@@ -97,7 +99,9 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
         noindex={isPrint}
       />
       <HeadWrapper>
-        <LeftWrapper>{featuredImage && <Img fluid={useDefaultBannerImage()} />}</LeftWrapper>
+        <LeftWrapper>
+          <Img fluid={image} />
+        </LeftWrapper>
         <RightWrapper>
           <PriceWrapper>
             {showPrice

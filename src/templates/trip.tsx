@@ -4,16 +4,22 @@ import { graphql } from 'gatsby';
 import SingleTrip from '../components/trip/SingleTrip';
 
 const TripTemplate = ({ data, pageContext }) => (
-  <SingleTrip trip={data.testYaml} pageContext={pageContext} isPrint={false} />
+  <SingleTrip trip={data.yaml} pageContext={pageContext} isPrint={false} />
 );
-/*
+
 export const pageQuery = graphql`
   query TripById($id: String!) {
-    testYaml(id: { eq: $id }) {
+    yaml(id: { eq: $id }) {
       title
       description
       excerpt
-      featuredImage
+      featuredImage {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
       destination
       activity
       season
@@ -40,26 +46,33 @@ export const pageQuery = graphql`
       isDatesOnRequest
       dates {
         date
+        isSale
       }
       itinerary {
         dayItems {
+          title
           description
           images {
             alt
-            path
+            image {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
             width
           }
-          title
         }
         note
       }
-      supplementInfo
       equipment {
         list
         note
       }
+      supplementInfo
     }
   }
 `;
-*/
+
 export default TripTemplate;

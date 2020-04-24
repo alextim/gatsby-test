@@ -99,7 +99,6 @@ export default {
         ],
       },
     },
-    
     /*
     {
       resolve: 'gatsby-transformer-yaml-plus',

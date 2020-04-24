@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Img from 'gatsby-image';
-import { graphql, useStaticQuery } from 'gatsby';
 
 import { ITheme } from '../../../theme.d';
 
@@ -19,7 +18,6 @@ const ImagesWrap = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
   margin-top: 1rem;
 `;
 
@@ -29,45 +27,20 @@ const SingleImgWrap = styled.div`
 
 const DoubleImgWrap = styled.div`
   width: 100%;
-  padding-bottom: 1rem;
+  margin-bottom: 1rem;
   ${(props) => (props.theme as ITheme).mediaQueries.md} {
     width: 50%;
-    padding-right: 1rem;
+    :first-child {
+      padding-right: 0.5rem;
+    }
     :last-child {
-      padding-right: 0;
+      padding-left: 0.5rem;
     }
   }
 `;
 
 const Itinerary = ({ itinerary }: Props) => {
   const { subTitle, description, dayItems, note } = itinerary;
-  const q = graphql`
-    query {
-      bannerImage: file(relativePath: { eq: "gnifetti-alps-italy.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 1920) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      img1: file(relativePath: { eq: "le-brevent-frison-roche.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 800) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      img2: file(relativePath: { eq: "2.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 800) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-    }
-  `;
-  const data = useStaticQuery(q);
-
   return (
     <>
       {subTitle && <div>{subTitle}</div>}
@@ -80,18 +53,18 @@ const Itinerary = ({ itinerary }: Props) => {
               {day.title && ` - ${day.title}`}
             </h3>
             {day.description && <div dangerouslySetInnerHTML={{ __html: day.description }} />}
-            {day.images && day.images.length === 1 && (
+            {day.images && day.images.length === 1 && day.images[0].image && (
               <SingleImgWrap>
-                <Img fluid={data.bannerImage.childImageSharp.fluid} alt={day.images[0].alt} />
+                <Img fluid={day.images[0].image.childImageSharp.fluid} alt={day.images[0].alt} />
               </SingleImgWrap>
             )}
-            {day.images && day.images.length > 1 && (
+            {day.images && day.images.length > 1 && day.images[0].image && day.images[1].image && (
               <ImagesWrap>
                 <DoubleImgWrap>
-                  <Img fluid={data.img1.childImageSharp.fluid} alt={day.images[0].alt} />
+                  <Img fluid={day.images[0].image.childImageSharp.fluid} alt={day.images[0].alt} />
                 </DoubleImgWrap>
                 <DoubleImgWrap>
-                  <Img fluid={data.img2.childImageSharp.fluid} alt={day.images[1].alt} />
+                  <Img fluid={day.images[1].image.childImageSharp.fluid} alt={day.images[1].alt} />
                 </DoubleImgWrap>
               </ImagesWrap>
             )}

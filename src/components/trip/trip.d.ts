@@ -48,7 +48,7 @@ export interface IService {
 }
 
 export interface IItineraryImage {
-  path: string;
+  image: any;
   alt?: string;
   width?: number;
 }
@@ -80,7 +80,7 @@ export interface ITrip {
   metaDescription?: string; // 160
   description: string;
   excerpt?: string;
-  featuredImage?: string;
+  featuredImage?: any;
 
   season?: Array<string>;
   activity?: Array<string>;
