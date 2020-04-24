@@ -11,6 +11,7 @@ import _ from 'lodash';
 import postArchiveHelper from '../postArchiveHelper';
 import siteConfig from '../../data/site-config';
 
+const tripTemplate = resolve('./src/templates/trip.tsx');
 const pageTemplate = resolve('./src/templates/page.tsx');
 const postTemplate = resolve('./src/templates/post.tsx');
 const postsTemplate = resolve('./src/templates/posts.tsx');
@@ -22,6 +23,16 @@ interface IGroup {
   field: string;
   fieldValue: string;
   totalCount: number;
+}
+interface IYEdge {
+  node: {
+    id: string;
+    title: string;
+    fields: {
+      slug: string;
+      type: string;
+    };
+  };
 }
 
 interface IEdge {
@@ -51,6 +62,9 @@ interface IQueryResult {
   };
   allMarkdown: {
     edges: IEdge[];
+  };
+  allCollectionYaml: {
+    edges: IYEdge[];
   };
 }
 
@@ -87,6 +101,18 @@ const allPostsQuery = `
           }
           frontmatter {
             title
+          }
+        }
+      }
+    }
+    allCollectionYaml: allTestYaml {
+      edges {
+        node {
+          id
+          title
+          fields {
+            slug
+            type
           }
         }
       }
@@ -157,6 +183,48 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     return null;
   }
 
+  // TRIPS
+  const yaml = result.data.allCollectionYaml.edges;
+  console.log(yaml);
+  yaml.forEach(({ node }) => console.log(node.fields));
+  const trips = yaml.filter((item) => item.node.fields.type === 'trip');
+  trips.map((edge: IYEdge, index: number, arr: IYEdge[]) => {
+    const { node } = edge;
+    console.log('========================');
+    console.log('createTripsPages: ' + node.fields.slug);
+
+    const isFirst = index === 0;
+    const isLast = index === arr.length - 1;
+
+    let prev;
+    let next;
+
+    if (!isFirst) {
+      prev = {
+        name: arr[index - 1].node.title,
+        url: arr[index - 1].node.fields.slug,
+      };
+    }
+
+    if (!isLast) {
+      next = {
+        name: arr[index + 1].node.title,
+        url: arr[index + 1].node.fields.slug,
+      };
+    }
+
+    createPage({
+      path: node.fields.slug,
+      component: tripTemplate,
+      context: {
+        pathname: node.fields.slug,
+        id: node.id,
+        prev,
+        next,
+      },
+    });
+  });
+
   // PAGES
   const pages = result.data.allMarkdown.edges.filter((item) => item.node.fields.type === 'page');
   pages.map((edge: IEdge) => {
@@ -189,14 +257,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 
     if (!isFirst) {
       prev = {
-        title: arr[index - 1].node.frontmatter.title,
+        name: arr[index - 1].node.frontmatter.title,
         url: arr[index - 1].node.fields.slug,
       };
     }
 
     if (!isLast) {
       next = {
-        title: arr[index + 1].node.frontmatter.title,
+        name: arr[index + 1].node.frontmatter.title,
         url: arr[index + 1].node.fields.slug,
       };
     }

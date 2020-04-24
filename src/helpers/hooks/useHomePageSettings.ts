@@ -1,3 +1,5 @@
 import homePageSettings from '../../data/home-settings';
 
-export default () => homePageSettings;
+const useHomePageSettings = () => homePageSettings;
+
+export default useHomePageSettings;

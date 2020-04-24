@@ -46,9 +46,7 @@ const FeatureItemWrap = styled.div`
  * The Shapes of CSS
  * https://css-tricks.com/the-shapes-of-css/
  *
- *
  */
-
 const Burst12 = styled(Flex)`
   align-items: center;
   justify-content: center;

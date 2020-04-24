@@ -17,6 +17,10 @@ import { sanitizeKeys } from '../taxonomy-helpers';
 import translit from '../../lib/translit';
 import slugify from '../../lib/slugify';
 
+interface IYNode {
+  slug: string;
+}
+
 interface INode {
   frontmatter: {
     title: string;
@@ -139,5 +143,22 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
       name: 'tag',
       value: sanitizedTag,
     });
+  } else if (node.internal.type.slice(-4) === 'Yaml') {
+    const fileNode = getNode(node.parent);
+    // const parsedFilePath = pathParse(fileNode.relativePath);
+
+    if (fileNode.sourceInstanceName === 'trips') {
+      const slug = safeSlug((node as IYNode).slug);
+      createNodeField({
+        node,
+        name: 'type',
+        value: 'trip',
+      });
+      createNodeField({
+        node,
+        name: 'slug',
+        value: `${siteConfig.tripsUrlBase}/${slug}`,
+      });
+    }
   }
 };

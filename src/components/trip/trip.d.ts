@@ -68,6 +68,7 @@ export interface IItinerary {
 export interface ITrip {
   slug: string;
   title: string;
+  published: boolean;
   /**
    * Google - 60
    * FB     - 95
@@ -80,11 +81,11 @@ export interface ITrip {
   metaDescription?: string; // 160
   description: string;
   excerpt?: string;
+  featuredImage?: string;
 
   season?: Array<string>;
   activity?: Array<string>;
   destination: Array<string>;
-  featuredImage?: string;
 
   priceMode: PriceModeType;
   currency: CurrencyNameType;

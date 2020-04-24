@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
+
+import { ILink } from '../lib/types';
 import IconLink, { IconLinkR } from '../components/IconLink';
 
 const PrevNextWrap = styled.div`
@@ -8,29 +10,23 @@ const PrevNextWrap = styled.div`
   justify-content: space-between;
 `;
 
-interface ILink {
-  url: string;
-  title: string;
-}
-
-interface IProps {
-  prev: ILink;
-  next: ILink;
-}
-
-const PrevNext: React.FC<IProps> = ({ prev, next }) => (
+type Props = {
+  prev?: ILink;
+  next?: ILink;
+};
+const PrevNext = ({ prev, next }: Props) => (
   <PrevNextWrap>
     {prev && (
       <h3>
         <IconLink to={prev.url} rel="prev" icon="long-arrow-alt-left">
-          {prev.title}
+          {prev.name}
         </IconLink>
       </h3>
     )}
     {next && (
       <h3>
         <IconLinkR to={next.url} rel="next" icon="long-arrow-alt-right">
-          {next.title}
+          {next.name}
         </IconLinkR>
       </h3>
     )}

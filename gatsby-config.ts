@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 export default {
   siteMetadata: {
     title: 'Adrenalin-Travel',
@@ -28,6 +29,13 @@ export default {
       options: {
         path: `${__dirname}/content/pages`,
         name: 'pages',
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/content/trips`,
+        name: 'trips',
       },
     },
     {
@@ -90,12 +98,14 @@ export default {
       options: {
         plugins: [
           'gatsby-yaml-full-markdown', // Enable !markdown tags
+          /*
           {
             resolve: 'gatsby-yaml-full-file',
             options: {
               path: `${__dirname}/content/trips`, // If not set, the base path will be the current directory of the YAML file being
             },
           },
+          */
         ],
       },
     },

@@ -2,16 +2,19 @@ import React, { useRef, useState } from 'react';
 import Img from 'gatsby-image';
 import { useDisclosure } from '@chakra-ui/core';
 
+import { ILink } from '../../../lib/types';
+import useDefaultBannerImage from '../../../helpers/hooks/useDefaultBannerImage';
 import Layout from '../../Layout';
 import SEO from '../../SEO';
-import * as Trip from '../trip';
-
-import BookButton from './BookButton';
+import PrevNext from '../../PrevNext';
 import IconLink from '../../IconLink';
-
-import { TripTabs, TripPrintableDetails } from './tabs';
-import { formatStartFinish, getLowestPrice, getDaysAndDateItems } from '../helpers';
 import TripInquiryForm from '../../forms/TripInquiryForm';
+
+import { ITrip } from '../trip';
+import { formatStartFinish, getLowestPrice, getDaysAndDateItems } from '../helpers';
+import TripInfoItem from '../TripInfoItem';
+import Price from '../Price';
+
 import {
   HeadWrapper,
   LeftWrapper,
@@ -22,22 +25,23 @@ import {
   DatesBookWrapper,
   BodyWrapper,
 } from './wrappers';
-
-import TripInfoItem from '../TripInfoItem';
+import BookButton from './BookButton';
+import { TripTabs, TripPrintableDetails } from './tabs';
 
 // import PriceMeta from './PriceMeta';
 import Metas from './metas';
 
-import Price from '../Price';
-import useDefaultBannerImage from '../../../helpers/hooks/useDefaultBannerImage';
-
-//import PrevNext from '../PrevNext';
 type Props = {
-  trip: Trip.ITrip;
-  pathname: string;
+  trip: ITrip;
+  pageContext: {
+    prev?: ILink;
+    next?: ILink;
+    pathname: string;
+  };
   isPrint: boolean;
 };
-const SingleTrip = ({ trip, pathname, isPrint }: Props) => {
+const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
+  const { next, prev, pathname } = pageContext;
   const focusRef = useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -173,6 +177,7 @@ const SingleTrip = ({ trip, pathname, isPrint }: Props) => {
           </>
         )}
       </BodyWrapper>
+      {!isPrint && <PrevNext prev={prev} next={next} />}
     </Layout>
   );
 };

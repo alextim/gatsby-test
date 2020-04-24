@@ -3,19 +3,16 @@ import { Link } from 'gatsby';
 import { Box } from '@chakra-ui/core';
 import { IconPrefix, IconName } from '@fortawesome/fontawesome-common-types';
 
+import { ILink } from '../lib/types';
+
 import IconLink from './IconLink';
 
-interface IItem {
-  name: string;
-  url: string;
-}
-
-interface IProps {
+type Props = {
   icon: IconName | [IconPrefix, IconName];
-  items: Array<IItem> | string;
-}
+  items: Array<ILink> | string;
+};
 
-const IconMeta: React.FC<IProps> = ({ icon, items }) => (
+const IconMeta = ({ icon, items }: Props) => (
   <IconLink icon={icon} mr="0.75em">
     {Array.isArray(items) ? (
       items.map((item, i) => (

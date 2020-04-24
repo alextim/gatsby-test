@@ -3,6 +3,7 @@ import * as Trip from '../components/trip/trip';
 const singleTrip: Trip.ITrip = {
   slug: 'courchevel-couloirs-les-3-vallees-freeride',
   title: 'Кулуары Куршевеля - фрирайд в Трех Долинах',
+  published: true,
   /**
    * Google - 60
    * FB     - 95
