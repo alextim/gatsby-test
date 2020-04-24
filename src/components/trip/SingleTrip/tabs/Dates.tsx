@@ -12,11 +12,11 @@ type Props = {
   showPrice: boolean;
   lowest?: IPriceListItem;
   currency: CurrencyNameType;
-  isSale: boolean;
+  enableSale: boolean;
   openFormHandler?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Dates = ({ dates, duration, showPrice, lowest, currency, isSale, openFormHandler }: Props) => {
+const Dates = ({ dates, duration, showPrice, lowest, currency, enableSale, openFormHandler }: Props) => {
   const fmt = new Intl.DateTimeFormat('ru');
   return (
     <ViewModeContext.Consumer>
@@ -31,18 +31,19 @@ const Dates = ({ dates, duration, showPrice, lowest, currency, isSale, openFormH
             </tr>
           </thead>
           <tbody>
-            {dates.map((start, i) => {
-              const finish = getFinishDate(start.date, duration);
+            {dates.map((item, i) => {
+              const startDate = new Date(item.date);
+              const finishDate = getFinishDate(startDate, duration);
               return (
                 <tr key={i}>
-                  <td>{fmt.format(start.date)}</td>
-                  <td>{fmt.format(finish)}</td>
+                  <td>{fmt.format(startDate)}</td>
+                  <td>{fmt.format(finishDate)}</td>
                   <td>
                     {showPrice && lowest ? (
                       <Price
                         price={lowest.price}
                         currency={currency}
-                        isSale={isSale && start.isSale}
+                        isSale={enableSale && item.isSale}
                         salePrice={lowest.salePrice}
                       />
                     ) : (

@@ -39,7 +39,6 @@ export interface IPriceListItem {
   qty: number;
   price: number;
   salePrice?: number;
-  isSale: boolean;
 }
 
 export interface IService {
@@ -89,7 +88,7 @@ export interface ITrip {
 
   priceMode: PriceModeType;
   currency: CurrencyNameType;
-  isSale: boolean;
+  enableSale: boolean;
   priceList?: Array<IPriceListItem>;
 
   service?: IService;

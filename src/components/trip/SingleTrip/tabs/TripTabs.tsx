@@ -22,13 +22,16 @@ type Props = {
 const TripTabs = ({ trip, days, showPrice, showPriceList, lowestPrice, focusRef, openFormHandler }: Props) => {
   const {
     currency,
-    isSale,
+    enableSale,
     priceList,
 
     itinerary,
     service,
     isDatesOnRequest,
     dates,
+
+    equipment,
+    supplementInfo,
   } = trip;
 
   return (
@@ -55,12 +58,12 @@ const TripTabs = ({ trip, days, showPrice, showPriceList, lowestPrice, focusRef,
             </div>
           </Tab>
         )}
-        {trip.equipment && (
+        {equipment && (
           <Tab>
             <TabHeading icon="tshirt">Снаряжение</TabHeading>
           </Tab>
         )}
-        {trip.supplementInfo && (
+        {supplementInfo && (
           <Tab>
             <TabHeading icon="info">Доп.информация</TabHeading>
           </Tab>
@@ -74,7 +77,9 @@ const TripTabs = ({ trip, days, showPrice, showPriceList, lowestPrice, focusRef,
         )}
         {(showPriceList || service) && (
           <TabPanel>
-            {showPriceList && priceList && <PriceList priceList={priceList} isSale={isSale} currency={currency} />}
+            {showPriceList && priceList && (
+              <PriceList priceList={priceList} enableSale={enableSale} currency={currency} />
+            )}
             {service && <Service service={service} />}
           </TabPanel>
         )}
@@ -86,7 +91,7 @@ const TripTabs = ({ trip, days, showPrice, showPriceList, lowestPrice, focusRef,
               showPrice={showPrice}
               lowest={lowestPrice}
               currency={currency}
-              isSale={isSale}
+              enableSale={enableSale}
               openFormHandler={openFormHandler}
             />
             <div>
@@ -94,14 +99,14 @@ const TripTabs = ({ trip, days, showPrice, showPriceList, lowestPrice, focusRef,
             </div>
           </TabPanel>
         )}
-        {trip.equipment && (
+        {equipment && (
           <TabPanel>
-            <Equipment equipment={trip.equipment} />
+            <Equipment equipment={equipment} />
           </TabPanel>
         )}
-        {trip.supplementInfo && (
+        {supplementInfo && (
           <TabPanel>
-            <div dangerouslySetInnerHTML={{ __html: trip.supplementInfo }} />
+            <div dangerouslySetInnerHTML={{ __html: supplementInfo }} />
           </TabPanel>
         )}
       </TabPanels>

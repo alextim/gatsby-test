@@ -6,7 +6,7 @@ import SingleTrip from '../components/trip/SingleTrip';
 const TripTemplate = ({ data, pageContext }) => (
   <SingleTrip trip={data.testYaml} pageContext={pageContext} isPrint={false} />
 );
-
+/*
 export const pageQuery = graphql`
   query TripById($id: String!) {
     testYaml(id: { eq: $id }) {
@@ -24,9 +24,8 @@ export const pageQuery = graphql`
       fitnessLevel
       priceMode
       currency
-      isSale
+      enableSale
       priceList {
-        isSale
         price
         qty
         salePrice
@@ -39,6 +38,9 @@ export const pageQuery = graphql`
       duration
       isShowNights
       isDatesOnRequest
+      dates {
+        date
+      }
       itinerary {
         dayItems {
           description
@@ -52,8 +54,12 @@ export const pageQuery = graphql`
         note
       }
       supplementInfo
+      equipment {
+        list
+        note
+      }
     }
   }
 `;
-
+*/
 export default TripTemplate;

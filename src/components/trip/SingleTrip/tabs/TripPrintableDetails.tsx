@@ -24,7 +24,7 @@ type Props = {
 const TripPrintableDetails = ({ trip, days, showPrice, showPriceList, lowestPrice }: Props) => {
   const {
     currency,
-    isSale,
+    enableSale,
     priceList,
 
     itinerary,
@@ -44,7 +44,7 @@ const TripPrintableDetails = ({ trip, days, showPrice, showPriceList, lowestPric
       {(showPriceList || service) && (
         <ItemWrapper>
           <TabHeading icon="money-bill-alt">Цена</TabHeading>
-          {showPriceList && priceList && <PriceList priceList={priceList} isSale={isSale} currency={currency} />}
+          {showPriceList && priceList && <PriceList priceList={priceList} enableSale={enableSale} currency={currency} />}
           {service && <Service service={service} />}
         </ItemWrapper>
       )}
@@ -57,7 +57,7 @@ const TripPrintableDetails = ({ trip, days, showPrice, showPriceList, lowestPric
             showPrice={showPrice}
             lowest={lowestPrice}
             currency={currency}
-            isSale={isSale}
+            enableSale={enableSale}
           />
           <div>
             <em>Вы можете заказать путешествие и в другие даты</em>

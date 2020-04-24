@@ -52,6 +52,11 @@ const BodyWrapper = styled.div`
   margin-bottom: 1rem;
 `;
 
+const DescriptionWrapper = styled.div`
+  text-align: justify;
+  margin-bottom: 1.5rem;
+`;
+
 export {
   HeadWrapper,
   LeftWrapper,
@@ -61,4 +66,5 @@ export {
   BookWrapper,
   DatesBookWrapper,
   BodyWrapper,
+  DescriptionWrapper,
 };

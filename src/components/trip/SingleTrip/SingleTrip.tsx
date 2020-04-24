@@ -24,6 +24,7 @@ import {
   BookWrapper,
   DatesBookWrapper,
   BodyWrapper,
+  DescriptionWrapper,
 } from './wrappers';
 import BookButton from './BookButton';
 import { TripTabs, TripPrintableDetails } from './tabs';
@@ -54,7 +55,7 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
 
     priceMode,
     currency,
-    isSale,
+    enableSale,
     priceList,
 
     isDatesOnRequest,
@@ -107,7 +108,7 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
                       <Price
                         price={lowestPrice.price}
                         currency={currency}
-                        isSale={isSale}
+                        isSale={enableSale}
                         salePrice={lowestPrice.salePrice}
                       />
                     }
@@ -124,7 +125,7 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
                 <TripInfoItem label="Даты поездок" value="по запросу" />
               ) : (
                 <>
-                  <TripInfoItem label="Ближайшая поездка" value={formatStartFinish(dates[0].date, days)} />
+                  <TripInfoItem label="Ближайшая поездка" value={formatStartFinish(new Date(dates[0].date), days)} />
                   {dates.length > 1 && !isPrint && (
                     <IconLink icon={['far', 'eye']} to="#" onClick={handleGoToDatesTab}>
                       другие даты
@@ -152,6 +153,7 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
       </HeadWrapper>
 
       <BodyWrapper>
+        {description && <DescriptionWrapper dangerouslySetInnerHTML={{ __html: description }} />}
         {isPrint ? (
           <TripPrintableDetails
             trip={trip}

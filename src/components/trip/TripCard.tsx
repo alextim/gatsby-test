@@ -55,7 +55,7 @@ type Props = {
 };
 
 const TripCard = ({ trip }: Props) => {
-  const { slug, featuredImage, title, destination, activity, currency, isSale, priceMode, priceList } = trip;
+  const { slug, featuredImage, title, destination, activity, currency, enableSale, priceMode, priceList } = trip;
   const path = `/${siteConfig.tripsUrlBase}/${slug}`;
 
   const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
@@ -70,7 +70,7 @@ const TripCard = ({ trip }: Props) => {
           <Link to={path}>
             {!featuredImage ? <Img fluid={dummy} alt={title} /> : <Img fluid={placeholder} alt={title} />}
           </Link>
-          {isSale && <TripOffer />}
+          {enableSale && <TripOffer />}
         </ImageWrap>
 
         <Box p="1rem" textAlign="left">
@@ -82,7 +82,7 @@ const TripCard = ({ trip }: Props) => {
                 <Price
                   price={lowestPrice.price}
                   currency={currency}
-                  isSale={isSale}
+                  isSale={enableSale}
                   salePrice={lowestPrice.salePrice}
                 />
               )

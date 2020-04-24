@@ -87,13 +87,13 @@ export const getDaysAndDateItems = (trip: ITrip) => {
   let dateItems: Array<IKeyValuePair> | undefined;
   if (!isDatesOnRequest && dates) {
     const fmt = new Intl.DateTimeFormat('ru');
-    dateItems = dates.map(
-      (start) =>
-        ({
-          key: fmt.format(start.date),
-          value: formatStartFinish(start.date, days),
-        } as IKeyValuePair),
-    );
+    dateItems = dates.map((item) => {
+      const startDate = new Date(item.date);
+      return {
+        key: fmt.format(startDate),
+        value: formatStartFinish(startDate, days),
+      } as IKeyValuePair;
+    });
   }
   return { days, dateItems };
 };

@@ -157,7 +157,7 @@ const TripWideCard = ({ trip }: Props) => {
 
     priceMode,
     currency,
-    isSale,
+    enableSale,
     priceList,
 
     isDatesOnRequest,
@@ -185,7 +185,7 @@ const TripWideCard = ({ trip }: Props) => {
               <Link to={path}>
                 {!featuredImage ? <Img fluid={dummy} alt={title} /> : <Img fluid={placeholder} alt={title} />}
               </Link>
-              {isSale && <TripOffer />}
+              {enableSale && <TripOffer />}
             </ImageWrap>
             <TextWrap>
               <Heading as="h2" mb="0.25rem" fontSize={['1.25rem', '1.5rem']}>
@@ -225,7 +225,7 @@ const TripWideCard = ({ trip }: Props) => {
                   <Price
                     price={lowestPrice.price}
                     currency={currency}
-                    isSale={isSale}
+                    isSale={enableSale}
                     salePrice={lowestPrice.salePrice}
                   />
                 )

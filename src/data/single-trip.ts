@@ -26,12 +26,12 @@ const singleTrip: Trip.ITrip = {
 
   priceMode: (2 as unknown) as Trip.PriceModeType,
   currency: ('EUR' as unknown) as Trip.CurrencyNameType,
-  isSale: true,
+  enableSale: true,
   priceList: [
-    { qty: 6, price: 700, salePrice: 400, isSale: true },
-    { qty: 5, price: 790, salePrice: 500, isSale: true },
-    { qty: 4, price: 950, salePrice: 800, isSale: false },
-    { qty: 3, price: 1200, salePrice: 1000, isSale: true },
+    { qty: 6, price: 700, salePrice: 400 },
+    { qty: 5, price: 790, salePrice: 500 },
+    { qty: 4, price: 950, salePrice: 800 },
+    { qty: 3, price: 1200, salePrice: 1000 },
   ],
 
   service: {

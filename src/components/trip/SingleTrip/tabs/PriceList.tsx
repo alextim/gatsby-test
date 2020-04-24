@@ -6,10 +6,10 @@ import Price from '../../Price';
 type Props = {
   priceList: Array<IPriceListItem>;
   currency: CurrencyNameType;
-  isSale: boolean;
+  enableSale: boolean;
 };
 
-const PriceList = ({ priceList, currency, isSale }: Props) => {
+const PriceList = ({ priceList, currency, enableSale }: Props) => {
   return (
     <>
       <table className="price-list-table table table-striped table-hover">
@@ -24,7 +24,7 @@ const PriceList = ({ priceList, currency, isSale }: Props) => {
             <tr key={i}>
               <td>{row.qty}</td>
               <td>
-                <Price price={row.price} currency={currency} isSale={isSale && row.isSale} salePrice={row.salePrice} />
+                <Price price={row.price} currency={currency} isSale={enableSale} salePrice={row.salePrice} />
               </td>
             </tr>
           ))}

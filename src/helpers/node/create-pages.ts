@@ -63,9 +63,11 @@ interface IQueryResult {
   allMarkdown: {
     edges: IEdge[];
   };
+  /*
   allCollectionYaml: {
     edges: IYEdge[];
   };
+  */
 }
 
 const allPostsQuery = `
@@ -105,6 +107,9 @@ const allPostsQuery = `
         }
       }
     }
+  }
+`;
+/*
     allCollectionYaml: allTestYaml {
       edges {
         node {
@@ -117,8 +122,7 @@ const allPostsQuery = `
         }
       }
     }
-  }
-`;
+*/
 
 /* eslint max-params: [1, 5] */
 const createPaginationPages = (
@@ -182,7 +186,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   if (result.data === undefined) {
     return null;
   }
-
+/*
   // TRIPS
   const yaml = result.data.allCollectionYaml.edges;
   console.log(yaml);
@@ -224,7 +228,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
       },
     });
   });
-
+*/
   // PAGES
   const pages = result.data.allMarkdown.edges.filter((item) => item.node.fields.type === 'page');
   pages.map((edge: IEdge) => {
