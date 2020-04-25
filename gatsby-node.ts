@@ -18,3 +18,5 @@
 export { createPages } from './src/helpers/node/create-pages';
 export { createFields as onCreateNode } from './src/helpers/node/create-fields';
 export { createSearchIndex as onPostBootstrap } from './src/helpers/node/create-search-index';
+const hello = () => console.log('sourceNodes - WWWWWWWWWWWWWWWWWWWWWWWWWWW');
+export { hello as sourceNodes };

@@ -41,6 +41,7 @@ const safeSlug = (s: string): string => slugify(translit(s, 1));
 export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
   if (node.internal.type === 'Mdx') {
+    console.log('onCreateNode - Mdx WWWWWWWWWWWWWWWWWWWWWWWWWWW');
     /*
     if (node.fileAbsolutePath != null) {
       const matcher = /posts\/\d{4}-\d{2}-\d{2}-(.+?)\/index.md$/;
@@ -148,6 +149,7 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
       value: sanitizedTag,
     });
   } else if (node.internal.type === 'Yaml') {
+    console.log('onCreateNode - Yaml WWWWWWWWWWWWWWWWWWWWWWWWWWW');
     const fileNode = getNode(node.parent);
     if (fileNode.sourceInstanceName === 'trips') {
       const slug = safeSlug((node as ITripNode).slug);

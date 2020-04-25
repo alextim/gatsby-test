@@ -198,6 +198,7 @@ const createPaginationPages = (
 };
 
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
+  console.log('createPages - WWWWWWWWWWWWWWWWWWWWWWWWWWW');
   const { createPage } = actions;
   const result = await graphql<IQueryResult>(allPostsQuery);
 
