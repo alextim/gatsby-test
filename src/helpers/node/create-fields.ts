@@ -1,11 +1,12 @@
 import { GatsbyNode } from 'gatsby';
 import { parse as pathParse } from 'path';
-import { parseISO, formatISO } from 'date-fns';
+import moment from 'moment';
 
 import siteConfig from '../../data/site-config';
 import { sanitizeKeys } from '../taxonomy-helpers';
 /**
-//const moment = require('moment');
+ * // import { parseISO, formatISO } from 'date-fns';
+
  *
  * TODO: moment
  * https://github.com/you-dont-need/You-Dont-Need-Momentjs
@@ -17,11 +18,15 @@ import { sanitizeKeys } from '../taxonomy-helpers';
 import translit from '../../lib/translit';
 import slugify from '../../lib/slugify';
 
-interface IYNode {
+interface ITripNode {
   slug: string;
 }
 
-interface INode {
+interface ITaxNode {
+  key: string;
+}
+
+interface IMdNode {
   frontmatter: {
     title: string;
     slug: string;
@@ -35,7 +40,6 @@ const safeSlug = (s: string): string => slugify(translit(s, 1));
 
 export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
-
   if (node.internal.type === 'Mdx') {
     /*
     if (node.fileAbsolutePath != null) {
@@ -58,7 +62,7 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
       Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
       Object.prototype.hasOwnProperty.call(node.frontmatter, 'title')
     ) {
-      slug = safeSlug((node as INode).frontmatter.title);
+      slug = safeSlug((node as IMdNode).frontmatter.title);
     } else if (parsedFilePath.name !== 'index' && parsedFilePath.dir !== '') {
       slug = `${safeSlug(parsedFilePath.dir)}/${safeSlug(parsedFilePath.name)}`;
     } else if (parsedFilePath.dir === '') {
@@ -69,19 +73,19 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
 
     if (Object.prototype.hasOwnProperty.call(node, 'frontmatter')) {
       if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug')) {
-        slug = safeSlug((node as INode).frontmatter.slug);
+        slug = safeSlug((node as IMdNode).frontmatter.slug);
       }
 
       if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'date')) {
-        // const date = moment(node.frontmatter.date, siteConfig.dateFromFormat);
-        const date = parseISO((node as INode).frontmatter.date);
-        // if (!date.isValid) {
-        if (String(date) === 'Invalid Date') {
+        // const date = parseISO((node as IMdNode).frontmatter.date);
+        // if (String(date) === 'Invalid Date') {
+        const date = moment((node as IMdNode).frontmatter.date, siteConfig.dateFromFormat);
+        if (!date.isValid) {
           console.warn('WARNING: Invalid date.', node.frontmatter);
         }
 
-        // const isoDate = date.toISOString();
-        const isoDate = formatISO(date);
+        const isoDate = date.toISOString();
+        // const isoDate = formatISO(date);
         createNodeField({
           node,
           name: 'date',
@@ -107,7 +111,7 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
     } else if (fileNode.sourceInstanceName === 'blog') {
       type = 'post';
       slug = `${siteConfig.blogUrlBase}/${slug}`;
-      const { category, tag } = (node as INode).frontmatter;
+      const { category, tag } = (node as IMdNode).frontmatter;
 
       if (category) {
         sanitizedCategory = sanitizeKeys('category', category);
@@ -143,12 +147,10 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
       name: 'tag',
       value: sanitizedTag,
     });
-  } else if (node.internal.type.slice(-4) === 'Yaml') {
+  } else if (node.internal.type === 'Yaml') {
     const fileNode = getNode(node.parent);
-    // const parsedFilePath = pathParse(fileNode.relativePath);
-
     if (fileNode.sourceInstanceName === 'trips') {
-      const slug = safeSlug((node as IYNode).slug);
+      const slug = safeSlug((node as ITripNode).slug);
       createNodeField({
         node,
         name: 'type',
@@ -158,6 +160,24 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
         node,
         name: 'slug',
         value: `${siteConfig.tripsUrlBase}/${slug}`,
+      });
+    } else if (fileNode.sourceInstanceName === 'taxonomy') {
+      createNodeField({
+        node,
+        name: 'type',
+        value: 'taxonomy',
+      });
+      const parsedFilePath = pathParse(fileNode.relativePath);
+      const slug = `/${parsedFilePath.name}/${(node as ITaxNode).key}`;
+      createNodeField({
+        node,
+        name: 'slug',
+        value: slug,
+      });
+      createNodeField({
+        node,
+        name: 'taxonomy',
+        value: parsedFilePath.name,
       });
     }
   }

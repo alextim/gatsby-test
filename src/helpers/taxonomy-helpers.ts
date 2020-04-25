@@ -1,16 +1,60 @@
 import taxonomy from '../data/taxonomy';
-
+//import useTaxonomy from '../helpers/hooks/useTaxonomy';
 import getKeyByValue from '../lib/getKeyByValue';
-import translit from '../lib/translit';
-import slugify from '../lib/slugify';
 
-const getSafeCategorySlug = (s: string): string => {
-  const key = getKeyByValue(taxonomy.category, s.toLowerCase());
-  const path = key || s;
-  return slugify(translit(path, 1));
+const createTaxonomy = (edges: any) => {
+  // const edges = useTaxonomy();
+  const tax = new Set<string>();
+  edges.forEach((e: any) => tax.add(e.node.fields.taxonomy));
+
+  const a = [...tax];
+  const o = a.reduce(
+    (o: {}, term: string) => ({
+      ...o,
+      [term]: edges
+        .filter((e: any) => e.node.fields.taxonomy === term)
+        .reduce((o: {}, e: any) => ({ ...o, [e.node.key]: e.node.value }), {}),
+    }),
+    {},
+  );
+  return o;
 };
 
-const getTaxonomyByName = (name: string) => taxonomy[name];
+const getTaxonomyByName = (name: string) => {
+  /*
+  const edges = useTaxonomy();
+  const tax = new Set<string>();
+  edges.forEach((e: any) => tax.add(e.node.fields.taxonomy));
+  if (!tax.has(name)) {
+    throw new Error(`Unknown taxonomy name: "${name}"`);
+  }
+  const a = [...tax];
+  const o = a.reduce(
+    (o: {}, term: string) => ({
+      ...o,
+      [term]: edges
+        .filter((e: any) => e.node.fields.taxonomy === term)
+        .reduce((o: {}, e: any) => ({ ...o, [e.node.key]: e.node.value }), {}),
+    }),
+    {},
+  );
+  console.log(o);
+  */
+  return taxonomy[name];
+  /*
+  const edges = useTaxonomy();
+  const taxonomy = new Set();
+
+  edges.forEach(({ node }: any) => taxonomy.add(node.fields.taxonomy));
+  if (!taxonomy.has(name)) {
+    throw new Error(`Unknown taxonomy name: "${name}"`);
+  }
+
+  const obj = edges.reduce((o: {}, e: any) => ({ ...o, [e.node.key]: e.node.value }), {});
+
+  return obj;
+  */
+};
 
 function getTaxUrlAndNames(
   name: string,
@@ -42,4 +86,4 @@ const sanitizeKeys = (name: string, keys: Array<string>): Array<string> => {
 
   return result;
 };
-export { getSafeCategorySlug, getTaxUrlAndNames, getTaxonomyByName, sanitizeKeys };
+export { createTaxonomy, getTaxUrlAndNames, getTaxonomyByName, sanitizeKeys };

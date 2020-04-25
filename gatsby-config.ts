@@ -41,6 +41,13 @@ export default {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
+        path: `${__dirname}/content/taxonomy`,
+        name: 'taxonomy',
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
         name: 'images',
         path: `${__dirname}/src/images`,
       },
@@ -99,33 +106,6 @@ export default {
         typeName: 'Yaml', // a fixed string
       },
     },
-    /*
-    {
-      resolve: 'gatsby-transformer-yaml-plus',
-      options: {
-        enableRemark: true,
-        markdownPreface: 'md//',
-      },
-    },
-    */
-    /*    
-    {
-      resolve: 'gatsby-transformer-yaml-full',
-      options: {
-        plugins: [
-          'gatsby-yaml-full-markdown', // Enable !markdown tags
-
-          {
-            resolve: 'gatsby-yaml-full-file',
-            options: {
-              path: `${__dirname}/content/trips`, // If not set, the base path will be the current directory of the YAML file being
-            },
-          },
-
-        ],
-      },
-    },
-    */
     {
       resolve: 'gatsby-plugin-chakra-ui',
       options: {

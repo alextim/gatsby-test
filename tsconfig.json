@@ -7,7 +7,7 @@
       "target": "esnext",
       "jsx": "react",
       "allowJs": true,
-      "lib": ["dom", "esnext"],
+      "lib": ["dom", "es6", "esnext"],
       "isolatedModules": true,
       "esModuleInterop": true,
       "noImplicitAny": true,

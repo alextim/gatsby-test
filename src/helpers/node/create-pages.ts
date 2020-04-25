@@ -10,6 +10,7 @@ import _ from 'lodash';
 // const catHelper = require('./../categoryHelper');
 import postArchiveHelper from '../postArchiveHelper';
 import siteConfig from '../../data/site-config';
+import { createTaxonomy } from '../taxonomy-helpers';
 
 const tripTemplate = resolve('./src/templates/trip.tsx');
 const pageTemplate = resolve('./src/templates/page.tsx');
@@ -24,7 +25,7 @@ interface IGroup {
   fieldValue: string;
   totalCount: number;
 }
-interface IYEdge {
+interface ITripEdge {
   node: {
     id: string;
     title: string;
@@ -34,8 +35,20 @@ interface IYEdge {
     };
   };
 }
+interface ITaxonomyEdge {
+  node: {
+    id: string;
+    value: string;
+    key: string;
+    fields: {
+      slug: string;
+      type: string;
+      taxonomy: string;
+    };
+  };
+}
 
-interface IEdge {
+interface IMdEdge {
   node: {
     id: string;
     fields: {
@@ -61,10 +74,13 @@ interface IQueryResult {
     group: IGroup[];
   };
   allMarkdown: {
-    edges: IEdge[];
+    edges: IMdEdge[];
   };
-  allCollectionYaml: {
-    edges: IYEdge[];
+  allTripsYaml: {
+    edges: ITripEdge[];
+  };
+  allTaxonomyYaml: {
+    edges: ITaxonomyEdge[];
   };
 }
 
@@ -105,14 +121,26 @@ const allPostsQuery = `
         }
       }
     }
-    allCollectionYaml: allYaml {
+    allTaxonomyYaml: allYaml(filter: { fields: { type: { eq: "taxonomy" } } } ) {
+      edges {
+        node {
+          id
+          key
+          value
+          fields {
+            slug
+            taxonomy
+          }
+        }
+      }
+    }
+    allTripsYaml: allYaml(filter: { fields: { type: { eq: "trip" } } } ) {
       edges {
         node {
           id
           title
           fields {
             slug
-            type
           }
         }
       }
@@ -183,12 +211,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     return null;
   }
 
+  // TAXONOMY
+  const taxEdges = result.data.allTaxonomyYaml.edges;
+  console.log('=========TAXONOMY===============');
+  console.log(createTaxonomy(taxEdges));
+
   // TRIPS
-  const yaml = result.data.allCollectionYaml.edges;
-  console.log(yaml);
-  yaml.forEach(({ node }) => console.log(node.fields));
-  const trips = yaml.filter((item) => item.node.fields.type === 'trip');
-  trips.map((edge: IYEdge, index: number, arr: IYEdge[]) => {
+  const trips = result.data.allTripsYaml.edges;
+  trips.map((edge: ITripEdge, index: number, arr: ITripEdge[]) => {
     const { node } = edge;
     console.log('========================');
     console.log('createTripsPages: ' + node.fields.slug);
@@ -227,7 +257,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 
   // PAGES
   const pages = result.data.allMarkdown.edges.filter((item) => item.node.fields.type === 'page');
-  pages.map((edge: IEdge) => {
+  pages.map((edge: IMdEdge) => {
     const { node } = edge;
     console.log('========================');
     console.log('createPages: ' + node.fields.slug);
@@ -244,7 +274,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   //
   // INDIVIDUAL POST PAGE
   const posts = result.data.allMarkdown.edges.filter((item) => item.node.fields.type === 'post');
-  posts.map((edge: IEdge, index: number, arr: IEdge[]) => {
+  posts.map((edge: IMdEdge, index: number, arr: IMdEdge[]) => {
     const { node } = edge;
     console.log('========================');
     console.log('createPostPages: ' + node.fields.slug);

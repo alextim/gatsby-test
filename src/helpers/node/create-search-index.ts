@@ -38,7 +38,7 @@ export const createSearchIndex: GatsbyNode['onPostBootstrap'] = ({ getNodes, get
           tag: n.fields.tag,
         };
 
-        console.log(a);
+        // console.log(a);
         fullIndex.push(a);
       }
     });
