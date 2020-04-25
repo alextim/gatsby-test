@@ -54,8 +54,6 @@ interface IMdEdge {
     fields: {
       slug: string;
       type: string;
-      category?: string[];
-      tag?: string[];
     };
     frontmatter: {
       title: string;
@@ -86,27 +84,40 @@ interface IQueryResult {
 
 const allPostsQuery = `
   query {
+    allTaxonomyYaml: allYaml(filter: { fields: { type: { eq: "taxonomy" } } } ) {
+      edges {
+        node {
+          id
+          key
+          value
+          fields {
+            slug
+            taxonomy
+          }
+        }
+      }
+    }
     allYYYYMM: allMdx(filter: { frontmatter: { published: { eq: true } } } ) {
       group(field: fields___yyyymm) {
         field
         fieldValue
         totalCount
       }
-    }    
+    }
     allCategories: allMdx(filter: { frontmatter: { published: { eq: true } } } ) {
-      group(field: fields___category) {
+      group(field: frontmatter___category) {
         field
         fieldValue
         totalCount
       }
     }
     allTags: allMdx(filter: { frontmatter: { published: { eq: true } } } ) {
-      group(field: fields___tag) {
+      group(field: frontmatter___tag) {
         field
         fieldValue
         totalCount
       }
-    }
+    }      
     allMarkdown: allMdx(filter: { frontmatter: { published: { eq: true } } } ) {
       edges {
         node {
@@ -117,19 +128,6 @@ const allPostsQuery = `
           }
           frontmatter {
             title
-          }
-        }
-      }
-    }
-    allTaxonomyYaml: allYaml(filter: { fields: { type: { eq: "taxonomy" } } } ) {
-      edges {
-        node {
-          id
-          key
-          value
-          fields {
-            slug
-            taxonomy
           }
         }
       }
@@ -197,8 +195,44 @@ const createPaginationPages = (
   return [...pages, firstPage];
 };
 
+const onCreatePage = (edge: any, index: number, arr: Array<any>, createPage: any, template: string) => {
+  const { node } = edge;
+  console.log('========================');
+  console.log('create page: ' + node.fields.slug);
+
+  const isFirst = index === 0;
+  const isLast = index === arr.length - 1;
+
+  let prev;
+  let next;
+
+  if (!isFirst) {
+    prev = {
+      name: arr[index - 1].node.title || arr[index - 1].node.frontmatter.title,
+      url: arr[index - 1].node.fields.slug,
+    };
+  }
+
+  if (!isLast) {
+    next = {
+      name: arr[index + 1].node.title || arr[index + 1].node.frontmatter.title,
+      url: arr[index + 1].node.fields.slug,
+    };
+  }
+
+  createPage({
+    path: node.fields.slug,
+    component: template,
+    context: {
+      pathname: node.fields.slug,
+      id: node.id,
+      prev,
+      next,
+    },
+  });
+};
+
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
-  console.log('createPages - WWWWWWWWWWWWWWWWWWWWWWWWWWW');
   const { createPage } = actions;
   const result = await graphql<IQueryResult>(allPostsQuery);
 
@@ -215,46 +249,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   // TAXONOMY
   const taxEdges = result.data.allTaxonomyYaml.edges;
   console.log('=========TAXONOMY===============');
-  console.log(createTaxonomy(taxEdges));
+  const taxonomy = createTaxonomy(taxEdges);
+  console.log(taxonomy);
 
   // TRIPS
   const trips = result.data.allTripsYaml.edges;
-  trips.map((edge: ITripEdge, index: number, arr: ITripEdge[]) => {
-    const { node } = edge;
-    console.log('========================');
-    console.log('createTripsPages: ' + node.fields.slug);
-
-    const isFirst = index === 0;
-    const isLast = index === arr.length - 1;
-
-    let prev;
-    let next;
-
-    if (!isFirst) {
-      prev = {
-        name: arr[index - 1].node.title,
-        url: arr[index - 1].node.fields.slug,
-      };
-    }
-
-    if (!isLast) {
-      next = {
-        name: arr[index + 1].node.title,
-        url: arr[index + 1].node.fields.slug,
-      };
-    }
-
-    createPage({
-      path: node.fields.slug,
-      component: tripTemplate,
-      context: {
-        pathname: node.fields.slug,
-        id: node.id,
-        prev,
-        next,
-      },
-    });
-  });
+  trips.map((edge, i, arr) => onCreatePage(edge, i, arr, createPage, tripTemplate));
 
   // PAGES
   const pages = result.data.allMarkdown.edges.filter((item) => item.node.fields.type === 'page');
@@ -275,71 +275,40 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   //
   // INDIVIDUAL POST PAGE
   const posts = result.data.allMarkdown.edges.filter((item) => item.node.fields.type === 'post');
-  posts.map((edge: IMdEdge, index: number, arr: IMdEdge[]) => {
-    const { node } = edge;
-    console.log('========================');
-    console.log('createPostPages: ' + node.fields.slug);
-
-    const isFirst = index === 0;
-    const isLast = index === arr.length - 1;
-
-    let prev;
-    let next;
-
-    if (!isFirst) {
-      prev = {
-        name: arr[index - 1].node.frontmatter.title,
-        url: arr[index - 1].node.fields.slug,
-      };
-    }
-
-    if (!isLast) {
-      next = {
-        name: arr[index + 1].node.frontmatter.title,
-        url: arr[index + 1].node.fields.slug,
-      };
-    }
-
-    createPage({
-      path: node.fields.slug,
-      component: postTemplate,
-      context: {
-        pathname: node.fields.slug,
-        id: node.id,
-        prev,
-        next,
-      },
-    });
-  });
+  posts.map((edge, i, arr) => onCreatePage(edge, i, arr, createPage, postTemplate));
 
   // POSTS INDEX
   createPaginationPages(postsTemplate, posts.length, siteConfig.blogUrlBase, {}, createPage);
 
   // CATEGORIES INDEX
-  result.data.allCategories.group.map((group: IGroup) =>
-    createPaginationPages(
-      categoryTemplate,
-      group.totalCount,
-      `/category/${_.kebabCase(group.fieldValue)}`,
-      {
-        category: group.fieldValue,
-      },
-      createPage,
-    ),
-  );
+  result.data.allCategories.group
+    .filter((group: IGroup) => taxonomy['category'][group.fieldValue])
+    .map((group: IGroup) =>
+      createPaginationPages(
+        categoryTemplate,
+        group.totalCount,
+        `/category/${_.kebabCase(group.fieldValue)}`,
+        {
+          category: group.fieldValue,
+        },
+        createPage,
+      ),
+    );
 
   // TAGS INDEX
-  result.data.allTags.group.map((group: IGroup) =>
-    createPaginationPages(
-      tagTemplate,
-      group.totalCount,
-      `/tag/${_.kebabCase(group.fieldValue)}`,
-      {
-        tag: group.fieldValue,
-      },
-      createPage,
-    ),
-  );
+  result.data.allTags.group
+    .filter((group: IGroup) => taxonomy['tag'][group.fieldValue])
+    .map((group: IGroup) =>
+      createPaginationPages(
+        tagTemplate,
+        group.totalCount,
+        `/tag/${_.kebabCase(group.fieldValue)}`,
+        {
+          tag: group.fieldValue,
+        },
+        createPage,
+      ),
+    );
 
   // YEAR-MONTH ARCHIVE
   result.data.allYYYYMM.group.map((group: IGroup) =>

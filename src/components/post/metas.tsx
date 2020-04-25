@@ -16,7 +16,7 @@ type CategoryMetaProps = {
 };
 const CategoryMeta = ({ category }: CategoryMetaProps) => {
   const items = getTaxUrlAndNames('category', category);
-  return <IconMeta icon={['far', 'folder-open']} items={items} />;
+  return items && items.length > 0 ? <IconMeta icon={['far', 'folder-open']} items={items} /> : null;
 };
 
 type TagMetaProps = {
@@ -24,7 +24,7 @@ type TagMetaProps = {
 };
 const TagMeta = ({ tag }: TagMetaProps) => {
   const items = getTaxUrlAndNames('tag', tag);
-  return <IconMeta icon="tag" items={items} />;
+  return items && items.length > 0 ? <IconMeta icon="tag" items={items} /> : null;
 };
 
 export { DateMeta, CategoryMeta, TagMeta };

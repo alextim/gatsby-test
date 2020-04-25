@@ -24,11 +24,11 @@ export const pageQuery = graphql`
           excerpt
           fields {
             slug
-            category
-            tag
           }
           frontmatter {
             date(formatString: "YYYY-MM-DD")
+            category
+            tag
             path
             title
             featuredImage {

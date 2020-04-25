@@ -18,9 +18,8 @@ import { BlogLayout } from '../components/Layout';
 
 const PostTemplate = ({ data, pageContext }) => {
   const { next, prev, pathname } = pageContext;
-  const { fields, frontmatter, body, excerpt } = data.mdx; // , fields
-  const { tag, category } = fields;
-  const { title, description, date, featuredImage } = frontmatter;
+  const { frontmatter, body, excerpt } = data.mdx; // , fields
+  const { title, description, date, featuredImage, tag, category } = frontmatter;
   const featuredImgFluid = featuredImage ? featuredImage.childImageSharp.fluid : null;
   const imgSrc = featuredImgFluid ? featuredImgFluid.src : null;
   //const url = fields.slug;
@@ -63,8 +62,6 @@ export const pageQuery = graphql`
       excerpt
       fields {
         slug
-        category
-        tag
       }
       frontmatter {
         date(formatString: "YYYY-MM-DD")
@@ -79,6 +76,8 @@ export const pageQuery = graphql`
             }
           }
         }
+        category
+        tag
       }
     }
   }

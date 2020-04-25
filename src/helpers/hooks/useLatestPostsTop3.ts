@@ -39,7 +39,6 @@ const useLatestPostsTop3 = (): Array<{
             excerpt
             fields {
               slug
-              category
             }
             frontmatter {
               path
@@ -52,6 +51,7 @@ const useLatestPostsTop3 = (): Array<{
                   }
                 }
               }
+              category
             }
           }
         }

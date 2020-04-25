@@ -1,8 +1,5 @@
 import { useStaticQuery, graphql } from 'gatsby';
 
-// import { Taxonomy } from '../../types/types';
-//     allYaml(filter: { fields: { type: { eq: "taxonomy" } } }) {
-
 const useTaxonomy = () => {
   const data = useStaticQuery(graphql`
     query TaxonomyQuery {

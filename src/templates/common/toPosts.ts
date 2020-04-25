@@ -1,7 +1,7 @@
 const toPosts = (edges) =>
   edges.map(({ node }) => {
-    const { slug, category, tag } = node.fields;
-    const { title, date, featuredImage } = node.frontmatter;
+    const { slug } = node.fields;
+    const { title, date, featuredImage, category, tag } = node.frontmatter;
 
     return {
       title,

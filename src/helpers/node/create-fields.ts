@@ -3,7 +3,6 @@ import { parse as pathParse } from 'path';
 import moment from 'moment';
 
 import siteConfig from '../../data/site-config';
-import { sanitizeKeys } from '../taxonomy-helpers';
 /**
  * // import { parseISO, formatISO } from 'date-fns';
 
@@ -41,7 +40,6 @@ const safeSlug = (s: string): string => slugify(translit(s, 1));
 export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
   if (node.internal.type === 'Mdx') {
-    console.log('onCreateNode - Mdx WWWWWWWWWWWWWWWWWWWWWWWWWWW');
     /*
     if (node.fileAbsolutePath != null) {
       const matcher = /posts\/\d{4}-\d{2}-\d{2}-(.+?)\/index.md$/;
@@ -103,8 +101,6 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
     }
 
     let type;
-    let sanitizedCategory = new Array<string>();
-    let sanitizedTag = new Array<string>();
 
     if (fileNode.sourceInstanceName === 'pages') {
       type = 'page';
@@ -112,15 +108,6 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
     } else if (fileNode.sourceInstanceName === 'blog') {
       type = 'post';
       slug = `${siteConfig.blogUrlBase}/${slug}`;
-      const { category, tag } = (node as IMdNode).frontmatter;
-
-      if (category) {
-        sanitizedCategory = sanitizeKeys('category', category);
-      }
-
-      if (tag) {
-        sanitizedTag = sanitizeKeys('tag', tag);
-      }
     } else {
       type = '';
       throw new Error('Unkonwn type: ' + fileNode.sourceInstanceName);
@@ -136,20 +123,7 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
       name: 'slug',
       value: slug,
     });
-
-    createNodeField({
-      node,
-      name: 'category',
-      value: sanitizedCategory,
-    });
-
-    createNodeField({
-      node,
-      name: 'tag',
-      value: sanitizedTag,
-    });
   } else if (node.internal.type === 'Yaml') {
-    console.log('onCreateNode - Yaml WWWWWWWWWWWWWWWWWWWWWWWWWWW');
     const fileNode = getNode(node.parent);
     if (fileNode.sourceInstanceName === 'trips') {
       const slug = safeSlug((node as ITripNode).slug);

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import SidebarWidget from '../../SidebarWidget';
-import IconLink from '../../IconLink';
 import useAllCategories from '../../../helpers/hooks/useAllCategories';
 import { getTaxonomyByName } from '../../../helpers/taxonomy-helpers';
+import SidebarWidget from '../../SidebarWidget';
+import IconLink from '../../IconLink';
 
 const PostCategories = () => {
   const cats = useAllCategories();
