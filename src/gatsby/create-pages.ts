@@ -6,24 +6,26 @@ https://github.com/diogorodrigues/iceberg-gatsby-multilang
 */
 import { GatsbyNode } from 'gatsby';
 import { resolve } from 'path';
-import _ from 'lodash';
 
-import postArchiveHelper from '../postArchiveHelper';
-import siteConfig from '../../data/site-config';
-import { createTaxonomy } from '../taxonomy-helpers';
+import siteConfig from '../data/site-config';
+import postArchiveHelper from '../helpers/postArchiveHelper';
+import { createTaxonomy } from '../helpers/taxonomy-helpers';
 
 const tripTemplate = resolve('./src/templates/trip.tsx');
 const tripsTemplate = resolve('./src/templates/trips.tsx');
+const seasonTemplate = resolve('./src/templates/trips-season.tsx');
+const destinationTemplate = resolve('./src/templates/trips-destination.tsx');
+const activityTemplate = resolve('./src/templates/trips-activity.tsx');
 
 const pageTemplate = resolve('./src/templates/page.tsx');
 
 const postTemplate = resolve('./src/templates/post.tsx');
 const postsTemplate = resolve('./src/templates/posts.tsx');
-const categoryTemplate = resolve('./src/templates/category-posts.tsx');
-const tagTemplate = resolve('./src/templates/tag-posts.tsx');
+const categoryTemplate = resolve('./src/templates/posts-category.tsx');
+const tagTemplate = resolve('./src/templates/posts-tag.tsx');
 const archiveTemplate = resolve('./src/templates/archive-posts.tsx');
 
-import { createSinglePage, createPaginationPages } from './helpers';
+import { createSinglePage, createPaginationPages, createTaxonomyPage } from './helpers';
 
 interface IGroup {
   field: string;
@@ -76,6 +78,15 @@ interface IQueryResult {
   allCategories: {
     group: IGroup[];
   };
+  allSeasons: {
+    group: IGroup[];
+  };
+  allDestinations: {
+    group: IGroup[];
+  };
+  allActivities: {
+    group: IGroup[];
+  };
   allMarkdown: {
     edges: IMdEdge[];
   };
@@ -102,6 +113,27 @@ const allPostsQuery = `
         }
       }
     }
+    allSeasons: allYaml(filter: { published: { eq: true }, fields: { type: { eq: "trip" } } } ) {
+      group(field: season) {
+        field
+        fieldValue
+        totalCount
+      }
+    }
+    allDestinations: allYaml(filter: { published: { eq: true }, fields: { type: { eq: "trip" } } } ) {
+      group(field: destination) {
+        field
+        fieldValue
+        totalCount
+      }
+    }
+    allActivities: allYaml(filter: { published: { eq: true }, fields: { type: { eq: "trip" } } } ) {
+      group(field: activity) {
+        field
+        fieldValue
+        totalCount
+      }
+    }    
     allYYYYMM: allMdx(filter: { frontmatter: { published: { eq: true } } } ) {
       group(field: fields___yyyymm) {
         field
@@ -176,7 +208,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   // INDIVIDUAL TRIP PAGE
   trips.map((edge, i, arr) => createSinglePage(edge, i, arr, createPage, tripTemplate));
   // TRIPS INDEX
-  createPaginationPages(tripsTemplate, trips.length, siteConfig.tripsUrlBase, {}, createPage, siteConfig.pageSize);
+  createPaginationPages(tripsTemplate, trips.length, siteConfig.tripsUrlBase, {}, createPage);
+  // TRIP TAXES
+  createTaxonomyPage(result.data.allSeasons.group, seasonTemplate, taxonomy, 'season', createPage);
+  createTaxonomyPage(result.data.allDestinations.group, destinationTemplate, taxonomy, 'destination', createPage);
+  createTaxonomyPage(result.data.allActivities.group, activityTemplate, taxonomy, 'activity', createPage);
 
   /************  PAGES  ************/
   result.data.allMarkdown.edges
@@ -199,37 +235,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   // INDIVIDUAL POST PAGE
   posts.map((edge, i, arr) => createSinglePage(edge, i, arr, createPage, postTemplate));
   // POSTS INDEX
-  createPaginationPages(postsTemplate, posts.length, siteConfig.blogUrlBase, {}, createPage, siteConfig.pageSize);
-  // CATEGORIES INDEX
-  result.data.allCategories.group
-    .filter(({ fieldValue }: IGroup) => taxonomy['category'][fieldValue])
-    .map(({ totalCount, fieldValue }: IGroup) =>
-      createPaginationPages(
-        categoryTemplate,
-        totalCount,
-        `/category/${_.kebabCase(fieldValue)}`,
-        {
-          category: fieldValue,
-        },
-        createPage,
-        siteConfig.pageSize,
-      ),
-    );
-  // TAGS INDEX
-  result.data.allTags.group
-    .filter(({ fieldValue }: IGroup) => taxonomy['tag'][fieldValue])
-    .map(({ totalCount, fieldValue }: IGroup) =>
-      createPaginationPages(
-        tagTemplate,
-        totalCount,
-        `/tag/${_.kebabCase(fieldValue)}`,
-        {
-          tag: fieldValue,
-        },
-        createPage,
-        siteConfig.pageSize,
-      ),
-    );
+  createPaginationPages(postsTemplate, posts.length, siteConfig.blogUrlBase, {}, createPage);
+  // POST TAXES
+  createTaxonomyPage(result.data.allCategories.group, categoryTemplate, taxonomy, 'category', createPage);
+  createTaxonomyPage(result.data.allTags.group, tagTemplate, taxonomy, 'tag', createPage);
 
   // YEAR-MONTH ARCHIVE
   result.data.allYYYYMM.group.map(({ totalCount, fieldValue }: IGroup) =>
@@ -241,7 +250,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
         yyyymm: fieldValue,
       },
       createPage,
-      siteConfig.pageSize,
     ),
   );
   return null;

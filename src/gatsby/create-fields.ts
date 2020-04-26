@@ -2,7 +2,7 @@ import { GatsbyNode } from 'gatsby';
 import { parse as pathParse } from 'path';
 import moment from 'moment';
 
-import siteConfig from '../../data/site-config';
+import siteConfig from '../data/site-config';
 /**
  * // import { parseISO, formatISO } from 'date-fns';
 
@@ -14,8 +14,8 @@ import siteConfig from '../../data/site-config';
  *
  */
 
-import translit from '../../lib/translit';
-import slugify from '../../lib/slugify';
+import translit from '../lib/translit';
+import slugify from '../lib/slugify';
 
 interface ITripNode {
   slug: string;

@@ -1,3 +1,12 @@
+import _ from 'lodash';
+import siteConfig from '../data/site-config';
+
+interface IGroup {
+  field: string;
+  fieldValue: string;
+  totalCount: number;
+}
+
 export const createSinglePage = (edge: any, index: number, arr: Array<any>, createPage: any, template: string) => {
   const { node } = edge;
   console.log('========================');
@@ -42,9 +51,8 @@ export const createPaginationPages = (
   pathBase: string,
   context: any,
   createPage: any,
-  pageSize: number,
 ): (false | void)[] => {
-  const pageCount = Math.ceil(totalItems / pageSize);
+  const pageCount = Math.ceil(totalItems / siteConfig.pageSize);
 
   console.log('========================');
   console.log('createPaginationPages: ' + pathBase);
@@ -56,8 +64,8 @@ export const createPaginationPages = (
       context: {
         base: pathBase,
         pathname: `${pathBase}/page/${index + 1}`,
-        limit: pageSize,
-        skip: index * pageSize,
+        limit: siteConfig.pageSize,
+        skip: index * siteConfig.pageSize,
         pageCount,
         currentPage: index + 1,
         ...context,
@@ -73,7 +81,7 @@ export const createPaginationPages = (
       context: {
         base: pathBase,
         pathname: pathBase,
-        limit: pageSize,
+        limit: siteConfig.pageSize,
         skip: 0,
         pageCount,
         currentPage: 1,
@@ -83,3 +91,25 @@ export const createPaginationPages = (
 
   return [...pages, firstPage];
 };
+
+export const createTaxonomyPage = (
+  group: Array<IGroup>,
+  template: string,
+  taxonomy: any,
+  name: string,
+  createPage: any,
+  // eslint-disable-next-line max-params
+) =>
+  group
+    .filter(({ fieldValue }: IGroup) => taxonomy[name][fieldValue])
+    .map(({ totalCount, fieldValue }: IGroup) =>
+      createPaginationPages(
+        template,
+        totalCount,
+        `/${name}/${_.kebabCase(fieldValue)}`,
+        {
+          term: fieldValue,
+        },
+        createPage,
+      ),
+    );

@@ -16,16 +16,16 @@ const TagPostsTemplate = ({
     allMdx: { edges },
   },
   pageContext,
-}: Props) => <PostListTemplate edges={edges} pageContext={pageContext} title={`Таг:${' '}${pageContext.tag}`} />;
+}: Props) => <PostListTemplate edges={edges} pageContext={pageContext} title={`Таг:${' '}${pageContext.term}`} />;
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
-  query TagPage($skip: Int!, $limit: Int!, $tag: String) {
+  query TagPage($skip: Int!, $limit: Int!, $term: String) {
     allMdx(
       skip: $skip
       limit: $limit
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { published: { eq: true }, tag: { in: [$tag] } }, fields: { type: { eq: "post" } } }
+      filter: { frontmatter: { published: { eq: true }, tag: { in: [$term] } }, fields: { type: { eq: "post" } } }
     ) {
       totalCount
       edges {
