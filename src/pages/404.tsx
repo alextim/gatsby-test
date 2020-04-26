@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IPageProps } from '../types/page-types';
+import { IPageProps } from '../types/types';
 import Layout from '../components/Layout';
 import Seo from '../components/SEO';
 

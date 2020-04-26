@@ -9,29 +9,10 @@ import { resolve } from 'path';
 
 import siteConfig from '../data/site-config';
 import postArchiveHelper from '../helpers/postArchiveHelper';
-import { createTaxonomy } from '../helpers/taxonomy-helpers';
+import { buildTaxonomyLookup } from '../helpers/taxonomy-helpers';
+import { IGroup } from '../types/types';
+import CreateHelper from './CreateHelper';
 
-const tripTemplate = resolve('./src/templates/trip.tsx');
-const tripsTemplate = resolve('./src/templates/trips.tsx');
-const seasonTemplate = resolve('./src/templates/trips-season.tsx');
-const destinationTemplate = resolve('./src/templates/trips-destination.tsx');
-const activityTemplate = resolve('./src/templates/trips-activity.tsx');
-
-const pageTemplate = resolve('./src/templates/page.tsx');
-
-const postTemplate = resolve('./src/templates/post.tsx');
-const postsTemplate = resolve('./src/templates/posts.tsx');
-const categoryTemplate = resolve('./src/templates/posts-category.tsx');
-const tagTemplate = resolve('./src/templates/posts-tag.tsx');
-const archiveTemplate = resolve('./src/templates/archive-posts.tsx');
-
-import { createSinglePage, createPaginationPages, createTaxonomyPage } from './helpers';
-
-interface IGroup {
-  field: string;
-  fieldValue: string;
-  totalCount: number;
-}
 interface ITripEdge {
   node: {
     id: string;
@@ -183,6 +164,20 @@ const allPostsQuery = `
   }
 `;
 
+const tripTemplate = resolve('./src/templates/trip.tsx');
+const tripsTemplate = resolve('./src/templates/trips.tsx');
+const seasonTemplate = resolve('./src/templates/trips-season.tsx');
+const destinationTemplate = resolve('./src/templates/trips-destination.tsx');
+const activityTemplate = resolve('./src/templates/trips-activity.tsx');
+
+const pageTemplate = resolve('./src/templates/page.tsx');
+
+const postTemplate = resolve('./src/templates/post.tsx');
+const postsTemplate = resolve('./src/templates/posts.tsx');
+const categoryTemplate = resolve('./src/templates/posts-category.tsx');
+const tagTemplate = resolve('./src/templates/posts-tag.tsx');
+const archiveTemplate = resolve('./src/templates/archive-posts.tsx');
+
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
   const result = await graphql<IQueryResult>(allPostsQuery);
@@ -200,19 +195,21 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   /************  TAXONOMY  ************/
   const taxEdges = result.data.allTaxonomyYaml.edges;
   console.log('=========TAXONOMY===============');
-  const taxonomy = createTaxonomy(taxEdges);
+  const taxonomy = buildTaxonomyLookup(taxEdges);
   console.log(taxonomy);
+
+  const helper = new CreateHelper(taxonomy, siteConfig.pageSize, createPage);
 
   /************  TRIPS  ************/
   const trips = result.data.allTripsYaml.edges;
   // INDIVIDUAL TRIP PAGE
-  trips.map((edge, i, arr) => createSinglePage(edge, i, arr, createPage, tripTemplate));
+  trips.map((edge, i, arr) => helper.createSinglePage(edge, i, arr, tripTemplate));
   // TRIPS INDEX
-  createPaginationPages(tripsTemplate, trips.length, siteConfig.tripsUrlBase, {}, createPage);
+  helper.createPaginationPages(tripsTemplate, trips.length, siteConfig.tripsUrlBase, {});
   // TRIP TAXES
-  createTaxonomyPage(result.data.allSeasons.group, seasonTemplate, taxonomy, 'season', createPage);
-  createTaxonomyPage(result.data.allDestinations.group, destinationTemplate, taxonomy, 'destination', createPage);
-  createTaxonomyPage(result.data.allActivities.group, activityTemplate, taxonomy, 'activity', createPage);
+  helper.createTaxonomyPage(result.data.allSeasons.group, seasonTemplate, 'season');
+  helper.createTaxonomyPage(result.data.allDestinations.group, destinationTemplate, 'destination');
+  helper.createTaxonomyPage(result.data.allActivities.group, activityTemplate, 'activity');
 
   /************  PAGES  ************/
   result.data.allMarkdown.edges
@@ -233,24 +230,17 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   /************  POSTS  ************/
   const posts = result.data.allMarkdown.edges.filter((item) => item.node.fields.type === 'post');
   // INDIVIDUAL POST PAGE
-  posts.map((edge, i, arr) => createSinglePage(edge, i, arr, createPage, postTemplate));
+  posts.map((edge, i, arr) => helper.createSinglePage(edge, i, arr, postTemplate));
   // POSTS INDEX
-  createPaginationPages(postsTemplate, posts.length, siteConfig.blogUrlBase, {}, createPage);
+  helper.createPaginationPages(postsTemplate, posts.length, siteConfig.blogUrlBase, {});
   // POST TAXES
-  createTaxonomyPage(result.data.allCategories.group, categoryTemplate, taxonomy, 'category', createPage);
-  createTaxonomyPage(result.data.allTags.group, tagTemplate, taxonomy, 'tag', createPage);
-
+  helper.createTaxonomyPage(result.data.allCategories.group, categoryTemplate, 'category');
+  helper.createTaxonomyPage(result.data.allTags.group, tagTemplate, 'tag');
   // YEAR-MONTH ARCHIVE
   result.data.allYYYYMM.group.map(({ totalCount, fieldValue }: IGroup) =>
-    createPaginationPages(
-      archiveTemplate,
-      totalCount,
-      `/blog/${postArchiveHelper.getPath(fieldValue)}`,
-      {
-        yyyymm: fieldValue,
-      },
-      createPage,
-    ),
+    helper.createPaginationPages(archiveTemplate, totalCount, `/blog/${postArchiveHelper.getPath(fieldValue)}`, {
+      term: fieldValue,
+    }),
   );
   return null;
 };

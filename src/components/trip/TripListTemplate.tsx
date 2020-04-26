@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+import { PageContext } from '../../types/types';
 import Layout from '../Layout';
 import SEO from '../SEO';
 import Pagination from '../Pagination';
@@ -11,7 +12,7 @@ const Wrapper = styled.div``;
 
 type Props = {
   edges: Array<any>;
-  pageContext: any;
+  pageContext: PageContext;
   title: string;
 };
 // <Layout header=???? title={title}

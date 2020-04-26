@@ -2,32 +2,24 @@ import React from 'react';
 import { graphql } from 'gatsby';
 
 import PostListTemplate from '../components/post/PostListTemplate';
+import { MdxProps } from '../types/types';
 
-type Props = {
-  data: {
-    allMdx: {
-      edges: Array<any>;
-    };
-  };
-  pageContext: any;
-};
 const CategoryPostsTemplate = ({
   data: {
     allMdx: { edges },
   },
   pageContext,
-}: Props) => <PostListTemplate edges={edges} pageContext={pageContext} title={`Category:${' '}${pageContext.term}`} />;
+}: MdxProps) => <PostListTemplate edges={edges} pageContext={pageContext} title={`Категория: ${pageContext.termName}`} />;
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
-  query CategoryPage($skip: Int!, $limit: Int!, $term: String) {
+  query CategoryPageQuery($skip: Int!, $limit: Int!, $term: String) {
     allMdx(
       skip: $skip
       limit: $limit
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { published: { eq: true }, category: { in: [$term] } }, fields: { type: { eq: "post" } } }
     ) {
-      totalCount
       edges {
         node {
           fields {

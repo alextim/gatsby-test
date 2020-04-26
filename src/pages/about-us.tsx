@@ -1,7 +1,7 @@
 import React from 'react';
 import Img from 'gatsby-image';
 
-import { IPageProps } from '../types/page-types';
+import { IPageProps } from '../types/types';
 
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';

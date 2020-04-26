@@ -3,36 +3,29 @@ import { graphql } from 'gatsby';
 
 import PostListTemplate from '../components/post/PostListTemplate';
 import postArchiveHelper from '../helpers/postArchiveHelper';
+import { MdxProps } from '../types/types';
 
-type Props = {
-  data: {
-    allMdx: {
-      edges: Array<any>;
-    };
-  };
-  pageContext: any;
-};
 const ArchivePostsTemplate = ({
   data: {
     allMdx: { edges },
   },
   pageContext,
-}: Props) => (
+}: MdxProps) => (
   <PostListTemplate
     edges={edges}
     pageContext={pageContext}
-    title={`Архив за ${postArchiveHelper.getTitle(pageContext.yyyymm)}`}
+    title={`Архив за ${postArchiveHelper.getTitle(pageContext.term)}`}
   />
 );
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
-  query ArchivePage($skip: Int!, $limit: Int!, $yyyymm: String) {
+  query ArchivePageQuery($skip: Int!, $limit: Int!, $term: String) {
     allMdx(
       skip: $skip
       limit: $limit
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { published: { eq: true } }, fields: { yyyymm: { eq: $yyyymm } } }
+      filter: { frontmatter: { published: { eq: true } }, fields: { yyyymm: { eq: $term } } }
     ) {
       totalCount
       edges {

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { ITheme } from '../theme.d';
+import { PageContext } from '../../types/types';
 import { BlogLayout } from '../Layout';
 import SEO from '../SEO';
 import Pagination from '../Pagination';
@@ -25,7 +26,7 @@ const ItemWrap = styled.div`
 
 type Props = {
   edges: Array<any>;
-  pageContext: any;
+  pageContext: PageContext;
   title: string;
 };
 const PostListTemplate = ({ edges, pageContext, title }: Props) => {
