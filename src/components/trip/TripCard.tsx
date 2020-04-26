@@ -5,8 +5,6 @@ import { Box, Heading } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 
 import { ITheme } from '../theme.d';
-import { ITrip } from './trip.d';
-import siteConfig from '../../data/site-config';
 import { getLowestPrice } from './helpers';
 
 import IconLink from '../IconLink';
@@ -14,7 +12,6 @@ import TaxonomyList from '../TaxonomyList';
 import TripOffer from './TripOffer';
 import Price from './Price';
 
-import useDefaultBannerImage from '../../helpers/hooks/useDefaultBannerImage';
 import usePlaceholderImage from '../../helpers/hooks/usePlaceholderImage';
 /**
  * TODO: https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680
@@ -51,24 +48,22 @@ const TaxonomiesWrapper = styled.div`
 `;
 
 type Props = {
-  trip: ITrip;
+  trip: any;
 };
 
 const TripCard = ({ trip }: Props) => {
-  const { slug, featuredImage, title, destination, activity, currency, enableSale, priceMode, priceList } = trip;
-  const path = `/${siteConfig.tripsUrlBase}/${slug}`;
+  const { fields, featuredImage, title, destination, activity, currency, enableSale, priceMode, priceList } = trip;
+  const path = fields.slug;
 
   const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
   const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
-  const dummy = useDefaultBannerImage();
-  const placeholder = usePlaceholderImage();
 
   return (
     <Wrapper as="article">
       <InnerWrapper shadow="lg">
         <ImageWrap>
           <Link to={path}>
-            {!featuredImage ? <Img fluid={dummy} alt={title} /> : <Img fluid={placeholder} alt={title} />}
+            <Img fluid={featuredImage ? featuredImage.childImageSharp.fluid : usePlaceholderImage()} alt={title} />
           </Link>
           {enableSale && <TripOffer />}
         </ImageWrap>

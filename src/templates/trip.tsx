@@ -3,7 +3,11 @@ import { graphql } from 'gatsby';
 
 import SingleTrip from '../components/trip/SingleTrip';
 
-const TripTemplate = ({ data, pageContext }) => (
+type Props = {
+  data: any;
+  pageContext: any;
+};
+const TripTemplate = ({ data, pageContext }: Props) => (
   <SingleTrip trip={data.yaml} pageContext={pageContext} isPrint={false} />
 );
 

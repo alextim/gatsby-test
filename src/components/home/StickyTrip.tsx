@@ -6,59 +6,90 @@ import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 
 import { ITheme } from '../theme.d';
-
+import useLatestTripFeatured1 from '../../helpers/hooks/useLatestTripFeatured1';
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
-import Section from './Section';
 import { BtnLink } from '../Button';
-import useLatestPostsFeatured1 from '../../helpers/hooks/useLatestPostsFeatured1';
+import Price from '../trip/Price';
+import { getLowestPrice } from '../trip/helpers';
+import Section from './Section';
 
-const Wrapper = styled(Box)`
+const LeftWrapper = styled.div`
   width: 100%;
   margin-bottom: 1rem;
-  ${(props) => (props.theme as ITheme).mediaQueries.md} {
+  ${(props) => (props.theme as ITheme).mediaQueries.lg} {
+    flex: 1;
     width: 50%;
+    margin-bottom: 0;
   }
 `;
 
+const RightWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  ${(props) => (props.theme as ITheme).mediaQueries.lg} {
+    flex: 1;
+    width: 50%;
+    margin-bottom: 0;
+  }
+`;
+
+const StyledDiv = styled.div`
+  display: block;
+`;
+
 const StickyTrip = () => {
-  const posts = useLatestPostsFeatured1();
-  if (!posts.length) {
+  const edges = useLatestTripFeatured1();
+  if (!edges.length) {
     return null;
   }
 
   const { stickyTrip } = useHomePageSettings();
   const { title, subTitle, text } = stickyTrip;
-  // , trip
+
   const theme = (useTheme() as unknown) as ITheme;
 
-  const { path, featuredImage } = posts[0];
+  const { fields, currency, enableSale, priceMode, priceList, featuredImage } = edges[0].node;
+  const path = fields.slug;
 
-  const price = 100;
-  const currency = 'EUR';
+  const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
+  const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
 
   return (
     <Section title={title} subTitle={subTitle} bg={theme.home.stickyTrip.colors.bg}>
       <Flex flexWrap="wrap" shadow="lg" mx="1em" mb={['2em', '2em', '0']}>
-        <Wrapper>
+        <LeftWrapper>
           {featuredImage && (
             <Link to={path}>
-              <Img fluid={featuredImage} alt={title} width="100%" height="auto" />
+              <Img fluid={featuredImage.childImageSharp.fluid} alt={title} />
             </Link>
           )}
-        </Wrapper>
-        <Wrapper p="1em">
-          <Text align="justify" mt={6} mb={6}>
-            {text}
-          </Text>
-          {price && (
+        </LeftWrapper>
+        <RightWrapper>
+          <StyledDiv>
+            <Text textAlign="justify" mt={6} mb={6}>
+              {text}
+            </Text>
             <Box fontSize="1.25em">
-              {currency} {price}
+              {showPrice
+                ? lowestPrice && (
+                    <Price
+                      price={lowestPrice.price}
+                      currency={currency}
+                      isSale={enableSale}
+                      salePrice={lowestPrice.salePrice}
+                    />
+                  )
+                : 'Цена по запросу'}
             </Box>
-          )}
-          <BtnLink w="85%" m="2rem auto" to={path}>
-            Подробнее
-          </BtnLink>
-        </Wrapper>
+            <BtnLink width="85%" m="2rem auto" to={path}>
+              Подробнее
+            </BtnLink>
+          </StyledDiv>
+        </RightWrapper>
       </Flex>
     </Section>
   );

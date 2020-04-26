@@ -11,16 +11,28 @@ import useDefaultImage from '../helpers/hooks/useDefaultBannerImage';
 
 //import HelloWorld from '../components/HelloWorld';
 
-const PageTemplate = ({ data }) => {
+type Props = {
+  data: {
+    mdx: {
+      frontmatter: {
+        title: string;
+        description?: string;
+        featuredImage?: any;
+      };
+      body: any;
+      excerpt?: string;
+      fields: {
+        slug: string;
+      };
+    };
+  };
+};
+const PageTemplate = ({ data }: Props) => {
   const { frontmatter, body, excerpt, fields } = data.mdx;
   const { slug } = fields;
   const { title, description, featuredImage } = frontmatter;
-  let featuredImgFluid;
-  if (featuredImage) {
-    featuredImgFluid = featuredImage.childImageSharp.fluid;
-  } else {
-    featuredImgFluid = useDefaultImage();
-  }
+  const featuredImgFluid = featuredImage ? featuredImage.childImageSharp.fluid : useDefaultImage();
+
   const imgSrc = featuredImgFluid ? featuredImgFluid.src : null;
   /*
    const shortcodes = { IconLink };

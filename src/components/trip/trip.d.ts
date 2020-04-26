@@ -67,7 +67,8 @@ export interface IItinerary {
 export interface ITrip {
   slug: string;
   title: string;
-  published: boolean;
+  published?: boolean;
+  featured?: boolean;
   /**
    * Google - 60
    * FB     - 95

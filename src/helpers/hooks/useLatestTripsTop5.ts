@@ -1,13 +1,38 @@
-import { ITrip } from '../../components/trip/trip.d';
-import singleTrip from '../../data/single-trip';
+import { useStaticQuery, graphql } from 'gatsby';
 
-const useLatestTripsTop5 = (): Array<ITrip> => {
-  const data = new Array<ITrip>();
-  for (let i = 0; i < 5; i++) {
-    data.push(singleTrip);
-  }
+interface IEdge {
+  node: {
+    title: string;
+    fields: {
+      slug: string;
+    };
+  };
+}
 
-  return data;
+const useLatestTripsTop5 = (): Array<{ title: string; path: string }> => {
+  const data = useStaticQuery(graphql`
+    query LatestTripsTop5Query {
+      allYaml(
+        filter: { published: { eq: true }, fields: { type: { eq: "trip" } } }
+        limit: 5
+        sort: { order: DESC, fields: [date] }
+      ) {
+        edges {
+          node {
+            fields {
+              slug
+            }
+            title
+          }
+        }
+      }
+    }
+  `);
+
+  return data.allYaml.edges.map(({ node }: IEdge) => ({
+    title: node.title,
+    path: node.fields.slug,
+  }));
 };
 
 export default useLatestTripsTop5;

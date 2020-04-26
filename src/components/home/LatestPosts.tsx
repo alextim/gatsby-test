@@ -7,7 +7,7 @@ import { ITheme } from '../theme.d';
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
 import Section from './Section';
 import PostCard from '../post/PostCard';
-import useLatestPostsTop3 from '../../helpers/hooks/useLatestPostsTop3';
+import useLatestPostsTop3 from '../../helpers/hooks/useLatestPostsHomePage';
 
 const InnerWrap = styled(Flex)`
   flex-direction: column;

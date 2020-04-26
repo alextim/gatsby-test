@@ -6,7 +6,6 @@ import styled from '@emotion/styled';
 
 import { ITheme } from '../theme.d';
 import { ITrip } from './trip';
-import siteConfig from '../../data/site-config';
 import IconLink from '../IconLink';
 import TripOffer from './TripOffer';
 import TaxonomyList from '../TaxonomyList';
@@ -14,7 +13,6 @@ import { TechLevel } from './ico-levels';
 import Price from './Price';
 import TripInfoItem from './TripInfoItem';
 import { getLowestPrice, getDays, formatDuration, formatStartFinish } from './helpers';
-import useDefaultBannerImage from '../../helpers/hooks/useDefaultBannerImage';
 import usePlaceholderImage from '../../helpers/hooks/usePlaceholderImage';
 /**
  * TODO: https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680
@@ -149,7 +147,6 @@ const TripWideCard = ({ trip }: Props) => {
     excerpt,
     featuredImage,
 
-    isShowNights,
     groupSize,
     destination,
     activity,
@@ -161,17 +158,16 @@ const TripWideCard = ({ trip }: Props) => {
     priceList,
 
     isDatesOnRequest,
+    isShowNights,
     dates,
   } = trip;
-  const path = `/${siteConfig.tripsUrlBase}/${slug}`;
+  const path = slug;
 
   const days = getDays(trip);
   const nights = isShowNights ? days - 1 : 0;
 
   const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
   const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
-  const dummy = useDefaultBannerImage();
-  const placeholder = usePlaceholderImage();
   const text = excerpt ? excerpt : description ? description.substr(0, 160) : undefined;
 
   const mr = '1rem';
@@ -183,7 +179,7 @@ const TripWideCard = ({ trip }: Props) => {
           <HeadWrap>
             <ImageWrap>
               <Link to={path}>
-                {!featuredImage ? <Img fluid={dummy} alt={title} /> : <Img fluid={placeholder} alt={title} />}
+                <Img fluid={featuredImage ? featuredImage : usePlaceholderImage()} alt={title} />
               </Link>
               {enableSale && <TripOffer />}
             </ImageWrap>
@@ -235,7 +231,7 @@ const TripWideCard = ({ trip }: Props) => {
             {isDatesOnRequest || !dates ? (
               <TripInfoItem label="Даты поездок" value="по запросу" />
             ) : (
-              <TripInfoItem label="Ближайшая поездка" value={formatStartFinish(dates[0].date, days)} />
+              <TripInfoItem label="Ближайшая поездка" value={formatStartFinish(new Date(dates[0].date), days)} />
             )}
           </DatesWrapper>
           <DetailsLink to={path}>Подробнее</DetailsLink>

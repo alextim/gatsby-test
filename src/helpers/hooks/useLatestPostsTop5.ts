@@ -13,7 +13,7 @@ interface IEdge {
 
 const useLatestPostsTop5 = (): Array<{ title: string; path: string }> => {
   const data = useStaticQuery(graphql`
-    query LatestPostsQueryTop5 {
+    query LatestPostsTop5Query {
       allMdx(
         filter: { frontmatter: { published: { eq: true } }, fields: { type: { eq: "post" } } }
         limit: 5

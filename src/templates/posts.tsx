@@ -1,14 +1,22 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import ListTemplate from './common/ListTemplate';
+import PostListTemplate from '../components/post/PostListTemplate';
 
+type Props = {
+  data: {
+    allMdx: {
+      edges: Array<any>;
+    };
+  };
+  pageContext: any;
+};
 const PostsTemplate = ({
   data: {
     allMdx: { edges },
   },
   pageContext,
-}) => <ListTemplate edges={edges} pageContext={pageContext} title="Статьи и новости" />;
+}: Props) => <PostListTemplate edges={edges} pageContext={pageContext} title="Статьи и новости" />;
 
 export const pageQuery = graphql`
   query BlogListQuery($skip: Int!, $limit: Int!) {

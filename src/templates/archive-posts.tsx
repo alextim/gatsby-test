@@ -1,16 +1,24 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import ListTemplate from './common/ListTemplate';
+import PostListTemplate from '../components/post/PostListTemplate';
 import postArchiveHelper from '../helpers/postArchiveHelper';
 
+type Props = {
+  data: {
+    allMdx: {
+      edges: Array<any>;
+    };
+  };
+  pageContext: any;
+};
 const ArchivePostsTemplate = ({
   data: {
     allMdx: { edges },
   },
   pageContext,
-}) => (
-  <ListTemplate
+}: Props) => (
+  <PostListTemplate
     edges={edges}
     pageContext={pageContext}
     title={`Архив за ${postArchiveHelper.getTitle(pageContext.yyyymm)}`}

@@ -1,14 +1,22 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import ListTemplate from './common/ListTemplate';
+import PostListTemplate from '../components/post/PostListTemplate';
 
+type Props = {
+  data: {
+    allMdx: {
+      edges: Array<any>;
+    };
+  };
+  pageContext: any;
+};
 const TagPostsTemplate = ({
   data: {
     allMdx: { edges },
   },
   pageContext,
-}) => <ListTemplate edges={edges} pageContext={pageContext} title={`Таг:${' '}${pageContext.tag}`} />;
+}: Props) => <PostListTemplate edges={edges} pageContext={pageContext} title={`Таг:${' '}${pageContext.tag}`} />;
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`

@@ -11,15 +11,15 @@ interface IEdge {
           fluid: any;
         };
       };
+      category?: Array<string>;
     };
     fields: {
       slug: string;
-      category?: Array<string>;
     };
   };
 }
 
-const useLatestPostsTop3 = (): Array<{
+const useLatestPostsHomePage = (): Array<{
   title: string;
   path: string;
   date: string;
@@ -28,7 +28,7 @@ const useLatestPostsTop3 = (): Array<{
   featuredImage: any;
 }> => {
   const data = useStaticQuery(graphql`
-    query LatestPostsQueryTop3 {
+    query LatestPostsHomePageQuery {
       allMdx(
         filter: { frontmatter: { published: { eq: true }, featured: { ne: true } }, fields: { type: { eq: "post" } } }
         limit: 3
@@ -60,8 +60,8 @@ const useLatestPostsTop3 = (): Array<{
   `);
 
   return data.allMdx.edges.map(({ node }: IEdge) => {
-    const { title, date, featuredImage } = node.frontmatter;
-    const { slug, category } = node.fields;
+    const { title, date, featuredImage, category } = node.frontmatter;
+    const { slug } = node.fields;
     return {
       title,
       path: slug,
@@ -73,4 +73,4 @@ const useLatestPostsTop3 = (): Array<{
   });
 };
 
-export default useLatestPostsTop3;
+export default useLatestPostsHomePage;

@@ -7,18 +7,23 @@ https://github.com/diogorodrigues/iceberg-gatsby-multilang
 import { GatsbyNode } from 'gatsby';
 import { resolve } from 'path';
 import _ from 'lodash';
-// const catHelper = require('./../categoryHelper');
+
 import postArchiveHelper from '../postArchiveHelper';
 import siteConfig from '../../data/site-config';
 import { createTaxonomy } from '../taxonomy-helpers';
 
 const tripTemplate = resolve('./src/templates/trip.tsx');
+const tripsTemplate = resolve('./src/templates/trips.tsx');
+
 const pageTemplate = resolve('./src/templates/page.tsx');
+
 const postTemplate = resolve('./src/templates/post.tsx');
 const postsTemplate = resolve('./src/templates/posts.tsx');
 const categoryTemplate = resolve('./src/templates/category-posts.tsx');
 const tagTemplate = resolve('./src/templates/tag-posts.tsx');
 const archiveTemplate = resolve('./src/templates/archive-posts.tsx');
+
+import { createSinglePage, createPaginationPages } from './helpers';
 
 interface IGroup {
   field: string;
@@ -132,7 +137,7 @@ const allPostsQuery = `
         }
       }
     }
-    allTripsYaml: allYaml(filter: { fields: { type: { eq: "trip" } } } ) {
+    allTripsYaml: allYaml(filter: { published: { eq: true }, fields: { type: { eq: "trip" } } } ) {
       edges {
         node {
           id
@@ -145,92 +150,6 @@ const allPostsQuery = `
     }
   }
 `;
-
-/* eslint max-params: [1, 5] */
-const createPaginationPages = (
-  component: string,
-  totalItems: number,
-  pathBase: string,
-  context: any,
-  createPage: any,
-): (false | void)[] => {
-  const { pageSize } = siteConfig;
-  const pageCount = Math.ceil(totalItems / pageSize);
-
-  console.log('========================');
-  console.log('createPaginationPages: ' + pathBase);
-
-  const pages = Array.from({ length: pageCount }).map((_, index) =>
-    createPage({
-      path: `${pathBase}/page/${index + 1}`,
-      component,
-      context: {
-        base: pathBase,
-        pathname: `${pathBase}/page/${index + 1}`,
-        limit: pageSize,
-        skip: index * pageSize,
-        pageCount,
-        currentPage: index + 1,
-        ...context,
-      },
-    }),
-  );
-
-  const firstPage =
-    pageCount > 0 &&
-    createPage({
-      path: pathBase,
-      component,
-      context: {
-        base: pathBase,
-        pathname: pathBase,
-        limit: pageSize,
-        skip: 0,
-        pageCount,
-        currentPage: 1,
-        ...context,
-      },
-    });
-
-  return [...pages, firstPage];
-};
-
-const onCreatePage = (edge: any, index: number, arr: Array<any>, createPage: any, template: string) => {
-  const { node } = edge;
-  console.log('========================');
-  console.log('create page: ' + node.fields.slug);
-
-  const isFirst = index === 0;
-  const isLast = index === arr.length - 1;
-
-  let prev;
-  let next;
-
-  if (!isFirst) {
-    prev = {
-      name: arr[index - 1].node.title || arr[index - 1].node.frontmatter.title,
-      url: arr[index - 1].node.fields.slug,
-    };
-  }
-
-  if (!isLast) {
-    next = {
-      name: arr[index + 1].node.title || arr[index + 1].node.frontmatter.title,
-      url: arr[index + 1].node.fields.slug,
-    };
-  }
-
-  createPage({
-    path: node.fields.slug,
-    component: template,
-    context: {
-      pathname: node.fields.slug,
-      id: node.id,
-      prev,
-      next,
-    },
-  });
-};
 
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
@@ -246,80 +165,83 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     return null;
   }
 
-  // TAXONOMY
+  /************  TAXONOMY  ************/
   const taxEdges = result.data.allTaxonomyYaml.edges;
   console.log('=========TAXONOMY===============');
   const taxonomy = createTaxonomy(taxEdges);
   console.log(taxonomy);
 
-  // TRIPS
+  /************  TRIPS  ************/
   const trips = result.data.allTripsYaml.edges;
-  trips.map((edge, i, arr) => onCreatePage(edge, i, arr, createPage, tripTemplate));
+  // INDIVIDUAL TRIP PAGE
+  trips.map((edge, i, arr) => createSinglePage(edge, i, arr, createPage, tripTemplate));
+  // TRIPS INDEX
+  createPaginationPages(tripsTemplate, trips.length, siteConfig.tripsUrlBase, {}, createPage, siteConfig.pageSize);
 
-  // PAGES
-  const pages = result.data.allMarkdown.edges.filter((item) => item.node.fields.type === 'page');
-  pages.map((edge: IMdEdge) => {
-    const { node } = edge;
-    console.log('========================');
-    console.log('createPages: ' + node.fields.slug);
+  /************  PAGES  ************/
+  result.data.allMarkdown.edges
+    .filter((item) => item.node.fields.type === 'page')
+    .map(({ node }: IMdEdge) => {
+      console.log('========================');
+      console.log('createPages: ' + node.fields.slug);
 
-    createPage({
-      path: node.fields.slug,
-      component: pageTemplate,
-      context: {
-        id: node.id,
-      },
+      createPage({
+        path: node.fields.slug,
+        component: pageTemplate,
+        context: {
+          id: node.id,
+        },
+      });
     });
-  });
 
-  //
-  // INDIVIDUAL POST PAGE
+  /************  POSTS  ************/
   const posts = result.data.allMarkdown.edges.filter((item) => item.node.fields.type === 'post');
-  posts.map((edge, i, arr) => onCreatePage(edge, i, arr, createPage, postTemplate));
-
+  // INDIVIDUAL POST PAGE
+  posts.map((edge, i, arr) => createSinglePage(edge, i, arr, createPage, postTemplate));
   // POSTS INDEX
-  createPaginationPages(postsTemplate, posts.length, siteConfig.blogUrlBase, {}, createPage);
-
+  createPaginationPages(postsTemplate, posts.length, siteConfig.blogUrlBase, {}, createPage, siteConfig.pageSize);
   // CATEGORIES INDEX
   result.data.allCategories.group
-    .filter((group: IGroup) => taxonomy['category'][group.fieldValue])
-    .map((group: IGroup) =>
+    .filter(({ fieldValue }: IGroup) => taxonomy['category'][fieldValue])
+    .map(({ totalCount, fieldValue }: IGroup) =>
       createPaginationPages(
         categoryTemplate,
-        group.totalCount,
-        `/category/${_.kebabCase(group.fieldValue)}`,
+        totalCount,
+        `/category/${_.kebabCase(fieldValue)}`,
         {
-          category: group.fieldValue,
+          category: fieldValue,
         },
         createPage,
+        siteConfig.pageSize,
       ),
     );
-
   // TAGS INDEX
   result.data.allTags.group
-    .filter((group: IGroup) => taxonomy['tag'][group.fieldValue])
-    .map((group: IGroup) =>
+    .filter(({ fieldValue }: IGroup) => taxonomy['tag'][fieldValue])
+    .map(({ totalCount, fieldValue }: IGroup) =>
       createPaginationPages(
         tagTemplate,
-        group.totalCount,
-        `/tag/${_.kebabCase(group.fieldValue)}`,
+        totalCount,
+        `/tag/${_.kebabCase(fieldValue)}`,
         {
-          tag: group.fieldValue,
+          tag: fieldValue,
         },
         createPage,
+        siteConfig.pageSize,
       ),
     );
 
   // YEAR-MONTH ARCHIVE
-  result.data.allYYYYMM.group.map((group: IGroup) =>
+  result.data.allYYYYMM.group.map(({ totalCount, fieldValue }: IGroup) =>
     createPaginationPages(
       archiveTemplate,
-      group.totalCount,
-      `/blog/${postArchiveHelper.getPath(group.fieldValue)}`,
+      totalCount,
+      `/blog/${postArchiveHelper.getPath(fieldValue)}`,
       {
-        yyyymm: group.fieldValue,
+        yyyymm: fieldValue,
       },
       createPage,
+      siteConfig.pageSize,
     ),
   );
   return null;
