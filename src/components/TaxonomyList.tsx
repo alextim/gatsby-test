@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 
-import { getTaxonomyByName, sanitizeKeys } from '../helpers/taxonomy-helpers';
+import { getTaxUrlAndNames } from '../helpers/taxonomy-helpers';
 
 const LinkWrap = styled.span`
   :after {
@@ -22,13 +22,12 @@ type Props = {
   keys: string[];
 };
 const TaxonomyList = ({ name, keys }: Props) => {
-  const tax = getTaxonomyByName(name);
-  const sanitized = sanitizeKeys(name, keys);
+  const items = getTaxUrlAndNames(name, keys);
   return (
     <>
-      {sanitized.map((key, i) => (
+      {items.map((item, i) => (
         <LinkWrap key={i}>
-          <Link to={`/${name}/${key}`}>{tax[key]}</Link>
+          <Link to={item.url}>{item.name}</Link>
         </LinkWrap>
       ))}
     </>

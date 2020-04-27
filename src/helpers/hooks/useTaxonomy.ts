@@ -7,7 +7,22 @@ const useTaxonomy = () => {
         edges {
           node {
             key
-            value
+            name
+            description
+            bannerImage {
+              childImageSharp {
+                fluid(maxWidth: 1920) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+            featuredImage {
+              childImageSharp {
+                fluid(maxWidth: 800) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
             fields {
               slug
               taxonomy

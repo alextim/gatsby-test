@@ -1,8 +1,8 @@
 - key: france
-  value: Франция
+  name: Франция
 - key: italy
-  value: Италия
+  name: Италия
 - key: switzerland
-  value: Швейцария
+  name: Швейцария
 - key: ukraine
-  value: Украина
+  name: Украина

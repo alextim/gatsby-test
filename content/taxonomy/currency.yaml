@@ -1,8 +1,8 @@
 - key: EUR
-  value: €
+  name: €
 - key: USD
-  value: $
+  name: $
 - key: RUR
-  value: руб
+  name: руб
 - key: UAH
-  value: грн
+  name: грн

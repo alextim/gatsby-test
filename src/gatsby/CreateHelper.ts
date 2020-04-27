@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { Taxonomy, IGroup } from '../types/types';
 
 class CreateHelper {
@@ -95,9 +94,9 @@ class CreateHelper {
     return group
       .filter(({ fieldValue }: IGroup) => this._taxonomy[taxonomyName][fieldValue])
       .map(({ totalCount, fieldValue }: IGroup) =>
-        this.createPaginationPages(template, totalCount, `/${taxonomyName}/${_.kebabCase(fieldValue)}`, {
+        this.createPaginationPages(template, totalCount, this._taxonomy[taxonomyName][fieldValue].slug, {
           term: fieldValue,
-          termName: this._taxonomy[taxonomyName][fieldValue],
+          termName: this._taxonomy[taxonomyName][fieldValue].name,
         }),
       );
   }

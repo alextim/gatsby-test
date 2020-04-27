@@ -1,8 +1,8 @@
 - key: winter
-  value: Зима
+  name: Зима
 - key: spring  
-  value: Весна
+  name: Весна
 - key: summer
-  value: Лето
+  name: Лето
 - key: autumn
-  value: Осень
+  name: Осень

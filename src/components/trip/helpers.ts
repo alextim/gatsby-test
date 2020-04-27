@@ -2,7 +2,7 @@ import { IKeyValuePair } from '../../lib/types';
 import Utils from '../../lib/utils';
 import { num2form } from '../../lib/num2form';
 
-import { getTaxonomyByName } from '../../helpers/taxonomy-helpers';
+import { getTermName } from '../../helpers/taxonomy-helpers';
 
 import { ITrip } from './trip';
 import { LevelType, IPriceListItem, CurrencyNameType } from './trip';
@@ -30,14 +30,8 @@ export const getLowestPrice = (rows: Array<IPriceListItem>): IPriceListItem =>
     return prev;
   }, rows[0]);
 
-export const getCurrencySymbol = (currency: CurrencyNameType): string => {
-  const tax = getTaxonomyByName('currency');
-  const value = tax[(currency as unknown) as string];
-  if (!value) {
-    throw new Error(`getCurrencySymbol: "${currency}" not found`);
-  }
-  return value;
-};
+export const getCurrencySymbol = (currency: CurrencyNameType): string =>
+  getTermName((currency as unknown) as string, 'currency');
 
 export const formatDuration = (days: number, nights: number): string => {
   if (!days && !nights) {

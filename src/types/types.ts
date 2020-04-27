@@ -1,9 +1,30 @@
-import { IDictionary, StringMap } from '../lib/types';
+import { IDictionary } from '../lib/types';
 
-export type Taxonomy = IDictionary<StringMap>;
+export type Term = {
+  name: string;
+  slug: string;
+  description?: string;
+  bannerImage?: any;
+  featuredImage?: any;
+};
+
+export type TermMap = IDictionary<Term>;
+export type Taxonomy = IDictionary<TermMap>;
 
 export interface IPageProps {
   location: Location;
+}
+
+export interface ITaxNode {
+  key: string;
+  name: string;
+  description?: string;
+  bannerImage?: any;
+  featuredImage?: any;
+  fields: {
+    taxonomy: string;
+    slug: string;
+  };
 }
 
 export interface IGroup {

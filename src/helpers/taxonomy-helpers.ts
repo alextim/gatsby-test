@@ -1,19 +1,33 @@
-import { StringMap } from '../lib/types';
-import { Taxonomy } from '../types/types';
-// import getKeyByValue from '../lib/getKeyByValue';
+import { ILink } from '../lib/types';
+import { ITaxNode, Taxonomy, TermMap } from '../types/types';
 import useTaxonomy from '../helpers/hooks/useTaxonomy';
 
-const buildTaxonomyLookup = (edges: any): Taxonomy => {
+interface ITaxEdge {
+  node: ITaxNode;
+}
+const buildTaxonomyLookup = (edges: Array<ITaxEdge>): Taxonomy => {
   const tax = new Set<string>();
-  edges.forEach((e: any) => tax.add(e.node.fields.taxonomy));
+  edges.forEach((e) => tax.add(e.node.fields.taxonomy));
 
-  const a = [...tax];
-  const o = a.reduce(
-    (o: {}, term: string) => ({
+  const taxonomyNames = [...tax];
+  const o = taxonomyNames.reduce(
+    (o: {}, taxonomyName: string) => ({
       ...o,
-      [term]: edges
-        .filter((e: any) => e.node.fields.taxonomy === term)
-        .reduce((o: {}, e: any) => ({ ...o, [e.node.key]: e.node.value }), {}),
+      [taxonomyName]: edges
+        .filter((e) => e.node.fields.taxonomy === taxonomyName)
+        .reduce(
+          (o: {}, e) => ({
+            ...o,
+            [e.node.key]: {
+              name: e.node.name,
+              slug: e.node.fields.slug,
+              description: e.node.description,
+              bannerImage: e.node.bannerImage,
+              featuredImage: e.node.featuredImage,
+            },
+          }),
+          {},
+        ),
     }),
     {},
   );
@@ -31,10 +45,10 @@ const getTaxonomyByName = (taxonomyName: string) => {
 
 const getTermName = (key: string, taxonomyName: string) => {
   const tax = getTaxonomyByName(taxonomyName);
-  return tax[key];
+  return tax[key].name;
 };
 
-const _sanitizeKeys = (tax: StringMap, keys: Array<string>): Array<string> => {
+const _sanitizeKeys = (tax: TermMap, keys: Array<string>): Array<string> => {
   const unique = new Set(keys.map((key) => key.toLowerCase()));
   const result = new Array<string>();
 
@@ -56,17 +70,11 @@ const _sanitizeKeys = (tax: StringMap, keys: Array<string>): Array<string> => {
 const sanitizeKeys = (taxonomyName: string, keys: Array<string>): Array<string> =>
   _sanitizeKeys(getTaxonomyByName(taxonomyName), keys);
 
-const getTaxUrlAndNames = (
-  taxonomyName: string,
-  keys: string[],
-): Array<{
-  name: string;
-  url: string;
-}> => {
+const getTaxUrlAndNames = (taxonomyName: string, keys: string[]): Array<ILink> => {
   const tax = getTaxonomyByName(taxonomyName);
   const sanitized = _sanitizeKeys(tax, keys);
 
-  return sanitized.map((key) => ({ name: tax[key], url: `/${name}/${key}` }));
+  return sanitized.map((key) => ({ name: tax[key].name, url: tax[key].slug }));
 };
 
 export { buildTaxonomyLookup, getTaxUrlAndNames, getTaxonomyByName, getTermName, sanitizeKeys };

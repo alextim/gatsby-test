@@ -1,4 +1,4 @@
 - key: news
-  value: Новости 
+  name: Новости 
 - key: tutorials
-  value: Учебные материалы
+  name: Учебные материалы

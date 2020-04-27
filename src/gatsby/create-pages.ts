@@ -10,7 +10,7 @@ import { resolve } from 'path';
 import siteConfig from '../data/site-config';
 import postArchiveHelper from '../helpers/postArchiveHelper';
 import { buildTaxonomyLookup } from '../helpers/taxonomy-helpers';
-import { IGroup } from '../types/types';
+import { ITaxNode as ITaxNodebase, IGroup } from '../types/types';
 import CreateHelper from './CreateHelper';
 
 interface ITripEdge {
@@ -23,17 +23,14 @@ interface ITripEdge {
     };
   };
 }
-interface ITaxonomyEdge {
-  node: {
-    id: string;
-    value: string;
-    key: string;
-    fields: {
-      slug: string;
-      type: string;
-      taxonomy: string;
-    };
+interface ITaxNode extends ITaxNodebase {
+  fields: {
+    slug: string;
+    taxonomy: string;
   };
+}
+interface ITaxonomyEdge {
+  node: ITaxNode;
 }
 
 interface IMdEdge {
@@ -84,9 +81,8 @@ const allPostsQuery = `
     allTaxonomyYaml: allYaml(filter: { fields: { type: { eq: "taxonomy" } } } ) {
       edges {
         node {
-          id
           key
-          value
+          name
           fields {
             slug
             taxonomy
@@ -194,9 +190,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 
   /************  TAXONOMY  ************/
   const taxEdges = result.data.allTaxonomyYaml.edges;
-  console.log('=========TAXONOMY===============');
   const taxonomy = buildTaxonomyLookup(taxEdges);
-  console.log(taxonomy);
+  console.log('=========TAXONOMY is OK ===============');
 
   const helper = new CreateHelper(taxonomy, siteConfig.pageSize, createPage);
 

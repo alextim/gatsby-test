@@ -1,13 +1,13 @@
 - key: alpinism
-  value: Альпинизм
+  name: Альпинизм
   description: bla-blA
-  bannerImage:
-  featuredImage:
+  bannerImage: ./test.jpg
+  featuredImage: ./test.jpg
 - key: kayaking
-  value: Каякинг
+  name: Каякинг
 - key: trekking
-  value: Поход
+  name: Поход
 - key: rock-climbing
-  value: Скалолазание
+  name: Скалолазание
 - key: ski
-  value: Ски-тур/Фрирайд
+  name: Ски-тур/Фрирайд
