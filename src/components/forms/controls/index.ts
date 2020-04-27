@@ -5,8 +5,10 @@ import PhoneControl from './PhoneControl';
 import NoteControl from './NoteControl';
 import DateControl from './DateControl';
 // import SelectControl from './SelectControl';
+import SimpleSelect from './SimpleSelect';
 import TripDatesControl from './TripDatesControl';
 import Submit from './Submit';
+import IconSubmit from './IconSubmit';
 
 export {
   FirstNameControl,
@@ -16,6 +18,8 @@ export {
   NoteControl,
   DateControl,
   // SelectControl,
+  SimpleSelect,
   TripDatesControl,
   Submit,
+  IconSubmit,
 };

@@ -1,8 +1,8 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import PostListTemplate from '../components/post/PostListTemplate';
-import { MdxProps } from '../types/types';
+import PostListTemplate from '../PostListTemplate';
+import { MdxProps } from '../../../types/types';
 
 const PostsTemplate = ({
   data: {

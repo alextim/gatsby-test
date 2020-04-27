@@ -180,19 +180,20 @@ const allPostsQuery = `
   }
 `;
 
-const tripTemplate = resolve('./src/templates/trip.tsx');
-const tripsTemplate = resolve('./src/templates/trips.tsx');
-const seasonTemplate = resolve('./src/templates/trips-season.tsx');
-const destinationTemplate = resolve('./src/templates/trips-destination.tsx');
-const activityTemplate = resolve('./src/templates/trips-activity.tsx');
+const tripTemplate = resolve('./src/components/trip/templates/trip.tsx');
+const tripsTemplate = resolve('./src/components/trip/templates/trips.tsx');
+const seasonTemplate = resolve('./src/components/trip/templates/trips-season.tsx');
+const destinationTemplate = resolve('./src/components/trip/templates/trips-destination.tsx');
+const activityTemplate = resolve('./src/components/trip/templates/trips-activity.tsx');
+const searchTemplate = resolve('./src/components/trip/templates/trips-search.tsx');
 
 const pageTemplate = resolve('./src/templates/page.tsx');
 
-const postTemplate = resolve('./src/templates/post.tsx');
-const postsTemplate = resolve('./src/templates/posts.tsx');
-const categoryTemplate = resolve('./src/templates/posts-category.tsx');
-const tagTemplate = resolve('./src/templates/posts-tag.tsx');
-const archiveTemplate = resolve('./src/templates/archive-posts.tsx');
+const postTemplate = resolve('./src/components/post/templates/post.tsx');
+const postsTemplate = resolve('./src/components/post/templates/posts.tsx');
+const categoryTemplate = resolve('./src/components/post/templates/posts-category.tsx');
+const tagTemplate = resolve('./src/components/post/templates/posts-tag.tsx');
+const archiveTemplate = resolve('./src/components/post/templates/archive-posts.tsx');
 
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
@@ -225,6 +226,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   helper.createTaxonomyPage(result.data.allSeasons.group, seasonTemplate, 'season');
   helper.createTaxonomyPage(result.data.allDestinations.group, destinationTemplate, 'destination');
   helper.createTaxonomyPage(result.data.allActivities.group, activityTemplate, 'activity');
+
+  helper.createSearchPage(
+    searchTemplate,
+    `${siteConfig.tripsUrlBase}/search`,
+    result.data.allSeasons.group,
+    result.data.allDestinations.group,
+    result.data.allActivities.group,
+  );
 
   /************  PAGES  ************/
   result.data.allMarkdown.edges

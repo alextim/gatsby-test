@@ -1,39 +1,36 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import PostListTemplate from '../components/post/PostListTemplate';
-import postArchiveHelper from '../helpers/postArchiveHelper';
-import { MdxProps } from '../types/types';
+import PostListTemplate from '../PostListTemplate';
+import { MdxProps } from '../../../types/types';
 
-const ArchivePostsTemplate = ({
+const CategoryPostsTemplate = ({
   data: {
     allMdx: { edges },
   },
   pageContext,
 }: MdxProps) => (
-  <PostListTemplate
-    edges={edges}
-    pageContext={pageContext}
-    title={`Архив за ${postArchiveHelper.getTitle(pageContext.termKey)}`}
-  />
+  <PostListTemplate edges={edges} pageContext={pageContext} title={`Категория: ${pageContext.term.name}`} />
 );
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
-  query ArchivePageQuery($skip: Int!, $limit: Int!, $termKey: String) {
+  query CategoryPageQuery($skip: Int!, $limit: Int!, $termKey: String) {
     allMdx(
       skip: $skip
       limit: $limit
       sort: { fields: [fields___date], order: DESC }
-      filter: { frontmatter: { published: { eq: true } }, fields: { yyyymm: { eq: $termKey } } }
+      filter: {
+        frontmatter: { published: { eq: true }, category: { in: [$termKey] } }
+        fields: { type: { eq: "post" } }
+      }
     ) {
-      totalCount
       edges {
         node {
-          excerpt
           fields {
             slug
           }
+          excerpt
           frontmatter {
             title
             date
@@ -53,4 +50,4 @@ export const pageQuery = graphql`
   }
 `;
 
-export default ArchivePostsTemplate;
+export default CategoryPostsTemplate;

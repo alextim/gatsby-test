@@ -35,7 +35,7 @@ const mainMenuItems = [
   },
   {
     title: 'Подбор тура',
-    url: '/trip-search',
+    url: '/trips/search',
   },
   {
     title: 'Туристу',

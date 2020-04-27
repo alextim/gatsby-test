@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import SingleTrip from '../components/trip/SingleTrip';
+import SingleTrip from '../SingleTrip';
 
 type Props = {
   data: any;

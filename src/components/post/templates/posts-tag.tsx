@@ -1,36 +1,31 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import PostListTemplate from '../components/post/PostListTemplate';
-import { MdxProps } from '../types/types';
+import PostListTemplate from '../PostListTemplate';
+import { MdxProps } from '../../../types/types';
 
-const CategoryPostsTemplate = ({
+const TagPostsTemplate = ({
   data: {
     allMdx: { edges },
   },
   pageContext,
-}: MdxProps) => (
-  <PostListTemplate edges={edges} pageContext={pageContext} title={`Категория: ${pageContext.term.name}`} />
-);
+}: MdxProps) => <PostListTemplate edges={edges} pageContext={pageContext} title={`Тэг: ${pageContext.term.name}`} />;
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
-  query CategoryPageQuery($skip: Int!, $limit: Int!, $termKey: String) {
+  query TagPageQuery($skip: Int!, $limit: Int!, $termKey: String) {
     allMdx(
       skip: $skip
       limit: $limit
       sort: { fields: [fields___date], order: DESC }
-      filter: {
-        frontmatter: { published: { eq: true }, category: { in: [$termKey] } }
-        fields: { type: { eq: "post" } }
-      }
+      filter: { frontmatter: { published: { eq: true }, tag: { in: [$termKey] } }, fields: { type: { eq: "post" } } }
     ) {
       edges {
         node {
+          excerpt
           fields {
             slug
           }
-          excerpt
           frontmatter {
             title
             date
@@ -50,4 +45,4 @@ export const pageQuery = graphql`
   }
 `;
 
-export default CategoryPostsTemplate;
+export default TagPostsTemplate;

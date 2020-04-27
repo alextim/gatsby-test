@@ -1,30 +1,26 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import TripListTemplate from '../components/trip/TripListTemplate';
+import TripListTemplate from '../TripListTemplate';
+import { YamlProps } from '../../../types/types';
 
-type Props = {
-  data: {
-    allYaml: {
-      edges: Array<any>;
-    };
-  };
-  pageContext: any;
-};
-const TripsTemplate = ({
+const DeastinationTripsTemplate = ({
   data: {
     allYaml: { edges },
   },
   pageContext,
-}: Props) => <TripListTemplate edges={edges} pageContext={pageContext} title="Путешествия" />;
+}: YamlProps) => (
+  <TripListTemplate edges={edges} pageContext={pageContext} title={`Направление: ${pageContext.term.name}`} />
+);
 
+/* eslint no-undef: "off" */
 export const pageQuery = graphql`
-  query TripListQuery($skip: Int!, $limit: Int!) {
+  query DestinationPageQuery($skip: Int!, $limit: Int!, $termKey: String) {
     allYaml(
-      filter: { published: { eq: true }, fields: { type: { eq: "trip" } } }
-      limit: $limit
       skip: $skip
-      sort: { order: DESC, fields: [fields___date] }
+      limit: $limit
+      sort: { fields: [fields___date], order: DESC }
+      filter: { published: { eq: true }, destination: { in: [$termKey] }, fields: { type: { eq: "trip" } } }
     ) {
       edges {
         node {
@@ -71,4 +67,4 @@ export const pageQuery = graphql`
   }
 `;
 
-export default TripsTemplate;
+export default DeastinationTripsTemplate;
