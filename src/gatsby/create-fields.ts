@@ -19,6 +19,7 @@ import slugify from '../lib/slugify';
 
 interface ITripNode {
   slug: string;
+  date: string;
 }
 
 interface ITaxNode {
@@ -78,9 +79,10 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
       if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'date')) {
         // const date = parseISO((node as IMdNode).frontmatter.date);
         // if (String(date) === 'Invalid Date') {
-        const date = moment((node as IMdNode).frontmatter.date, siteConfig.dateFromFormat);
+
+        const date = moment.utc((node as IMdNode).frontmatter.date, siteConfig.dateFromFormat);
         if (!date.isValid) {
-          console.warn('WARNING: Invalid date.', node.frontmatter);
+          throw new Error(`Invalid date. ${(node as IMdNode).frontmatter.date}`);
         }
 
         const isoDate = date.toISOString();
@@ -91,7 +93,8 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
           value: isoDate,
         });
 
-        const yyyymm = isoDate.toString().substr(0, 7).replace('-', '');
+        // const yyyymm = isoDate.toString().substr(0, 7).replace('-', '');
+        const yyyymm = isoDate.substr(0, 7).replace('-', '');
         createNodeField({
           node,
           name: 'yyyymm',
@@ -136,6 +139,17 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
         node,
         name: 'slug',
         value: `${siteConfig.tripsUrlBase}/${slug}`,
+      });
+
+      const date = moment.utc((node as ITripNode).date, siteConfig.dateFromFormat);
+      if (!date.isValid) {
+        throw new Error(`Invalid date. ${(node as ITripNode).date}`);
+      }
+      const isoDate = date.toISOString();
+      createNodeField({
+        node,
+        name: 'date',
+        value: isoDate,
       });
     } else if (fileNode.sourceInstanceName === 'taxonomy') {
       createNodeField({

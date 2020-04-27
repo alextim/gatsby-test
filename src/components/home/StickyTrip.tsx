@@ -5,9 +5,9 @@ import Img from 'gatsby-image';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 
-import { ITheme } from '../theme.d';
-import useLatestTripFeatured1 from '../../helpers/hooks/useLatestTripFeatured1';
 import useHomePageSettings from '../../helpers/hooks/useHomePageSettings';
+import useLatestTripFeatured1 from '../../helpers/hooks/useLatestTripFeatured1';
+import { ITheme } from '../theme.d';
 import { BtnLink } from '../Button';
 import Price from '../trip/Price';
 import { getLowestPrice } from '../trip/helpers';
@@ -27,7 +27,7 @@ const RightWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 2rem;
   width: 100%;
   margin-bottom: 1rem;
   ${(props) => (props.theme as ITheme).mediaQueries.lg} {

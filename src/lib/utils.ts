@@ -76,7 +76,9 @@ const Utils = {
   viberUrl: (viber: string): string => `viber://add?number=${Utils.isMobile() ? '+' : ''}${viber}`,
 
   formatDate: (s: string): string => {
-    const d = new Date(s);
+    const pattern = /(\d{2})-(\d{2})-(\d{4})/;
+    const d = new Date(s.replace(pattern, '$3-$2-$1'));
+    // const d = new Date(s);
     const locale = 'ru';
     const sep = '.';
     const ye = new Intl.DateTimeFormat(locale, { year: 'numeric' }).format(d);

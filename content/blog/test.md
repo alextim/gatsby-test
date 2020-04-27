@@ -1,6 +1,6 @@
 ---
-date: "2018-01-01"
-title: "Markdown Cheatsheet"
+date: 01-01-2018
+title: Markdown Cheatsheet
 category:
   - General
 tag:

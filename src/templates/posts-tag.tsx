@@ -17,7 +17,7 @@ export const pageQuery = graphql`
     allMdx(
       skip: $skip
       limit: $limit
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { fields: [fields___date], order: DESC }
       filter: { frontmatter: { published: { eq: true }, tag: { in: [$term] } }, fields: { type: { eq: "post" } } }
     ) {
       edges {

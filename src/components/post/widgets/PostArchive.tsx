@@ -1,10 +1,10 @@
 import React from 'react';
 
-import SidebarWidget from '../../SidebarWidget';
-import IconLink from '../../IconLink';
+import siteConfig from '../../../data/site-config';
 import useAllYYYYMM from '../../../helpers/hooks/useAllYYYYMM';
 import postArchiveHelper from '../../../helpers/postArchiveHelper';
-import siteConfig from '../../../data/site-config';
+import SidebarWidget from '../../SidebarWidget';
+import IconLink from '../../IconLink';
 
 const PostArchive = () => {
   const dates = useAllYYYYMM();

@@ -24,7 +24,7 @@ export const pageQuery = graphql`
       filter: { published: { eq: true }, fields: { type: { eq: "trip" } } }
       limit: $limit
       skip: $skip
-      sort: { order: DESC, fields: [date] }
+      sort: { order: DESC, fields: [fields___date] }
     ) {
       edges {
         node {

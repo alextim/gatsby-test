@@ -1,6 +1,6 @@
 ---
 path: /posts/mdx-test
-date: 2019-05-26
+date: 26-05-2019
 published: true
 title: My first MDX blog post
 description: ""

@@ -1,7 +1,7 @@
 const siteConfig = {
   blogUrlBase: '/blog', // No trailing slash
   tripsUrlBase: '/trips',
-  dateFromFormat: 'YYYY-MM-DD', // Date format used in the frontmatter.
+  dateFromFormat: 'DD-MM-YYYY', // Date format used in the frontmatter.
   dateFormat: 'DD/MM/YYYY', // Date format for display.
   pageSize: 2,
   defaultBannerImage: 'gnifetty-alp-italy.jpg',

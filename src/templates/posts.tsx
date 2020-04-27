@@ -15,7 +15,7 @@ export const pageQuery = graphql`
   query BlogListQuery($skip: Int!, $limit: Int!) {
     allMdx(
       filter: { frontmatter: { published: { eq: true } }, fields: { type: { eq: "post" } } }
-      sort: { order: DESC, fields: [frontmatter___date] }
+      sort: { order: DESC, fields: [fields___date] }
       limit: $limit
       skip: $skip
     ) {
@@ -27,7 +27,7 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
-            date(formatString: "YYYY-MM-DD")
+            date
             category
             tag
             path
