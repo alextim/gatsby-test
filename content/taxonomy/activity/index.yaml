@@ -1,5 +1,8 @@
 - key: alpinism
   value: Альпинизм
+  description: bla-blA
+  bannerImage:
+  featuredImage:
 - key: kayaking
   value: Каякинг
 - key: trekking

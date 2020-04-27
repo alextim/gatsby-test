@@ -38,6 +38,16 @@ interface IMdNode {
 
 const safeSlug = (s: string): string => slugify(translit(s, 1));
 
+const slugFromPath = (name: string, dir: string): string => {
+  if (name !== 'index' && dir !== '') {
+    return `${safeSlug(dir)}/${safeSlug(name)}`;
+  }
+  if (dir === '') {
+    return safeSlug(name);
+  }
+  return safeSlug(dir);
+};
+
 export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
   if (node.internal.type === 'Mdx') {
@@ -63,12 +73,8 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
       Object.prototype.hasOwnProperty.call(node.frontmatter, 'title')
     ) {
       slug = safeSlug((node as IMdNode).frontmatter.title);
-    } else if (parsedFilePath.name !== 'index' && parsedFilePath.dir !== '') {
-      slug = `${safeSlug(parsedFilePath.dir)}/${safeSlug(parsedFilePath.name)}`;
-    } else if (parsedFilePath.dir === '') {
-      slug = safeSlug(parsedFilePath.name);
     } else {
-      slug = safeSlug(parsedFilePath.dir);
+      slug = slugFromPath(parsedFilePath.name, parsedFilePath.dir);
     }
 
     if (Object.prototype.hasOwnProperty.call(node, 'frontmatter')) {
@@ -152,13 +158,14 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
         value: isoDate,
       });
     } else if (fileNode.sourceInstanceName === 'taxonomy') {
+      const parsedFilePath = pathParse(fileNode.relativePath);
+      const taxName = parsedFilePath.name === 'index' ? parsedFilePath.dir : parsedFilePath.name;
+      const slug = `/${taxName}/${(node as ITaxNode).key}`;
       createNodeField({
         node,
         name: 'type',
         value: 'taxonomy',
       });
-      const parsedFilePath = pathParse(fileNode.relativePath);
-      const slug = `/${parsedFilePath.name}/${(node as ITaxNode).key}`;
       createNodeField({
         node,
         name: 'slug',
@@ -167,7 +174,7 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
       createNodeField({
         node,
         name: 'taxonomy',
-        value: parsedFilePath.name,
+        value: taxName,
       });
     }
   }
