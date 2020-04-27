@@ -9,8 +9,7 @@ const buildTaxonomyLookup = (edges: Array<ITaxEdge>): Taxonomy => {
   const tax = new Set<string>();
   edges.forEach((e) => tax.add(e.node.fields.taxonomy));
 
-  const taxonomyNames = [...tax];
-  const o = taxonomyNames.reduce(
+  return [...tax].reduce(
     (o: {}, taxonomyName: string) => ({
       ...o,
       [taxonomyName]: edges
@@ -24,6 +23,7 @@ const buildTaxonomyLookup = (edges: Array<ITaxEdge>): Taxonomy => {
               description: e.node.description,
               bannerImage: e.node.bannerImage,
               featuredImage: e.node.featuredImage,
+              taxonomyName: taxonomyName,
             },
           }),
           {},
@@ -31,7 +31,6 @@ const buildTaxonomyLookup = (edges: Array<ITaxEdge>): Taxonomy => {
     }),
     {},
   );
-  return o as Taxonomy;
 };
 
 const getTaxonomyByName = (taxonomyName: string) => {
@@ -43,9 +42,14 @@ const getTaxonomyByName = (taxonomyName: string) => {
   return tax;
 };
 
-const getTermName = (key: string, taxonomyName: string) => {
+const getTerm = (key: string, taxonomyName: string) => {
   const tax = getTaxonomyByName(taxonomyName);
-  return tax[key].name;
+  return tax[key];
+};
+
+const getTermName = (key: string, taxonomyName: string) => {
+  const term = getTerm(key, taxonomyName);
+  return term.name;
 };
 
 const _sanitizeKeys = (tax: TermMap, keys: Array<string>): Array<string> => {
@@ -77,4 +81,4 @@ const getTaxUrlAndNames = (taxonomyName: string, keys: string[]): Array<ILink> =
   return sanitized.map((key) => ({ name: tax[key].name, url: tax[key].slug }));
 };
 
-export { buildTaxonomyLookup, getTaxUrlAndNames, getTaxonomyByName, getTermName, sanitizeKeys };
+export { buildTaxonomyLookup, getTaxUrlAndNames, getTaxonomyByName, getTerm, getTermName, sanitizeKeys };

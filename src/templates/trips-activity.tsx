@@ -10,17 +10,17 @@ const ActivityTripsTemplate = ({
   },
   pageContext,
 }: YamlProps) => (
-  <TripListTemplate edges={edges} pageContext={pageContext} title={`Активность: ${pageContext.termName}`} />
+  <TripListTemplate edges={edges} pageContext={pageContext} title={`Активность: ${pageContext.term.name}`} />
 );
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
-  query ActivityPageQuery($skip: Int!, $limit: Int!, $term: String) {
+  query ActivityPageQuery($skip: Int!, $limit: Int!, $termKey: String) {
     allYaml(
       skip: $skip
       limit: $limit
       sort: { fields: [fields___date], order: DESC }
-      filter: { published: { eq: true }, activity: { in: [$term] }, fields: { type: { eq: "trip" } } }
+      filter: { published: { eq: true }, activity: { in: [$termKey] }, fields: { type: { eq: "trip" } } }
     ) {
       edges {
         node {

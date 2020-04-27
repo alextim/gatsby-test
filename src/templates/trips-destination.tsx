@@ -10,17 +10,17 @@ const DeastinationTripsTemplate = ({
   },
   pageContext,
 }: YamlProps) => (
-  <TripListTemplate edges={edges} pageContext={pageContext} title={`Направление: ${pageContext.termName}`} />
+  <TripListTemplate edges={edges} pageContext={pageContext} title={`Направление: ${pageContext.term.name}`} />
 );
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
-  query DestinationPageQuery($skip: Int!, $limit: Int!, $term: String) {
+  query DestinationPageQuery($skip: Int!, $limit: Int!, $termKey: String) {
     allYaml(
       skip: $skip
       limit: $limit
       sort: { fields: [fields___date], order: DESC }
-      filter: { published: { eq: true }, destination: { in: [$term] }, fields: { type: { eq: "trip" } } }
+      filter: { published: { eq: true }, destination: { in: [$termKey] }, fields: { type: { eq: "trip" } } }
     ) {
       edges {
         node {

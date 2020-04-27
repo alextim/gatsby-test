@@ -9,16 +9,16 @@ const SeasonTripsTemplate = ({
     allYaml: { edges },
   },
   pageContext,
-}: YamlProps) => <TripListTemplate edges={edges} pageContext={pageContext} title={`Сезон: ${pageContext.termName}`} />;
+}: YamlProps) => <TripListTemplate edges={edges} pageContext={pageContext} title={`Сезон: ${pageContext.term.name}`} />;
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
-  query SeasonPageQuery($skip: Int!, $limit: Int!, $term: String) {
+  query SeasonPageQuery($skip: Int!, $limit: Int!, $termKey: String) {
     allYaml(
       skip: $skip
       limit: $limit
       sort: { fields: [fields___date], order: DESC }
-      filter: { published: { eq: true }, season: { in: [$term] }, fields: { type: { eq: "trip" } } }
+      filter: { published: { eq: true }, season: { in: [$termKey] }, fields: { type: { eq: "trip" } } }
     ) {
       edges {
         node {

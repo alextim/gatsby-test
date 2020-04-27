@@ -10,7 +10,7 @@ import { resolve } from 'path';
 import siteConfig from '../data/site-config';
 import postArchiveHelper from '../helpers/postArchiveHelper';
 import { buildTaxonomyLookup } from '../helpers/taxonomy-helpers';
-import { ITaxNode as ITaxNodebase, IGroup } from '../types/types';
+import { ITaxNode, IGroup } from '../types/types';
 import CreateHelper from './CreateHelper';
 
 interface ITripEdge {
@@ -23,12 +23,7 @@ interface ITripEdge {
     };
   };
 }
-interface ITaxNode extends ITaxNodebase {
-  fields: {
-    slug: string;
-    taxonomy: string;
-  };
-}
+
 interface ITaxonomyEdge {
   node: ITaxNode;
 }
@@ -83,6 +78,31 @@ const allPostsQuery = `
         node {
           key
           name
+          description
+          bannerImage {
+            childImageSharp {
+              fluid(maxWidth: 1920) {
+                src
+                srcSet
+                aspectRatio
+                sizes
+                base64
+              }
+            }
+            publicURL
+          }
+          featuredImage {
+            childImageSharp {
+              fluid(maxWidth: 800) {
+                src
+                srcSet
+                aspectRatio
+                sizes
+                base64
+              }
+            }
+            publicURL
+          }
           fields {
             slug
             taxonomy
@@ -234,7 +254,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   // YEAR-MONTH ARCHIVE
   result.data.allYYYYMM.group.map(({ totalCount, fieldValue }: IGroup) =>
     helper.createPaginationPages(archiveTemplate, totalCount, `/blog/${postArchiveHelper.getPath(fieldValue)}`, {
-      term: fieldValue,
+      termKey: fieldValue,
     }),
   );
   return null;

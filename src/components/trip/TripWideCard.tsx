@@ -28,14 +28,12 @@ const InnerWrapper = styled(Box)`
   align-content: flex-start;
   width: 100%;
   margin-bottom: 2rem;
-  flex-direction: column;
-  padding-right: 1.5rem;
-  padding-left: 1.5rem;
+  padding: 1.5rem;
   ${(props) => (props.theme as ITheme).mediaQueries.lg} {
     justify-content: space-between;
     flex-direction: row;
     flex-wrap: nowrap;
-    padding: 1.5rem 0 1.5rem 1.5rem;
+    padding-right: 0;
   }
 `;
 

@@ -16,7 +16,7 @@ const Layout: React.FC<IProps> = ({ title, header, isPrint = false, children }) 
     <LayoutFullWidth>
       {header && <ContainerFullWidth>{header}</ContainerFullWidth>}
       <Container>
-        {title && <PageHeading>{title}</PageHeading>}
+        {!header && title && <PageHeading>{title}</PageHeading>}
         {children}
       </Container>
     </LayoutFullWidth>

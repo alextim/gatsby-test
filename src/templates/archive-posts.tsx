@@ -14,18 +14,18 @@ const ArchivePostsTemplate = ({
   <PostListTemplate
     edges={edges}
     pageContext={pageContext}
-    title={`Архив за ${postArchiveHelper.getTitle(pageContext.term)}`}
+    title={`Архив за ${postArchiveHelper.getTitle(pageContext.termKey)}`}
   />
 );
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
-  query ArchivePageQuery($skip: Int!, $limit: Int!, $term: String) {
+  query ArchivePageQuery($skip: Int!, $limit: Int!, $termKey: String) {
     allMdx(
       skip: $skip
       limit: $limit
       sort: { fields: [fields___date], order: DESC }
-      filter: { frontmatter: { published: { eq: true } }, fields: { yyyymm: { eq: $term } } }
+      filter: { frontmatter: { published: { eq: true } }, fields: { yyyymm: { eq: $termKey } } }
     ) {
       totalCount
       edges {

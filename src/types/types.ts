@@ -6,6 +6,7 @@ export type Term = {
   description?: string;
   bannerImage?: any;
   featuredImage?: any;
+  taxonomy: string;
 };
 
 export type TermMap = IDictionary<Term>;
@@ -34,8 +35,8 @@ export interface IGroup {
 }
 
 export type PageContext = {
-  term: string;
-  termName: string;
+  termKey: string;
+  term: Term;
   pathname: string;
   pageCount: number;
   currentPage: number;

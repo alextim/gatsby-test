@@ -1,8 +1,6 @@
 - key: alpinism
   name: Альпинизм
-  description: bla-blA
-  bannerImage: ./test.jpg
-  featuredImage: ./test.jpg
+  description: bla-blAAAA
 - key: kayaking
   name: Каякинг
 - key: trekking
@@ -11,3 +9,6 @@
   name: Скалолазание
 - key: ski
   name: Ски-тур/Фрирайд
+  description: bla-blBBBBBB
+  bannerImage: ./test.jpg
+  featuredImage: ./test.jpg

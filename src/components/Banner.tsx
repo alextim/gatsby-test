@@ -28,12 +28,12 @@ const SImg = styled(Img)`
   height: auto;
 `;
 
-interface IProps {
+type Props = {
   img?: any;
   title: string;
 }
 
-const Banner: React.FC<IProps> = ({ img, title }) => (
+const Banner = ({ img, title }: Props) => (
   <Wrapper>
     {img && <SImg fluid={img} alt={title} />}
     <CenteredWrap>

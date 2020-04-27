@@ -9,16 +9,21 @@ const CategoryPostsTemplate = ({
     allMdx: { edges },
   },
   pageContext,
-}: MdxProps) => <PostListTemplate edges={edges} pageContext={pageContext} title={`Категория: ${pageContext.termName}`} />;
+}: MdxProps) => (
+  <PostListTemplate edges={edges} pageContext={pageContext} title={`Категория: ${pageContext.term.name}`} />
+);
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
-  query CategoryPageQuery($skip: Int!, $limit: Int!, $term: String) {
+  query CategoryPageQuery($skip: Int!, $limit: Int!, $termKey: String) {
     allMdx(
       skip: $skip
       limit: $limit
       sort: { fields: [fields___date], order: DESC }
-      filter: { frontmatter: { published: { eq: true }, category: { in: [$term] } }, fields: { type: { eq: "post" } } }
+      filter: {
+        frontmatter: { published: { eq: true }, category: { in: [$termKey] } }
+        fields: { type: { eq: "post" } }
+      }
     ) {
       edges {
         node {

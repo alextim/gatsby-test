@@ -95,8 +95,8 @@ class CreateHelper {
       .filter(({ fieldValue }: IGroup) => this._taxonomy[taxonomyName][fieldValue])
       .map(({ totalCount, fieldValue }: IGroup) =>
         this.createPaginationPages(template, totalCount, this._taxonomy[taxonomyName][fieldValue].slug, {
-          term: fieldValue,
-          termName: this._taxonomy[taxonomyName][fieldValue].name,
+          termKey: fieldValue,
+          term: this._taxonomy[taxonomyName][fieldValue],
         }),
       );
   }
