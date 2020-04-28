@@ -4,7 +4,7 @@
  *
  */
 import fs from 'fs';
-import path from 'path';
+
 import { GatsbyNode } from 'gatsby';
 import { ITrip } from '../components/trip/trip';
 import { buildTaxonomyLookup, sanitizeKeys } from '../helpers/taxonomy-helpers';
@@ -64,12 +64,6 @@ export const createSearchIndex: GatsbyNode['onPostBootstrap'] = ({ getNodes, get
         dates,
         itinerary,
       } = n;
-      let img;
-      if (featuredImage) {
-        const fileNode = getNode(n.parent);
-        // const parsedFilePath = path.parse(fileNode.absolutePath);
-        img = path.relative(path.dirname(fileNode.absolutePath), path.join(__dirname, '/static/', featuredImage));
-      }
       tripsIndex.push({
         slug: n.fields.slug,
         title,
@@ -77,7 +71,7 @@ export const createSearchIndex: GatsbyNode['onPostBootstrap'] = ({ getNodes, get
         // metaTitle,
         // metaDescription,
         excerpt,
-        featuredImage: img,
+        featuredImage,
 
         groupSize,
         season: season && sanitizeKeys(taxonomy.season, season),

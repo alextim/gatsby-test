@@ -6,22 +6,25 @@ https://github.com/diogorodrigues/iceberg-gatsby-multilang
 */
 import { GatsbyNode } from 'gatsby';
 import { resolve } from 'path';
+import fs from 'fs';
 
 import siteConfig from '../data/site-config';
 import postArchiveHelper from '../helpers/postArchiveHelper';
 import { buildTaxonomyLookup } from '../helpers/taxonomy-helpers';
 import { ITaxNode, IGroup } from '../types/types';
 import CreateHelper from './CreateHelper';
+import { ITrip } from '../components/trip/trip';
+import { sanitizeKeys } from '../helpers/taxonomy-helpers';
+import Utils from '../lib/utils';
 
-interface ITripEdge {
-  node: {
-    id: string;
-    title: string;
-    fields: {
-      slug: string;
-      type: string;
-    };
+interface INodeTrip extends ITrip {
+  id: string;
+  fields: {
+    slug: string;
   };
+}
+interface ITripEdge {
+  node: INodeTrip;
 }
 
 interface ITaxonomyEdge {
@@ -171,6 +174,44 @@ const allPostsQuery = `
         node {
           id
           title
+          description
+          excerpt
+          featuredImage {
+            childImageSharp {
+              fluid(maxWidth: 800) {
+                src
+                srcSet
+                aspectRatio
+                sizes
+                base64
+              }
+            }
+            publicURL
+          }
+          groupSize
+          season
+          destination
+          activity
+          difficultyLevel
+          priceMode
+          currency
+          enableSale
+          priceList {
+            price
+            qty
+            salePrice
+          }
+          isDatesOnRequest
+          isShowNights
+          dates {
+            date
+            isSale
+          }
+          itinerary {
+            dayItems {
+              title
+            }
+          }         
           fields {
             slug
           }
@@ -222,6 +263,61 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   const trips = result.data.allTripsYaml.edges;
   // INDIVIDUAL TRIP PAGE
   trips.map((edge, i, arr) => helper.createSinglePage(edge, i, arr, tripTemplate));
+
+  const tripsIndex = new Array<any>();
+  trips.map((edge) => {
+    const {
+      title,
+      description,
+      // metaTitle,
+      // metaDescription,
+      excerpt,
+      featuredImage,
+
+      groupSize,
+      season,
+      destination,
+      activity,
+      difficultyLevel,
+
+      priceMode,
+      currency,
+      enableSale,
+      priceList,
+
+      isDatesOnRequest,
+      isShowNights,
+      dates,
+      itinerary,
+    } = edge.node;
+    tripsIndex.push({
+      slug: edge.node.fields.slug,
+      title,
+      description: description && Utils.stripHtmlTags(description),
+      // metaTitle,
+      // metaDescription,
+      excerpt,
+      featuredImage,
+
+      groupSize,
+      season: season && sanitizeKeys(taxonomy.season, season),
+      destination: destination && sanitizeKeys(taxonomy.destination, destination),
+      activity: activity && sanitizeKeys(taxonomy.activity, activity),
+      difficultyLevel,
+
+      priceMode,
+      currency,
+      enableSale,
+      priceList,
+
+      isDatesOnRequest,
+      isShowNights,
+      dates: dates,
+      itinerary: itinerary && itinerary.dayItems ? { dayItems: { length: itinerary.dayItems.length } } : undefined,
+    });
+  });
+  fs.writeFileSync(`public/${siteConfig.searchIndexFileName}`, JSON.stringify(tripsIndex));
+
   // TRIPS INDEX
   helper.createPaginationPages(tripsTemplate, trips.length, siteConfig.tripsUrlBase, {});
   // TRIP TAXES
