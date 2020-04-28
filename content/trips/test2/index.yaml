@@ -24,16 +24,17 @@ excerpt: Фрирайд на лучшем горнолыжном курорте 
 featuredImage: ./test.jpg
 season: 
   - winter
-  - Spring
-  - Осень
+  - spring
+  - summer
 activity:
   - ski
+  - rock-climbing
 destination: 
   - france
   - italy
   - Италия
   - Italy
-  - xxx
+  - switzerland
 priceMode: 2
 currency: EUR
 enableSale: true

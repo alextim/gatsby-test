@@ -211,8 +211,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 
   /************  TAXONOMY  ************/
   const taxEdges = result.data.allTaxonomyYaml.edges;
+  console.log('========================');
+  console.log('TAXONOMY');
   const taxonomy = buildTaxonomyLookup(taxEdges);
-  console.log('=========TAXONOMY is OK ===============');
+  console.log('OK');
 
   const helper = new CreateHelper(taxonomy, siteConfig.pageSize, createPage);
 
@@ -241,7 +243,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     .map(({ node }: IMdEdge) => {
       console.log('========================');
       console.log('createPages: ' + node.fields.slug);
-
       createPage({
         path: node.fields.slug,
         component: pageTemplate,
@@ -249,6 +250,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
           id: node.id,
         },
       });
+      console.log('OK');
     });
 
   /************  POSTS  ************/

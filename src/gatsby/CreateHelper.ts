@@ -14,7 +14,7 @@ class CreateHelper {
   createSinglePage(edge: any, index: number, arr: Array<any>, template: string) {
     const { node } = edge;
     console.log('========================');
-    console.log('create page: ' + node.fields.slug);
+    console.log(`create page: ${node.fields.slug}`);
 
     const isFirst = index === 0;
     const isLast = index === arr.length - 1;
@@ -46,6 +46,7 @@ class CreateHelper {
         next,
       },
     });
+    console.log('OK');
   }
 
   /* eslint max-params: [1, 5] */
@@ -53,7 +54,7 @@ class CreateHelper {
     const pageCount = Math.ceil(totalItems / this._pageSize);
 
     console.log('========================');
-    console.log('createPaginationPages: ' + pathBase);
+    console.log(`createPaginationPages: ${pathBase}`);
 
     const pages = Array.from({ length: pageCount }).map((_, index) =>
       this._createPage({
@@ -86,7 +87,7 @@ class CreateHelper {
           ...context,
         },
       });
-
+    console.log('OK');
     return [...pages, firstPage];
   }
 
@@ -108,6 +109,8 @@ class CreateHelper {
     destinations: Array<IGroup>,
     activities: Array<IGroup>,
   ) {
+    console.log('========================');
+    console.log(`createSearchPage: ${path}`);
     this._createPage({
       path: path,
       component,
@@ -130,6 +133,7 @@ class CreateHelper {
           })),
       },
     });
+    console.log('OK');
   }
 }
 

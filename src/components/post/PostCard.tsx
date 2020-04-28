@@ -30,7 +30,7 @@ const PostCard = ({ post }: Props) => (
     {post.featuredImage && (
       <Box mb="1rem">
         <Link to={post.path}>
-          <Img fluid={post.featuredImage} alt={post.title} width="100%" height="auto" />
+          <Img fluid={post.featuredImage} alt={post.title} />
         </Link>
       </Box>
     )}

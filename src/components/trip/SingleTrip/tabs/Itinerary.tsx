@@ -30,10 +30,10 @@ const DoubleImgWrap = styled.div`
   margin-bottom: 1rem;
   ${(props) => (props.theme as ITheme).mediaQueries.md} {
     width: 50%;
-    :first-child {
+    :first-of-type {
       padding-right: 0.5rem;
     }
-    :last-child {
+    :last-of-type {
       padding-left: 0.5rem;
     }
   }

@@ -53,12 +53,10 @@ const getTermName = (key: string, taxonomyName: string) => {
 };
 
 const _sanitizeKeys = (tax: TermMap, keys: Array<string>): Array<string> => {
-  const unique = new Set(keys.map((key) => key.toLowerCase()));
   const result = new Array<string>();
 
-  unique.forEach((item) => {
-    const value = tax[item];
-    if (value) {
+  new Set(keys.map((key) => key.toLowerCase())).forEach((item) => {
+    if (tax[item]) {
       result.push(item);
     } /* else {
       const key = getKeyByValue(tax, item);
@@ -71,8 +69,8 @@ const _sanitizeKeys = (tax: TermMap, keys: Array<string>): Array<string> => {
   return result;
 };
 
-const sanitizeKeys = (taxonomyName: string, keys: Array<string>): Array<string> =>
-  _sanitizeKeys(getTaxonomyByName(taxonomyName), keys);
+const sanitizeKeys = (taxonomy: string | TermMap, keys: Array<string>): Array<string> =>
+  _sanitizeKeys(typeof taxonomy === 'string' ? getTaxonomyByName(taxonomy) : taxonomy, keys);
 
 const getTaxUrlAndNames = (taxonomyName: string, keys: string[]): Array<ILink> => {
   const tax = getTaxonomyByName(taxonomyName);

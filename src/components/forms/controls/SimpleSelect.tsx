@@ -6,25 +6,23 @@ type Props = {
   label: string;
   name: string;
   items: Array<IKeyValuePair>;
-  empty: IKeyValuePair;
+  defaultItem?: IKeyValuePair;
   register: any;
+  value: any;
+  onChange: any;
 };
-const SimpleSelect = ({ label, name, items, empty, register }: Props) => {
-  if (empty) {
-    items.unshift(empty);
-  }
-  return (
-    <FormControl>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <Select ref={register} name={name}>
-        {items.map((item, i) => (
-          <option key={i} value={item.key}>
-            {item.value}
-          </option>
-        ))}
-      </Select>
-    </FormControl>
-  );
-};
+const SimpleSelect = ({ label, name, items, defaultItem, value, onChange, register }: Props) => (
+  <FormControl>
+    <FormLabel htmlFor={name}>{label}</FormLabel>
+    <Select ref={register} name={name} value={value} onChange={onChange}>
+      {defaultItem && <option value={defaultItem.key}>{defaultItem.value}</option>}
+      {items.map((item, i) => (
+        <option key={`${name}-${i}`} value={item.key}>
+          {item.value}
+        </option>
+      ))}
+    </Select>
+  </FormControl>
+);
 
 export default React.memo(SimpleSelect);

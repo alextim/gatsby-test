@@ -177,7 +177,10 @@ const TripWideCard = ({ trip }: Props) => {
           <HeadWrap>
             <ImageWrap>
               <Link to={path}>
-                <Img fluid={featuredImage ? featuredImage : usePlaceholderImage()} alt={title} />
+                <Img
+                  fluid={featuredImage && typeof featuredImage === 'object' ? featuredImage : usePlaceholderImage()}
+                  alt={title}
+                />
               </Link>
               {enableSale && <TripOffer />}
             </ImageWrap>
