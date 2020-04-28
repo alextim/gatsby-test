@@ -7,7 +7,7 @@ type Props = {
   name: string;
   items: Array<IKeyValuePair>;
   defaultItem?: IKeyValuePair;
-  register: any;
+  register?: any;
   value: any;
   onChange: any;
 };

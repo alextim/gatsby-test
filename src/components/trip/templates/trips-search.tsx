@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { useForm } from 'react-hook-form';
 
 import siteConfig from '../../../data/site-config';
 import { IKeyValuePair } from '../../../lib/types';
@@ -8,8 +7,9 @@ import useDefaultBannerImage from '../../../helpers/hooks/useDefaultBannerImage'
 import Layout from '../../Layout';
 import Banner from '../../Banner';
 import SEO from '../../SEO';
-import { SimpleSelect, IconSubmit } from '../../forms/controls';
+import { SimpleSelect, SimpleDate } from '../../forms/controls';
 import TripWideCard from '../TripWideCard';
+
 import { ITrip } from '../trip';
 const PAGE_TITLE = 'Подбор тура';
 
@@ -35,25 +35,10 @@ type Props = {
 
 const SearchTemplate = ({ pageContext }: Props) => {
   const { seasons, destinations, activities } = pageContext;
-  /*
-  const {
-    handleSubmit,
-    // setError,
-    // reset,
-    register,
-    // errors,
-    // control,
-  } = useForm();
 
-  const onSubmit = (data: any, e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    console.log(data);
-    alert('hello');
-  };
-            register={register}
-
-  */
   const [data, setData] = useState('');
+  const [startDate, setstartDate] = useState('');
+  const [finishDate, setfinishDate] = useState('');
   const [activity, setActivity] = useState('');
   const [season, setSeason] = useState('');
   const [destination, setDestination] = useState('');
@@ -89,7 +74,6 @@ const SearchTemplate = ({ pageContext }: Props) => {
   return (
     <Layout header={<Banner img={useDefaultBannerImage()} title={PAGE_TITLE} />}>
       <SEO title={PAGE_TITLE} pathname={pageContext.pathname} />
-      {/*<form onSubmit={handleSubmit(onSubmit)} method="post">*/}
       <ControlsWrapper>
         {seasons && (
           <SimpleSelect
@@ -121,9 +105,9 @@ const SearchTemplate = ({ pageContext }: Props) => {
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setActivity(e.target.value)}
           />
         )}
-        {/*<IconSubmit title="Поиск" icon="filter" />*/}
+        <SimpleDate label="Начало" name="start" value={startDate} onChange={setstartDate} />
+        <SimpleDate label="Завершение" name="start" value={finishDate} onChange={setfinishDate} />
       </ControlsWrapper>
-      {/*</form>*/}
       <div>season: {season}</div>
       <div>destination: {destination}</div>
       <div>activity: {activity}</div>

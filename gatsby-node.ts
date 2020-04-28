@@ -14,6 +14,6 @@
 // https://github.com/gatsbyjs/gatsby/issues/1457#issuecomment-381405638
 // https://www.extensive.one/converting-gatsby-config-and-node-api-to-typescript/
 // https://github.com/assainov/gatsby-extensive-starter-typescript
-// export { createSearchIndex as onPostBootstrap } from './src/gatsby/create-search-index';
+
 export { createPages } from './src/gatsby/create-pages';
 export { createFields as onCreateNode } from './src/gatsby/create-fields';

@@ -9,7 +9,6 @@ import { BaseformContext } from '../base-forms/BaseformContext';
 const dateRules = {
   required: 'Дата обязательна',
 };
-
 const DatePickerController = ({ control }) => (
   <Controller
     as={<ReactDatePicker clearIcon={null} />}
