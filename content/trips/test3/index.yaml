@@ -1,0 +1,81 @@
+slug: t3
+title: bla-bla-bla
+published: true
+date: 2020-02-11
+featured: false
+#
+# Google - 60
+# FB     - 95
+#
+# metaTitle?: string;
+#
+# Google - 160
+# FB     - 200
+#
+# metaDescription?: string; // 160
+description:
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+season: 
+  - winter
+  - spring
+  - Осень
+activity:
+  - rock-climbing
+destination: 
+  - france
+  - italy
+  - Италия
+  - Italy
+  - xxx
+priceMode: 2
+currency: UAH
+enableSale: true
+priceList:
+  - qty: 6
+    price: 700
+    salePrice: 400
+  - qty: 5
+    price: 790
+    salePrice: 500
+    isSale: true
+  - qty: 4
+    price: 950
+    salePrice: 800
+  - qty: 3
+    price: 1200
+    salePrice: 1000
+service:
+  included:
+    - Услуги гида при катании вне трасс (один гид на пять участников)
+    - Групповая аптечка первой неотложной помощи, средства связи и навигации (находятся у гида)
+    - Групповой трансфер аэропорт Женевы - Три Долины и обратно
+    - Проживание в Трех Долинах в аппартаментах - 6 ночей
+    - Страховка на случай экстренной эвакуации со склона до медицинского учреждения
+  excluded:
+    - Виза в Шенгенскую зону
+    - Туристическая страховка с обязательным указанием на занятие зимними видами спорта
+    - Питание - от 10 EUR в день, если готовить самостоятельно
+    - Ски-пасс (62 EUR в день)
+    - Прокат личного горнолыжного снаряжения
+    - Перекусы на активную часть программы
+    - Услуги связи - интернет и звонки
+    - Чаевые гиду (по желанию и возможности)
+    - Прочие расходы, неуказанные в программе
+  note: Ориентировочныйе цены в местном прокате на 2019 год
+    лыжный комплект (лыжи, ботинки, палки) - 67-140 EUR за 5 дней в зависимости от модели
+    горнолыжный шлем - 13.30 EUR за 5 дней (если берете в комплекте с лыжами)
+    лавинное снаряжение (бипер, щуп, лопата) - 70 EUR за 5 дней
+difficultyLevel: 1
+fitnessLevel: 4
+altitude: 5555
+accomodation: гостиница, апартаменты
+groupSize: 11
+isShowNights: true
+duration: 8
+isDatesOnRequest: false
+dates:
+  - date: 2019-01-01
+    isSale: true
+  - date: 2019-05-30
+    isSale: false

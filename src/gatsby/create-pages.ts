@@ -263,7 +263,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   /************  TRIPS  ************/
   const trips = result.data.allTripsYaml.edges;
   // INDIVIDUAL TRIP PAGE
-  trips.map((edge, i, arr) => helper.createSinglePage(edge, i, arr, tripTemplate));
+  trips.map((edge, i, arr) => helper.createSinglePage(edge, i, arr, tripTemplate, true));
 
   // TRIPS SEARCH INDEX
   helper.createSearchIndex(trips);

@@ -95,6 +95,7 @@ const Utils = {
     result.setDate(result.getDate() + days);
     return result;
   },
+  getExcerpt: (s: string, length = 160): string => s.substr(0, length),
 };
 
 export default Utils;

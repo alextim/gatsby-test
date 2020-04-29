@@ -12,14 +12,22 @@ import TabHeading from './TabHeading';
 
 type Props = {
   trip: ITrip;
-  days: number;
+  startFinishDates?: Array<any>;
   showPrice: boolean;
   showPriceList: boolean;
   lowestPrice?: IPriceListItem;
   focusRef: any;
   openFormHandler: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
-const TripTabs = ({ trip, days, showPrice, showPriceList, lowestPrice, focusRef, openFormHandler }: Props) => {
+const TripTabs = ({
+  trip,
+  startFinishDates,
+  showPrice,
+  showPriceList,
+  lowestPrice,
+  focusRef,
+  openFormHandler,
+}: Props) => {
   const {
     currency,
     enableSale,
@@ -28,7 +36,6 @@ const TripTabs = ({ trip, days, showPrice, showPriceList, lowestPrice, focusRef,
     itinerary,
     service,
     isDatesOnRequest,
-    dates,
 
     equipment,
     supplementInfo,
@@ -47,7 +54,7 @@ const TripTabs = ({ trip, days, showPrice, showPriceList, lowestPrice, focusRef,
             <TabHeading icon="money-bill-alt">Цена</TabHeading>
           </Tab>
         )}
-        {!isDatesOnRequest && dates && (
+        {!isDatesOnRequest && startFinishDates && (
           <Tab>
             <div
               ref={(el: any) => {
@@ -83,11 +90,10 @@ const TripTabs = ({ trip, days, showPrice, showPriceList, lowestPrice, focusRef,
             {service && <Service service={service} />}
           </TabPanel>
         )}
-        {!isDatesOnRequest && dates && (
+        {!isDatesOnRequest && startFinishDates && (
           <TabPanel>
             <Dates
-              dates={dates}
-              duration={days}
+              startFinishDates={startFinishDates}
               showPrice={showPrice}
               lowest={lowestPrice}
               currency={currency}

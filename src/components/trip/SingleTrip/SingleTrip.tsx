@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import Img from 'gatsby-image';
 import { useDisclosure } from '@chakra-ui/core';
 
+import Utils from '../../../lib/utils';
 import { ILink } from '../../../lib/types';
 import usePlaceholderImage from '../../../helpers/hooks/usePlaceholderImage';
 import Layout from '../../Layout';
@@ -11,7 +12,7 @@ import IconLink from '../../IconLink';
 import TripInquiryForm from '../../forms/TripInquiryForm';
 
 import { ITrip } from '../trip';
-import { formatStartFinish, getLowestPrice, getDays, getDateItems } from '../helpers';
+import { getLowestPrice, getDays, getStartFinishDates, formatStartFinish, getDateItemsFormat } from '../helpers';
 import TripInfoItem from '../TripInfoItem';
 import Price from '../Price';
 
@@ -38,11 +39,11 @@ type Props = {
     prev?: ILink;
     next?: ILink;
     pathname: string;
+    isPrint?: boolean;
   };
-  isPrint: boolean;
 };
-const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
-  const { next, prev, pathname } = pageContext;
+const SingleTrip = ({ trip, pageContext }: Props) => {
+  const { next, prev, pathname, isPrint } = pageContext;
   const focusRef = useRef<HTMLInputElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -59,7 +60,6 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
     priceList,
 
     isDatesOnRequest,
-    dates,
   } = trip;
 
   const [selected, setSelected] = useState(0);
@@ -72,7 +72,7 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
   };
 
   const days = getDays(trip);
-  const dateItems = getDateItems(trip, days);
+  const startFinishDates = getStartFinishDates(trip, days);
 
   const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
   const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
@@ -94,7 +94,7 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
     <Layout title={title} isPrint={isPrint}>
       <SEO
         title={metaTitle || title}
-        description={metaDescription || excerpt || description.substr(0, 160)}
+        description={metaDescription || excerpt || (description ? Utils.getExcerpt(description) : '')}
         pathname={pathname}
         noindex={isPrint}
       />
@@ -125,12 +125,15 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
           </MetasWrapper>
           <BookWrapper>
             <DatesBookWrapper>
-              {isDatesOnRequest || !dates ? (
+              {isDatesOnRequest || !startFinishDates ? (
                 <TripInfoItem label="Даты поездок" value="по запросу" />
               ) : (
                 <>
-                  <TripInfoItem label="Ближайшая поездка" value={formatStartFinish(new Date(dates[0].date), days)} />
-                  {dates.length > 1 && !isPrint && (
+                  <TripInfoItem
+                    label="Ближайшая поездка"
+                    value={formatStartFinish(startFinishDates[0].startDate, startFinishDates[0].finishDate)}
+                  />
+                  {startFinishDates.length > 1 && !isPrint && (
                     <IconLink icon={['far', 'eye']} to="#" onClick={handleGoToDatesTab}>
                       другие даты
                     </IconLink>
@@ -146,8 +149,8 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
                 <TripInquiryForm
                   isOpen={isOpen}
                   onClose={onClose}
-                  mode={dateItems ? 'list' : 'on-request'}
-                  dates={dateItems}
+                  mode={startFinishDates ? 'list' : 'on-request'}
+                  dates={getDateItemsFormat(startFinishDates)}
                   selected={selected}
                 />
               </>
@@ -161,7 +164,7 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
         {isPrint ? (
           <TripPrintableDetails
             trip={trip}
-            days={days}
+            startFinishDates={startFinishDates}
             showPrice={showPrice}
             showPriceList={showPriceList}
             lowestPrice={lowestPrice}
@@ -170,7 +173,7 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
           <>
             <TripTabs
               trip={trip}
-              days={days}
+              startFinishDates={startFinishDates}
               showPrice={showPrice}
               showPriceList={showPriceList}
               lowestPrice={lowestPrice}

@@ -17,7 +17,7 @@ class CreateHelper {
     this._pageSize = pageSize;
   }
 
-  createSinglePage(edge: any, index: number, arr: Array<any>, template: string) {
+  createSinglePage(edge: any, index: number, arr: Array<any>, template: string, isPrint = false) {
     const { node } = edge;
     console.log('========================');
     console.log(`create page: ${node.fields.slug}`);
@@ -50,8 +50,21 @@ class CreateHelper {
         id: node.id,
         prev,
         next,
+        isPrint: false,
       },
     });
+
+    if (isPrint) {
+      this._createPage({
+        path: `${node.fields.slug}/print`,
+        component: template,
+        context: {
+          pathname: node.fields.slug,
+          id: node.id,
+          isPrint: true,
+        },
+      });
+    }
     console.log('OK');
   }
 
@@ -166,6 +179,7 @@ class CreateHelper {
         priceList,
 
         isDatesOnRequest,
+        duration,
         isShowNights,
         dates,
         itinerary,
@@ -191,9 +205,9 @@ class CreateHelper {
         priceList,
 
         isDatesOnRequest,
+        duration: itinerary && itinerary.dayItems ? itinerary.dayItems.length : duration,
         isShowNights,
         dates: dates,
-        itinerary: itinerary && itinerary.dayItems ? { dayItems: { length: itinerary.dayItems.length } } : undefined,
       });
       return o;
     }, new Array<any>());

@@ -11,7 +11,7 @@ import SEO from '../../SEO';
 import { SimpleSelect, SimpleDate } from '../../forms/controls';
 import TripWideCard from '../TripWideCard';
 import { ITrip } from '../trip';
-import { getStartFinishDates } from '../helpers';
+import { getDays, getStartFinishDates } from '../helpers';
 
 const PAGE_TITLE = 'Подбор тура';
 
@@ -95,7 +95,8 @@ const SearchTemplate = ({ pageContext }: Props) => {
     if (!startDate && !finishDate) {
       return true;
     }
-    const dates = getStartFinishDates(trip);
+    const days = getDays(trip);
+    const dates = getStartFinishDates(trip, days);
     if (!dates) {
       return true;
     }

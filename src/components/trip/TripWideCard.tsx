@@ -12,7 +12,7 @@ import TaxonomyList from '../TaxonomyList';
 import { TechLevel } from './ico-levels';
 import Price from './Price';
 import TripInfoItem from './TripInfoItem';
-import { getLowestPrice, getDays, formatDuration, formatStartFinish } from './helpers';
+import { getLowestPrice, getDays, getStartFinishDates, formatStartFinish, formatDuration } from './helpers';
 import usePlaceholderImage from '../../helpers/hooks/usePlaceholderImage';
 /**
  * TODO: https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680
@@ -157,11 +157,11 @@ const TripWideCard = ({ trip }: Props) => {
 
     isDatesOnRequest,
     isShowNights,
-    dates,
   } = trip;
   const path = slug;
 
   const days = getDays(trip);
+  const startFinishDates = getStartFinishDates(trip, days);
   const nights = isShowNights ? days - 1 : 0;
 
   const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
@@ -229,10 +229,13 @@ const TripWideCard = ({ trip }: Props) => {
               : 'Цена по запросу'}
           </PriceWrapper>
           <DatesWrapper>
-            {isDatesOnRequest || !dates ? (
+            {isDatesOnRequest || !startFinishDates ? (
               <TripInfoItem label="Даты поездок" value="по запросу" />
             ) : (
-              <TripInfoItem label="Ближайшая поездка" value={formatStartFinish(new Date(dates[0].date), days)} />
+              <TripInfoItem
+                label="Ближайшая поездка"
+                value={formatStartFinish(startFinishDates[0].startDate, startFinishDates[0].finishDate)}
+              />
             )}
           </DatesWrapper>
           <DetailsLink to={path}>Подробнее</DetailsLink>

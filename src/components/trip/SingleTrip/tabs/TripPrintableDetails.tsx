@@ -16,12 +16,12 @@ const ItemWrapper = styled.div`
 
 type Props = {
   trip: ITrip;
-  days: number;
+  startFinishDates?: Array<any>;
   showPrice: boolean;
   showPriceList: boolean;
   lowestPrice?: IPriceListItem;
 };
-const TripPrintableDetails = ({ trip, days, showPrice, showPriceList, lowestPrice }: Props) => {
+const TripPrintableDetails = ({ trip, startFinishDates, showPrice, showPriceList, lowestPrice }: Props) => {
   const {
     currency,
     enableSale,
@@ -30,7 +30,6 @@ const TripPrintableDetails = ({ trip, days, showPrice, showPriceList, lowestPric
     itinerary,
     service,
     isDatesOnRequest,
-    dates,
   } = trip;
 
   return (
@@ -44,16 +43,17 @@ const TripPrintableDetails = ({ trip, days, showPrice, showPriceList, lowestPric
       {(showPriceList || service) && (
         <ItemWrapper>
           <TabHeading icon="money-bill-alt">Цена</TabHeading>
-          {showPriceList && priceList && <PriceList priceList={priceList} enableSale={enableSale} currency={currency} />}
+          {showPriceList && priceList && (
+            <PriceList priceList={priceList} enableSale={enableSale} currency={currency} />
+          )}
           {service && <Service service={service} />}
         </ItemWrapper>
       )}
-      {!isDatesOnRequest && dates && (
+      {!isDatesOnRequest && startFinishDates && (
         <ItemWrapper>
           <TabHeading icon={['far', 'calendar']}>Даты поездок</TabHeading>
           <Dates
-            dates={dates}
-            duration={days}
+            startFinishDates={startFinishDates}
             showPrice={showPrice}
             lowest={lowestPrice}
             currency={currency}

@@ -1,16 +1,12 @@
 import React from 'react';
-import styled from '@emotion/styled';
 
 import siteConfig from '../../../data/site-config';
 import { FormLabel, FormControl } from '@chakra-ui/core';
 import ReactDatePicker from 'react-date-picker/dist/entry.nostyle';
 
-// https://www.npmjs.com/package/react-date-picker?activeTab=readme
+import DatePickerWrap from './DatePickerWrap';
 
-const DateWrapper = styled.div`
-  position: relative;
-  width: 100%;
-`;
+// https://www.npmjs.com/package/react-date-picker?activeTab=readme
 
 type Props = {
   name: string;
@@ -22,7 +18,7 @@ type Props = {
 const SimpleDate = ({ label, name, value, onChange }: Props) => (
   <FormControl>
     <FormLabel htmlFor={name}>{label}</FormLabel>
-    <DateWrapper>
+    <DatePickerWrap>
       <ReactDatePicker
         className="date-picker-custom"
         format={siteConfig.dateFormat.reactDatePicker}
@@ -30,7 +26,7 @@ const SimpleDate = ({ label, name, value, onChange }: Props) => (
         value={value}
         onChange={onChange}
       />
-    </DateWrapper>
+    </DatePickerWrap>
   </FormControl>
 );
 

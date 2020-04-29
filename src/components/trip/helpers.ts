@@ -56,10 +56,9 @@ export const getFinishDate = (date: Date, duration: number): Date => {
   return finish;
 };
 
-export const formatStartFinish = (date: Date, duration: number): string => {
-  const finish = getFinishDate(date, duration);
+export const formatStartFinish = (startDate: Date, finishDate: Date): string => {
   const fmt = new Intl.DateTimeFormat('ru');
-  return fmt.format(date) + ' - ' + fmt.format(finish);
+  return fmt.format(startDate) + ' - ' + fmt.format(finishDate);
 };
 
 export const getDays = (trip: ITrip): number => {
@@ -76,37 +75,29 @@ export const getDays = (trip: ITrip): number => {
 const ONE_DAY_MILLISECS = 24 * 60 * 60 * 1000;
 const actualDates = (item: any): boolean => new Date(item.date).getTime() > new Date().getTime() - ONE_DAY_MILLISECS;
 
-export const getDateItems = (trip: ITrip, days: number) => {
+export const getStartFinishDates = (trip: ITrip, days: number) => {
   const { isDatesOnRequest, dates } = trip;
-
-  let items: Array<IKeyValuePair> | undefined;
-  if (!isDatesOnRequest && dates) {
-    const fmt = new Intl.DateTimeFormat('ru');
-    items = dates.filter(actualDates).map((item) => {
-      const startDate = new Date(item.date);
-      return {
-        key: fmt.format(startDate),
-        value: formatStartFinish(startDate, days),
-      } as IKeyValuePair;
-    });
-  }
-  return items;
-};
-
-export const getStartFinishDates = (trip: ITrip) => {
-  const { isDatesOnRequest, dates } = trip;
-
-  const days = getDays(trip);
 
   let items;
   if (!isDatesOnRequest && dates) {
     items = dates.filter(actualDates).map((item) => {
       const startDate = new Date(item.date);
       const finishDate = getFinishDate(startDate, days);
-      return { startDate, finishDate };
+      return { startDate, finishDate, isSale: item.isSale };
     });
   }
-  return items;
+  return items && items.length > 0 ? items : undefined;
+};
+
+export const getDateItemsFormat = (startFinish: undefined | Array<any>): undefined | Array<IKeyValuePair> => {
+  if (!startFinish) {
+    return undefined;
+  }
+  const fmt = new Intl.DateTimeFormat('ru');
+  return startFinish.map((item) => ({
+    key: fmt.format(item.startDate),
+    value: formatStartFinish(item.startDate, item.finishDate),
+  }));
 };
 
 export const formatGroupSize = (groupSize: number): string =>

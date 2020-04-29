@@ -6,6 +6,7 @@ import ReactDatePicker from 'react-date-picker';
 
 import siteConfig from '../../../data/site-config';
 import { BaseformContext } from '../base-forms/BaseformContext';
+import DatePickerWrap from './DatePickerWrap';
 
 const dateRules = {
   required: 'Дата обязательна',
@@ -16,7 +17,13 @@ type CrProps = {
 const DatePickerController = ({ control }: CrProps) => (
   <Controller
     as={
-      <ReactDatePicker className="date-picker-custom" format={siteConfig.dateFormat.reactDatePicker} clearIcon={null} />
+      <DatePickerWrap>
+        <ReactDatePicker
+          className="date-picker-custom"
+          format={siteConfig.dateFormat.reactDatePicker}
+          clearIcon={null}
+        />
+      </DatePickerWrap>
     }
     control={control}
     rules={dateRules}

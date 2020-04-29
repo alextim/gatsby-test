@@ -118,17 +118,18 @@ const GlobalStyles = () => {
         }
       }
       .date-picker-custom .react-date-picker__wrapper {
-        transition: all 0.2s;
+        position: relative;
         outline: none;
         appearance: none;
-        fontSize: 1rem;
+        font-size: 1rem;
         padding-left: 1rem;
         padding-right: 0.5rem;
         height: 2.5rem;
-        border-radius: 0.25rem;
         border: 1px solid;
+        border-radius: 0.25rem;
         border-color: inherit;
         background-color: #fff;        
+        transition: all 0.2s;
       }
     `}
     />
