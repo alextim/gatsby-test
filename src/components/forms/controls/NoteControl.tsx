@@ -19,7 +19,7 @@ const NoteControl: React.FC<IProps> = ({ label = 'Сообщение', required 
           <FormControl isInvalid={context.errors.note}>
             <FormLabel htmlFor="note">{label}</FormLabel>
             <Textarea
-              ref={customRegister ? (e) => customRegister(e, noteRules) : context.register(noteRules)}
+              ref={customRegister ? (el) => customRegister(el, noteRules) : context.register(noteRules)}
               name="note"
               placeholder="Ваш текст"
               mb="1rem"

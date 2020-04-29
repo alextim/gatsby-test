@@ -29,7 +29,7 @@ const SelectControl = ({ items, customRegister, name, label, icon, selected }: P
                 <FontAwesomeIcon icon={icon} />
               </InputLeftElement>
               <Select
-                ref={customRegister ? (e) => customRegister(e, selectRules) : context.register(selectRules)}
+                ref={customRegister ? (el) => customRegister(el, selectRules) : context.register(selectRules)}
                 name={name}
                 defaultValue={items[selected].key}
               >
@@ -44,7 +44,7 @@ const SelectControl = ({ items, customRegister, name, label, icon, selected }: P
             </InputGroup>
           ) : (
             <Select
-              ref={customRegister ? (e) => customRegister(e, selectRules) : context.register(selectRules)}
+              ref={customRegister ? (el) => customRegister(el, selectRules) : context.register(selectRules)}
               name={name}
               defaultValue={items[selected].key}
             >

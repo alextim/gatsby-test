@@ -49,7 +49,7 @@ const PopupForm: React.FC<IProps> = ({
     control,
   } = useForm();
 
-  const focusRef = useRef();
+  const focusRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState(FormStatusEnum.Form);
   const [message, setMessage] = useState('');
 
@@ -85,7 +85,7 @@ const PopupForm: React.FC<IProps> = ({
 
   const cancel = () => sendData.cancel();
 
-  const onSubmit = (data, e) => {
+  const onSubmit = (data, e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     sendData.send(data);
   };

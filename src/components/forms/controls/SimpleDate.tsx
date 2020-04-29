@@ -2,6 +2,8 @@ import React from 'react';
 import { FormLabel, FormControl } from '@chakra-ui/core';
 import ReactDatePicker from 'react-date-picker';
 
+// https://www.npmjs.com/package/react-date-picker?activeTab=readme
+
 type Props = {
   name: string;
   label: string;

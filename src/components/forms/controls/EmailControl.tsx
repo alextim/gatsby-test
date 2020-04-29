@@ -37,7 +37,7 @@ const EmailControl = ({ customRegister, label = 'E-mail', icon = false }: Props)
                 <FontAwesomeIcon icon={['far', 'envelope']} />
               </InputLeftElement>
               <Input
-                ref={customRegister ? (e) => customRegister(e, emailRules) : context.register(emailRules)}
+                ref={customRegister ? (el) => customRegister(el, emailRules) : context.register(emailRules)}
                 name="email"
                 type="email"
                 placeholder="Ваш E-mail"
@@ -45,7 +45,7 @@ const EmailControl = ({ customRegister, label = 'E-mail', icon = false }: Props)
             </InputGroup>
           ) : (
             <Input
-              ref={customRegister ? (e) => customRegister(e, emailRules) : context.register(emailRules)}
+              ref={customRegister ? (el) => customRegister(el, emailRules) : context.register(emailRules)}
               name="email"
               type="email"
               placeholder="Ваш E-mail"

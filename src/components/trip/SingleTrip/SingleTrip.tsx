@@ -43,7 +43,7 @@ type Props = {
 };
 const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
   const { next, prev, pathname } = pageContext;
-  const focusRef = useRef();
+  const focusRef = useRef<HTMLInputElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     title,
@@ -79,9 +79,8 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
 
   const handleGoToDatesTab = (e: React.MouseEvent) => {
     e.preventDefault();
-    const current = focusRef.current;
-    if (current !== undefined) {
-      const parent = (current as HTMLElement).parentNode;
+    if (focusRef.current) {
+      const parent = (focusRef.current as HTMLElement).parentNode;
       if (parent !== null) {
         parent.click();
       }

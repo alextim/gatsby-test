@@ -42,7 +42,7 @@ const PhoneControl = ({ customRegister, label = 'Телефон', icon = false }
                 <FontAwesomeIcon icon="phone" />
               </InputLeftElement>
               <Input
-                ref={customRegister ? (e) => customRegister(e, phoneRules) : context.register(phoneRules)}
+                ref={customRegister ? (el) => customRegister(el, phoneRules) : context.register(phoneRules)}
                 name="phone"
                 type="phone"
                 placeholder="Ваш телефон"
@@ -50,7 +50,7 @@ const PhoneControl = ({ customRegister, label = 'Телефон', icon = false }
             </InputGroup>
           ) : (
             <Input
-              ref={customRegister ? (e) => customRegister(e, phoneRules) : context.register(phoneRules)}
+              ref={customRegister ? (el) => customRegister(el, phoneRules) : context.register(phoneRules)}
               name="phone"
               type="phone"
               placeholder="Ваш телефон"

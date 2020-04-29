@@ -36,29 +36,37 @@ type Props = {
 const SearchTemplate = ({ pageContext }: Props) => {
   const { seasons, destinations, activities } = pageContext;
 
-  const [data, setData] = useState('');
+  const [searchIndex, setSearchIndex] = useState(undefined);
+  const [error, setError] = React.useState('');
+
   const [startDate, setstartDate] = useState('');
   const [finishDate, setfinishDate] = useState('');
   const [activity, setActivity] = useState('');
   const [season, setSeason] = useState('');
   const [destination, setDestination] = useState('');
 
-  const loadSearchIndex = async () => {
-    const response = await fetch(indexFileUrl);
-
-    if (response.ok) {
-      // если HTTP-статус в диапазоне 200-299
-      // получаем тело ответа (см. про этот метод ниже)
-      const data = await response.json();
-      return data;
-    } else {
-      return 'Ошибка HTTP: ' + response.status;
-    }
+  const fetchSearchIndex = async () => {
+    return fetch(indexFileUrl).then((res) => {
+      if (!res.ok) {
+        throw new Error('Ошибка сервера');
+      }
+      if (res.status >= 400) {
+        throw new Error('Ошибка HTTP: ' + res.status);
+      }
+      return res.json();
+    });
   };
-
+  // https://juliangaramendy.dev/use-promise-subscription/
   useEffect(() => {
-    loadSearchIndex().then(setData);
-  });
+    let isLoaded = true;
+    fetchSearchIndex()
+      .then((index) => (isLoaded ? setSearchIndex(index) : null))
+      .catch((error) => (isLoaded ? setError(error.toString()) : null));
+
+    return () => {
+      isLoaded = false;
+    };
+  }, []);
   const filterFunc = (item: ITrip): boolean => {
     if (activity && item.activity && !item.activity.includes(activity)) {
       return false;
@@ -112,9 +120,13 @@ const SearchTemplate = ({ pageContext }: Props) => {
       <div>destination: {destination}</div>
       <div>activity: {activity}</div>
       <div>
-        {Array.isArray(data) &&
-          data.filter((item) => filterFunc(item)).map((item, i) => <TripWideCard key={i} trip={item} />)}
-        {typeof data === 'string' && data}
+        {!error && !searchIndex && <div>Loading...</div>}
+        {!error &&
+          searchIndex &&
+          searchIndex
+            .filter((item: ITrip) => filterFunc(item))
+            .map((item: ITrip, i: number) => <TripWideCard key={i} trip={item} />)}
+        {error && <div>{error}</div>}
       </div>
     </Layout>
   );

@@ -33,7 +33,7 @@ const NameControl = ({ customRegister, controlName, label, placeholder, maxLengt
           <FormControl isInvalid={context.errors[controlName]} mb="1rem">
             <FormLabel htmlFor={controlName}>{label}</FormLabel>
             <Input
-              ref={customRegister ? (e) => customRegister(e, nameRules) : context.register(nameRules)}
+              ref={customRegister ? (el) => customRegister(el, nameRules) : context.register(nameRules)}
               name={controlName}
               placeholder={placeholder}
             />

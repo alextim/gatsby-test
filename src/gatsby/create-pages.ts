@@ -169,13 +169,16 @@ const allPostsQuery = `
     allTripsYaml: allYaml(filter: { published: { eq: true }, fields: { type: { eq: "trip" } } } ) {
       edges {
         node {
+          fields {
+            slug
+          }
           id
           title
           description
           excerpt
           featuredImage {
             childImageSharp {
-              fluid(maxWidth: 800) {
+              fluid {
                 src
                 srcSet
                 aspectRatio
@@ -185,11 +188,14 @@ const allPostsQuery = `
             }
             publicURL
           }
-          groupSize
-          season
           destination
           activity
+          season
+          altitude
+          accomodation
+          groupSize
           difficultyLevel
+          fitnessLevel
           priceMode
           currency
           enableSale
@@ -198,8 +204,9 @@ const allPostsQuery = `
             qty
             salePrice
           }
-          isDatesOnRequest
+          duration
           isShowNights
+          isDatesOnRequest
           dates {
             date
             isSale
@@ -208,9 +215,6 @@ const allPostsQuery = `
             dayItems {
               title
             }
-          }         
-          fields {
-            slug
           }
         }
       }

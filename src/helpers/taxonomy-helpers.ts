@@ -7,22 +7,22 @@ interface ITaxEdge {
 }
 const buildTaxonomyLookup = (edges: Array<ITaxEdge>): Taxonomy => {
   const tax = new Set<string>();
-  edges.forEach((e) => tax.add(e.node.fields.taxonomy));
+  edges.forEach((edge) => tax.add(edge.node.fields.taxonomy));
 
   return [...tax].reduce(
     (o: {}, taxonomyName: string) => ({
       ...o,
       [taxonomyName]: edges
-        .filter((e) => e.node.fields.taxonomy === taxonomyName)
+        .filter((edge) => edge.node.fields.taxonomy === taxonomyName)
         .reduce(
-          (o: {}, e) => ({
+          (o: {}, edge) => ({
             ...o,
-            [e.node.key]: {
-              name: e.node.name,
-              slug: e.node.fields.slug,
-              description: e.node.description,
-              bannerImage: e.node.bannerImage,
-              featuredImage: e.node.featuredImage,
+            [edge.node.key]: {
+              name: edge.node.name,
+              slug: edge.node.fields.slug,
+              description: edge.node.description,
+              bannerImage: edge.node.bannerImage,
+              featuredImage: edge.node.featuredImage,
               taxonomyName: taxonomyName,
             },
           }),

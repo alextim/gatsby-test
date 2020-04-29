@@ -19,7 +19,7 @@ export default class ErrorBoundary extends React.Component {
         method: 'post',
         body: JSON.stringify(args),
       });
-    } catch (e) {
+    } catch (err) {
       /* fuck it */
     }
   }

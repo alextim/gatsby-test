@@ -36,7 +36,7 @@ const InlineForm: React.FC<IProps> = ({
 
   const [status, setStatus] = useState(FormStatusEnum.Sending);
   const [message, setMessage] = useState('');
-  const focusRef = useRef();
+  const focusRef = useRef<HTMLInputElement>(null);
 
   const close = () => {
     onClose();
@@ -74,7 +74,7 @@ const InlineForm: React.FC<IProps> = ({
 
   const cancel = () => sendData.cancel();
 
-  const onSubmit = (data, e) => {
+  const onSubmit = (data, e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     sendData.send(data);
   };
