@@ -4,8 +4,11 @@ const siteConfig = {
   siteUrl: process.env.SITE_URL,
   blogUrlBase: '/blog', // No trailing slash
   tripsUrlBase: '/trips',
-  dateFromFormat: 'DD-MM-YYYY', // Date format used in the frontmatter.
-  dateFormat: 'DD/MM/YYYY', // Date format for display.
+  dateFormat: {
+    frontmatter: 'DD-MM-YYYY', // Date format used in the frontmatter.
+    display: 'DD.MM.YYYY', // Date format for display.
+    reactDatePicker: 'dd.MM.y',
+  },
   pageSize: 2,
   defaultBannerImage: 'gnifetty-alp-italy.jpg',
   searchIndexFileName: 'search-index.json',

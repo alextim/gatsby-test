@@ -17,7 +17,7 @@ const SimpleSelect = ({ label, name, items, defaultItem, value, onChange, regist
     <Select ref={register} name={name} value={value} onChange={onChange}>
       {defaultItem && <option value={defaultItem.key}>{defaultItem.value}</option>}
       {items.map((item, i) => (
-        <option key={`${name}-${i}`} value={item.key}>
+        <option key={i} value={item.key}>
           {item.value}
         </option>
       ))}

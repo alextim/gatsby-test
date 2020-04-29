@@ -86,7 +86,7 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
         // const date = parseISO((node as IMdNode).frontmatter.date);
         // if (String(date) === 'Invalid Date') {
 
-        const date = moment.utc((node as IMdNode).frontmatter.date, siteConfig.dateFromFormat);
+        const date = moment.utc((node as IMdNode).frontmatter.date, siteConfig.dateFormat.frontmatter);
         if (!date.isValid) {
           throw new Error(`Invalid date. ${(node as IMdNode).frontmatter.date}`);
         }
@@ -147,7 +147,7 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
         value: `${siteConfig.tripsUrlBase}/${slug}`,
       });
 
-      const date = moment.utc((node as ITripNode).date, siteConfig.dateFromFormat);
+      const date = moment.utc((node as ITripNode).date, siteConfig.dateFormat.frontmatter);
       if (!date.isValid) {
         throw new Error(`Invalid date. ${(node as ITripNode).date}`);
       }

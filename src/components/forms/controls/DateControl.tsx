@@ -4,19 +4,24 @@ import { FormErrorMessage, FormLabel, FormControl, InputGroup, InputLeftElement 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactDatePicker from 'react-date-picker';
 
+import siteConfig from '../../../data/site-config';
 import { BaseformContext } from '../base-forms/BaseformContext';
 
 const dateRules = {
   required: 'Дата обязательна',
 };
-const DatePickerController = ({ control }) => (
+type CrProps = {
+  control: any;
+};
+const DatePickerController = ({ control }: CrProps) => (
   <Controller
-    as={<ReactDatePicker clearIcon={null} />}
+    as={
+      <ReactDatePicker className="date-picker-custom" format={siteConfig.dateFormat.reactDatePicker} clearIcon={null} />
+    }
     control={control}
     rules={dateRules}
     valueName="value" // DateSelect value's name is selected
     name="date"
-    className="input"
     placeholderText="Дата"
     onChange={([value]) => value}
   />

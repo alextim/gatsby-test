@@ -11,7 +11,7 @@ import IconLink from '../../IconLink';
 import TripInquiryForm from '../../forms/TripInquiryForm';
 
 import { ITrip } from '../trip';
-import { formatStartFinish, getLowestPrice, getDaysAndDateItems } from '../helpers';
+import { formatStartFinish, getLowestPrice, getDays, getDateItems } from '../helpers';
 import TripInfoItem from '../TripInfoItem';
 import Price from '../Price';
 
@@ -71,7 +71,8 @@ const SingleTrip = ({ trip, pageContext, isPrint }: Props) => {
     onOpen();
   };
 
-  const { days, dateItems } = getDaysAndDateItems(trip);
+  const days = getDays(trip);
+  const dateItems = getDateItems(trip, days);
 
   const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
   const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;

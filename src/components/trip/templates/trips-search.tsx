@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
+import { Spinner } from '@chakra-ui/core';
 
 import siteConfig from '../../../data/site-config';
 import { IKeyValuePair } from '../../../lib/types';
@@ -9,8 +10,9 @@ import Banner from '../../Banner';
 import SEO from '../../SEO';
 import { SimpleSelect, SimpleDate } from '../../forms/controls';
 import TripWideCard from '../TripWideCard';
-
 import { ITrip } from '../trip';
+import { getStartFinishDates } from '../helpers';
+
 const PAGE_TITLE = 'Подбор тура';
 
 const ControlsWrapper = styled.div`
@@ -21,8 +23,15 @@ const ControlsWrapper = styled.div`
     flex-wrap: nowrap;
   }
 `;
+const ControlWrap = styled.div`
+  margin-bottom: 1em;
+  ${(props) => props.theme.mediaQueries.lg} {
+    margin-right: 1.5rem;
+  }
+`;
 
 const indexFileUrl = `${siteConfig.siteUrl}/${siteConfig.searchIndexFileName}`;
+const ONE_DAY_MILLISECS = 24 * 60 * 60 * 1000;
 
 type Props = {
   pageContext: {
@@ -36,11 +45,12 @@ type Props = {
 const SearchTemplate = ({ pageContext }: Props) => {
   const { seasons, destinations, activities } = pageContext;
 
-  const [searchIndex, setSearchIndex] = useState(undefined);
+  const [searchIndex, setSearchIndex] = useState(null);
   const [error, setError] = React.useState('');
 
-  const [startDate, setstartDate] = useState('');
-  const [finishDate, setfinishDate] = useState('');
+  const [startDate, setStartDate] = useState(undefined);
+  const [finishDate, setFinishDate] = useState(undefined);
+
   const [activity, setActivity] = useState('');
   const [season, setSeason] = useState('');
   const [destination, setDestination] = useState('');
@@ -56,6 +66,7 @@ const SearchTemplate = ({ pageContext }: Props) => {
       return res.json();
     });
   };
+
   // https://juliangaramendy.dev/use-promise-subscription/
   useEffect(() => {
     let isLoaded = true;
@@ -67,60 +78,96 @@ const SearchTemplate = ({ pageContext }: Props) => {
       isLoaded = false;
     };
   }, []);
-  const filterFunc = (item: ITrip): boolean => {
-    if (activity && item.activity && !item.activity.includes(activity)) {
+
+  const filterFunc = (trip: ITrip): boolean => {
+    if (activity && trip.activity && !trip.activity.includes(activity)) {
       return false;
     }
-    if (season && item.season && !item.season.includes(season)) {
+    if (season && trip.season && !trip.season.includes(season)) {
       return false;
     }
-    if (destination && item.destination && !item.destination.includes(destination)) {
+    if (destination && trip.destination && !trip.destination.includes(destination)) {
+      return false;
+    }
+    if (trip.isDatesOnRequest || !trip.dates) {
+      return true;
+    }
+    if (!startDate && !finishDate) {
+      return true;
+    }
+    const dates = getStartFinishDates(trip);
+    if (!dates) {
+      return true;
+    }
+    if (startDate && !dates.some((item) => item.startDate.getTime() > startDate.getTime() - ONE_DAY_MILLISECS)) {
+      return false;
+    }
+    if (finishDate && !dates.some((item) => item.finishDate.getTime() < finishDate.getTime() + ONE_DAY_MILLISECS)) {
       return false;
     }
     return true;
   };
+
   return (
     <Layout header={<Banner img={useDefaultBannerImage()} title={PAGE_TITLE} />}>
       <SEO title={PAGE_TITLE} pathname={pageContext.pathname} />
-      <ControlsWrapper>
-        {seasons && (
-          <SimpleSelect
-            label="Сезон"
-            name="season"
-            items={seasons}
-            defaultItem={{ key: '', value: 'Все сезоны' }}
-            value={season}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSeason(e.target.value)}
-          />
-        )}
-        {destinations && (
-          <SimpleSelect
-            label="Направление"
-            name="destination"
-            items={destinations}
-            defaultItem={{ key: '', value: 'Все направления' }}
-            value={destination}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setDestination(e.target.value)}
-          />
-        )}
-        {activities && (
-          <SimpleSelect
-            label="Активность"
-            name="activity"
-            items={activities}
-            defaultItem={{ key: '', value: 'Все активности' }}
-            value={activity}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setActivity(e.target.value)}
-          />
-        )}
-        <SimpleDate label="Начало" name="start" value={startDate} onChange={setstartDate} />
-        <SimpleDate label="Завершение" name="start" value={finishDate} onChange={setfinishDate} />
-      </ControlsWrapper>
-      <div>season: {season}</div>
-      <div>destination: {destination}</div>
-      <div>activity: {activity}</div>
+      {!error && searchIndex && (
+        <>
+          <ControlsWrapper>
+            {seasons && (
+              <ControlWrap>
+                <SimpleSelect
+                  label="Сезон"
+                  name="season"
+                  items={seasons}
+                  defaultItem={{ key: '', value: 'Все сезоны' }}
+                  value={season}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSeason(e.target.value)}
+                />
+              </ControlWrap>
+            )}
+            {destinations && (
+              <ControlWrap>
+                <SimpleSelect
+                  label="Направление"
+                  name="destination"
+                  items={destinations}
+                  defaultItem={{ key: '', value: 'Все направления' }}
+                  value={destination}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setDestination(e.target.value)}
+                />
+              </ControlWrap>
+            )}
+            {activities && (
+              <ControlWrap>
+                <SimpleSelect
+                  label="Активность"
+                  name="activity"
+                  items={activities}
+                  defaultItem={{ key: '', value: 'Все активности' }}
+                  value={activity}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setActivity(e.target.value)}
+                />
+              </ControlWrap>
+            )}
+            <ControlWrap>
+              <SimpleDate label="Начало" name="start" value={startDate} onChange={setStartDate} />
+            </ControlWrap>
+            <ControlWrap>
+              <SimpleDate label="Завершение" name="start" value={finishDate} onChange={setFinishDate} />
+            </ControlWrap>
+          </ControlsWrapper>
+          <div>
+            <div>season: {season}</div>
+            <div>destination: {destination}</div>
+            <div>activity: {activity}</div>
+            <div>startDate: {startDate && startDate.toString()}</div>
+            <div>finishDate: {finishDate && finishDate.toString()}</div>
+          </div>
+        </>
+      )}
       <div>
-        {!error && !searchIndex && <div>Loading...</div>}
+        {!error && !searchIndex && <Spinner />}
         {!error &&
           searchIndex &&
           searchIndex

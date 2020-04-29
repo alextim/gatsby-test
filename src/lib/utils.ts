@@ -90,6 +90,11 @@ const Utils = {
   formatDays: (days: number): string => (days > 0 ? num2form(days, 'день', 'дня', 'дней') : ''),
   formatNights: (nights: number): string => (nights > 0 ? num2form(nights, 'ночь', 'ночи', 'ночей') : ''),
   stripHtmlTags: (html: string): string => html.replace(/(<([^>]+)>)/gi, ''),
+  addDays: (date: Date, days: number): Date => {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  },
 };
 
 export default Utils;

@@ -73,15 +73,16 @@ export const getDays = (trip: ITrip): number => {
   return 0;
 };
 
-export const getDaysAndDateItems = (trip: ITrip) => {
+const ONE_DAY_MILLISECS = 24 * 60 * 60 * 1000;
+const actualDates = (item: any): boolean => new Date(item.date).getTime() > new Date().getTime() - ONE_DAY_MILLISECS;
+
+export const getDateItems = (trip: ITrip, days: number) => {
   const { isDatesOnRequest, dates } = trip;
 
-  const days = getDays(trip);
-
-  let dateItems: Array<IKeyValuePair> | undefined;
+  let items: Array<IKeyValuePair> | undefined;
   if (!isDatesOnRequest && dates) {
     const fmt = new Intl.DateTimeFormat('ru');
-    dateItems = dates.map((item) => {
+    items = dates.filter(actualDates).map((item) => {
       const startDate = new Date(item.date);
       return {
         key: fmt.format(startDate),
@@ -89,7 +90,23 @@ export const getDaysAndDateItems = (trip: ITrip) => {
       } as IKeyValuePair;
     });
   }
-  return { days, dateItems };
+  return items;
+};
+
+export const getStartFinishDates = (trip: ITrip) => {
+  const { isDatesOnRequest, dates } = trip;
+
+  const days = getDays(trip);
+
+  let items;
+  if (!isDatesOnRequest && dates) {
+    items = dates.filter(actualDates).map((item) => {
+      const startDate = new Date(item.date);
+      const finishDate = getFinishDate(startDate, days);
+      return { startDate, finishDate };
+    });
+  }
+  return items;
 };
 
 export const formatGroupSize = (groupSize: number): string =>
