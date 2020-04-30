@@ -1,20 +1,26 @@
-import fs from 'fs';
-
-import siteConfig from '../data/site-config';
-import { Taxonomy, IGroup } from '../types/types';
-import { sanitizeKeys } from '../helpers/taxonomy-helpers';
-import Utils from '../lib/utils';
-import { ITrip } from '../components/trip/trip';
+import createSearchIndex from './createSearchIndex';
+import createSearchPage from './createSearchPage';
+import { Taxonomy, IGroup } from '../../types/types';
 
 class CreateHelper {
   _createPage: any;
   _taxonomy: Taxonomy;
   _pageSize: number;
+  createSearchIndex: (trips: Array<any>) => void;
+  createSearchPage: (
+    component: string,
+    path: string,
+    seasons: Array<IGroup>,
+    destinations: Array<IGroup>,
+    activities: Array<IGroup>,
+  ) => void;
 
   constructor(taxonomy: Taxonomy, pageSize: number, createPage: any) {
     this._taxonomy = taxonomy;
     this._createPage = createPage;
     this._pageSize = pageSize;
+    this.createSearchIndex = createSearchIndex.bind(this);
+    this.createSearchPage = createSearchPage.bind(this);
   }
 
   createSinglePage(edge: any, index: number, arr: Array<any>, template: string, isPrint = false) {
@@ -119,100 +125,6 @@ class CreateHelper {
           term: this._taxonomy[taxonomyName][fieldValue],
         }),
       );
-  }
-
-  createSearchPage(
-    component: string,
-    path: string,
-    seasons: Array<IGroup>,
-    destinations: Array<IGroup>,
-    activities: Array<IGroup>,
-  ) {
-    console.log('========================');
-    console.log(`createSearchPage: ${path}`);
-    this._createPage({
-      path: path,
-      component,
-      context: {
-        pathname: path,
-        seasons: seasons
-          .filter(({ fieldValue }: IGroup) => this._taxonomy['season'][fieldValue])
-          .map(({ fieldValue }: IGroup) => ({ key: fieldValue, value: this._taxonomy['season'][fieldValue].name })),
-        destinations: destinations
-          .filter(({ fieldValue }: IGroup) => this._taxonomy['destination'][fieldValue])
-          .map(({ fieldValue }: IGroup) => ({
-            key: fieldValue,
-            value: this._taxonomy['destination'][fieldValue].name,
-          })),
-        activities: activities
-          .filter(({ fieldValue }: IGroup) => this._taxonomy['activity'][fieldValue])
-          .map(({ fieldValue }: IGroup) => ({
-            key: fieldValue,
-            value: this._taxonomy['activity'][fieldValue].name,
-          })),
-      },
-    });
-    console.log('OK');
-  }
-
-  createSearchIndex(trips: Array<any>) {
-    console.log('========================');
-    console.log(siteConfig.searchIndexFileName);
-    const tripsIndex = trips.reduce((o, edge: any) => {
-      const {
-        title,
-        description,
-        // metaTitle,
-        // metaDescription,
-        excerpt,
-        featuredImage,
-
-        groupSize,
-        season,
-        destination,
-        activity,
-        difficultyLevel,
-
-        priceMode,
-        currency,
-        enableSale,
-        priceList,
-
-        isDatesOnRequest,
-        duration,
-        isShowNights,
-        dates,
-        itinerary,
-      } = edge.node as ITrip;
-      o.push({
-        slug: edge.node.fields.slug,
-        title,
-        description: description && Utils.stripHtmlTags(description),
-        // metaTitle,
-        // metaDescription,
-        excerpt,
-        featuredImage: featuredImage ? featuredImage.childImageSharp.fluid : undefined,
-
-        groupSize,
-        season: season && sanitizeKeys(this._taxonomy.season, season),
-        destination: destination && sanitizeKeys(this._taxonomy.destination, destination),
-        activity: activity && sanitizeKeys(this._taxonomy.activity, activity),
-        difficultyLevel,
-
-        priceMode,
-        currency,
-        enableSale,
-        priceList,
-
-        isDatesOnRequest,
-        duration: itinerary && itinerary.dayItems ? itinerary.dayItems.length : duration,
-        isShowNights,
-        dates: dates,
-      });
-      return o;
-    }, new Array<any>());
-    fs.writeFileSync(`public/${siteConfig.searchIndexFileName}`, JSON.stringify(tripsIndex));
-    console.log('OK');
   }
 }
 

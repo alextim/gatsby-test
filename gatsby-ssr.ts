@@ -1,3 +1,3 @@
 import Provider from './src/state/provider';
-console.log('BROWSER----------------------------');
+console.log('SSR----------------------------');
 export const wrapRootElement = Provider;

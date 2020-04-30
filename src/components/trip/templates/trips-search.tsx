@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from '@emotion/styled';
 import { Spinner } from '@chakra-ui/core';
 
 import siteConfig from '../../../data/site-config';
 import { IKeyValuePair } from '../../../lib/types';
 import useDefaultBannerImage from '../../../helpers/hooks/useDefaultBannerImage';
+import AppContext from '../../../state/AppContext';
 import Layout from '../../Layout';
 import Banner from '../../Banner';
 import SEO from '../../SEO';
@@ -44,16 +45,12 @@ type Props = {
 
 const SearchTemplate = ({ pageContext }: Props) => {
   const { seasons, destinations, activities } = pageContext;
+  const context = useContext(AppContext);
+  const { searchParams, setSearchParamByName } = context;
+  const { activity, destination, season, startDate, finishDate } = searchParams;
 
   const [searchIndex, setSearchIndex] = useState(null);
   const [error, setError] = React.useState('');
-
-  const [startDate, setStartDate] = useState(undefined);
-  const [finishDate, setFinishDate] = useState(undefined);
-
-  const [activity, setActivity] = useState('');
-  const [season, setSeason] = useState('');
-  const [destination, setDestination] = useState('');
 
   const fetchSearchIndex = async () => {
     return fetch(indexFileUrl).then((res) => {
@@ -123,7 +120,7 @@ const SearchTemplate = ({ pageContext }: Props) => {
                   items={seasons}
                   defaultItem={{ key: '', value: 'Все сезоны' }}
                   value={season}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSeason(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSearchParamByName('season', e.target.value)}
                 />
               </ControlWrap>
             )}
@@ -135,7 +132,9 @@ const SearchTemplate = ({ pageContext }: Props) => {
                   items={destinations}
                   defaultItem={{ key: '', value: 'Все направления' }}
                   value={destination}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setDestination(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                    setSearchParamByName('destination', e.target.value)
+                  }
                 />
               </ControlWrap>
             )}
@@ -147,15 +146,27 @@ const SearchTemplate = ({ pageContext }: Props) => {
                   items={activities}
                   defaultItem={{ key: '', value: 'Все активности' }}
                   value={activity}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setActivity(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                    setSearchParamByName('activity', e.target.value)
+                  }
                 />
               </ControlWrap>
             )}
             <ControlWrap>
-              <SimpleDate label="Начало" name="start" value={startDate} onChange={setStartDate} />
+              <SimpleDate
+                label="Начало"
+                name="start"
+                value={startDate}
+                onChange={(value: any) => setSearchParamByName('startDate', value)}
+              />
             </ControlWrap>
             <ControlWrap>
-              <SimpleDate label="Завершение" name="start" value={finishDate} onChange={setFinishDate} />
+              <SimpleDate
+                label="Завершение"
+                name="finish"
+                value={finishDate}
+                onChange={(value: any) => setSearchParamByName('finishDate', value)}
+              />
             </ControlWrap>
           </ControlsWrapper>
           <div>
