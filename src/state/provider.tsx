@@ -8,7 +8,7 @@ const StateProvider = ({ children }) => {
     season: '',
     startDate: undefined,
     finishDate: undefined,
-    pageNumber: 1,
+    currentPage: 1,
   } as ISearchParams);
   return (
     <AppContext.Provider
@@ -22,7 +22,7 @@ const StateProvider = ({ children }) => {
             case 'season':
             case 'startDate':
             case 'finishDate':
-            case 'pageNumber':
+            case 'currentPage':
               o[name] = value;
               break;
             default:

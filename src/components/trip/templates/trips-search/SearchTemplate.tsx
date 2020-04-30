@@ -2,17 +2,19 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from '@emotion/styled';
 import { Spinner } from '@chakra-ui/core';
 
-import siteConfig from '../../../data/site-config';
-import { IKeyValuePair } from '../../../lib/types';
-import useDefaultBannerImage from '../../../helpers/hooks/useDefaultBannerImage';
-import AppContext from '../../../state/AppContext';
-import Layout from '../../Layout';
-import Banner from '../../Banner';
-import SEO from '../../SEO';
-import { SimpleSelect, SimpleDate } from '../../forms/controls';
-import TripWideCard from '../TripWideCard';
-import { ITrip } from '../trip';
-import { getDays, getStartFinishDates } from '../helpers';
+import siteConfig from '../../../../data/site-config';
+import { IKeyValuePair } from '../../../../lib/types';
+import useDefaultBannerImage from '../../../../helpers/hooks/useDefaultBannerImage';
+import AppContext from '../../../../state/AppContext';
+
+import Layout from '../../../Layout';
+import Banner from '../../../Banner';
+import SEO from '../../../SEO';
+import { SimpleSelect, SimpleDate } from '../../../forms/controls';
+
+import { ITrip } from '../../trip';
+import { getDays, getStartFinishDates } from '../../helpers';
+import DisplaySearchResult from './DisplaySearchResult';
 
 const PAGE_TITLE = 'Подбор тура';
 
@@ -47,7 +49,7 @@ const SearchTemplate = ({ pageContext }: Props) => {
   const { seasons, destinations, activities } = pageContext;
   const context = useContext(AppContext);
   const { searchParams, setSearchParamByName } = context;
-  const { activity, destination, season, startDate, finishDate } = searchParams;
+  const { activity, destination, season, startDate, finishDate, currentPage } = searchParams;
 
   const [searchIndex, setSearchIndex] = useState(null);
   const [error, setError] = React.useState('');
@@ -175,16 +177,19 @@ const SearchTemplate = ({ pageContext }: Props) => {
             <div>activity: {activity}</div>
             <div>startDate: {startDate && startDate.toString()}</div>
             <div>finishDate: {finishDate && finishDate.toString()}</div>
+            <div>currentPage: {currentPage && currentPage.toString()}</div>
           </div>
         </>
       )}
       <div>
         {!error && !searchIndex && <Spinner />}
-        {!error &&
-          searchIndex &&
-          searchIndex
-            .filter((item: ITrip) => filterFunc(item))
-            .map((item: ITrip, i: number) => <TripWideCard key={i} trip={item} />)}
+        {!error && searchIndex && (
+          <DisplaySearchResult
+            searchIndex={searchIndex.filter(filterFunc)}
+            currentPage={currentPage}
+            setCurrentPage={(n: any) => setSearchParamByName('currentPage', Number(n))}
+          />
+        )}
         {error && <div>{error}</div>}
       </div>
     </Layout>

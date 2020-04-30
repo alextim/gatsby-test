@@ -227,7 +227,7 @@ const tripsTemplate = resolve('./src/components/trip/templates/trips.tsx');
 const seasonTemplate = resolve('./src/components/trip/templates/trips-season.tsx');
 const destinationTemplate = resolve('./src/components/trip/templates/trips-destination.tsx');
 const activityTemplate = resolve('./src/components/trip/templates/trips-activity.tsx');
-const searchTemplate = resolve('./src/components/trip/templates/trips-search.tsx');
+const searchTemplate = resolve('./src/components/trip/templates/trips-search/index.ts');
 
 const pageTemplate = resolve('./src/templates/page.tsx');
 
@@ -302,7 +302,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   /************  POSTS  ************/
   const posts = result.data.allMarkdown.edges.filter((item) => item.node.fields.type === 'post');
   // INDIVIDUAL POST PAGE
-  posts.map((edge, i, arr) => helper.createSinglePage(edge, i, arr, postTemplate));
+  posts.map((edge, i, arr) => helper.createSinglePage(edge, i, arr, postTemplate, false));
   // POSTS INDEX
   helper.createPaginationPages(postsTemplate, posts.length, siteConfig.blogUrlBase, {});
   // POST TAXES

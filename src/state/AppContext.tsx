@@ -6,7 +6,7 @@ export interface ISearchParams {
   season?: string;
   startDate?: Date;
   finishDate?: Date;
-  pageNumber?: number;
+  currentPage: number;
 }
 
 export interface IAppContext {
@@ -15,7 +15,7 @@ export interface IAppContext {
 }
 
 const AppContext = React.createContext<IAppContext>({
-  searchParams: {},
+  searchParams: { currentPage: 1 },
   setSearchParamByName: (name: string, value: any) => {
     console.log(name, value);
   },

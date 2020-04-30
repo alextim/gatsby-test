@@ -1,5 +1,6 @@
 import createSearchIndex from './createSearchIndex';
 import createSearchPage from './createSearchPage';
+import createSinglePage from './createSinglePage';
 import { Taxonomy, IGroup } from '../../types/types';
 
 class CreateHelper {
@@ -14,6 +15,7 @@ class CreateHelper {
     destinations: Array<IGroup>,
     activities: Array<IGroup>,
   ) => void;
+  createSinglePage: (edge: any, index: number, arr: Array<any>, template: string, isPrint: boolean) => void;
 
   constructor(taxonomy: Taxonomy, pageSize: number, createPage: any) {
     this._taxonomy = taxonomy;
@@ -21,60 +23,9 @@ class CreateHelper {
     this._pageSize = pageSize;
     this.createSearchIndex = createSearchIndex.bind(this);
     this.createSearchPage = createSearchPage.bind(this);
+    this.createSinglePage = createSinglePage.bind(this);
   }
 
-  createSinglePage(edge: any, index: number, arr: Array<any>, template: string, isPrint = false) {
-    const { node } = edge;
-    console.log('========================');
-    console.log(`create page: ${node.fields.slug}`);
-
-    const isFirst = index === 0;
-    const isLast = index === arr.length - 1;
-
-    let prev;
-    let next;
-
-    if (!isFirst) {
-      prev = {
-        name: arr[index - 1].node.title || arr[index - 1].node.frontmatter.title,
-        url: arr[index - 1].node.fields.slug,
-      };
-    }
-
-    if (!isLast) {
-      next = {
-        name: arr[index + 1].node.title || arr[index + 1].node.frontmatter.title,
-        url: arr[index + 1].node.fields.slug,
-      };
-    }
-
-    this._createPage({
-      path: node.fields.slug,
-      component: template,
-      context: {
-        pathname: node.fields.slug,
-        id: node.id,
-        prev,
-        next,
-        isPrint: false,
-      },
-    });
-
-    if (isPrint) {
-      this._createPage({
-        path: `${node.fields.slug}/print`,
-        component: template,
-        context: {
-          pathname: node.fields.slug,
-          id: node.id,
-          isPrint: true,
-        },
-      });
-    }
-    console.log('OK');
-  }
-
-  /* eslint max-params: [1, 5] */
   createPaginationPages(component: string, totalItems: number, pathBase: string, context: any): (false | void)[] {
     const pageCount = Math.ceil(totalItems / this._pageSize);
 
