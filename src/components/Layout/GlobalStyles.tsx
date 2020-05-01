@@ -131,6 +131,46 @@ const GlobalStyles = () => {
         background-color: #fff;        
         transition: all 0.2s;
       }
+      .fg {
+        display: flex;
+        flex-wrap:  wrap;   
+        }
+        
+        .fg-gutter {
+            margin: -1em 0 0 -1em;
+            > .fg-c {
+                padding: 1em 0 0 1em;
+            }
+        }
+        .fg-right {
+            margin-left: auto;
+        }
+        .fg-c { flex: 1; }
+        .fg-1 { flex: 0 0 100%; }
+        .fg-2 { flex: 0 0 50%;  }
+        .fg-3 { flex: 0 0 33.3333333333%; }
+        .fg-4 { flex: 0 0 25%; }
+        
+        @media only screen and (max-width: 1023px) {
+            .fg-4 {
+                flex: 0 0 33.3333333333%;
+            }
+        }
+        
+        @media only screen and (max-width: 767px) {
+            .fg-3, .fg-4 {
+                flex: 0 0 50%;
+            }
+        }
+        
+        @media only screen and (max-width:479px){
+            .fg {
+                flex-direction: column;
+            }
+            .fg-2, .fg-3, .fg-4 {
+                flex: 0 0 100%;
+            }
+        }
     `}
     />
   );

@@ -185,7 +185,7 @@ const TripWideCard = ({ trip }: Props) => {
               {enableSale && <TripOffer />}
             </ImageWrap>
             <TextWrap>
-              <Heading as="h2" mb="0.25rem" fontSize={['1.25rem', '1.5rem']}>
+              <Heading as="h2" mb="0.25rem" fontSize="1.25rem">
                 <Link to={path}>{title}</Link>
               </Heading>
               {text && <TextBodyWrap>{text}</TextBodyWrap>}

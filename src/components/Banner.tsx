@@ -4,7 +4,7 @@ import Img from 'gatsby-image';
 
 import DefaultPageHeading from './PageHeading';
 
-const PageHeading = styled(DefaultPageHeading)`
+const Heading = styled(DefaultPageHeading)`
   text-align: center;
   color: #fff;
 `;
@@ -37,7 +37,7 @@ const Banner = ({ img, title }: Props) => (
   <Wrapper>
     {img && <SImg fluid={img} alt={title} />}
     <CenteredWrap>
-      <PageHeading>{title}</PageHeading>
+      <Heading>{title}</Heading>
     </CenteredWrap>
   </Wrapper>
 );

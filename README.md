@@ -30,3 +30,6 @@ bannerImage {
 }
 ```
 Source: [Problems with 'gatsby-image' and their workarounds](https://theleakycauldronblog.com/blog/problems-with-gatsby-image-and-their-workarounds)
+
+## State for Search
+Source: [stateful gatsby](https://github.com/DynamisDevelopment/stateful-gatsby-starter)

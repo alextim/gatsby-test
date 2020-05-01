@@ -9,20 +9,21 @@ const PaginationWrapper = styled.nav`
   align-items: center;
   margin-top: 4em;
   width: 80%;
-  max-width: 770px;
-  padding: 25px 0;
-  margin: 0px auto;
+  max-width: 48em;
+  padding: 1.5625em 0;
+  margin: 0 auto;
 `;
 
 const NavSqr = styled.div`
-  padding: 6px 18px;
-  color: #242729;
   display: inline-block;
+  margin: 0.3125em;
+  padding: 0.375em 1.125em;
+  color: #242729;
   background: #f5f5f5;
-  margin: 5px;
   &:hover {
-    background: #ff7550;
     color: #fff;
+    background: #ff7550;
+    cursor: pointer;
   }
 `;
 const CurrentPageSqr = styled(NavSqr)`
@@ -30,14 +31,14 @@ const CurrentPageSqr = styled(NavSqr)`
 `;
 
 const NavBtn = styled(Link)`
-  padding: 6px 18px;
-  color: #242729;
   display: inline-block;
+  margin: 0.3125em;
+  padding: 0.375em 1.125em;
+  color: #242729;
   background: #f5f5f5;
-  margin: 5px;
   &:hover {
-    background: #ff7550;
     color: #fff;
+    background: #ff7550;
   }
 `;
 
@@ -46,11 +47,11 @@ const CurrentPageBtn = styled(NavBtn)`
 `;
 
 const Arrow = styled(Box)`
+  display: inline-block;
+  margin-bottom: 2px;
+  padding: 2px;
   border: solid;
   border-width: 0 2px 2px 0;
-  display: inline-block;
-  padding: 2px;
-  margin-bottom: 2px;
 `;
 
 const ArrowLeft = styled(Arrow)`

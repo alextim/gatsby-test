@@ -79,4 +79,50 @@ const getTaxUrlAndNames = (taxonomyName: string, keys: string[]): Array<ILink> =
   return sanitized.map((key) => ({ name: tax[key].name, url: tax[key].slug }));
 };
 
-export { buildTaxonomyLookup, getTaxUrlAndNames, getTaxonomyByName, getTerm, getTermName, sanitizeKeys };
+const prepareDestinations = (
+  data: { allTaxonomyYaml: { edges: Array<any> }; allTripsYaml: { edges: Array<any> } },
+  destinations: Array<string> = [],
+  limit = 0,
+) => {
+  const tax = buildTaxonomyLookup(data.allTaxonomyYaml.edges)['destination'];
+  const tripEdges = data.allTripsYaml.edges;
+
+  const a1 =
+    destinations.length > 0 ? sanitizeKeys(tax, destinations) : data.allTaxonomyYaml.edges.map((e) => e.node.key);
+  /* destination should contain at least one trip */
+  const a2 = a1.filter((item) => tripEdges.some((e) => e.node.destination.some((d: string) => d === item)));
+  const a3 = limit === 0 ? a2 : a2.slice(0, limit);
+
+  const tripsCount = tripEdges.length;
+
+  return a3.map((key) => {
+    let path;
+    let n = 0;
+    for (let i = 0; i < tripsCount; i++) {
+      if (tripEdges[i].node.destination.some((d: string) => d === key)) {
+        if (n === 0) {
+          path = tripEdges[i].node.fields.slug;
+        }
+        n = n + 1;
+        if (n === 2) {
+          break;
+        }
+      }
+    }
+
+    return {
+      title: tax[key].name,
+      path: n > 1 ? tax[key].slug : path /* if destination has only one trip then goto directly to trip page */,
+      featuredImage: tax[key].featuredImage ? tax[key].featuredImage.childImageSharp.fluid : null,
+    };
+  });
+};
+export {
+  buildTaxonomyLookup,
+  getTaxUrlAndNames,
+  getTaxonomyByName,
+  getTerm,
+  getTermName,
+  sanitizeKeys,
+  prepareDestinations,
+};

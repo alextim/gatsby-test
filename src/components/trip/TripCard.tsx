@@ -69,7 +69,7 @@ const TripCard = ({ trip }: Props) => {
         </ImageWrap>
 
         <Box p="1rem" textAlign="left">
-          <Heading as="h3" mb="0.25rem" fontSize={['1.25rem', '1.5rem']}>
+          <Heading as="h3" mb="0.25rem" fontSize="1.125rem">
             <Link to={path}>{title}</Link>
           </Heading>
           {showPrice
