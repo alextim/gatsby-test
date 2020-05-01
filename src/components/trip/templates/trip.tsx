@@ -7,9 +7,7 @@ type Props = {
   data: any;
   pageContext: any;
 };
-const TripTemplate = ({ data, pageContext }: Props) => (
-  <SingleTrip trip={data.yaml} pageContext={pageContext} isPrint={false} />
-);
+const TripTemplate = ({ data, pageContext }: Props) => <SingleTrip trip={data.yaml} pageContext={pageContext} />;
 
 export const pageQuery = graphql`
   query TripById($id: String!) {
@@ -71,7 +69,7 @@ export const pageQuery = graphql`
         note
       }
       equipment {
-        list
+        gear
         note
       }
       supplementInfo

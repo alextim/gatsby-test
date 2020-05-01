@@ -15,23 +15,16 @@ export interface IDateItem {
   isSale: boolean;
 }
 
-export interface IGearType {
-  id: string;
-  name: string;
-  url?: string;
-  order: number;
-}
-
 export interface IGearItem {
   name: string;
   description?: string;
-  type?: Array<string>;
+  type?: string;
+  usage?: Array<string>;
   url?: string;
-  order: number;
 }
 
 export interface IEquipment {
-  list: Array<IGearItem>;
+  gear?: Array<string>;
   note: string;
 }
 

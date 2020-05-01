@@ -1,0 +1,73 @@
+- name: Ботинки альпинистские одинарные
+  type: shoes
+  usage:
+    - alpinism  
+- name: Гамаши
+  description: 
+  type: shoes
+  usage:
+    - alpinism
+    - montblanc
+- name: Каска
+  type: climbing
+  usage:
+    - alpinism
+    - ski
+- name: Кошки с чехлом
+    - alpinism
+    - ski
+- name: Лыжная маска
+  description: 
+  type: eyes
+  usage:
+    - hoverla
+    - ski
+- name: Магнезия
+  description:
+  type: climbing
+  usage:
+    - rock-climbing
+  url: http:\\adrenalin.od.ua
+- name: Очки солнцезащитные (фактор защиты 4)
+  description:
+  type: eyes
+  usage:
+    - alpinism  
+    - rock-climbing
+- name: Перчатки теплые непромокаемые
+  description:
+  type: handwear
+  usage:
+    - alpinism
+    - ski  
+- name: Перчатки тонкие
+  description:
+  type: handwear
+  usage:
+    - alpinism
+    - ski  
+    - rock-climbing
+- name: Рукавицы теплые
+  description:
+  type: handwear
+  usage:
+    - alpinism
+    - ski    
+- name: Система страховочная
+  description:
+  type: climbing
+  usage:
+    - alpinism
+    - rock-climbing
+- name: Скальные туфли
+  type: climbing
+  description:
+  usage:
+    - rock-climbing
+- name: Треккинговые кроссовки
+  type: shoes
+  usage:
+- name: Шапка (кепка) от солнца
+  type: headwear
+  usage:
+     - alpinism

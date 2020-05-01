@@ -176,6 +176,12 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
         name: 'taxonomy',
         value: taxName,
       });
+    } else if (fileNode.sourceInstanceName === 'gear') {
+      createNodeField({
+        node,
+        name: 'type',
+        value: 'gear',
+      });
     }
   }
 };
