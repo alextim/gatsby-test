@@ -55,11 +55,12 @@ const Heading = styled.h2`
 const PAGE_TITLE = 'Все направления';
 
 const DestinationsPage = ({ location }: IPageProps) => {
-  const img = useDefaultBannerImage();
+  // const img = useDefaultBannerImage();
   const placeholder = usePlaceholderImage();
   const data = useDestinations();
   const result = prepareDestinations(data);
   const count = result.length;
+  let key = 0;
   let i = 0;
   let n = 0;
   return (
@@ -86,7 +87,7 @@ const DestinationsPage = ({ location }: IPageProps) => {
             i++;
           }
           return (
-            <div key={i} className={`fg-c fg-${n}`}>
+            <div key={key++} className={`fg-c fg-${n}`}>
               <Item to={item.path}>
                 <Wrap>
                   <SImg fluid={item.featuredImage ? item.featuredImage : placeholder} />

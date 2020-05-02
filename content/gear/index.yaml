@@ -61,7 +61,7 @@
     - rock-climbing
 - name: Скальные туфли
   type: climbing
-  description:
+  description: Lorem ipsum dolor sit amet, dolor corpora molestiae pri ex, ne mel nemore scripta indoctum, vero tamquam an mea. Mei at legimus legendos praesent, duo ne fierent scripserit. Ex pro omnes accumsan explicari, eum vitae facete dolorum ei, eu per modus dolor adipisci. Vitae appareat lucilius nec ei, in alii scripserit ius, at dicit mollis intellegebat cum. Vel prima inani omnesque in, eum cu ullum cetero contentiones.
   usage:
     - rock-climbing
 - name: Треккинговые кроссовки
@@ -71,3 +71,11 @@
   type: headwear
   usage:
      - alpinism
+- name: x
+  type: headwear
+  description: bla-bla-bla
+  usage:
+     - alpinism
+     - ski      
+     - hoverla
+     - montblanc

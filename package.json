@@ -15,8 +15,6 @@
     "@fortawesome/react-fontawesome": "^0.1.9",
     "@mdx-js/mdx": "^1.5.9",
     "@mdx-js/react": "^1.5.9",
-    "@rebass/forms": "^4.0.6",
-    "@rebass/preset": "^4.0.5",
     "dotenv": "^8.2.0",
     "emotion-theming": "^10.0.27",
     "gatsby": "^2.20.29",
@@ -38,12 +36,12 @@
     "gatsby-transformer-remark": "^2.7.4",
     "gatsby-transformer-sharp": "^2.4.6",
     "gatsby-transformer-yaml": "^2.3.4",
-    "imagemin-pngquant": "^8.0.0",
     "react": "^16.13.1",
     "react-date-picker": "^8.0.1",
     "react-dom": "npm:@hot-loader/react-dom@^16.13.0",
     "react-helmet": "^6.0.0",
-    "react-hook-form": "^5.5.3"
+    "react-hook-form": "^5.5.3",
+    "react-responsive-carousel": "^3.2.5"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.10",

@@ -40,13 +40,24 @@ const theme: ITheme = {
   colors: {
     ...chakraDefaultTheme.colors,
 
+    gray: {
+      50: '#f2f2f8',
+      100: '#d8d8da',
+      200: '#bdbdbf',
+      300: '#a3a3a4',
+      400: '#89898b',
+      500: '#6f6f71',
+      600: '#575759',
+      700: '#3e3e40',
+      800: '#252527',
+      900: '#0c0c12',
+    },
     text: 'rgb(59, 64, 69)',
     heading: 'rgb(36, 39, 41)',
     background: '#fff',
     primary: '#07c',
     secondary: '#30c',
     muted: '#f6f6f9',
-    gray: '#dddddf',
     orange: '#ff7550',
     highlight: 'hsla(205, 100%, 40%, 0.125)',
 

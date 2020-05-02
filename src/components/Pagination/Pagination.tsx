@@ -1,6 +1,10 @@
 import React from 'react';
+/**
+ * https://habr.com/ru/company/hh/blog/352150/
+ * https://github.com/paularmstrong/normalizr
+ */
 
-import { PaginationWrapper, NavBtn, CurrentPageBtn, ArrowLeft, ArrowRight } from './components';
+import { PaginationWrapper, NavBtn, CurrentPageSqr, ArrowLeft, ArrowRight } from './components';
 
 type Props = {
   currentPage: number;
@@ -30,11 +34,7 @@ const Pagination = ({ currentPage, pageCount, base }: Props) => {
         const title = i + 1;
 
         if (currentPage === i + 1) {
-          return (
-            <CurrentPageBtn to={to} key={key}>
-              {title}
-            </CurrentPageBtn>
-          );
+          return <CurrentPageSqr key={key}>{title}</CurrentPageSqr>;
         }
 
         return (

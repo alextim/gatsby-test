@@ -10,5 +10,7 @@
   name: Личное
 - key: shoes
   name: Обувь
+- key: headwear
+  name: на голову    
 - key: handwear
   name: на руки  

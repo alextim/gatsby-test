@@ -79,3 +79,8 @@ dates:
     isSale: true
   - date: 2019-05-30
     isSale: false
+equipment:
+  gear:
+    - hoverla
+    - ski
+    - montblanc 

@@ -25,7 +25,7 @@ export interface IGearItem {
 
 export interface IEquipment {
   gear?: Array<string>;
-  note: string;
+  note?: string;
 }
 
 export interface IPriceListItem {
