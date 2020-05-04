@@ -1,7 +1,7 @@
 slug: t3
 title: bla-bla-bla
 published: true
-date: 2020-02-11
+date: 11-02-2020
 featured: false
 #
 # Google - 60
@@ -75,9 +75,9 @@ isShowNights: true
 duration: 8
 isDatesOnRequest: false
 dates:
-  - date: 2019-01-01
+  - date: 30-05-2020
     isSale: true
-  - date: 2019-05-30
+  - date: 29-06-2020
     isSale: false
 equipment:
   gear:

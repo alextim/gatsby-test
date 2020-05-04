@@ -24,7 +24,7 @@ const useTaxonomy = () => {
               }
             }
             fields {
-              slug
+              path
               taxonomy
             }
           }

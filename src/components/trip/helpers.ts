@@ -72,19 +72,26 @@ export const getDays = (trip: ITrip): number => {
   return 0;
 };
 
+const toDate = (s: string): Date => {
+  const parts = s.split('-');
+  // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
+  // January - 0, February - 1, etc.
+  return new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+};
 const ONE_DAY_MILLISECS = 24 * 60 * 60 * 1000;
-const actualDates = (item: any): boolean => new Date(item.date).getTime() > new Date().getTime() - ONE_DAY_MILLISECS;
 
 export const getStartFinishDates = (trip: ITrip, days: number) => {
   const { isDatesOnRequest, dates } = trip;
 
   let items;
   if (!isDatesOnRequest && dates) {
-    items = dates.filter(actualDates).map((item) => {
-      const startDate = new Date(item.date);
-      const finishDate = getFinishDate(startDate, days);
-      return { startDate, finishDate, isSale: item.isSale };
-    });
+    items = dates
+      .filter((item) => toDate(item.date).getTime() > new Date().getTime() - ONE_DAY_MILLISECS)
+      .map((item) => {
+        const startDate = toDate(item.date);
+        const finishDate = getFinishDate(startDate, days);
+        return { startDate, finishDate, isSale: item.isSale };
+      });
   }
   return items && items.length > 0 ? items : undefined;
 };

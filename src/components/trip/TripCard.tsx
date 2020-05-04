@@ -53,7 +53,7 @@ type Props = {
 
 const TripCard = ({ trip }: Props) => {
   const { fields, featuredImage, title, destination, activity, currency, enableSale, priceMode, priceList } = trip;
-  const path = fields.slug;
+  const path = fields.path;
 
   const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
   const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;

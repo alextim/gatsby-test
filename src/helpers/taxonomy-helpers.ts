@@ -19,7 +19,7 @@ const buildTaxonomyLookup = (edges: Array<ITaxEdge>): Taxonomy => {
             ...o,
             [edge.node.key]: {
               name: edge.node.name,
-              slug: edge.node.fields.slug,
+              path: edge.node.fields.path,
               description: edge.node.description,
               bannerImage: edge.node.bannerImage,
               featuredImage: edge.node.featuredImage,
@@ -76,7 +76,7 @@ const getTaxUrlAndNames = (taxonomyName: string, keys: string[]): Array<ILink> =
   const tax = getTaxonomyByName(taxonomyName);
   const sanitized = _sanitizeKeys(tax, keys);
 
-  return sanitized.map((key) => ({ name: tax[key].name, url: tax[key].slug }));
+  return sanitized.map((key) => ({ name: tax[key].name, url: tax[key].path }));
 };
 
 const prepareDestinations = (
@@ -101,7 +101,7 @@ const prepareDestinations = (
     for (let i = 0; i < tripsCount; i++) {
       if (tripEdges[i].node.destination.some((d: string) => d === key)) {
         if (n === 0) {
-          path = tripEdges[i].node.fields.slug;
+          path = tripEdges[i].node.fields.path;
         }
         n = n + 1;
         if (n === 2) {
@@ -112,7 +112,7 @@ const prepareDestinations = (
 
     return {
       title: tax[key].name,
-      path: n > 1 ? tax[key].slug : path /* if destination has only one trip then goto directly to trip page */,
+      path: n > 1 ? tax[key].path : path /* if destination has only one trip then goto directly to trip page */,
       featuredImage: tax[key].featuredImage ? tax[key].featuredImage.childImageSharp.fluid : null,
     };
   });

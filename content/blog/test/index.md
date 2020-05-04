@@ -1,5 +1,4 @@
 ---
-path: /posts/test
 date: 31-12-2019
 published: true
 title: My first blog post

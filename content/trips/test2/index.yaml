@@ -1,7 +1,7 @@
 slug: t1
 title: Кулуары Куршевеля - фрирайд в Трех Долинах
 published: true
-date: 2020-01-31
+date: 31-01-2020
 featured: true
 #
 # Google - 60
@@ -82,9 +82,9 @@ isShowNights: true
 duration: 8
 isDatesOnRequest: false
 dates:
-  - date: 2020-12-01
+  - date: 01-12-2020
     isSale: true
-  - date: 2020-12-30
+  - date: 30-12-2020
     isSale: false
 itinerary:
   subTitle:

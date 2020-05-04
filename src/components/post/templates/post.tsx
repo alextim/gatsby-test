@@ -22,7 +22,7 @@ const PostTemplate = ({ data, pageContext }) => {
   const { title, description, date, featuredImage, tag, category } = frontmatter;
   const featuredImgFluid = featuredImage ? featuredImage.childImageSharp.fluid : null;
   const imgSrc = featuredImgFluid ? featuredImgFluid.src : null;
-  //const url = fields.slug;
+  //const url = fields.path;
   /*
 const shortcodes = { IconLink };
         <MDXProvider components={shortcodes}>
@@ -61,7 +61,7 @@ export const pageQuery = graphql`
       body
       excerpt
       fields {
-        slug
+        path
       }
       frontmatter {
         date

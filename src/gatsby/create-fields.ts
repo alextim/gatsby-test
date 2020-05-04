@@ -28,9 +28,9 @@ interface ITaxNode {
 
 interface IMdNode {
   frontmatter: {
-    title: string;
     slug: string;
-    date: string;
+    title: string;
+    date?: string;
     category?: string[];
     tag?: string[];
   };
@@ -66,22 +66,28 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
     */
     let slug;
     const fileNode = getNode(node.parent);
-    const parsedFilePath = pathParse(fileNode.relativePath);
-
-    if (
-      Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
-      Object.prototype.hasOwnProperty.call(node.frontmatter, 'title')
-    ) {
-      slug = safeSlug((node as IMdNode).frontmatter.title);
-    } else {
-      slug = slugFromPath(parsedFilePath.name, parsedFilePath.dir);
-    }
 
     if (Object.prototype.hasOwnProperty.call(node, 'frontmatter')) {
       if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug')) {
         slug = safeSlug((node as IMdNode).frontmatter.slug);
+      } else if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'title')) {
+        slug = safeSlug((node as IMdNode).frontmatter.title);
       }
+    }
 
+    if (!slug) {
+      const parsedFilePath = pathParse(fileNode.relativePath);
+      slug = slugFromPath(parsedFilePath.name, parsedFilePath.dir);
+    }
+
+    let type;
+    let path;
+    if (fileNode.sourceInstanceName === 'pages') {
+      type = 'page';
+      path = `/${slug}`;
+    } else if (fileNode.sourceInstanceName === 'blog') {
+      type = 'post';
+      path = `${siteConfig.blogUrlBase}/${slug}`;
       if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'date')) {
         // const date = parseISO((node as IMdNode).frontmatter.date);
         // if (String(date) === 'Invalid Date') {
@@ -107,18 +113,7 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
           value: yyyymm,
         });
       }
-    }
-
-    let type;
-
-    if (fileNode.sourceInstanceName === 'pages') {
-      type = 'page';
-      slug = `/${slug}`;
-    } else if (fileNode.sourceInstanceName === 'blog') {
-      type = 'post';
-      slug = `${siteConfig.blogUrlBase}/${slug}`;
     } else {
-      type = '';
       throw new Error('Unkonwn type: ' + fileNode.sourceInstanceName);
     }
     createNodeField({
@@ -129,8 +124,8 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
 
     createNodeField({
       node,
-      name: 'slug',
-      value: slug,
+      name: 'path',
+      value: path,
     });
   } else if (node.internal.type === 'Yaml') {
     const fileNode = getNode(node.parent);
@@ -143,7 +138,7 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
       });
       createNodeField({
         node,
-        name: 'slug',
+        name: 'path',
         value: `${siteConfig.tripsUrlBase}/${slug}`,
       });
 
@@ -160,7 +155,7 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
     } else if (fileNode.sourceInstanceName === 'taxonomy') {
       const parsedFilePath = pathParse(fileNode.relativePath);
       const taxName = parsedFilePath.name === 'index' ? parsedFilePath.dir : parsedFilePath.name;
-      const slug = `/${taxName}/${(node as ITaxNode).key}`;
+      const path = `/${taxName}/${(node as ITaxNode).key}`;
       createNodeField({
         node,
         name: 'type',
@@ -168,8 +163,8 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
       });
       createNodeField({
         node,
-        name: 'slug',
-        value: slug,
+        name: 'path',
+        value: path,
       });
       createNodeField({
         node,
@@ -181,6 +176,12 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
         node,
         name: 'type',
         value: 'gear',
+      });
+    } else if (fileNode.sourceInstanceName === 'home') {
+      createNodeField({
+        node,
+        name: 'type',
+        value: 'home',
       });
     }
   }

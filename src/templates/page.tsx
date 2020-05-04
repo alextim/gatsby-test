@@ -22,14 +22,14 @@ type Props = {
       body: any;
       excerpt?: string;
       fields: {
-        slug: string;
+        path: string;
       };
     };
   };
 };
 const PageTemplate = ({ data }: Props) => {
   const { frontmatter, body, excerpt, fields } = data.mdx;
-  const { slug } = fields;
+  const { path } = fields;
   const { title, description, featuredImage } = frontmatter;
   const featuredImgFluid = featuredImage ? featuredImage.childImageSharp.fluid : useDefaultImage();
 
@@ -43,7 +43,7 @@ const PageTemplate = ({ data }: Props) => {
   */
   return (
     <PageLayout title={title} img={featuredImgFluid}>
-      <SEO title={title} description={description || excerpt} pathname={slug} image={imgSrc} type="article" />
+      <SEO title={title} description={description || excerpt} pathname={path} image={imgSrc} type="article" />
 
       <article>
         <MDXRenderer>{body}</MDXRenderer>
@@ -58,7 +58,7 @@ export const pageQuery = graphql`
       body
       excerpt
       fields {
-        slug
+        path
       }
       frontmatter {
         title

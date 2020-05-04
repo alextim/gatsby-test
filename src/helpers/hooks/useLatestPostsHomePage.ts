@@ -14,7 +14,7 @@ interface IEdge {
       category?: Array<string>;
     };
     fields: {
-      slug: string;
+      path: string;
     };
   };
 }
@@ -38,7 +38,7 @@ const useLatestPostsHomePage = (): Array<{
           node {
             excerpt
             fields {
-              slug
+              path
             }
             frontmatter {
               path
@@ -61,10 +61,10 @@ const useLatestPostsHomePage = (): Array<{
 
   return data.allMdx.edges.map(({ node }: IEdge) => {
     const { title, date, featuredImage, category } = node.frontmatter;
-    const { slug } = node.fields;
+    const { path } = node.fields;
     return {
       title,
-      path: slug,
+      path,
       date,
       category,
       excerpt: node.excerpt,

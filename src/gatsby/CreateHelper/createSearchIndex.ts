@@ -35,7 +35,7 @@ function createSearchIndex(this: any, trips: Array<any>) {
       itinerary,
     } = edge.node as ITrip;
     o.push({
-      slug: edge.node.fields.slug,
+      path: edge.node.fields.path,
       title,
       description: description && Utils.stripHtmlTags(description),
       // metaTitle,

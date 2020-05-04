@@ -6,7 +6,7 @@ interface IEdge {
       title: string;
     };
     fields: {
-      slug: string;
+      path: string;
     };
   };
 }
@@ -22,7 +22,7 @@ const useLatestPostsTop5 = (): Array<{ title: string; path: string }> => {
         edges {
           node {
             fields {
-              slug
+              path
             }
             frontmatter {
               title
@@ -35,7 +35,7 @@ const useLatestPostsTop5 = (): Array<{ title: string; path: string }> => {
 
   return data.allMdx.edges.map(({ node }: IEdge) => ({
     title: node.frontmatter.title,
-    path: node.fields.slug,
+    path: node.fields.path,
   }));
 };
 

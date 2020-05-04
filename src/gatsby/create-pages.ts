@@ -17,7 +17,7 @@ import { ITrip } from '../components/trip/trip';
 interface INodeTrip extends ITrip {
   id: string;
   fields: {
-    slug: string;
+    path: string;
   };
 }
 interface ITripEdge {
@@ -32,7 +32,7 @@ interface IMdEdge {
   node: {
     id: string;
     fields: {
-      slug: string;
+      path: string;
       type: string;
     };
     frontmatter: {
@@ -104,7 +104,7 @@ const allPostsQuery = `
             publicURL
           }
           fields {
-            slug
+            path
             taxonomy
           }
         }
@@ -157,7 +157,7 @@ const allPostsQuery = `
         node {
           id
           fields {
-            slug
+            path
             type
           }
           frontmatter {
@@ -170,7 +170,7 @@ const allPostsQuery = `
       edges {
         node {
           fields {
-            slug
+            path
           }
           id
           title
@@ -288,9 +288,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     .filter((item) => item.node.fields.type === 'page')
     .map(({ node }: IMdEdge) => {
       console.log('========================');
-      console.log('createPages: ' + node.fields.slug);
+      console.log('createPages: ' + node.fields.path);
       createPage({
-        path: node.fields.slug,
+        path: node.fields.path,
         component: pageTemplate,
         context: {
           id: node.id,

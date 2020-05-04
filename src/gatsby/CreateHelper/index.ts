@@ -71,7 +71,7 @@ class CreateHelper {
     return group
       .filter(({ fieldValue }: IGroup) => this._taxonomy[taxonomyName][fieldValue])
       .map(({ totalCount, fieldValue }: IGroup) =>
-        this.createPaginationPages(template, totalCount, this._taxonomy[taxonomyName][fieldValue].slug, {
+        this.createPaginationPages(template, totalCount, this._taxonomy[taxonomyName][fieldValue].path, {
           termKey: fieldValue,
           term: this._taxonomy[taxonomyName][fieldValue],
         }),

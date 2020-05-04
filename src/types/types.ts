@@ -2,7 +2,7 @@ import { IDictionary } from '../lib/types';
 
 export type Term = {
   name: string;
-  slug: string;
+  path: string;
   description?: string;
   bannerImage?: any;
   featuredImage?: any;
@@ -24,7 +24,7 @@ export interface ITaxNode {
   featuredImage?: any;
   fields: {
     taxonomy: string;
-    slug: string;
+    path: string;
   };
 }
 

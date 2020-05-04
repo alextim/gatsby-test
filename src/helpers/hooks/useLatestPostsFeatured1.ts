@@ -10,7 +10,7 @@ interface IEdge {
       };
     };
     fields: {
-      slug: string;
+      path: string;
     };
   };
 }
@@ -29,7 +29,7 @@ const useLatestPostsFeatured1 = (): Array<{
         edges {
           node {
             fields {
-              slug
+              path
             }
             frontmatter {
               featuredImage {
@@ -47,7 +47,7 @@ const useLatestPostsFeatured1 = (): Array<{
   `);
 
   return data.allMdx.edges.map(({ node }: IEdge) => ({
-    path: node.fields.slug,
+    path: node.fields.path,
     featuredImage: node.frontmatter.featuredImage ? node.frontmatter.featuredImage.childImageSharp.fluid : undefined,
   }));
 };

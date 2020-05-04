@@ -25,7 +25,7 @@ export const pageQuery = graphql`
       edges {
         node {
           fields {
-            slug
+            path
           }
           title
           description

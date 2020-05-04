@@ -1,5 +1,5 @@
 ---
-path: /posts/mdx-test
+slug: heello-mdx-text
 date: 26-05-2019
 published: true
 title: My first MDX blog post

@@ -11,7 +11,7 @@ const useLatestTripFeatured1 = () => {
         edges {
           node {
             fields {
-              slug
+              path
             }
             currency
             enableSale

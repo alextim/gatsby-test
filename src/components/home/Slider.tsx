@@ -3,8 +3,8 @@ import Img from 'gatsby-image';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 
-import useDefaultBannerImage from '../../helpers/hooks/useDefaultBannerImage';
-
+import useHomePageSettings2 from '../../helpers/hooks/useHomePageSettings2';
+import { BtnLink } from '../Button';
 import { ContainerFullWidth } from '../Container';
 
 const carouselProps = {
@@ -26,22 +26,20 @@ const carouselProps = {
   swipeScrollTolerance: 5,
 };
 const Slider = () => {
-  const fluid = useDefaultBannerImage();
+  const edges = useHomePageSettings2();
   return (
     <ContainerFullWidth>
       <Carousel {...carouselProps}>
-        <div>
-          <Img fluid={fluid} />
-          <p className="legend">Legend 1</p>
-        </div>
-        <div>
-          <img src="https://picsum.photos/1920/800" />
-          <p className="legend">Legend 2</p>
-        </div>
-        <div>
-          <img src="https://picsum.photos/1920/800" />
-          <p className="legend">Legend 3</p>
-        </div>
+        {edges.map(({ node }: any, i: number) => (
+          <div key={i}>
+            {node.image && <Img fluid={node.image.childImageSharp.fluid} />}
+            <div>
+              {node.title}
+              {node.description && <p className="legend">{node.description}</p>}
+              {node.action && <BtnLink to={node.action.url}>{node.action.caption}</BtnLink>}
+            </div>
+          </div>
+        ))}
       </Carousel>
     </ContainerFullWidth>
   );

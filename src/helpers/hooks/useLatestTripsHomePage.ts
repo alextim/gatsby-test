@@ -11,7 +11,7 @@ const useLatestTripsHomePage = (): Array<any> => {
         edges {
           node {
             fields {
-              slug
+              path
             }
             title
             destination

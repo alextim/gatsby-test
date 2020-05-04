@@ -24,7 +24,7 @@ export const pageQuery = graphql`
           id
           excerpt
           fields {
-            slug
+            path
           }
           frontmatter {
             date

@@ -17,7 +17,7 @@ const useDestinations = () => {
               }
             }
             fields {
-              slug
+              path
               taxonomy
             }
           }
@@ -30,7 +30,7 @@ const useDestinations = () => {
         edges {
           node {
             fields {
-              slug
+              path
             }
             destination
           }

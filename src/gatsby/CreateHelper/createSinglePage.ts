@@ -8,7 +8,7 @@ function createSinglePage(
 ): void {
   const { node } = edge;
   console.log('========================');
-  console.log(`create page: ${node.fields.slug}`);
+  console.log(`create page: ${node.fields.path}`);
 
   const isFirst = index === 0;
   const isLast = index === arr.length - 1;
@@ -19,22 +19,22 @@ function createSinglePage(
   if (!isFirst) {
     prev = {
       name: arr[index - 1].node.title || arr[index - 1].node.frontmatter.title,
-      url: arr[index - 1].node.fields.slug,
+      url: arr[index - 1].node.fields.path,
     };
   }
 
   if (!isLast) {
     next = {
       name: arr[index + 1].node.title || arr[index + 1].node.frontmatter.title,
-      url: arr[index + 1].node.fields.slug,
+      url: arr[index + 1].node.fields.path,
     };
   }
 
   this._createPage({
-    path: node.fields.slug,
+    path: node.fields.path,
     component: template,
     context: {
-      pathname: node.fields.slug,
+      pathname: node.fields.path,
       id: node.id,
       prev,
       next,
@@ -44,10 +44,10 @@ function createSinglePage(
 
   if (isPrint) {
     this._createPage({
-      path: `${node.fields.slug}/print`,
+      path: `${node.fields.path}/print`,
       component: template,
       context: {
-        pathname: node.fields.slug,
+        pathname: node.fields.path,
         id: node.id,
         isPrint: true,
       },

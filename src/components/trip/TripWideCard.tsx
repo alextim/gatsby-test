@@ -136,7 +136,7 @@ type Props = {
 
 const TripWideCard = ({ trip }: Props) => {
   const {
-    slug,
+    path,
 
     title,
     description,
@@ -158,7 +158,6 @@ const TripWideCard = ({ trip }: Props) => {
     isDatesOnRequest,
     isShowNights,
   } = trip;
-  const path = slug;
 
   const days = getDays(trip);
   const startFinishDates = getStartFinishDates(trip, days);

@@ -24,7 +24,7 @@ export const pageQuery = graphql`
         node {
           excerpt
           fields {
-            slug
+            path
           }
           frontmatter {
             title

@@ -1,10 +1,10 @@
 const toPost = (node: any) => {
-  const { slug } = node.fields;
+  const { path } = node.fields;
   const { title, date, featuredImage, category, tag } = node.frontmatter;
 
   return {
     title,
-    path: slug,
+    path,
     date,
     category,
     tag,

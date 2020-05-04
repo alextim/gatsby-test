@@ -53,7 +53,7 @@ const StickyTrip = () => {
   const theme = (useTheme() as unknown) as ITheme;
 
   const { fields, currency, enableSale, priceMode, priceList, featuredImage } = edges[0].node;
-  const path = fields.slug;
+  const path = fields.path;
 
   const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
   const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;

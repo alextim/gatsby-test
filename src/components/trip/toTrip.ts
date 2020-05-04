@@ -1,6 +1,7 @@
 const toTrip = (node: any) => {
-  const { slug } = node.fields;
+  const { path } = node.fields;
   const {
+    slug,
     title,
     description,
     // metaTitle,
@@ -27,6 +28,7 @@ const toTrip = (node: any) => {
 
   return {
     slug,
+    path,
 
     title,
     description,

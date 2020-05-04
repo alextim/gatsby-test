@@ -28,7 +28,7 @@ export const pageQuery = graphql`
       edges {
         node {
           fields {
-            slug
+            path
           }
           excerpt
           frontmatter {

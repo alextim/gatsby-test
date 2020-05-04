@@ -4,7 +4,7 @@ interface IEdge {
   node: {
     title: string;
     fields: {
-      slug: string;
+      path: string;
     };
   };
 }
@@ -20,7 +20,7 @@ const useLatestTripsTop5 = (): Array<{ title: string; path: string }> => {
         edges {
           node {
             fields {
-              slug
+              path
             }
             title
           }
@@ -31,7 +31,7 @@ const useLatestTripsTop5 = (): Array<{ title: string; path: string }> => {
 
   return data.allYaml.edges.map(({ node }: IEdge) => ({
     title: node.title,
-    path: node.fields.slug,
+    path: node.fields.path,
   }));
 };
 

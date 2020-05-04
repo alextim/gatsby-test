@@ -11,7 +11,7 @@ export type LevelType = {
 };
 
 export interface IDateItem {
-  date: Date;
+  date: string;
   isSale: boolean;
 }
 
@@ -59,6 +59,7 @@ export interface IItinerary {
 
 export interface ITrip {
   slug: string;
+  path: string;
   title: string;
   published?: boolean;
   featured?: boolean;
