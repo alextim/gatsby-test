@@ -10,7 +10,6 @@ import useLatestTripFeatured1 from '../../helpers/hooks/useLatestTripFeatured1';
 import { ITheme } from '../theme.d';
 import { BtnLink } from '../Button';
 import Price from '../trip/Price';
-import { getLowestPrice } from '../trip/helpers';
 import Section from './Section';
 
 const LeftWrapper = styled.div`
@@ -52,11 +51,7 @@ const StickyTrip = () => {
 
   const theme = (useTheme() as unknown) as ITheme;
 
-  const { fields, currency, enableSale, priceMode, priceList, featuredImage } = edges[0].node;
-  const path = fields.path;
-
-  const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
-  const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
+  const { path, currency, enableSale, showPrice, lowestPrice, featuredImage } = edges[0].node;
 
   return (
     <Section title={title} subTitle={subTitle} bg={theme.home.stickyTrip.colors.bg}>

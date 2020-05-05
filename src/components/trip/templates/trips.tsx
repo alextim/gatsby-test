@@ -20,17 +20,10 @@ const TripsTemplate = ({
 
 export const pageQuery = graphql`
   query TripListQuery($skip: Int!, $limit: Int!) {
-    allYaml(
-      filter: { published: { eq: true }, fields: { type: { eq: "trip" } } }
-      limit: $limit
-      skip: $skip
-      sort: { order: DESC, fields: [fields___date] }
-    ) {
+    allTrip(limit: $limit, skip: $skip, sort: { order: DESC, fields: [date] }) {
       edges {
         node {
-          fields {
-            path
-          }
+          path
           title
           description
           excerpt
@@ -45,19 +38,19 @@ export const pageQuery = graphql`
           destination
           activity
           difficultyLevel
-          priceMode
-          currency
-          enableSale
-          priceList {
+          showPrice
+          lowestPrice {
             price
-            qty
             salePrice
           }
-          duration
+          currency
+          enableSale
           isShowNights
           isDatesOnRequest
-          dates {
-            date
+          days
+          startFinishDates {
+            startDate
+            finishDate
             isSale
           }
           itinerary {

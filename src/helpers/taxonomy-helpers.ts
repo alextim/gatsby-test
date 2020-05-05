@@ -80,12 +80,12 @@ const getTaxUrlAndNames = (taxonomyName: string, keys: string[]): Array<ILink> =
 };
 
 const prepareDestinations = (
-  data: { allTaxonomyYaml: { edges: Array<any> }; allTripsYaml: { edges: Array<any> } },
+  data: { allTaxonomyYaml: { edges: Array<any> }; allTrips: { edges: Array<any> } },
   destinations: Array<string> = [],
   limit = 0,
 ) => {
   const tax = buildTaxonomyLookup(data.allTaxonomyYaml.edges)['destination'];
-  const tripEdges = data.allTripsYaml.edges;
+  const tripEdges = data.allTrips.edges;
 
   const a1 =
     destinations.length > 0 ? sanitizeKeys(tax, destinations) : data.allTaxonomyYaml.edges.map((e) => e.node.key);
@@ -101,7 +101,7 @@ const prepareDestinations = (
     for (let i = 0; i < tripsCount; i++) {
       if (tripEdges[i].node.destination.some((d: string) => d === key)) {
         if (n === 0) {
-          path = tripEdges[i].node.fields.path;
+          path = tripEdges[i].node.path;
         }
         n = n + 1;
         if (n === 2) {

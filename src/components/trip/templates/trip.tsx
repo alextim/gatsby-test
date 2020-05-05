@@ -7,11 +7,11 @@ type Props = {
   data: any;
   pageContext: any;
 };
-const TripTemplate = ({ data, pageContext }: Props) => <SingleTrip trip={data.yaml} pageContext={pageContext} />;
+const TripTemplate = ({ data, pageContext }: Props) => <SingleTrip trip={data.trip} pageContext={pageContext} />;
 
 export const pageQuery = graphql`
   query TripById($id: String!) {
-    yaml(id: { eq: $id }) {
+    trip(id: { eq: $id }) {
       title
       description
       excerpt
@@ -30,7 +30,11 @@ export const pageQuery = graphql`
       groupSize
       difficultyLevel
       fitnessLevel
-      priceMode
+      showPrice
+      lowestPrice {
+        price
+        salePrice
+      }
       currency
       enableSale
       priceList {
@@ -38,17 +42,18 @@ export const pageQuery = graphql`
         qty
         salePrice
       }
+      isShowNights
+      isDatesOnRequest
+      days
+      startFinishDates {
+        startDate
+        finishDate
+        isSale
+      }
       service {
         excluded
         included
         note
-      }
-      duration
-      isShowNights
-      isDatesOnRequest
-      dates {
-        date
-        isSale
       }
       itinerary {
         dayItems {

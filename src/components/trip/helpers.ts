@@ -4,7 +4,7 @@ import { num2form } from '../../lib/num2form';
 
 import { getTermName } from '../../helpers/taxonomy-helpers';
 
-import { ITrip } from './trip';
+import { ISrcTrip } from './trip.d';
 import { LevelType, IPriceListItem, CurrencyNameType } from './trip';
 
 export function getFitnessLevelTitle(level: LevelType): string {
@@ -58,10 +58,10 @@ export const getFinishDate = (date: Date, duration: number): Date => {
 
 export const formatStartFinish = (startDate: Date, finishDate: Date): string => {
   const fmt = new Intl.DateTimeFormat('ru');
-  return fmt.format(startDate) + ' - ' + fmt.format(finishDate);
+  return fmt.format(new Date(startDate)) + ' - ' + fmt.format(new Date(finishDate));
 };
 
-export const getDays = (trip: ITrip): number => {
+export const getDays = (trip: ISrcTrip): number => {
   const { itinerary, duration } = trip;
   if (itinerary && itinerary.dayItems) {
     return itinerary.dayItems.length;
@@ -80,7 +80,7 @@ const toDate = (s: string): Date => {
 };
 const ONE_DAY_MILLISECS = 24 * 60 * 60 * 1000;
 
-export const getStartFinishDates = (trip: ITrip, days: number) => {
+export const getStartFinishDates = (trip: ISrcTrip, days: number) => {
   const { isDatesOnRequest, dates } = trip;
 
   let items;
@@ -102,7 +102,7 @@ export const getDateItemsFormat = (startFinish: undefined | Array<any>): undefin
   }
   const fmt = new Intl.DateTimeFormat('ru');
   return startFinish.map((item) => ({
-    key: fmt.format(item.startDate),
+    key: fmt.format(new Date(item.startDate)),
     value: formatStartFinish(item.startDate, item.finishDate),
   }));
 };

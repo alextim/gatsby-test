@@ -16,17 +16,15 @@ const DeastinationTripsTemplate = ({
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
   query DestinationPageQuery($skip: Int!, $limit: Int!, $termKey: String) {
-    allYaml(
+    allTrip(
       skip: $skip
       limit: $limit
-      sort: { fields: [fields___date], order: DESC }
-      filter: { published: { eq: true }, destination: { in: [$termKey] }, fields: { type: { eq: "trip" } } }
+      sort: { fields: [date], order: DESC }
+      filter: { destination: { in: [$termKey] } }
     ) {
       edges {
         node {
-          fields {
-            path
-          }
+          path
           title
           description
           excerpt
@@ -41,19 +39,19 @@ export const pageQuery = graphql`
           destination
           activity
           difficultyLevel
-          priceMode
-          currency
-          enableSale
-          priceList {
+          showPrice
+          lowestPrice {
             price
-            qty
             salePrice
           }
-          duration
+          currency
+          enableSale
           isShowNights
           isDatesOnRequest
-          dates {
-            date
+          days
+          startFinishDates {
+            startDate
+            finishDate
             isSale
           }
           itinerary {

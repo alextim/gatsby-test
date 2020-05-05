@@ -7,8 +7,10 @@ function createSinglePage(
   isPrint: boolean,
 ): void {
   const { node } = edge;
+  const path = node.path || node.fields.path;
+
   console.log('========================');
-  console.log(`create page: ${node.fields.path}`);
+  console.log(`create page: ${path}`);
 
   const isFirst = index === 0;
   const isLast = index === arr.length - 1;
@@ -17,24 +19,26 @@ function createSinglePage(
   let next;
 
   if (!isFirst) {
+    const n = arr[index - 1].node;
     prev = {
-      name: arr[index - 1].node.title || arr[index - 1].node.frontmatter.title,
-      url: arr[index - 1].node.fields.path,
+      name: n.title || n.frontmatter.title,
+      url: n.path || n.fields.path,
     };
   }
 
   if (!isLast) {
+    const n = arr[index + 1].node;
     next = {
-      name: arr[index + 1].node.title || arr[index + 1].node.frontmatter.title,
-      url: arr[index + 1].node.fields.path,
+      name: n.title || n.frontmatter.title,
+      url: n.path || n.fields.path,
     };
   }
 
   this._createPage({
-    path: node.fields.path,
+    path,
     component: template,
     context: {
-      pathname: node.fields.path,
+      pathname: path,
       id: node.id,
       prev,
       next,
@@ -44,10 +48,10 @@ function createSinglePage(
 
   if (isPrint) {
     this._createPage({
-      path: `${node.fields.path}/print`,
+      path: `${path}/print`,
       component: template,
       context: {
-        pathname: node.fields.path,
+        pathname: path,
         id: node.id,
         isPrint: true,
       },

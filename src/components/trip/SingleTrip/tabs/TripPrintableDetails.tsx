@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import { ITrip, IPriceListItem } from '../../trip';
+import { IEscTrip } from '../../trip.d';
 import PriceList from './PriceList';
 import Service from './Service';
 import Itinerary from './Itinerary';
@@ -15,13 +15,9 @@ const ItemWrapper = styled.div`
 `;
 
 type Props = {
-  trip: ITrip;
-  startFinishDates?: Array<any>;
-  showPrice: boolean;
-  showPriceList: boolean;
-  lowestPrice?: IPriceListItem;
+  trip: IEscTrip;
 };
-const TripPrintableDetails = ({ trip, startFinishDates, showPrice, showPriceList, lowestPrice }: Props) => {
+const TripPrintableDetails = ({ trip }: Props) => {
   const {
     currency,
     enableSale,
@@ -30,6 +26,10 @@ const TripPrintableDetails = ({ trip, startFinishDates, showPrice, showPriceList
     itinerary,
     service,
     isDatesOnRequest,
+    startFinishDates,
+    showPrice,
+    showPriceList,
+    lowestPrice,
   } = trip;
 
   return (

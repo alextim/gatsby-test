@@ -8,7 +8,6 @@ import SEO from '../SEO';
 import Banner from '../Banner';
 import Pagination from '../Pagination';
 import TripWideCard from './TripWideCard';
-import toTrip from './toTrip';
 
 const DescriptionWrapper = styled.div`
   margin: 2rem 1.5rem 0;
@@ -37,7 +36,7 @@ const TripListTemplate = ({ edges, pageContext, title }: Props) => {
       {description && <DescriptionWrapper>{description}</DescriptionWrapper>}
       <CardsWrapper>
         {edges.map(({ node }, i) => (
-          <TripWideCard key={i} trip={toTrip(node)} />
+          <TripWideCard key={i} trip={node} />
         ))}
       </CardsWrapper>
       <Pagination pageCount={pageContext.pageCount} currentPage={pageContext.currentPage} base={pageContext.base} />

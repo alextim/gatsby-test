@@ -33,8 +33,8 @@ const Dates = ({ startFinishDates, showPrice, lowest, currency, enableSale, open
               const { startDate, finishDate, isSale } = item;
               return (
                 <tr key={i}>
-                  <td>{fmt.format(startDate)}</td>
-                  <td>{fmt.format(finishDate)}</td>
+                  <td>{fmt.format(new Date(startDate))}</td>
+                  <td>{fmt.format(new Date(finishDate))}</td>
                   <td>
                     {showPrice && lowest ? (
                       <Price

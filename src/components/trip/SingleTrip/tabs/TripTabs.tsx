@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/core';
 
-import { ITrip, IPriceListItem } from '../../trip';
+import { IEscTrip } from '../../trip.d';
 import PriceList from './PriceList';
 import Service from './Service';
 import Itinerary from './Itinerary';
@@ -11,23 +11,11 @@ import { Dates } from './Dates';
 import TabHeading from './TabHeading';
 
 type Props = {
-  trip: ITrip;
-  startFinishDates?: Array<any>;
-  showPrice: boolean;
-  showPriceList: boolean;
-  lowestPrice?: IPriceListItem;
+  trip: IEscTrip;
   focusRef: any;
   openFormHandler: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
-const TripTabs = ({
-  trip,
-  startFinishDates,
-  showPrice,
-  showPriceList,
-  lowestPrice,
-  focusRef,
-  openFormHandler,
-}: Props) => {
+const TripTabs = ({ trip, focusRef, openFormHandler }: Props) => {
   const {
     currency,
     enableSale,
@@ -39,6 +27,10 @@ const TripTabs = ({
 
     equipment,
     supplementInfo,
+    startFinishDates,
+    showPrice,
+    showPriceList,
+    lowestPrice,
   } = trip;
 
   return (

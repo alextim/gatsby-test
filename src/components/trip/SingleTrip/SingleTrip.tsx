@@ -11,8 +11,8 @@ import PrevNext from '../../PrevNext';
 import IconLink from '../../IconLink';
 import TripInquiryForm from '../../forms/TripInquiryForm';
 
-import { ITrip } from '../trip';
-import { getLowestPrice, getDays, getStartFinishDates, formatStartFinish, getDateItemsFormat } from '../helpers';
+import { IEscTrip } from '../trip.d';
+import { formatStartFinish, getDateItemsFormat } from '../helpers';
 import TripInfoItem from '../TripInfoItem';
 import Price from '../Price';
 
@@ -34,7 +34,7 @@ import { TripTabs, TripPrintableDetails } from './tabs';
 import Metas from './metas';
 
 type Props = {
-  trip: ITrip;
+  trip: IEscTrip;
   pageContext: {
     prev?: ILink;
     next?: ILink;
@@ -54,10 +54,12 @@ const SingleTrip = ({ trip, pageContext }: Props) => {
     excerpt,
     featuredImage,
 
-    priceMode,
+    showPrice,
+    lowestPrice,
     currency,
     enableSale,
-    priceList,
+
+    startFinishDates,
 
     isDatesOnRequest,
   } = trip;
@@ -70,13 +72,6 @@ const SingleTrip = ({ trip, pageContext }: Props) => {
     }
     onOpen();
   };
-
-  const days = getDays(trip);
-  const startFinishDates = getStartFinishDates(trip, days);
-
-  const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
-  const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
-  const showPriceList = ((priceMode as unknown) as number) === 2 && priceList ? true : false;
 
   const handleGoToDatesTab = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -121,7 +116,7 @@ const SingleTrip = ({ trip, pageContext }: Props) => {
               : 'Цена по запросу'}
           </PriceWrapper>
           <MetasWrapper>
-            <Metas trip={trip} days={days} />
+            <Metas trip={trip} />
           </MetasWrapper>
           <BookWrapper>
             <DatesBookWrapper>
@@ -162,24 +157,10 @@ const SingleTrip = ({ trip, pageContext }: Props) => {
       <BodyWrapper>
         {description && <DescriptionWrapper dangerouslySetInnerHTML={{ __html: description }} />}
         {isPrint ? (
-          <TripPrintableDetails
-            trip={trip}
-            startFinishDates={startFinishDates}
-            showPrice={showPrice}
-            showPriceList={showPriceList}
-            lowestPrice={lowestPrice}
-          />
+          <TripPrintableDetails trip={trip} />
         ) : (
           <>
-            <TripTabs
-              trip={trip}
-              startFinishDates={startFinishDates}
-              showPrice={showPrice}
-              showPriceList={showPriceList}
-              lowestPrice={lowestPrice}
-              focusRef={focusRef}
-              openFormHandler={openFormHandler}
-            />
+            <TripTabs trip={trip} focusRef={focusRef} openFormHandler={openFormHandler} />
             <IconLink icon="print" to={`${pathname}/print`} target="_blank">
               Версия для печати
             </IconLink>

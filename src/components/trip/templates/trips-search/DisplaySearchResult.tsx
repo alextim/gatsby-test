@@ -1,12 +1,12 @@
 import React from 'react';
 
 import siteConfig from '../../../../data/site-config';
-import { ITrip } from '../../trip';
+import { IEscTrip } from '../../trip.d';
 import TripWideCard from '../../TripWideCard';
 import { DynamicPagination as Pagination } from '../../../Pagination';
 
 type Props = {
-  searchIndex: Array<ITrip>;
+  searchIndex: Array<IEscTrip>;
   currentPage: number;
   setCurrentPage: any;
 };

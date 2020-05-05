@@ -3,13 +3,15 @@ import fs from 'fs';
 import siteConfig from '../../data/site-config';
 import { sanitizeKeys } from '../../helpers/taxonomy-helpers';
 import Utils from '../../lib/utils';
-import { ITrip } from '../../components/trip/trip';
+import { IEscTrip } from '../../components/trip/trip.d';
 
 function createSearchIndex(this: any, trips: Array<any>) {
   console.log('========================');
   console.log(siteConfig.searchIndexFileName);
-  const tripsIndex = trips.reduce((o, edge: any) => {
+  const tripsIndex = trips.reduce((o, { node }: any) => {
     const {
+      slug,
+      path,
       title,
       description,
       // metaTitle,
@@ -23,19 +25,19 @@ function createSearchIndex(this: any, trips: Array<any>) {
       activity,
       difficultyLevel,
 
-      priceMode,
+      showPrice,
+      lowestPrice,
       currency,
       enableSale,
-      priceList,
 
       isDatesOnRequest,
-      duration,
       isShowNights,
-      dates,
-      itinerary,
-    } = edge.node as ITrip;
+      days,
+      startFinishDates,
+    } = node as IEscTrip;
     o.push({
-      path: edge.node.fields.path,
+      slug,
+      path,
       title,
       description: description && Utils.stripHtmlTags(description),
       // metaTitle,
@@ -49,15 +51,15 @@ function createSearchIndex(this: any, trips: Array<any>) {
       activity: activity && sanitizeKeys(this._taxonomy.activity, activity),
       difficultyLevel,
 
-      priceMode,
+      showPrice,
+      lowestPrice,
       currency,
       enableSale,
-      priceList,
 
       isDatesOnRequest,
-      duration: itinerary && itinerary.dayItems ? itinerary.dayItems.length : duration,
       isShowNights,
-      dates: dates,
+      days,
+      startFinishDates,
     });
     return o;
   }, new Array<any>());

@@ -57,11 +57,64 @@ export interface IItinerary {
   note?: string;
 }
 
-export interface ITrip {
+export interface ISrcTrip {
   slug: string;
-  path: string;
-  title: string;
+  date?: string;
+  title?: string;
   published?: boolean;
+  featured?: boolean;
+  /**
+   * Google - 60
+   * FB     - 95
+   * */
+  metaTitle?: string;
+  /**
+   * Google - 160
+   * FB     - 200
+   * */
+  metaDescription?: string; // 160
+  description?: string;
+  excerpt?: string;
+  featuredImage?: any;
+
+  season?: Array<string>;
+  activity?: Array<string>;
+  destination?: Array<string>;
+
+  priceMode?: PriceModeType;
+  currency?: CurrencyNameType;
+  enableSale?: boolean;
+  priceList?: Array<IPriceListItem>;
+
+  service?: IService;
+  difficultyLevel?: LevelType;
+  fitnessLevel?: LevelType;
+  altitude?: number;
+  accomodation?: string;
+  groupSize?: number;
+
+  isShowNights?: boolean;
+  duration?: number;
+
+  isDatesOnRequest?: boolean;
+  dates?: Array<IDateItem>;
+
+  itinerary?: IItinerary;
+  equipment?: IEquipment;
+  supplementInfo?: string;
+}
+
+export interface IStartFinishDate {
+  startDate: Date;
+  finishDate: Date;
+  isSale: boolean;
+}
+
+export interface IEscTrip {
+  path: string;
+
+  slug: string;
+  title: string;
   featured?: boolean;
   /**
    * Google - 60
@@ -79,12 +132,14 @@ export interface ITrip {
 
   season?: Array<string>;
   activity?: Array<string>;
-  destination: Array<string>;
+  destination?: Array<string>;
 
-  priceMode: PriceModeType;
-  currency: CurrencyNameType;
+  showPrice: boolean;
+  showPriceList: boolean;
   enableSale: boolean;
+  currency: CurrencyNameType;
   priceList?: Array<IPriceListItem>;
+  lowestPrice?: IPriceListItem;
 
   service?: IService;
   difficultyLevel?: LevelType;
@@ -94,10 +149,9 @@ export interface ITrip {
   groupSize?: number;
 
   isShowNights: boolean;
-  duration?: number;
-
+  days: number;
   isDatesOnRequest: boolean;
-  dates?: Array<IDateItem>;
+  startFinishDates?: Array<IStartFinishDate>;
 
   itinerary?: IItinerary;
   equipment?: IEquipment;

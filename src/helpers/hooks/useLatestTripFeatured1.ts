@@ -3,24 +3,17 @@ import { useStaticQuery, graphql } from 'gatsby';
 const useLatestTripFeatured1 = () => {
   const data = useStaticQuery(graphql`
     query LatestTripsQueryFeatured1 {
-      allYaml(
-        filter: { published: { eq: true }, featured: { eq: true }, fields: { type: { eq: "trip" } } }
-        limit: 1
-        sort: { order: DESC, fields: [date] }
-      ) {
+      allTrip(filter: { featured: { eq: true } }, limit: 1, sort: { order: DESC, fields: [date] }) {
         edges {
           node {
-            fields {
-              path
+            path
+            showPrice
+            lowestPrice {
+              price
+              salePrice
             }
             currency
             enableSale
-            priceMode
-            priceList {
-              price
-              qty
-              salePrice
-            }
             featuredImage {
               childImageSharp {
                 fluid(maxWidth: 800) {
@@ -34,7 +27,7 @@ const useLatestTripFeatured1 = () => {
     }
   `);
 
-  return data.allYaml.edges;
+  return data.allTrip.edges;
 };
 
 export default useLatestTripFeatured1;

@@ -5,14 +5,14 @@ import { Box, Heading } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 
 import { ITheme } from '../theme.d';
-import { ITrip } from './trip';
+import { IEscTrip } from './trip.d';
 import IconLink from '../IconLink';
 import TripOffer from './TripOffer';
 import TaxonomyList from '../TaxonomyList';
 import { TechLevel } from './ico-levels';
 import Price from './Price';
 import TripInfoItem from './TripInfoItem';
-import { getLowestPrice, getDays, getStartFinishDates, formatStartFinish, formatDuration } from './helpers';
+import { formatStartFinish, formatDuration } from './helpers';
 import usePlaceholderImage from '../../helpers/hooks/usePlaceholderImage';
 /**
  * TODO: https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680
@@ -131,7 +131,7 @@ const DetailsLink = styled(Link)`
 `;
 
 type Props = {
-  trip: ITrip;
+  trip: IEscTrip;
 };
 
 const TripWideCard = ({ trip }: Props) => {
@@ -150,21 +150,19 @@ const TripWideCard = ({ trip }: Props) => {
     activity,
     difficultyLevel,
 
-    priceMode,
+    showPrice,
+    lowestPrice,
     currency,
     enableSale,
-    priceList,
 
     isDatesOnRequest,
     isShowNights,
+    days,
+    startFinishDates,
   } = trip;
 
-  const days = getDays(trip);
-  const startFinishDates = getStartFinishDates(trip, days);
   const nights = isShowNights ? days - 1 : 0;
 
-  const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
-  const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
   const text = excerpt ? excerpt : description ? description.substr(0, 160) : undefined;
 
   const mr = '1rem';
@@ -177,7 +175,13 @@ const TripWideCard = ({ trip }: Props) => {
             <ImageWrap>
               <Link to={path}>
                 <Img
-                  fluid={featuredImage && typeof featuredImage === 'object' ? featuredImage : usePlaceholderImage()}
+                  fluid={
+                    featuredImage && typeof featuredImage === 'object'
+                      ? featuredImage.childImageSharp
+                        ? featuredImage.childImageSharp.fluid
+                        : featuredImage
+                      : usePlaceholderImage()
+                  }
                   alt={title}
                 />
               </Link>

@@ -5,7 +5,7 @@ import { Box, Heading } from '@chakra-ui/core';
 import styled from '@emotion/styled';
 
 import { ITheme } from '../theme.d';
-import { getLowestPrice } from './helpers';
+import { IEscTrip } from './trip.d';
 
 import IconLink from '../IconLink';
 import TaxonomyList from '../TaxonomyList';
@@ -48,15 +48,11 @@ const TaxonomiesWrapper = styled.div`
 `;
 
 type Props = {
-  trip: any;
+  trip: IEscTrip;
 };
 
 const TripCard = ({ trip }: Props) => {
-  const { fields, featuredImage, title, destination, activity, currency, enableSale, priceMode, priceList } = trip;
-  const path = fields.path;
-
-  const showPrice = ((priceMode as unknown) as number) !== 0 && priceList ? true : false;
-  const lowestPrice = priceList ? getLowestPrice(priceList) : undefined;
+  const { path, featuredImage, title, destination, activity, currency, enableSale, showPrice, lowestPrice } = trip;
 
   return (
     <Wrapper as="article">

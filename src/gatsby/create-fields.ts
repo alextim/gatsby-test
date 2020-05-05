@@ -17,10 +17,8 @@ import siteConfig from '../data/site-config';
 import translit from '../lib/translit';
 import slugify from '../lib/slugify';
 
-interface ITripNode {
-  slug: string;
-  date: string;
-}
+import { ISrcTrip } from '../components/trip/trip.d';
+import { getLowestPrice, getDays, getStartFinishDates } from '../components/trip/helpers';
 
 interface ITaxNode {
   key: string;
@@ -48,8 +46,14 @@ const slugFromPath = (name: string, dir: string): string => {
   return safeSlug(dir);
 };
 
-export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions;
+export const createFields: GatsbyNode['onCreateNode'] = ({
+  node,
+  actions,
+  getNode,
+  createNodeId,
+  createContentDigest,
+}) => {
+  const { createNode, createNodeField, createParentChildLink } = actions;
   if (node.internal.type === 'Mdx') {
     /*
     if (node.fileAbsolutePath != null) {
@@ -130,28 +134,47 @@ export const createFields: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
   } else if (node.internal.type === 'Yaml') {
     const fileNode = getNode(node.parent);
     if (fileNode.sourceInstanceName === 'trips') {
-      const slug = safeSlug((node as ITripNode).slug);
-      createNodeField({
-        node,
-        name: 'type',
-        value: 'trip',
-      });
-      createNodeField({
-        node,
-        name: 'path',
-        value: `${siteConfig.tripsUrlBase}/${slug}`,
-      });
+      const trip = node as ISrcTrip;
+      const { date, slug, published, priceMode, priceList } = trip;
 
-      const date = moment.utc((node as ITripNode).date, siteConfig.dateFormat.frontmatter);
-      if (!date.isValid) {
-        throw new Error(`Invalid date. ${(node as ITripNode).date}`);
+      if (!published) {
+        return;
       }
-      const isoDate = date.toISOString();
-      createNodeField({
-        node,
-        name: 'date',
-        value: isoDate,
-      });
+
+      const mdate = moment.utc(date, siteConfig.dateFormat.frontmatter);
+      if (!mdate.isValid) {
+        throw new Error(`Invalid date. ${date}`);
+      }
+      const isoDate = mdate.toISOString();
+
+      const sslug = safeSlug(slug);
+      const path = `${siteConfig.tripsUrlBase}/${sslug}`;
+      const tripNode = {
+        ...node,
+        path,
+        date: new Date(isoDate),
+
+        showPrice: ((priceMode as unknown) as number) !== 0 && priceList ? true : false,
+        showPriceList: ((priceMode as unknown) as number) === 2 && priceList ? true : false,
+        lowestPrice: priceList ? getLowestPrice(priceList) : undefined,
+
+        days: getDays(trip),
+        startFinishDates: getStartFinishDates(trip, getDays(trip)),
+
+        id: createNodeId(`${node.id}-trip`),
+        children: [],
+        parent: node.id,
+        internal: {
+          contentDigest: createContentDigest(node),
+          type: 'trip',
+        },
+      };
+      delete tripNode.duration;
+      delete tripNode.dates;
+      delete tripNode.priceMode;
+
+      createNode(tripNode);
+      createParentChildLink({ parent: node, child: tripNode });
     } else if (fileNode.sourceInstanceName === 'taxonomy') {
       const parsedFilePath = pathParse(fileNode.relativePath);
       const taxName = parsedFilePath.name === 'index' ? parsedFilePath.dir : parsedFilePath.name;

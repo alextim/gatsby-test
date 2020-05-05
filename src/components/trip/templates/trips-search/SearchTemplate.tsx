@@ -12,8 +12,7 @@ import Banner from '../../../Banner';
 import SEO from '../../../SEO';
 import { SimpleSelect, SimpleDate } from '../../../forms/controls';
 
-import { ITrip } from '../../trip';
-import { getDays, getStartFinishDates } from '../../helpers';
+import { IEscTrip } from '../../trip.d';
 import DisplaySearchResult from './DisplaySearchResult';
 
 const PAGE_TITLE = 'Подбор тура';
@@ -78,7 +77,7 @@ const SearchTemplate = ({ pageContext }: Props) => {
     };
   }, []);
 
-  const filterFunc = (trip: ITrip): boolean => {
+  const filterFunc = (trip: IEscTrip): boolean => {
     if (activity && trip.activity && !trip.activity.includes(activity)) {
       return false;
     }
@@ -88,21 +87,26 @@ const SearchTemplate = ({ pageContext }: Props) => {
     if (destination && trip.destination && !trip.destination.includes(destination)) {
       return false;
     }
-    if (trip.isDatesOnRequest || !trip.dates) {
+    if (trip.isDatesOnRequest || !trip.days || !trip.startFinishDates) {
       return true;
     }
     if (!startDate && !finishDate) {
       return true;
     }
-    const days = getDays(trip);
-    const dates = getStartFinishDates(trip, days);
-    if (!dates) {
-      return true;
-    }
-    if (startDate && !dates.some((item) => item.startDate.getTime() > startDate.getTime() - ONE_DAY_MILLISECS)) {
+    if (
+      startDate &&
+      !trip.startFinishDates.some(
+        (item) => new Date(item.startDate).getTime() > startDate.getTime() - ONE_DAY_MILLISECS,
+      )
+    ) {
       return false;
     }
-    if (finishDate && !dates.some((item) => item.finishDate.getTime() < finishDate.getTime() + ONE_DAY_MILLISECS)) {
+    if (
+      finishDate &&
+      !trip.startFinishDates.some(
+        (item) => new Date(item.finishDate).getTime() < finishDate.getTime() + ONE_DAY_MILLISECS,
+      )
+    ) {
       return false;
     }
     return true;

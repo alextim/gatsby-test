@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ITrip } from '../../trip';
+import { IEscTrip } from '../../trip.d';
 
 import { formatDuration, formatGroupSize } from '../../helpers';
 import { FitnessLevel, TechLevel } from '../../ico-levels';
@@ -10,11 +10,11 @@ import TripInfoItem from '../../TripInfoItem';
 import MetaItem from './MetaItem';
 
 type Props = {
-  trip: ITrip;
-  days: number;
+  trip: IEscTrip;
 };
-const Metas = ({ trip, days }: Props) => {
+const Metas = ({ trip }: Props) => {
   const {
+    days,
     isShowNights,
     groupSize,
     destination,

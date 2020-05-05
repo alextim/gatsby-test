@@ -12,14 +12,12 @@ import postArchiveHelper from '../helpers/postArchiveHelper';
 import { buildTaxonomyLookup } from '../helpers/taxonomy-helpers';
 import { ITaxNode, IGroup } from '../types/types';
 import CreateHelper from './CreateHelper';
-import { ITrip } from '../components/trip/trip';
+import { IEscTrip } from '../components/trip/trip.d';
 
-interface INodeTrip extends ITrip {
+interface INodeTrip extends IEscTrip {
   id: string;
-  fields: {
-    path: string;
-  };
 }
+
 interface ITripEdge {
   node: INodeTrip;
 }
@@ -63,7 +61,8 @@ interface IQueryResult {
   allMarkdown: {
     edges: IMdEdge[];
   };
-  allTripsYaml: {
+  // allTripsYaml: {
+  allTrips: {
     edges: ITripEdge[];
   };
   allTaxonomyYaml: {
@@ -110,21 +109,21 @@ const allPostsQuery = `
         }
       }
     }
-    allSeasons: allYaml(filter: { published: { eq: true }, fields: { type: { eq: "trip" } } } ) {
+    allSeasons: allTrip {
       group(field: season) {
         field
         fieldValue
         totalCount
       }
     }
-    allDestinations: allYaml(filter: { published: { eq: true }, fields: { type: { eq: "trip" } } } ) {
+    allDestinations: allTrip {
       group(field: destination) {
         field
         fieldValue
         totalCount
       }
     }
-    allActivities: allYaml(filter: { published: { eq: true }, fields: { type: { eq: "trip" } } } ) {
+    allActivities: allTrip {
       group(field: activity) {
         field
         fieldValue
@@ -166,13 +165,11 @@ const allPostsQuery = `
         }
       }
     }
-    allTripsYaml: allYaml(filter: { published: { eq: true }, fields: { type: { eq: "trip" } } } ) {
+    allTrips: allTrip {
       edges {
         node {
-          fields {
-            path
-          }
           id
+          path
           title
           description
           excerpt
@@ -196,25 +193,20 @@ const allPostsQuery = `
           groupSize
           difficultyLevel
           fitnessLevel
-          priceMode
-          currency
-          enableSale
-          priceList {
+          showPrice
+          lowestPrice {
             price
-            qty
             salePrice
           }
-          duration
-          isShowNights
+          currency
+          enableSale
           isDatesOnRequest
-          dates {
-            date
+          isShowNights
+          days
+          startFinishDates {
+            startDate
+            finishDate
             isSale
-          }
-          itinerary {
-            dayItems {
-              title
-            }
           }
         }
       }
@@ -261,7 +253,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   const helper = new CreateHelper(taxonomy, siteConfig.pageSize, createPage);
 
   /************  TRIPS  ************/
-  const trips = result.data.allTripsYaml.edges;
+  const trips = result.data.allTrips.edges;
   // INDIVIDUAL TRIP PAGE
   trips.map((edge, i, arr) => helper.createSinglePage(edge, i, arr, tripTemplate, true));
 
