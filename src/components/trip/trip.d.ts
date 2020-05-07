@@ -1,3 +1,4 @@
+import { FluidImage } from '../../types/types';
 export type CurrencyNameType = {
   string: 'RUR' | 'UAH' | 'USD' | 'EUR';
 };
@@ -41,7 +42,7 @@ export interface IService {
 }
 
 export interface IItineraryImage {
-  image: any;
+  image: FluidImage;
   alt?: string;
   width?: number;
 }
@@ -75,7 +76,7 @@ export interface ISrcTrip {
   metaDescription?: string; // 160
   description?: string;
   excerpt?: string;
-  featuredImage?: any;
+  featuredImage?: FluidImage;
 
   season?: Array<string>;
   activity?: Array<string>;
@@ -128,7 +129,7 @@ export interface IEscTrip {
   metaDescription?: string; // 160
   description: string;
   excerpt?: string;
-  featuredImage?: any;
+  featuredImage?: FluidImage;
 
   season?: Array<string>;
   activity?: Array<string>;

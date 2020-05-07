@@ -2,12 +2,13 @@ import createSearchIndex from './createSearchIndex';
 import createSearchPage from './createSearchPage';
 import createSinglePage from './createSinglePage';
 import { Taxonomy, IGroup } from '../../types/types';
+import { IEscTrip } from '../../components/trip/trip.d';
 
 class CreateHelper {
   _createPage: any;
   _taxonomy: Taxonomy;
   _pageSize: number;
-  createSearchIndex: (trips: Array<any>) => void;
+  createSearchIndex: (trips: Array<{ node: IEscTrip }>) => void;
   createSearchPage: (
     component: string,
     path: string,
@@ -15,7 +16,13 @@ class CreateHelper {
     destinations: Array<IGroup>,
     activities: Array<IGroup>,
   ) => void;
-  createSinglePage: (edge: any, index: number, arr: Array<any>, template: string, isPrint: boolean) => void;
+  createSinglePage: (
+    edge: { node: any },
+    index: number,
+    arr: Array<{ node: any }>,
+    template: string,
+    isPrint: boolean,
+  ) => void;
 
   constructor(taxonomy: Taxonomy, pageSize: number, createPage: any) {
     this._taxonomy = taxonomy;
@@ -69,8 +76,8 @@ class CreateHelper {
 
   createTaxonomyPage(group: Array<IGroup>, template: string, taxonomyName: string) {
     return group
-      .filter(({ fieldValue }: IGroup) => this._taxonomy[taxonomyName][fieldValue])
-      .map(({ totalCount, fieldValue }: IGroup) =>
+      .filter(({ fieldValue }) => this._taxonomy[taxonomyName][fieldValue])
+      .map(({ totalCount, fieldValue }) =>
         this.createPaginationPages(template, totalCount, this._taxonomy[taxonomyName][fieldValue].path, {
           termKey: fieldValue,
           term: this._taxonomy[taxonomyName][fieldValue],

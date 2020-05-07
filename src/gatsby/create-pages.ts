@@ -70,8 +70,8 @@ interface IQueryResult {
   };
 }
 
-const allPostsQuery = `
-  query {
+const allDataQuery = `
+  query AllDataQuery {
     allTaxonomyYaml: allYaml(filter: { fields: { type: { eq: "taxonomy" } } } ) {
       edges {
         node {
@@ -231,7 +231,7 @@ const archiveTemplate = resolve('./src/components/post/templates/archive-posts.t
 
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
-  const result = await graphql<IQueryResult>(allPostsQuery);
+  const result = await graphql<IQueryResult>(allDataQuery);
 
   if (result.errors) {
     // result.errors.forEach(e => console.error(e.toString()));

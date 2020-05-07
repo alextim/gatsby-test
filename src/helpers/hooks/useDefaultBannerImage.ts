@@ -2,7 +2,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 
 const useDefaultBannerImage = () => {
   const q = graphql`
-    query {
+    query DefaultBannerImagequery {
       bannerImage: file(relativePath: { eq: "gnifetti-alps-italy.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 1920) {

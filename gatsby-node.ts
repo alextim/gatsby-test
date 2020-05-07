@@ -15,5 +15,6 @@
 // https://www.extensive.one/converting-gatsby-config-and-node-api-to-typescript/
 // https://github.com/assainov/gatsby-extensive-starter-typescript
 
+export { createSchemaCustomization } from './src/gatsby/create-schema-customization';
 export { createPages } from './src/gatsby/create-pages';
 export { createFields as onCreateNode } from './src/gatsby/create-fields';

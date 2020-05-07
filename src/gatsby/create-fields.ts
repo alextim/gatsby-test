@@ -146,7 +146,6 @@ export const createFields: GatsbyNode['onCreateNode'] = ({
         throw new Error(`Invalid date. ${date}`);
       }
       const isoDate = mdate.toISOString();
-
       const sslug = safeSlug(slug);
       const path = `${siteConfig.tripsUrlBase}/${sslug}`;
       const tripNode = {
@@ -157,6 +156,10 @@ export const createFields: GatsbyNode['onCreateNode'] = ({
         showPrice: ((priceMode as unknown) as number) !== 0 && priceList ? true : false,
         showPriceList: ((priceMode as unknown) as number) === 2 && priceList ? true : false,
         lowestPrice: priceList ? getLowestPrice(priceList) : undefined,
+
+        //activity: node.atactivity,
+        //destination: node.atdestination,
+        //season: node.atseason,
 
         days: getDays(trip),
         startFinishDates: getStartFinishDates(trip, getDays(trip)),
@@ -175,6 +178,18 @@ export const createFields: GatsbyNode['onCreateNode'] = ({
 
       createNode(tripNode);
       createParentChildLink({ parent: node, child: tripNode });
+
+      createNodeField({
+        node,
+        name: 'type',
+        value: 'trip',
+      });
+      createNodeField({
+        node,
+        name: 'path',
+        value: path,
+      });
+
     } else if (fileNode.sourceInstanceName === 'taxonomy') {
       const parsedFilePath = pathParse(fileNode.relativePath);
       const taxName = parsedFilePath.name === 'index' ? parsedFilePath.dir : parsedFilePath.name;

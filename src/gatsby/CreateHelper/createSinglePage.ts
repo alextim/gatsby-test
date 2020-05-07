@@ -1,8 +1,8 @@
 function createSinglePage(
   this: any,
-  edge: any,
+  edge: { node: any },
   index: number,
-  arr: Array<any>,
+  arr: Array<{ node: any }>,
   template: string,
   isPrint: boolean,
 ): void {

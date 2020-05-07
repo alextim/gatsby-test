@@ -95,7 +95,19 @@ const Utils = {
     result.setDate(result.getDate() + days);
     return result;
   },
-  getExcerpt: (s: string, length = 160): string => s.substr(0, length),
+  getExcerpt: (s: string, length = 160, useWordBoundary = true): string => {
+    if (!s) {
+      return '';
+    }
+    if (s.length < length) {
+      return s;
+    }
+    const truncated = s.substr(0, length - 1);
+    if (!useWordBoundary) {
+      return truncated;
+    }
+    return truncated.substr(0, truncated.lastIndexOf(' '));
+  },
 };
 
 export default Utils;

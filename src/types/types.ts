@@ -1,11 +1,18 @@
+import { FluidObject } from 'gatsby-image';
 import { IDictionary } from '../lib/types';
+
+export type FluidImage = {
+  childImageSharp: {
+    fluid: FluidObject;
+  };
+};
 
 export type Term = {
   name: string;
   path: string;
   description?: string;
-  bannerImage?: any;
-  featuredImage?: any;
+  bannerImage?: FluidImage;
+  featuredImage?: FluidImage;
   taxonomy: string;
 };
 
@@ -20,8 +27,8 @@ export interface ITaxNode {
   key: string;
   name: string;
   description?: string;
-  bannerImage?: any;
-  featuredImage?: any;
+  bannerImage?: FluidImage;
+  featuredImage?: FluidImage;
   fields: {
     taxonomy: string;
     path: string;
@@ -46,7 +53,9 @@ export type PageContext = {
 export type YamlProps = {
   data: {
     allYaml: {
-      edges: Array<any>;
+      edges: {
+        node: any;
+      }[];
     };
   };
   pageContext: PageContext;
@@ -55,7 +64,9 @@ export type YamlProps = {
 export type MdxProps = {
   data: {
     allMdx: {
-      edges: Array<any>;
+      edges: {
+        node: any;
+      }[];
     };
   };
   pageContext: PageContext;

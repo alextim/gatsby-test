@@ -32,6 +32,33 @@ const buildTaxonomyLookup = (edges: Array<ITaxEdge>): Taxonomy => {
     {},
   );
 };
+const buildTaxonomyLookupNode = (nodes: Array<ITaxNode>): Taxonomy => {
+  const tax = new Set<string>();
+  nodes.forEach((node) => tax.add(node.fields.taxonomy));
+
+  return [...tax].reduce(
+    (o: {}, taxonomyName: string) => ({
+      ...o,
+      [taxonomyName]: nodes
+        .filter((node) => node.fields.taxonomy === taxonomyName)
+        .reduce(
+          (o: {}, node) => ({
+            ...o,
+            [node.key]: {
+              name: node.name,
+              path: node.fields.path,
+              description: node.description,
+              bannerImage: node.bannerImage,
+              featuredImage: node.featuredImage,
+              taxonomyName: taxonomyName,
+            },
+          }),
+          {},
+        ),
+    }),
+    {},
+  );
+};
 
 const getTaxonomyByName = (taxonomyName: string) => {
   const edges = useTaxonomy();
@@ -109,16 +136,17 @@ const prepareDestinations = (
         }
       }
     }
-
+    const img = tax[key].featuredImage;
     return {
       title: tax[key].name,
       path: n > 1 ? tax[key].path : path /* if destination has only one trip then goto directly to trip page */,
-      featuredImage: tax[key].featuredImage ? tax[key].featuredImage.childImageSharp.fluid : null,
+      featuredImage: img ? img.childImageSharp.fluid : undefined,
     };
   });
 };
 export {
   buildTaxonomyLookup,
+  buildTaxonomyLookupNode,
   getTaxUrlAndNames,
   getTaxonomyByName,
   getTerm,
