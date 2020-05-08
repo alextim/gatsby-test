@@ -7,7 +7,11 @@
 // GraphQL query operation: SeasonPageQuery
 // ====================================================
 
-export interface SeasonPageQuery_allTrip_edges_node_featuredImage_childImageSharp_fluid {
+export interface SeasonPageQuery_allYaml_edges_node_fields {
+  path: string | null;
+}
+
+export interface SeasonPageQuery_allYaml_edges_node_featuredImage_childImageSharp_fluid {
   base64: string | null;
   aspectRatio: number;
   src: string;
@@ -15,64 +19,64 @@ export interface SeasonPageQuery_allTrip_edges_node_featuredImage_childImageShar
   sizes: string;
 }
 
-export interface SeasonPageQuery_allTrip_edges_node_featuredImage_childImageSharp {
-  fluid: SeasonPageQuery_allTrip_edges_node_featuredImage_childImageSharp_fluid | null;
+export interface SeasonPageQuery_allYaml_edges_node_featuredImage_childImageSharp {
+  fluid: SeasonPageQuery_allYaml_edges_node_featuredImage_childImageSharp_fluid | null;
 }
 
-export interface SeasonPageQuery_allTrip_edges_node_featuredImage {
-  childImageSharp: SeasonPageQuery_allTrip_edges_node_featuredImage_childImageSharp | null;
+export interface SeasonPageQuery_allYaml_edges_node_featuredImage {
+  childImageSharp: SeasonPageQuery_allYaml_edges_node_featuredImage_childImageSharp | null;
 }
 
-export interface SeasonPageQuery_allTrip_edges_node_lowestPrice {
-  price: number | null;
-  salePrice: number | null;
+export interface SeasonPageQuery_allYaml_edges_node_lowestPrice {
+  price: number;
+  salePrice: number;
 }
 
-export interface SeasonPageQuery_allTrip_edges_node_startFinishDates {
-  startDate: any | null;
-  finishDate: any | null;
-  isSale: boolean | null;
+export interface SeasonPageQuery_allYaml_edges_node_startFinishDates {
+  startDate: any;
+  finishDate: any;
+  isSale: boolean;
 }
 
-export interface SeasonPageQuery_allTrip_edges_node_itinerary_dayItems {
+export interface SeasonPageQuery_allYaml_edges_node_itinerary_dayItems {
   title: string | null;
 }
 
-export interface SeasonPageQuery_allTrip_edges_node_itinerary {
-  dayItems: (SeasonPageQuery_allTrip_edges_node_itinerary_dayItems | null)[] | null;
+export interface SeasonPageQuery_allYaml_edges_node_itinerary {
+  dayItems: (SeasonPageQuery_allYaml_edges_node_itinerary_dayItems | null)[] | null;
 }
 
-export interface SeasonPageQuery_allTrip_edges_node {
-  path: string | null;
+export interface SeasonPageQuery_allYaml_edges_node {
+  fields: SeasonPageQuery_allYaml_edges_node_fields | null;
   title: string | null;
   description: string | null;
   excerpt: string | null;
-  featuredImage: SeasonPageQuery_allTrip_edges_node_featuredImage | null;
+  featuredImage: SeasonPageQuery_allYaml_edges_node_featuredImage | null;
   groupSize: number | null;
   destination: (string | null)[] | null;
   activity: (string | null)[] | null;
   difficultyLevel: number | null;
   showPrice: boolean | null;
-  lowestPrice: SeasonPageQuery_allTrip_edges_node_lowestPrice | null;
+  lowestPrice: SeasonPageQuery_allYaml_edges_node_lowestPrice | null;
   currency: string | null;
   enableSale: boolean | null;
   isShowNights: boolean | null;
   isDatesOnRequest: boolean | null;
   days: number | null;
-  startFinishDates: (SeasonPageQuery_allTrip_edges_node_startFinishDates | null)[] | null;
-  itinerary: SeasonPageQuery_allTrip_edges_node_itinerary | null;
+  startFinishDates: (SeasonPageQuery_allYaml_edges_node_startFinishDates | null)[] | null;
+  itinerary: SeasonPageQuery_allYaml_edges_node_itinerary | null;
 }
 
-export interface SeasonPageQuery_allTrip_edges {
-  node: SeasonPageQuery_allTrip_edges_node;
+export interface SeasonPageQuery_allYaml_edges {
+  node: SeasonPageQuery_allYaml_edges_node;
 }
 
-export interface SeasonPageQuery_allTrip {
-  edges: SeasonPageQuery_allTrip_edges[];
+export interface SeasonPageQuery_allYaml {
+  edges: SeasonPageQuery_allYaml_edges[];
 }
 
 export interface SeasonPageQuery {
-  allTrip: SeasonPageQuery_allTrip;
+  allYaml: SeasonPageQuery_allYaml;
 }
 
 export interface SeasonPageQueryVariables {

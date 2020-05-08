@@ -16,15 +16,17 @@ const DeastinationTripsTemplate = ({
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
   query DestinationPageQuery($skip: Int!, $limit: Int!, $termKey: String) {
-    allTrip(
+    allYaml(
       skip: $skip
       limit: $limit
       sort: { fields: [date], order: DESC }
-      filter: { destination: { in: [$termKey] } }
+      filter: { fields: { type: { eq: "trip" } }, published: { eq: true }, destination: { in: [$termKey] } }
     ) {
       edges {
         node {
-          path
+          fields {
+            path
+          }
           title
           description
           excerpt

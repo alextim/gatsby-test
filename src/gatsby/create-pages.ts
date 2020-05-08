@@ -61,18 +61,17 @@ interface IQueryResult {
   allMarkdown: {
     edges: IMdEdge[];
   };
-  // allTripsYaml: {
   allTrips: {
     edges: ITripEdge[];
   };
-  allTaxonomyYaml: {
+  allTaxonomy: {
     edges: ITaxonomyEdge[];
   };
 }
 
 const allDataQuery = `
   query AllDataQuery {
-    allTaxonomyYaml: allYaml(filter: { fields: { type: { eq: "taxonomy" } } } ) {
+    allTaxonomy: allYaml(filter: { fields: { type: { eq: "taxonomy" } } } ) {
       edges {
         node {
           key
@@ -109,21 +108,21 @@ const allDataQuery = `
         }
       }
     }
-    allSeasons: allTrip {
+    allSeasons: allYaml(filter: { fields: { type: { eq: "trip" } }, published: { eq: true } } )  {
       group(field: season) {
         field
         fieldValue
         totalCount
       }
     }
-    allDestinations: allTrip {
+    allDestinations: allYaml(filter: { fields: { type: { eq: "trip" } }, published: { eq: true } } )  {
       group(field: destination) {
         field
         fieldValue
         totalCount
       }
     }
-    allActivities: allTrip {
+    allActivities: allYaml(filter: { fields: { type: { eq: "trip" } }, published: { eq: true } } )  {
       group(field: activity) {
         field
         fieldValue
@@ -165,11 +164,13 @@ const allDataQuery = `
         }
       }
     }
-    allTrips: allTrip {
+    allTrips: allYaml(filter: { fields: { type: { eq: "trip" } }, published: { eq: true } } )  {
       edges {
         node {
           id
-          path
+          fields {
+            path
+          }
           title
           description
           excerpt
@@ -244,10 +245,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   }
 
   /************  TAXONOMY  ************/
-  const taxEdges = result.data.allTaxonomyYaml.edges;
   console.log('========================');
   console.log('TAXONOMY');
-  const taxonomy = buildTaxonomyLookup(taxEdges);
+  const taxonomy = buildTaxonomyLookup(result.data.allTaxonomy.edges);
   console.log('OK');
 
   const helper = new CreateHelper(taxonomy, siteConfig.pageSize, createPage);

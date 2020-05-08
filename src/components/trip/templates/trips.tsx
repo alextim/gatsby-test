@@ -20,10 +20,17 @@ const TripsTemplate = ({
 
 export const pageQuery = graphql`
   query TripListQuery($skip: Int!, $limit: Int!) {
-    allTrip(limit: $limit, skip: $skip, sort: { order: DESC, fields: [date] }) {
+    allYaml(
+      filter: { fields: { type: { eq: "trip" } }, published: { eq: true } }
+      limit: $limit
+      skip: $skip
+      sort: { order: DESC, fields: [date] }
+    ) {
       edges {
         node {
-          path
+          fields {
+            path
+          }
           title
           description
           excerpt

@@ -18,7 +18,7 @@ import translit from '../lib/translit';
 import slugify from '../lib/slugify';
 
 import { ISrcTrip } from '../components/trip/trip.d';
-import { getLowestPrice, getDays, getStartFinishDates } from '../components/trip/helpers';
+// import { getLowestPrice, getDays, getStartFinishDates } from '../components/trip/helpers';
 
 interface ITaxNode {
   key: string;
@@ -50,10 +50,11 @@ export const createFields: GatsbyNode['onCreateNode'] = ({
   node,
   actions,
   getNode,
-  createNodeId,
-  createContentDigest,
+  // createNodeId,
+  // createContentDigest,
 }) => {
-  const { createNode, createNodeField, createParentChildLink } = actions;
+  // const { createNode, createNodeField, createParentChildLink } = actions;
+  const { createNodeField } = actions;
   if (node.internal.type === 'Mdx') {
     /*
     if (node.fileAbsolutePath != null) {
@@ -135,7 +136,8 @@ export const createFields: GatsbyNode['onCreateNode'] = ({
     const fileNode = getNode(node.parent);
     if (fileNode.sourceInstanceName === 'trips') {
       const trip = node as ISrcTrip;
-      const { date, slug, published, priceMode, priceList } = trip;
+      // const { date, slug, published, priceMode, priceList } = trip;
+      const { date, slug, published } = trip;
 
       if (!published) {
         return;
@@ -148,6 +150,7 @@ export const createFields: GatsbyNode['onCreateNode'] = ({
       const isoDate = mdate.toISOString();
       const sslug = safeSlug(slug);
       const path = `${siteConfig.tripsUrlBase}/${sslug}`;
+      /*
       const tripNode = {
         ...node,
         path,
@@ -178,7 +181,7 @@ export const createFields: GatsbyNode['onCreateNode'] = ({
 
       createNode(tripNode);
       createParentChildLink({ parent: node, child: tripNode });
-
+      */
       createNodeField({
         node,
         name: 'type',
@@ -189,7 +192,11 @@ export const createFields: GatsbyNode['onCreateNode'] = ({
         name: 'path',
         value: path,
       });
-
+      createNodeField({
+        node,
+        name: 'date',
+        value: isoDate,
+      });
     } else if (fileNode.sourceInstanceName === 'taxonomy') {
       const parsedFilePath = pathParse(fileNode.relativePath);
       const taxName = parsedFilePath.name === 'index' ? parsedFilePath.dir : parsedFilePath.name;

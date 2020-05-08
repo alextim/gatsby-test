@@ -14,10 +14,17 @@ const SeasonTripsTemplate = ({
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
   query SeasonPageQuery($skip: Int!, $limit: Int!, $termKey: String) {
-    allTrip(skip: $skip, limit: $limit, sort: { fields: [date], order: DESC }, filter: { season: { in: [$termKey] } }) {
+    allYaml(
+      skip: $skip
+      limit: $limit
+      sort: { fields: [date], order: DESC }
+      filter: { fields: { type: { eq: "trip" } }, published: { eq: true }, season: { in: [$termKey] } }
+    ) {
       edges {
         node {
-          path
+          fields {
+            path
+          }
           title
           description
           excerpt

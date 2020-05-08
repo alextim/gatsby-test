@@ -3,10 +3,16 @@ import { useStaticQuery, graphql } from 'gatsby';
 const useLatestTripsHomePage = (): Array<any> => {
   const data = useStaticQuery(graphql`
     query LatestTripsHomePageQuery {
-      allTrip(filter: { featured: { ne: true } }, limit: 3, sort: { order: DESC, fields: [date] }) {
+      allYaml(
+        filter: { fields: { type: { eq: "trip" } }, published: { eq: true }, featured: { ne: true } }
+        limit: 3
+        sort: { order: DESC, fields: [date] }
+      ) {
         edges {
           node {
-            path
+            fields {
+              path
+            }
             title
             destination
             activity
@@ -30,7 +36,7 @@ const useLatestTripsHomePage = (): Array<any> => {
     }
   `);
 
-  return data.allTrip.edges;
+  return data.allYaml.edges;
 };
 
 export default useLatestTripsHomePage;

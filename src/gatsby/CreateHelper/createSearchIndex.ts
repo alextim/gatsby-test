@@ -13,7 +13,7 @@ function createSearchIndex(this: any, trips: Array<{ node: IEscTrip }>) {
       {
         node: {
           slug,
-          path,
+          fields,
           title,
           description, // metaDescription, // metaTitle,
           excerpt,
@@ -36,7 +36,7 @@ function createSearchIndex(this: any, trips: Array<{ node: IEscTrip }>) {
     ) => {
       const item = {
         slug,
-        path,
+        fields,
         title,
         description: description && Utils.stripHtmlTags(description),
         // metaTitle,

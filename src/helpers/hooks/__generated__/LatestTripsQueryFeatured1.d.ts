@@ -7,12 +7,16 @@
 // GraphQL query operation: LatestTripsQueryFeatured1
 // ====================================================
 
-export interface LatestTripsQueryFeatured1_allTrip_edges_node_lowestPrice {
-  price: number | null;
-  salePrice: number | null;
+export interface LatestTripsQueryFeatured1_allYaml_edges_node_fields {
+  path: string | null;
 }
 
-export interface LatestTripsQueryFeatured1_allTrip_edges_node_featuredImage_childImageSharp_fluid {
+export interface LatestTripsQueryFeatured1_allYaml_edges_node_lowestPrice {
+  price: number;
+  salePrice: number;
+}
+
+export interface LatestTripsQueryFeatured1_allYaml_edges_node_featuredImage_childImageSharp_fluid {
   base64: string | null;
   aspectRatio: number;
   src: string;
@@ -20,31 +24,31 @@ export interface LatestTripsQueryFeatured1_allTrip_edges_node_featuredImage_chil
   sizes: string;
 }
 
-export interface LatestTripsQueryFeatured1_allTrip_edges_node_featuredImage_childImageSharp {
-  fluid: LatestTripsQueryFeatured1_allTrip_edges_node_featuredImage_childImageSharp_fluid | null;
+export interface LatestTripsQueryFeatured1_allYaml_edges_node_featuredImage_childImageSharp {
+  fluid: LatestTripsQueryFeatured1_allYaml_edges_node_featuredImage_childImageSharp_fluid | null;
 }
 
-export interface LatestTripsQueryFeatured1_allTrip_edges_node_featuredImage {
-  childImageSharp: LatestTripsQueryFeatured1_allTrip_edges_node_featuredImage_childImageSharp | null;
+export interface LatestTripsQueryFeatured1_allYaml_edges_node_featuredImage {
+  childImageSharp: LatestTripsQueryFeatured1_allYaml_edges_node_featuredImage_childImageSharp | null;
 }
 
-export interface LatestTripsQueryFeatured1_allTrip_edges_node {
-  path: string | null;
+export interface LatestTripsQueryFeatured1_allYaml_edges_node {
+  fields: LatestTripsQueryFeatured1_allYaml_edges_node_fields | null;
   showPrice: boolean | null;
-  lowestPrice: LatestTripsQueryFeatured1_allTrip_edges_node_lowestPrice | null;
+  lowestPrice: LatestTripsQueryFeatured1_allYaml_edges_node_lowestPrice | null;
   currency: string | null;
   enableSale: boolean | null;
-  featuredImage: LatestTripsQueryFeatured1_allTrip_edges_node_featuredImage | null;
+  featuredImage: LatestTripsQueryFeatured1_allYaml_edges_node_featuredImage | null;
 }
 
-export interface LatestTripsQueryFeatured1_allTrip_edges {
-  node: LatestTripsQueryFeatured1_allTrip_edges_node;
+export interface LatestTripsQueryFeatured1_allYaml_edges {
+  node: LatestTripsQueryFeatured1_allYaml_edges_node;
 }
 
-export interface LatestTripsQueryFeatured1_allTrip {
-  edges: LatestTripsQueryFeatured1_allTrip_edges[];
+export interface LatestTripsQueryFeatured1_allYaml {
+  edges: LatestTripsQueryFeatured1_allYaml_edges[];
 }
 
 export interface LatestTripsQueryFeatured1 {
-  allTrip: LatestTripsQueryFeatured1_allTrip;
+  allYaml: LatestTripsQueryFeatured1_allYaml;
 }

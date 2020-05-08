@@ -3,9 +3,7 @@ import Utils from '../../lib/utils';
 import { num2form } from '../../lib/num2form';
 
 import { getTermName } from '../../helpers/taxonomy-helpers';
-
-import { ISrcTrip } from './trip.d';
-import { LevelType, IPriceListItem, CurrencyNameType } from './trip';
+import { LevelType, CurrencyNameType } from './trip';
 
 export function getFitnessLevelTitle(level: LevelType): string {
   return [
@@ -21,14 +19,6 @@ export function getTechLevelTitle(level: LevelType): string {
     ((level as unknown) as number) - 1
   ];
 }
-
-export const getLowestPrice = (rows: Array<IPriceListItem>): IPriceListItem =>
-  rows.reduce((prev, curr) => {
-    if (curr.price < prev.price) {
-      return curr;
-    }
-    return prev;
-  }, rows[0]);
 
 export const getCurrencySymbol = (currency: CurrencyNameType): string =>
   getTermName((currency as unknown) as string, 'currency');
@@ -50,50 +40,9 @@ export const formatDuration = (days: number, nights: number): string => {
   return s;
 };
 
-export const getFinishDate = (date: Date, duration: number): Date => {
-  const finish = new Date(date);
-  finish.setDate(finish.getDate() + duration);
-  return finish;
-};
-
 export const formatStartFinish = (startDate: Date, finishDate: Date): string => {
   const fmt = new Intl.DateTimeFormat('ru');
   return fmt.format(new Date(startDate)) + ' - ' + fmt.format(new Date(finishDate));
-};
-
-export const getDays = (trip: ISrcTrip): number => {
-  const { itinerary, duration } = trip;
-  if (itinerary && itinerary.dayItems) {
-    return itinerary.dayItems.length;
-  }
-  if (duration) {
-    return duration;
-  }
-  return 0;
-};
-
-const toDate = (s: string): Date => {
-  const parts = s.split('-');
-  // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
-  // January - 0, February - 1, etc.
-  return new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
-};
-const ONE_DAY_MILLISECS = 24 * 60 * 60 * 1000;
-
-export const getStartFinishDates = (trip: ISrcTrip, days: number) => {
-  const { isDatesOnRequest, dates } = trip;
-
-  let items;
-  if (!isDatesOnRequest && dates) {
-    items = dates
-      .filter((item) => toDate(item.date).getTime() > new Date().getTime() - ONE_DAY_MILLISECS)
-      .map((item) => {
-        const startDate = toDate(item.date);
-        const finishDate = getFinishDate(startDate, days);
-        return { startDate, finishDate, isSale: item.isSale };
-      });
-  }
-  return items && items.length > 0 ? items : undefined;
 };
 
 export const getDateItemsFormat = (startFinish: undefined | Array<any>): undefined | Array<IKeyValuePair> => {

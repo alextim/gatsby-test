@@ -16,15 +16,17 @@ const ActivityTripsTemplate = ({
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
   query ActivityPageQuery($skip: Int!, $limit: Int!, $termKey: String) {
-    allTrip(
+    allYaml(
       skip: $skip
       limit: $limit
       sort: { fields: [date], order: DESC }
-      filter: { activity: { in: [$termKey] } }
+      filter: { fields: { type: { eq: "trip" } }, published: { eq: true }, activity: { in: [$termKey] } }
     ) {
       edges {
         node {
-          path
+          fields {
+            path
+          }
           title
           description
           excerpt

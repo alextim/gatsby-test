@@ -16,7 +16,7 @@ const CardsWrapper = styled.div`
   margin-top: 2rem;
 `;
 type Props = {
-  edges: Array<any>;
+  edges: Array<{ node: any }>;
   pageContext: PageContext;
   title: string;
 };

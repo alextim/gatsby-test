@@ -51,7 +51,8 @@ const StickyTrip = () => {
 
   const theme = (useTheme() as unknown) as ITheme;
 
-  const { path, currency, enableSale, showPrice, lowestPrice, featuredImage } = edges[0].node;
+  const { fields, currency, enableSale, showPrice, lowestPrice, featuredImage } = edges[0].node;
+  const { path } = fields;
 
   return (
     <Section title={title} subTitle={subTitle} bg={theme.home.stickyTrip.colors.bg}>

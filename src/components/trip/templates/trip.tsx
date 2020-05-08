@@ -7,11 +7,11 @@ type Props = {
   data: any;
   pageContext: any;
 };
-const TripTemplate = ({ data, pageContext }: Props) => <SingleTrip trip={data.trip} pageContext={pageContext} />;
+const TripTemplate = ({ data, pageContext }: Props) => <SingleTrip trip={data.yaml} pageContext={pageContext} />;
 
 export const pageQuery = graphql`
   query TripById($id: String!) {
-    trip(id: { eq: $id }) {
+    yaml(id: { eq: $id }) {
       title
       description
       excerpt

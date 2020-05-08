@@ -52,7 +52,8 @@ type Props = {
 };
 
 const TripCard = ({ trip }: Props) => {
-  const { path, featuredImage, title, destination, activity, currency, enableSale, showPrice, lowestPrice } = trip;
+  const { fields, featuredImage, title, destination, activity, currency, enableSale, showPrice, lowestPrice } = trip;
+  const { path } = fields;
 
   return (
     <Wrapper as="article">
@@ -79,9 +80,11 @@ const TripCard = ({ trip }: Props) => {
               )
             : 'Цена по запросу'}
           <TaxonomiesWrapper>
-            <IconLink icon="map-marker-alt">
-              <TaxonomyList name="destination" keys={destination} />
-            </IconLink>
+            {destination && (
+              <IconLink icon="map-marker-alt">
+                <TaxonomyList name="destination" keys={destination} />
+              </IconLink>
+            )}
             {activity && (
               <IconLink icon={['far', 'folder-open']}>
                 <TaxonomyList name="activity" keys={activity} />

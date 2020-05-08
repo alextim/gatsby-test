@@ -128,7 +128,7 @@ const prepareDestinations = (
     for (let i = 0; i < tripsCount; i++) {
       if (tripEdges[i].node.destination.some((d: string) => d === key)) {
         if (n === 0) {
-          path = tripEdges[i].node.path;
+          path = tripEdges[i].node.fields.path;
         }
         n = n + 1;
         if (n === 2) {

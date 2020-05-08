@@ -7,7 +7,7 @@ function createSinglePage(
   isPrint: boolean,
 ): void {
   const { node } = edge;
-  const path = node.path || node.fields.path;
+  const path = node.fields.path;
 
   console.log('========================');
   console.log(`create page: ${path}`);
@@ -22,7 +22,7 @@ function createSinglePage(
     const n = arr[index - 1].node;
     prev = {
       name: n.title || n.frontmatter.title,
-      url: n.path || n.fields.path,
+      url: n.fields.path,
     };
   }
 
@@ -30,7 +30,7 @@ function createSinglePage(
     const n = arr[index + 1].node;
     next = {
       name: n.title || n.frontmatter.title,
-      url: n.path || n.fields.path,
+      url: n.fields.path,
     };
   }
 

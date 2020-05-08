@@ -112,7 +112,9 @@ export interface IStartFinishDate {
 }
 
 export interface IEscTrip {
-  path: string;
+  fields: {
+    path: string;
+  };
 
   slug: string;
   title: string;

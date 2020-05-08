@@ -44,8 +44,12 @@ export interface DestinationsHomePageQuery_allTaxonomyYaml {
   edges: DestinationsHomePageQuery_allTaxonomyYaml_edges[];
 }
 
-export interface DestinationsHomePageQuery_allTrips_edges_node {
+export interface DestinationsHomePageQuery_allTrips_edges_node_fields {
   path: string | null;
+}
+
+export interface DestinationsHomePageQuery_allTrips_edges_node {
+  fields: DestinationsHomePageQuery_allTrips_edges_node_fields | null;
   destination: (string | null)[] | null;
 }
 

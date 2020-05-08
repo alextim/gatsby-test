@@ -8,7 +8,7 @@ import { IPageProps } from '../types/types';
 
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-import useDefaultBannerImage from '../helpers/hooks/useDefaultBannerImage';
+// import useDefaultBannerImage from '../helpers/hooks/useDefaultBannerImage';
 import usePlaceholderImage from '../helpers/hooks/usePlaceholderImage';
 import useDestinations from '../helpers/hooks/useDestinations';
 import { prepareDestinations } from '../helpers/taxonomy-helpers';

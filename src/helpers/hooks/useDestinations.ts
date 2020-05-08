@@ -23,10 +23,15 @@ const useDestinations = () => {
           }
         }
       }
-      allTrips: allTrip(sort: { order: DESC, fields: [date] }) {
+      allTrips: allYaml(
+        filter: { fields: { type: { eq: "trip" } }, published: { eq: true } }
+        sort: { order: DESC, fields: [date] }
+      ) {
         edges {
           node {
-            path
+            fields {
+              path
+            }
             destination
           }
         }

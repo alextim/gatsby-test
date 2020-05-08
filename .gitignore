@@ -67,3 +67,7 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+schema.json
+apollo.config.js
+src/**/__generated__

@@ -136,7 +136,7 @@ type Props = {
 
 const TripWideCard = ({ trip }: Props) => {
   const {
-    path,
+    fields,
 
     title,
     description,
@@ -160,6 +160,7 @@ const TripWideCard = ({ trip }: Props) => {
     days,
     startFinishDates,
   } = trip;
+  const { path } = fields;
 
   const nights = isShowNights ? days - 1 : 0;
 
@@ -197,9 +198,11 @@ const TripWideCard = ({ trip }: Props) => {
 
           <TaxonomiesWrapper>
             {difficultyLevel && <TechLevel level={difficultyLevel} mr={mr} />}
-            <IconLink icon="map-marker-alt" mr={mr}>
-              <TaxonomyList name="destination" keys={destination} />
-            </IconLink>
+            {destination && (
+              <IconLink icon="map-marker-alt" mr={mr}>
+                <TaxonomyList name="destination" keys={destination} />
+              </IconLink>
+            )}
             {activity && (
               <IconLink icon={['far', 'folder-open']} mr={mr}>
                 <TaxonomyList name="activity" keys={activity} />
