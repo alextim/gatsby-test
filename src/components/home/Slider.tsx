@@ -25,12 +25,13 @@ const carouselProps = {
   transitionTime: 300,
   swipeScrollTolerance: 5,
 };
+
 const Slider = () => {
   const edges = useHomePageSettings2();
   return (
     <ContainerFullWidth>
       <Carousel {...carouselProps}>
-        {edges.map(({ node }: any, i: number) => (
+        {edges.map(({ node }, i: number) => (
           <div key={i}>
             {node.featuredImage && <Img fluid={node.featuredImage.childImageSharp.fluid} />}
             <div>

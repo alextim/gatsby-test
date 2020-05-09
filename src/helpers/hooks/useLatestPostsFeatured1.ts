@@ -1,13 +1,11 @@
 import { useStaticQuery, graphql } from 'gatsby';
+import { FluidImage } from '../../types/types';
+import { FluidObject } from 'gatsby-image';
 
 interface IEdge {
   node: {
     frontmatter: {
-      featuredImage?: {
-        childImageSharp: {
-          fluid: any;
-        };
-      };
+      featuredImage?: FluidImage;
     };
     fields: {
       path: string;
@@ -17,7 +15,7 @@ interface IEdge {
 
 const useLatestPostsFeatured1 = (): Array<{
   path: string;
-  featuredImage: any;
+  featuredImage?: FluidObject;
 }> => {
   const data = useStaticQuery(graphql`
     query LatestPostsQueryFeatured1 {

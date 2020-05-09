@@ -1,12 +1,22 @@
 import { useStaticQuery, graphql } from 'gatsby';
+import { FluidImage } from '../../types/types';
 
-const useLatestTripFeatured1 = () => {
+interface ISlideItem {
+  title: string;
+  description?: string;
+  featuredImage?: FluidImage;
+  action?: {
+    caption: string;
+    url: string;
+  };
+}
+
+const useHomePageSettings2 = (): Array<{ node: ISlideItem }> => {
   const data = useStaticQuery(graphql`
     query HomePageSettingsQuery {
       allYaml(filter: { fields: { type: { eq: "home" } } }) {
         edges {
           node {
-            id
             title
             description
             featuredImage {
@@ -29,4 +39,4 @@ const useLatestTripFeatured1 = () => {
   return data.allYaml.edges;
 };
 
-export default useLatestTripFeatured1;
+export default useHomePageSettings2;
