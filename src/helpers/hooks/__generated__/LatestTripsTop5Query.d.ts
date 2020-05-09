@@ -8,12 +8,12 @@
 // ====================================================
 
 export interface LatestTripsTop5Query_allYaml_edges_node_fields {
-  path: string | null;
+  path: string;
 }
 
 export interface LatestTripsTop5Query_allYaml_edges_node {
   fields: LatestTripsTop5Query_allYaml_edges_node_fields | null;
-  title: string | null;
+  title: string;
 }
 
 export interface LatestTripsTop5Query_allYaml_edges {

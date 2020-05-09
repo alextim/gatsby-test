@@ -41,7 +41,6 @@ const useLatestPostsHomePage = (): Array<{
               path
             }
             frontmatter {
-              path
               title
               date
               featuredImage {

@@ -129,21 +129,21 @@ const allDataQuery = `
         totalCount
       }
     }    
-    allYYYYMM: allMdx(filter: { frontmatter: { published: { eq: true } } } ) {
+    allYYYYMM: allMdx(filter: { fields: { type: { eq: "post" } }, frontmatter: { published: { eq: true } } } ) {
       group(field: fields___yyyymm) {
         field
         fieldValue
         totalCount
       }
     }
-    allCategories: allMdx(filter: { frontmatter: { published: { eq: true } } } ) {
+    allCategories: allMdx(filter: { fields: { type: { eq: "post" } }, frontmatter: { published: { eq: true } } } ) {
       group(field: frontmatter___category) {
         field
         fieldValue
         totalCount
       }
     }
-    allTags: allMdx(filter: { frontmatter: { published: { eq: true } } } ) {
+    allTags: allMdx(filter: { fields: { type: { eq: "post" } }, frontmatter: { published: { eq: true } } } ) {
       group(field: frontmatter___tag) {
         field
         fieldValue

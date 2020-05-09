@@ -1,7 +1,7 @@
 slug: t3
 title: bla-bla-bla
 published: true
-date: 11-02-2020
+date: 2020-02-11
 featured: false
 #
 # Google - 60
@@ -75,12 +75,12 @@ isShowNights: true
 duration: 8
 isDatesOnRequest: false
 dates:
-  - date: 30-05-2020
+  - date: 2020-05-30
     isSale: true
-  - date: 29-06-2020
+  - date: 2020-06-29
     isSale: false
 equipment:
-  gear:
+  gearUsage:
     - hoverla
     - ski
     - montblanc 

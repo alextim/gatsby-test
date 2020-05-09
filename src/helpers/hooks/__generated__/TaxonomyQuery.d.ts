@@ -40,13 +40,13 @@ export interface TaxonomyQuery_allYaml_edges_node_featuredImage {
 }
 
 export interface TaxonomyQuery_allYaml_edges_node_fields {
-  path: string | null;
+  path: string;
   taxonomy: string | null;
 }
 
 export interface TaxonomyQuery_allYaml_edges_node {
-  key: string | null;
-  name: string | null;
+  key: string;
+  name: string;
   description: string | null;
   bannerImage: TaxonomyQuery_allYaml_edges_node_bannerImage | null;
   featuredImage: TaxonomyQuery_allYaml_edges_node_featuredImage | null;

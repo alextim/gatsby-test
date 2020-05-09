@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface BlogListQuery_allMdx_edges_node_fields {
-  path: string | null;
+  path: string;
 }
 
 export interface BlogListQuery_allMdx_edges_node_frontmatter_featuredImage_childImageSharp_fluid {
@@ -28,10 +28,9 @@ export interface BlogListQuery_allMdx_edges_node_frontmatter_featuredImage {
 }
 
 export interface BlogListQuery_allMdx_edges_node_frontmatter {
-  date: string | null;
+  date: any | null;
   category: (string | null)[] | null;
   tag: (string | null)[] | null;
-  path: string | null;
   title: string;
   featuredImage: BlogListQuery_allMdx_edges_node_frontmatter_featuredImage | null;
 }
@@ -40,7 +39,7 @@ export interface BlogListQuery_allMdx_edges_node {
   id: string;
   excerpt: string;
   fields: BlogListQuery_allMdx_edges_node_fields | null;
-  frontmatter: BlogListQuery_allMdx_edges_node_frontmatter | null;
+  frontmatter: BlogListQuery_allMdx_edges_node_frontmatter;
 }
 
 export interface BlogListQuery_allMdx_edges {

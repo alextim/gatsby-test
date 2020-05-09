@@ -20,7 +20,7 @@ const PostTemplate = ({ data, pageContext }) => {
   const { next, prev, pathname } = pageContext;
   const { frontmatter, body, excerpt } = data.mdx; // , fields
   const { title, description, date, featuredImage, tag, category } = frontmatter;
-  const featuredImgFluid = featuredImage ? featuredImage.childImageSharp.fluid : null;
+  const featuredImgFluid = featuredImage?.childImageSharp?.fluid || null;
   const imgSrc = featuredImgFluid ? featuredImgFluid.src : null;
   //const url = fields.path;
   /*
@@ -65,7 +65,6 @@ export const pageQuery = graphql`
       }
       frontmatter {
         date
-        path
         title
         description
         featured

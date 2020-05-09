@@ -30,7 +30,6 @@ export const pageQuery = graphql`
             date
             category
             tag
-            path
             title
             featuredImage {
               childImageSharp {

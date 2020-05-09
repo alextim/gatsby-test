@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface LatestPostsHomePageQuery_allMdx_edges_node_fields {
-  path: string | null;
+  path: string;
 }
 
 export interface LatestPostsHomePageQuery_allMdx_edges_node_frontmatter_featuredImage_childImageSharp_fluid {
@@ -28,9 +28,8 @@ export interface LatestPostsHomePageQuery_allMdx_edges_node_frontmatter_featured
 }
 
 export interface LatestPostsHomePageQuery_allMdx_edges_node_frontmatter {
-  path: string | null;
   title: string;
-  date: string | null;
+  date: any | null;
   featuredImage: LatestPostsHomePageQuery_allMdx_edges_node_frontmatter_featuredImage | null;
   category: (string | null)[] | null;
 }
@@ -38,7 +37,7 @@ export interface LatestPostsHomePageQuery_allMdx_edges_node_frontmatter {
 export interface LatestPostsHomePageQuery_allMdx_edges_node {
   excerpt: string;
   fields: LatestPostsHomePageQuery_allMdx_edges_node_fields | null;
-  frontmatter: LatestPostsHomePageQuery_allMdx_edges_node_frontmatter | null;
+  frontmatter: LatestPostsHomePageQuery_allMdx_edges_node_frontmatter;
 }
 
 export interface LatestPostsHomePageQuery_allMdx_edges {

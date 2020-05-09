@@ -1,5 +1,5 @@
 ---
-date: 31-12-2019
+date: 2019-12-31
 published: true
 title: My first blog post
 description: ""

@@ -5,7 +5,7 @@ const siteConfig = {
   blogUrlBase: '/blog', // No trailing slash
   tripsUrlBase: '/trip',
   dateFormat: {
-    frontmatter: 'DD-MM-YYYY', // Date format used in the frontmatter and yaml.
+    frontmatter: 'YYYY-MM-DD', // Date format used in the frontmatter and yaml.
     display: 'DD.MM.YYYY', // Date format for display.
     reactDatePicker: 'dd.MM.y',
   },

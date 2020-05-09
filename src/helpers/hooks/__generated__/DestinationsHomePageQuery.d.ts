@@ -24,13 +24,13 @@ export interface DestinationsHomePageQuery_allTaxonomyYaml_edges_node_featuredIm
 }
 
 export interface DestinationsHomePageQuery_allTaxonomyYaml_edges_node_fields {
-  path: string | null;
+  path: string;
   taxonomy: string | null;
 }
 
 export interface DestinationsHomePageQuery_allTaxonomyYaml_edges_node {
-  key: string | null;
-  name: string | null;
+  key: string;
+  name: string;
   description: string | null;
   featuredImage: DestinationsHomePageQuery_allTaxonomyYaml_edges_node_featuredImage | null;
   fields: DestinationsHomePageQuery_allTaxonomyYaml_edges_node_fields | null;
@@ -45,7 +45,7 @@ export interface DestinationsHomePageQuery_allTaxonomyYaml {
 }
 
 export interface DestinationsHomePageQuery_allTrips_edges_node_fields {
-  path: string | null;
+  path: string;
 }
 
 export interface DestinationsHomePageQuery_allTrips_edges_node {

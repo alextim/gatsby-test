@@ -3,14 +3,14 @@ import { useStaticQuery, graphql } from 'gatsby';
 const useGear = () => {
   const data = useStaticQuery(graphql`
     query GearQuery {
-      allYaml(filter: { fields: { type: { eq: "gear" } }, usage: { ne: null }, type: { ne: null } }) {
+      allYaml(filter: { fields: { type: { eq: "gear" } }, gearUsage: { ne: null }, gearType: { ne: null } }) {
         edges {
           node {
-            name
+            title
             description
-            type
-            usage
-            url
+            gearType
+            gearUsage
+            gearLink
           }
         }
       }

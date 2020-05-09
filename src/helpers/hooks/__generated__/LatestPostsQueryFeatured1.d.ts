@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface LatestPostsQueryFeatured1_allMdx_edges_node_fields {
-  path: string | null;
+  path: string;
 }
 
 export interface LatestPostsQueryFeatured1_allMdx_edges_node_frontmatter_featuredImage_childImageSharp_fluid {
@@ -33,7 +33,7 @@ export interface LatestPostsQueryFeatured1_allMdx_edges_node_frontmatter {
 
 export interface LatestPostsQueryFeatured1_allMdx_edges_node {
   fields: LatestPostsQueryFeatured1_allMdx_edges_node_fields | null;
-  frontmatter: LatestPostsQueryFeatured1_allMdx_edges_node_frontmatter | null;
+  frontmatter: LatestPostsQueryFeatured1_allMdx_edges_node_frontmatter;
 }
 
 export interface LatestPostsQueryFeatured1_allMdx_edges {

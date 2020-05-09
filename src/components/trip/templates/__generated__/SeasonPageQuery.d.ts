@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface SeasonPageQuery_allYaml_edges_node_fields {
-  path: string | null;
+  path: string;
 }
 
 export interface SeasonPageQuery_allYaml_edges_node_featuredImage_childImageSharp_fluid {
@@ -48,7 +48,7 @@ export interface SeasonPageQuery_allYaml_edges_node_itinerary {
 
 export interface SeasonPageQuery_allYaml_edges_node {
   fields: SeasonPageQuery_allYaml_edges_node_fields | null;
-  title: string | null;
+  title: string;
   description: string | null;
   excerpt: string | null;
   featuredImage: SeasonPageQuery_allYaml_edges_node_featuredImage | null;

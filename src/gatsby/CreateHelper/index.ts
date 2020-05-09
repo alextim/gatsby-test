@@ -8,7 +8,9 @@ class CreateHelper {
   _createPage: any;
   _taxonomy: Taxonomy;
   _pageSize: number;
+
   createSearchIndex: (trips: Array<{ node: IEscTrip }>) => void;
+
   createSearchPage: (
     component: string,
     path: string,
@@ -16,6 +18,7 @@ class CreateHelper {
     destinations: Array<IGroup>,
     activities: Array<IGroup>,
   ) => void;
+
   createSinglePage: (
     edge: { node: any },
     index: number,
@@ -74,15 +77,17 @@ class CreateHelper {
     return [...pages, firstPage];
   }
 
+  // .filter(({ fieldValue }) => this._taxonomy[taxonomyName][fieldValue])
   createTaxonomyPage(group: Array<IGroup>, template: string, taxonomyName: string) {
-    return group
-      .filter(({ fieldValue }) => this._taxonomy[taxonomyName][fieldValue])
-      .map(({ totalCount, fieldValue }) =>
-        this.createPaginationPages(template, totalCount, this._taxonomy[taxonomyName][fieldValue].path, {
-          termKey: fieldValue,
-          term: this._taxonomy[taxonomyName][fieldValue],
-        }),
-      );
+    return group.map(({ totalCount, fieldValue }) => {
+      console.log(taxonomyName);
+      console.log(fieldValue);
+
+      return this.createPaginationPages(template, totalCount, this._taxonomy[taxonomyName][fieldValue].path, {
+        termKey: fieldValue,
+        term: this._taxonomy[taxonomyName][fieldValue],
+      });
+    });
   }
 }
 

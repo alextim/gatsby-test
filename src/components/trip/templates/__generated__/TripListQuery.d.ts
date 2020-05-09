@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface TripListQuery_allYaml_edges_node_fields {
-  path: string | null;
+  path: string;
 }
 
 export interface TripListQuery_allYaml_edges_node_featuredImage_childImageSharp_fluid {
@@ -48,7 +48,7 @@ export interface TripListQuery_allYaml_edges_node_itinerary {
 
 export interface TripListQuery_allYaml_edges_node {
   fields: TripListQuery_allYaml_edges_node_fields | null;
-  title: string | null;
+  title: string;
   description: string | null;
   excerpt: string | null;
   featuredImage: TripListQuery_allYaml_edges_node_featuredImage | null;

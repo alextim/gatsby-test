@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface LatestTripsHomePageQuery_allYaml_edges_node_fields {
-  path: string | null;
+  path: string;
 }
 
 export interface LatestTripsHomePageQuery_allYaml_edges_node_lowestPrice {
@@ -34,7 +34,7 @@ export interface LatestTripsHomePageQuery_allYaml_edges_node_featuredImage {
 
 export interface LatestTripsHomePageQuery_allYaml_edges_node {
   fields: LatestTripsHomePageQuery_allYaml_edges_node_fields | null;
-  title: string | null;
+  title: string;
   destination: (string | null)[] | null;
   activity: (string | null)[] | null;
   showPrice: boolean | null;

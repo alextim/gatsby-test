@@ -12,7 +12,7 @@ export type LevelType = {
 };
 
 export interface IDateItem {
-  date: string;
+  date: Date;
   isSale: boolean;
 }
 
@@ -25,7 +25,7 @@ export interface IGearItem {
 }
 
 export interface IEquipment {
-  gear?: Array<string>;
+  gearUsage?: Array<string>;
   note?: string;
 }
 

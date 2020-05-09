@@ -32,7 +32,7 @@ const Slider = () => {
       <Carousel {...carouselProps}>
         {edges.map(({ node }: any, i: number) => (
           <div key={i}>
-            {node.image && <Img fluid={node.image.childImageSharp.fluid} />}
+            {node.featuredImage && <Img fluid={node.featuredImage.childImageSharp.fluid} />}
             <div>
               {node.title}
               {node.description && <p className="legend">{node.description}</p>}

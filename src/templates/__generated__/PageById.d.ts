@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface PageById_mdx_fields {
-  path: string | null;
+  path: string;
 }
 
 export interface PageById_mdx_frontmatter_featuredImage_childImageSharp_fluid {
@@ -37,7 +37,7 @@ export interface PageById_mdx {
   body: string;
   excerpt: string;
   fields: PageById_mdx_fields | null;
-  frontmatter: PageById_mdx_frontmatter | null;
+  frontmatter: PageById_mdx_frontmatter;
 }
 
 export interface PageById {

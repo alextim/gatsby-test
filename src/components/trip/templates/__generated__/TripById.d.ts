@@ -29,8 +29,8 @@ export interface TripById_yaml_lowestPrice {
 }
 
 export interface TripById_yaml_priceList {
-  price: number | null;
-  qty: number | null;
+  price: number;
+  qty: number;
   salePrice: number | null;
 }
 
@@ -70,7 +70,7 @@ export interface TripById_yaml_itinerary_dayItems_images {
 
 export interface TripById_yaml_itinerary_dayItems {
   title: string | null;
-  description: string | null;
+  description: string;
   images: (TripById_yaml_itinerary_dayItems_images | null)[] | null;
 }
 
@@ -80,12 +80,12 @@ export interface TripById_yaml_itinerary {
 }
 
 export interface TripById_yaml_equipment {
-  gear: (string | null)[] | null;
+  gearUsage: (string | null)[] | null;
   note: string | null;
 }
 
 export interface TripById_yaml {
-  title: string | null;
+  title: string;
   description: string | null;
   excerpt: string | null;
   featuredImage: TripById_yaml_featuredImage | null;

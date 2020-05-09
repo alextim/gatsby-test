@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface CategoryPageQuery_allMdx_edges_node_fields {
-  path: string | null;
+  path: string;
 }
 
 export interface CategoryPageQuery_allMdx_edges_node_frontmatter_featuredImage_childImageSharp_fluid {
@@ -29,7 +29,7 @@ export interface CategoryPageQuery_allMdx_edges_node_frontmatter_featuredImage {
 
 export interface CategoryPageQuery_allMdx_edges_node_frontmatter {
   title: string;
-  date: string | null;
+  date: any | null;
   featuredImage: CategoryPageQuery_allMdx_edges_node_frontmatter_featuredImage | null;
   category: (string | null)[] | null;
   tag: (string | null)[] | null;
@@ -38,7 +38,7 @@ export interface CategoryPageQuery_allMdx_edges_node_frontmatter {
 export interface CategoryPageQuery_allMdx_edges_node {
   fields: CategoryPageQuery_allMdx_edges_node_fields | null;
   excerpt: string;
-  frontmatter: CategoryPageQuery_allMdx_edges_node_frontmatter | null;
+  frontmatter: CategoryPageQuery_allMdx_edges_node_frontmatter;
 }
 
 export interface CategoryPageQuery_allMdx_edges {

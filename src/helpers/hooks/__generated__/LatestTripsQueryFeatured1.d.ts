@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface LatestTripsQueryFeatured1_allYaml_edges_node_fields {
-  path: string | null;
+  path: string;
 }
 
 export interface LatestTripsQueryFeatured1_allYaml_edges_node_lowestPrice {

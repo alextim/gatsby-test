@@ -1,5 +1,5 @@
 import { ILink } from '../lib/types';
-import { ITaxNode, Taxonomy, TermMap } from '../types/types';
+import { ITaxNode, Taxonomy } from '../types/types';
 import useTaxonomy from '../helpers/hooks/useTaxonomy';
 
 interface ITaxEdge {
@@ -79,31 +79,9 @@ const getTermName = (key: string, taxonomyName: string) => {
   return term.name;
 };
 
-const _sanitizeKeys = (tax: TermMap, keys: Array<string>): Array<string> => {
-  const result = new Array<string>();
-
-  new Set(keys.map((key) => key.toLowerCase())).forEach((item) => {
-    if (tax[item]) {
-      result.push(item);
-    } /* else {
-      const key = getKeyByValue(tax, item);
-      if (key && !unique.has(key)) {
-        result.push(key);
-      }
-    } */
-  });
-
-  return result;
-};
-
-const sanitizeKeys = (taxonomy: string | TermMap, keys: Array<string>): Array<string> =>
-  _sanitizeKeys(typeof taxonomy === 'string' ? getTaxonomyByName(taxonomy) : taxonomy, keys);
-
 const getTaxUrlAndNames = (taxonomyName: string, keys: string[]): Array<ILink> => {
   const tax = getTaxonomyByName(taxonomyName);
-  const sanitized = _sanitizeKeys(tax, keys);
-
-  return sanitized.map((key) => ({ name: tax[key].name, url: tax[key].path }));
+  return keys.map((key) => ({ name: tax[key].name, url: tax[key].path }));
 };
 
 const prepareDestinations = (
@@ -114,8 +92,7 @@ const prepareDestinations = (
   const tax = buildTaxonomyLookup(data.allTaxonomyYaml.edges)['destination'];
   const tripEdges = data.allTrips.edges;
 
-  const a1 =
-    destinations.length > 0 ? sanitizeKeys(tax, destinations) : data.allTaxonomyYaml.edges.map((e) => e.node.key);
+  const a1 = destinations.length > 0 ? destinations : data.allTaxonomyYaml.edges.map((e) => e.node.key);
   /* destination should contain at least one trip */
   const a2 = a1.filter((item) => tripEdges.some((e) => e.node.destination.some((d: string) => d === item)));
   const a3 = limit === 0 ? a2 : a2.slice(0, limit);
@@ -151,6 +128,5 @@ export {
   getTaxonomyByName,
   getTerm,
   getTermName,
-  sanitizeKeys,
   prepareDestinations,
 };

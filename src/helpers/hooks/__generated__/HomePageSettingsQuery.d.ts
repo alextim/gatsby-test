@@ -7,7 +7,7 @@
 // GraphQL query operation: HomePageSettingsQuery
 // ====================================================
 
-export interface HomePageSettingsQuery_allYaml_edges_node_image_childImageSharp_fluid {
+export interface HomePageSettingsQuery_allYaml_edges_node_featuredImage_childImageSharp_fluid {
   base64: string | null;
   aspectRatio: number;
   src: string;
@@ -15,24 +15,24 @@ export interface HomePageSettingsQuery_allYaml_edges_node_image_childImageSharp_
   sizes: string;
 }
 
-export interface HomePageSettingsQuery_allYaml_edges_node_image_childImageSharp {
-  fluid: HomePageSettingsQuery_allYaml_edges_node_image_childImageSharp_fluid | null;
+export interface HomePageSettingsQuery_allYaml_edges_node_featuredImage_childImageSharp {
+  fluid: HomePageSettingsQuery_allYaml_edges_node_featuredImage_childImageSharp_fluid | null;
 }
 
-export interface HomePageSettingsQuery_allYaml_edges_node_image {
-  childImageSharp: HomePageSettingsQuery_allYaml_edges_node_image_childImageSharp | null;
+export interface HomePageSettingsQuery_allYaml_edges_node_featuredImage {
+  childImageSharp: HomePageSettingsQuery_allYaml_edges_node_featuredImage_childImageSharp | null;
 }
 
 export interface HomePageSettingsQuery_allYaml_edges_node_action {
-  caption: string | null;
-  url: string | null;
+  caption: string;
+  url: string;
 }
 
 export interface HomePageSettingsQuery_allYaml_edges_node {
   id: string;
-  title: string | null;
+  title: string;
   description: string | null;
-  image: HomePageSettingsQuery_allYaml_edges_node_image | null;
+  featuredImage: HomePageSettingsQuery_allYaml_edges_node_featuredImage | null;
   action: HomePageSettingsQuery_allYaml_edges_node_action | null;
 }
 

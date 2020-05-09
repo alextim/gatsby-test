@@ -1,6 +1,5 @@
 ---
-path: /posts/test-2
-date: 27-04-2019
+date: 2019-04-29
 published: true
 title: My second blog post
 description: ""

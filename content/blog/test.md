@@ -1,11 +1,19 @@
 ---
-date: 01-01-2018
+date: 2018-01-25
 title: Markdown Cheatsheet
 category:
   - General
-tag:
+  - news
+  - news
+  - tutorials
+tag: 
+  - bb
+  - aa
+  - cc
 featuredImage:
 published: true  
+test: true
+test2: hello
 ---
 
 [View raw (TEST.md)](https://raw.github.com/adamschwartz/github-markdown-kitchen-sink/master/README.md)

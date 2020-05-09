@@ -9,7 +9,7 @@ const useLatestTripFeatured1 = () => {
             id
             title
             description
-            image {
+            featuredImage {
               childImageSharp {
                 fluid(maxWidth: 1920) {
                   ...GatsbyImageSharpFluid

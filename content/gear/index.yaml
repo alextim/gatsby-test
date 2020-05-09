@@ -1,80 +1,80 @@
-- name: Ботинки альпинистские одинарные
-  type: shoes
-  usage:
+- title: Ботинки альпинистские одинарные
+  gearType: shoes
+  gearUsage:
     - alpinism  
-- name: Гамаши
+- title: Гамаши
   description: 
-  type: shoes
-  usage:
+  gearType: shoes
+  gearUsage:
     - alpinism
     - montblanc
-- name: Каска
-  type: climbing
-  usage:
+- title: Каска
+  gearType: climbing
+  gearUsage:
     - alpinism
     - ski
-- name: Кошки с чехлом
+- title: Кошки с чехлом
     - alpinism
     - ski
-- name: Лыжная маска
+- title: Лыжная маска
   description: 
-  type: eyes
-  usage:
+  gearType: eyes
+  gearUsage:
     - hoverla
     - ski
-- name: Магнезия
+- title: Магнезия
   description:
-  type: climbing
-  usage:
+  gearType: climbing
+  gearUsage:
     - rock-climbing
-  url: http:\\adrenalin.od.ua
-- name: Очки солнцезащитные (фактор защиты 4)
+  gearLink: http:\\adrenalin.od.ua
+- title: Очки солнцезащитные (фактор защиты 4)
   description:
-  type: eyes
-  usage:
+  gearType: eyes
+  gearUsage:
     - alpinism  
     - rock-climbing
-- name: Перчатки теплые непромокаемые
+- title: Перчатки теплые непромокаемые
   description:
-  type: handwear
-  usage:
+  gearType: handwear
+  gearUsage:
     - alpinism
     - ski  
-- name: Перчатки тонкие
+- title: Перчатки тонкие
   description:
-  type: handwear
-  usage:
+  gearType: handwear
+  gearUsage:
     - alpinism
     - ski  
     - rock-climbing
-- name: Рукавицы теплые
+- title: Рукавицы теплые
   description:
-  type: handwear
-  usage:
+  gearType: handwear
+  gearUsage:
     - alpinism
     - ski    
-- name: Система страховочная
+- title: Система страховочная
   description:
-  type: climbing
-  usage:
+  gearType: climbing
+  gearUsage:
     - alpinism
     - rock-climbing
-- name: Скальные туфли
-  type: climbing
+- title: Скальные туфли
+  gearType: climbing
   description: Lorem ipsum dolor sit amet, dolor corpora molestiae pri ex, ne mel nemore scripta indoctum, vero tamquam an mea. Mei at legimus legendos praesent, duo ne fierent scripserit. Ex pro omnes accumsan explicari, eum vitae facete dolorum ei, eu per modus dolor adipisci. Vitae appareat lucilius nec ei, in alii scripserit ius, at dicit mollis intellegebat cum. Vel prima inani omnesque in, eum cu ullum cetero contentiones.
-  usage:
+  gearUsage:
     - rock-climbing
-- name: Треккинговые кроссовки
-  type: shoes
-  usage:
-- name: Шапка (кепка) от солнца
-  type: headwear
-  usage:
+- title: Треккинговые кроссовки
+  gearType: shoes
+  gearUsage:
+- title: Шапка (кепка) от солнца
+  gearType: headwear
+  gearUsage:
      - alpinism
-- name: x
-  type: headwear
+- title: x
+  gearType: headwear
   description: bla-bla-bla
-  usage:
+  gearUsage:
      - alpinism
      - ski      
      - hoverla

@@ -1,20 +1,19 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import { IEquipment, IGearItem } from '../../trip';
+import { IEquipment } from '../../trip';
 import useTaxonomy from '../../../../helpers/hooks/useTaxonomy';
 import useGear from '../../../../helpers/hooks/useGear';
-import { buildTaxonomyLookup, sanitizeKeys } from '../../../../helpers/taxonomy-helpers';
 
 type Props = {
   equipment: IEquipment;
 };
 
 const Equipment = ({ equipment }: Props) => {
-  const { gear, note } = equipment;
+  const { gearUsage, note } = equipment;
   return (
     <>
-      {gear && <GearList gear={gear} />}
+      {gearUsage && gearUsage.length > 0 && <GearList gear={gearUsage} />}
       {note && <div dangerouslySetInnerHTML={{ __html: note }} />}
     </>
   );
@@ -25,17 +24,12 @@ type GearListProps = {
 };
 const GearList = ({ gear }: GearListProps) => {
   const taxEdges = useTaxonomy();
-  const taxonomies = buildTaxonomyLookup(taxEdges);
-  const sanitized = sanitizeKeys(taxonomies['gear-usage'], gear);
-  if (!sanitized || sanitized.length === 0) {
-    return null;
-  }
   const edges = useGear();
   const a1 = edges.filter(({ node }: any) =>
-    node.usage.some((usage: string) => sanitized.some((item) => item === usage)),
+    node.gearUsage.some((usage: string) => gear.some((item) => item === usage)),
   );
   const headings = taxEdges.filter(
-    (e: any) => e.node.fields.taxonomy === 'gear-type' && a1.some(({ node }: any) => node.type === e.node.key),
+    (e: any) => e.node.fields.taxonomy === 'gear-type' && a1.some(({ node }: any) => node.gearType === e.node.key),
   );
 
   return (
@@ -141,12 +135,12 @@ const Description = styled.p`
 
 type ItemsProps = {
   type: string;
-  edges: Array<any>;
+  edges: Array<{ node: any }>;
 };
 const Items = ({ type, edges }: ItemsProps) => (
   <GearItemsWrap>
     {edges
-      .filter((e) => e.node.type === type)
+      .filter((e) => e.node.gearType === type)
       .map(({ node }, i) => (
         <GearItem key={i}>
           {node.description && (
@@ -155,7 +149,7 @@ const Items = ({ type, edges }: ItemsProps) => (
               <StyledI />
             </>
           )}
-          {node.url ? <a href={node.url}>{node.name}</a> : node.name}
+          {node.gearLink ? <a href={node.gearLink}>{node.title}</a> : node.title}
           {node.description && <Description>{node.description}</Description>}
         </GearItem>
       ))}

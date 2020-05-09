@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface BlogPostById_mdx_fields {
-  path: string | null;
+  path: string;
 }
 
 export interface BlogPostById_mdx_frontmatter_featuredImage_childImageSharp_fluid {
@@ -28,8 +28,7 @@ export interface BlogPostById_mdx_frontmatter_featuredImage {
 }
 
 export interface BlogPostById_mdx_frontmatter {
-  date: string | null;
-  path: string | null;
+  date: any | null;
   title: string;
   description: string | null;
   featured: boolean | null;
@@ -42,7 +41,7 @@ export interface BlogPostById_mdx {
   body: string;
   excerpt: string;
   fields: BlogPostById_mdx_fields | null;
-  frontmatter: BlogPostById_mdx_frontmatter | null;
+  frontmatter: BlogPostById_mdx_frontmatter;
 }
 
 export interface BlogPostById {

@@ -33,7 +33,7 @@ const ControlWrap = styled.div`
 `;
 
 const indexFileUrl = `${siteConfig.siteUrl}/${siteConfig.searchIndexFileName}`;
-const ONE_DAY_MILLISECS = 24 * 60 * 60 * 1000;
+const MILLISECONDS_IN_A_DAY = 24 * 60 * 60 * 1000;
 
 type Props = {
   pageContext: {
@@ -96,7 +96,7 @@ const SearchTemplate = ({ pageContext }: Props) => {
     if (
       startDate &&
       !trip.startFinishDates.some(
-        (item) => new Date(item.startDate).getTime() > startDate.getTime() - ONE_DAY_MILLISECS,
+        (item) => new Date(item.startDate).getTime() > startDate.getTime() - MILLISECONDS_IN_A_DAY,
       )
     ) {
       return false;
@@ -104,7 +104,7 @@ const SearchTemplate = ({ pageContext }: Props) => {
     if (
       finishDate &&
       !trip.startFinishDates.some(
-        (item) => new Date(item.finishDate).getTime() < finishDate.getTime() + ONE_DAY_MILLISECS,
+        (item) => new Date(item.finishDate).getTime() < finishDate.getTime() + MILLISECONDS_IN_A_DAY,
       )
     ) {
       return false;

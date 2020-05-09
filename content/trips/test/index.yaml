@@ -1,7 +1,7 @@
 slug: t2
 title: Кулуары Куршевеля - фрирайд в Трех Долинах
 published: true
-date: 28-02-2020
+date: 2020-02-28
 featured: false
 #
 # Google - 60
@@ -85,9 +85,9 @@ isShowNights: true
 duration: 8
 isDatesOnRequest: false
 dates:
-  - date: 01-12-2020
+  - date: 2020-12-01
     isSale: true
-  - date: 30-12-2020
+  - date: 2020-12-30
     isSale: false
 itinerary:
   subTitle:
@@ -120,7 +120,7 @@ itinerary:
     <p><em>* Программа может быть изменена в целях безопасности по погодным условиям, состоянию снега или по договоренности между гидом и участниками.</em></p>
     <p><em>** Гид выберет наиболее оптимальный вариант, исходя из текущих условий и подготовленности группы.</em></p>
 equipment:
-  gear:
+  gearUsage:
     - alpinism
     - hoverla
   note:

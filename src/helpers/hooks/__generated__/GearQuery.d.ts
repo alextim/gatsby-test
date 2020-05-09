@@ -8,11 +8,11 @@
 // ====================================================
 
 export interface GearQuery_allYaml_edges_node {
-  name: string | null;
+  title: string;
   description: string | null;
-  type: string | null;
-  usage: (string | null)[] | null;
-  url: string | null;
+  gearType: string | null;
+  gearUsage: (string | null)[] | null;
+  gearLink: string | null;
 }
 
 export interface GearQuery_allYaml_edges {

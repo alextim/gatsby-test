@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface LatestPostsTop5Query_allMdx_edges_node_fields {
-  path: string | null;
+  path: string;
 }
 
 export interface LatestPostsTop5Query_allMdx_edges_node_frontmatter {
@@ -17,7 +17,7 @@ export interface LatestPostsTop5Query_allMdx_edges_node_frontmatter {
 
 export interface LatestPostsTop5Query_allMdx_edges_node {
   fields: LatestPostsTop5Query_allMdx_edges_node_fields | null;
-  frontmatter: LatestPostsTop5Query_allMdx_edges_node_frontmatter | null;
+  frontmatter: LatestPostsTop5Query_allMdx_edges_node_frontmatter;
 }
 
 export interface LatestPostsTop5Query_allMdx_edges {

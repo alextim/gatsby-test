@@ -74,7 +74,7 @@ export const pageQuery = graphql`
         note
       }
       equipment {
-        gear
+        gearUsage
         note
       }
       supplementInfo
