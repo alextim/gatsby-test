@@ -29,7 +29,6 @@ export interface HomePageSettingsQuery_allYaml_edges_node_action {
 }
 
 export interface HomePageSettingsQuery_allYaml_edges_node {
-  id: string;
   title: string;
   description: string | null;
   featuredImage: HomePageSettingsQuery_allYaml_edges_node_featuredImage | null;
